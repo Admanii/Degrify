@@ -13,18 +13,23 @@ import AuthMiddleware from "./src/middleware/Authentication.js";
 
 // connecting to mongodb
 mongoose.set("strictQuery", false);
-mongoose
-  .connect(process.env.mongoURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
-  .then(() => {
-    console.log("Database Connected!!");
-  })
-  .catch(() => {
-    console.log("Unable to connect to the database.");
-  });
+// mongoose
+//   .connect(process.env.mongoURL, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//   })
+//   .then(() => {
+//     console.log("Database Connected!!");
+//   })
+//   .catch(() => {
+//     console.log("Unable to connect to the database.");
+//   });
+mongoose.connect(
+  "mongodb+srv://pawan5627:Umerkot@26@degrify.za5mexy.mongodb.net/?retryWrites=true&w=majority",
+  { useNewUrlParser: true },
+  (e) => console.log("Database Connected")
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
