@@ -1,3 +1,5 @@
+// this file is useless for now
+
 import express from "express";
 
 const app = express();
