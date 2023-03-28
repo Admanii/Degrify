@@ -28,8 +28,23 @@ mongoose.set("strictQuery", false);
 mongoose.connect(
   "mongodb+srv://osama:osama123@degrify.2zpqfy2.mongodb.net/degrify?retryWrites=true&w=majority",
   { useNewUrlParser: true },
-  (e) => console.log("Database Connected")
+  (e) => console.log(e)
 );
+
+mongoose.connection.on("connected", () => {
+  console.log("Database Connected");
+});
+mongoose.connection.on("error", (err) => {
+  console.log(err.message);
+});
+mongoose.connection.on("disconnected", () => {
+  console.log(" Mongoose got disconnected");
+});
+
+process.on("SIGINT", async () => {
+  await mongoose.connection.close();
+  process.exit(0);
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
