@@ -26,7 +26,7 @@ mongoose.set("strictQuery", false);
 //     console.log("Unable to connect to the database.");
 //   });
 mongoose.connect(
-  "mongodb+srv://pawan5627:Umerkot@26@degrify.za5mexy.mongodb.net/?retryWrites=true&w=majority",
+  "mongodb+srv://osama:osama123@degrify.2zpqfy2.mongodb.net/degrify?retryWrites=true&w=majority",
   { useNewUrlParser: true },
   (e) => console.log("Database Connected")
 );
