@@ -5,7 +5,7 @@ export const Login = async (req, res) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
-    const { emsil, password } = req.body;
+    const { email, password } = req.body;
     const user = await Organistation.findOne({ username: username });
 
     if (!user) {
@@ -33,3 +33,19 @@ export const Login = async (req, res) => {
     }
   }
 };
+
+// LogIn is from university
+// LogIn is from HEC
+// LogIn is from Admin
+// Register User
+// get degree for recruiter and print message
+// get single degree
+// get all OrganisationApproved Degree
+// get all HECAppoved Degree
+// update degree information by student
+// write SHA-256 hash generator in JavaScript
+// degree aprroval from Organisation and HEC
+// add organisation
+// delete organisation
+// update organisation
+//

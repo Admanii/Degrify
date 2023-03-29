@@ -23,9 +23,20 @@ const userSchema = mongoose.Schema({
   },
   userRole: {
     type: String,
-    enum: ["ADMIN", "USER"],
+    enum: ["ADMIN", "UNIVERSITY", "HEC", "RECRUITER"],
     required: true,
+  },
+  studentID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Student",
+  },
+  organisationID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Organisation",
   },
 });
 
 export default mongoose.model("User", userSchema);
+
+// organisationn ID, Admin ID,
+// userRole Admin University HEC Student

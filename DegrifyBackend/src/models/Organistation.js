@@ -4,19 +4,19 @@ const organisationSchema = mongoose.Schema({
   name: {
     type: String,
   },
-  email: {
-    type: String,
-    min: 6,
-    max: 32,
-    required: true,
-    unique: "Email already exists",
-  },
-  password: {
-    type: String,
-    min: 6,
-    max: 32,
-    required: true,
-  },
+  // email: {
+  //   type: String,
+  //   min: 6,
+  //   max: 32,
+  //   required: true,
+  //   unique: "Email already exists",
+  // },
+  // password: {
+  //   type: String,
+  //   min: 6,
+  //   max: 32,
+  //   required: true,
+  // },
   phoneNumber: {
     type: String,
     required: true,
@@ -24,18 +24,18 @@ const organisationSchema = mongoose.Schema({
   address: {
     type: String,
   },
-  category: [
-    {
-      categoryID: {
-        type: Number,
-        unique: "This ID already exist",
-      },
-      categoryName: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  // category: [
+  //   {
+  //     categoryID: {
+  //       type: Number,
+  //       unique: "This ID already exist",
+  //     },
+  //     categoryName: {
+  //       type: String,
+  //       required: true,
+  //     },
+  //   },
+  // ],
   active: {
     type: Boolean,
     default: true,

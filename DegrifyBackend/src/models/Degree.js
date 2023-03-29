@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const degreeSchema = mongoose.Schema({
-  student: {
+  studentID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Student",
   },
