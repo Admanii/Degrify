@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
+import Layout from "../components/general/Layout";
+import SideBar from "../components/general/SideBar-copy";
 import TestPage from "../pages/TestPage";
 
 interface RouteType {
@@ -48,12 +50,12 @@ export const routeList: RouteType[] = [
   {
     path: "/",
     isPrivate: false,
-    component: <TestPage />,
+    component: <Layout/>,
   },
   {
     path: "/home",
     isPrivate: true,
-    component: <TestPage />,
+    component: <SideBar />,
   },
 ];
 
