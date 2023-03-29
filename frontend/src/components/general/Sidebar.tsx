@@ -1,6 +1,6 @@
 // components/layout/Sidebar.tsx
 import React, { useRef } from "react";
-import classNames from "classnames";
+import classNames from 'classnames';
 import { navItems } from "./navItems";
 import { useOnClickOutside } from "usehooks-ts";
 import { Link } from "react-router-dom";
