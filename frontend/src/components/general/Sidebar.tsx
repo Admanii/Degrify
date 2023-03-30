@@ -53,7 +53,7 @@ const Sidebar = ({ open, navItemss = navItems, setOpen }: Props) => {
                 </div>
 
                 <div className={classNames({
-                    "text-gray-600 font-medium text-base": true, //colors
+                    "text-gray-400 font-medium text-base": true, //colors
                     "flex gap-4 items-center": true, //layout
                     "rounded-md p-2 mx-6 mt-2": true, //self style
                 })}>
