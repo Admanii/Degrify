@@ -7,26 +7,42 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import { NavItem } from "./Sidebar";
+import { IMAGES } from "../../constants/images";
 
 export const navItems: NavItem[] = [
+  // {
+  //   label: "Dashboard",
+  //   href: "/",
+  //   icon: IMAGES.home_icon,
+  // },
   {
-    label: "Dashboard",
-    href: "/",
-    icon: <HomeIcon className="w-6 h-6" />,
+    label: "All Students",
+    href: "/students",
+    icon: IMAGES.bar_icon,
   },
   {
-    label: "Team",
-    href: "/team",
-    icon: <UserGroupIcon className="w-6 h-6" />,
+    label: "Add Student Details",
+    href: "/student/add/details",
+    icon: IMAGES.user_icon,
   },
   {
-    label: "Projects",
-    href: "/projects",
-    icon: <FolderIcon className="w-6 h-6" />,
+    label: "All Degrees",
+    href: "/degrees",
+    icon: IMAGES.users_icon,
   },
   {
-    label: "Calendar",
-    href: "/calendar",
-    icon: <CalendarIcon className="w-6 h-6" />,
+    label: "Verified Degrees",
+    href: "/degrees/verified",
+    icon: IMAGES.users_icon,
+  },
+  {
+    label: "Unverified Degrees",
+    href: "/degrees/unverified",
+    icon: IMAGES.users_icon,
+  },
+  {
+    label: "Edit Requests",
+    href: "/edit/requests",
+    icon: IMAGES.user_icon,
   },
 ];
