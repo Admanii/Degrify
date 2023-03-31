@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { navItems } from "./navItems";
 import { useOnClickOutside } from "usehooks-ts";
 import { Link } from "react-router-dom";
-import { HomeIcon } from "@heroicons/react/24/outline";
 import { IMAGES } from "../../constants/images";
 // define a NavItem prop
 export type NavItem = {

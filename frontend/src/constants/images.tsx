@@ -7,5 +7,6 @@ export const IMAGES = {
     user_icon: require("../assets/user.svg").default,
     logout_icon: require("../assets/logout.svg").default,
     avatar_icon: require("../assets/avatar.png"),
+    landing_image: require("../assets/landing-image.svg").default,
   };
   

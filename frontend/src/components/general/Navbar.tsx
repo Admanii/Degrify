@@ -1,10 +1,11 @@
 // components/layout/Navbar.tsx
-import React from "react";
+import React, { Children } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import classNames from "classnames";
 import { IMAGES } from "../../constants/images";
 type Props = {
     onMenuButtonClick(): void;
+    children?: React.ReactNode;
 };
 const Navbar = (props: Props) => {
     return (
@@ -22,8 +23,8 @@ const Navbar = (props: Props) => {
                 <div className="hidden md:block">
                     <img
                         src= {IMAGES.avatar_icon}
-                        height={55}
-                        width={55}
+                        height={50}
+                        width={54}
                         alt="avatar"
                         className="rounded-full"
                     />
