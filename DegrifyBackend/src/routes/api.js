@@ -1,5 +1,5 @@
 import express from "express";
-import { Login, Register } from "../controllers/user.controller.js";
+import { Login, Register } from "../controllers/User/usercontroller.js";
 
 export const apiRoute = express.Router();
 export const apiProtected = express.Router();
