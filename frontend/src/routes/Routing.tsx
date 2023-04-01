@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "../components/general/Layout";
 import SideBar from "../components/general/SideBar-copy";
+import LoginPage from "../pages/LoginPage";
 import TestPage from "../pages/TestPage";
 
 interface RouteType {
@@ -51,6 +52,11 @@ export const routeList: RouteType[] = [
     path: "/",
     isPrivate: false,
     component: <Layout/>,
+  },
+  {
+    path: "/login",
+    isPrivate: true,
+    component: <LoginPage />,
   },
   {
     path: "/home",
