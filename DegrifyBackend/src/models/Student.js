@@ -12,7 +12,7 @@ const studentSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  studnetID: {
+  studentID: {
     type: String,
     required: true,
     // unique: "Already Exist",
