@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "../components/general/Layout";
 import SideBar from "../components/general/SideBar-copy";
 import LoginPage from "../pages/LoginPage";
+import MainPageUni from "../pages/University/MainPageUni";
 import TestPage from "../pages/TestPage";
 
 interface RouteType {
@@ -63,6 +64,13 @@ export const routeList: RouteType[] = [
     isPrivate: true,
     component: <SideBar />,
   },
+  {
+    path: "/mainpageuni",
+    isPrivate: true,
+    component: <MainPageUni />,
+  },
+
+
 ];
 
 export default GetRoutes;
