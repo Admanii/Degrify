@@ -19,7 +19,7 @@ export const deleteRecruiter = async (req, res) => {
     return res.json(
       jsonGenerate(
         statusCode.SUCCESS,
-        "You are not authorised to delete profile"
+        "You are not authorised to delete admin profile"
       )
     );
   }
