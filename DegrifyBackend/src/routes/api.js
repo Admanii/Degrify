@@ -3,6 +3,8 @@ import { AddDegree } from "../controllers/Degree/AddDegree.controller.js";
 import { HECAppovedDegree } from "../controllers/Degree/DegreeHECApproved.controller.js";
 import AddStudent from "../controllers/Student/AddStudent.controller.js";
 import { deleteStudent } from "../controllers/Student/DeleteStudent.controller.js";
+import AddRecruiter from "../controllers/Recruiter/AddRecruiter.controller";
+import { DeleteRecruiter } from "../controllers/Recruiter/DeleteRecruiter.controller";
 import { Login, Register } from "../controllers/User/usercontroller.js";
 
 export const apiRoute = express.Router();
@@ -16,3 +18,5 @@ apiProtected.post("/adddegree", AddDegree);
 apiProtected.post("/hecapproveddegree", HECAppovedDegree);
 apiProtected.post("/addstudent", AddStudent);
 apiProtected.post("/deletestudent", deleteStudent);
+apiProtected.post("/addrecruiter", AddRecruiter);
+apiProtected.post("/deleterecruiter", DeleteRecruiter);
