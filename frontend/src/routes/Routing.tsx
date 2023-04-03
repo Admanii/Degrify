@@ -69,7 +69,11 @@ export const routeList: RouteType[] = [
     isPrivate: true,
     component: <MainPageUni />,
   },
-
+  {
+    path: "/test",
+    isPrivate: true,
+    component: <TestPage />,
+  },
 
 ];
 
