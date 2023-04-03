@@ -3,7 +3,7 @@ import Student from "../../models/Student.js";
 import { statusCode } from "../../utils/constant.js";
 import { jsonGenerate } from "../../utils/helper.js";
 
-const AddStudent = async (req, res) => {
+export const AddStudent = async (req, res) => {
   const {
     name,
     enrollmentNumber,
@@ -42,12 +42,9 @@ const AddStudent = async (req, res) => {
     res.json(
       jsonGenerate(statusCode.SUCCESS, "Student Registered", {
         studentMongoID: result._id,
-        // token: token,
       })
     );
   } catch (error) {
     console.log(error);
   }
 };
-
-export default AddStudent;
