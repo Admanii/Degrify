@@ -5,8 +5,8 @@ import SideBar from "../components/general/SideBar-copy";
 import LoginPage from "../pages/LoginPage";
 import MainPageUni from "../pages/University/MainPageUni";
 import TestPage from "../pages/TestPage";
-import VerifiedDegrees from "../pages/University/VerifiedDegrees";
-import UnverifiedDegrees from "../pages/University/UnverifiedDegrees";
+import VerifiedDegreesPage from "../pages/University/VerifiedDegreesPage";
+import UnverifiedDegreesPage from "../pages/University/UnverifiedDegreesPage";
 
 interface RouteType {
   path: string;
@@ -74,12 +74,12 @@ export const routeList: RouteType[] = [
   {
     path: "/verified/degrees",
     isPrivate: true,
-    component: <VerifiedDegrees />,
+    component: <VerifiedDegreesPage />,
   },
   {
     path: "/unverified/degrees",
     isPrivate: true,
-    component: <UnverifiedDegrees />,
+    component: <UnverifiedDegreesPage />,
   },
   {
     path: "/test",

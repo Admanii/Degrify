@@ -9,7 +9,7 @@ export const Heading: React.FC<Props> = ({ text, customise }) => {
   return (
     <div
       className={classNames(
-        "text-left text-2xl font-bold text-gray-900 mt-7 ml-10",
+        "text-left text-2xl font-bold text-gray-900",
         customise ? customise : ""
       )}
     >
