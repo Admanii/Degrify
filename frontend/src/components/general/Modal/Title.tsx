@@ -7,13 +7,13 @@ interface Props {
 
 export const Title: React.FC<Props> = ({ text, customise }) => {
     return (
-        <h1
+        <div
             className={classNames(
-                "text-center text-[#101828] font-semibold text-2xl",
+                "text-center text-[#101828] font-semibold text-xl",
                 customise ? customise : ""
             )}
         >
             {text}
-        </h1>
+        </div>
     );
 };

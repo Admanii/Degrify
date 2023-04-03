@@ -5,6 +5,8 @@ import SideBar from "../components/general/SideBar-copy";
 import LoginPage from "../pages/LoginPage";
 import MainPageUni from "../pages/University/MainPageUni";
 import TestPage from "../pages/TestPage";
+import VerifiedDegrees from "../pages/University/VerifiedDegrees";
+import UnverifiedDegrees from "../pages/University/UnverifiedDegrees";
 
 interface RouteType {
   path: string;
@@ -52,7 +54,7 @@ export const routeList: RouteType[] = [
   {
     path: "/",
     isPrivate: false,
-    component: <Layout/>,
+    component: <Layout />,
   },
   {
     path: "/login",
@@ -65,9 +67,19 @@ export const routeList: RouteType[] = [
     component: <SideBar />,
   },
   {
-    path: "/mainpageuni",
+    path: "/uni/dashboard/",
     isPrivate: true,
     component: <MainPageUni />,
+  },
+  {
+    path: "/verified/degrees",
+    isPrivate: true,
+    component: <VerifiedDegrees />,
+  },
+  {
+    path: "/unverified/degrees",
+    isPrivate: true,
+    component: <UnverifiedDegrees />,
   },
   {
     path: "/test",

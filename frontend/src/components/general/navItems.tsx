@@ -32,12 +32,12 @@ export const navItems: NavItem[] = [
   },
   {
     label: "Verified Degrees",
-    href: "/degrees/verified",
+    href: "/verified/degrees",
     icon: IMAGES.users_icon,
   },
   {
     label: "Unverified Degrees",
-    href: "/degrees/unverified",
+    href: "/unverified/degrees",
     icon: IMAGES.users_icon,
   },
   {

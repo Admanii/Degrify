@@ -7,13 +7,13 @@ interface Props {
 
 export const SubTitle: React.FC<Props> = ({ text, customise }) => {
     return (
-        <h1
+        <div
             className={classNames(
-                "text-center text-[#FF0000] font-normal text-lg",
+                "text-center text-[#FF0000] font-normal text-base",
                 customise ? customise : ""
             )}
         >
             {text}
-        </h1>
+        </div>
     );
 };

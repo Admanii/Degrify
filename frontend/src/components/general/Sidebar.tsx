@@ -42,14 +42,17 @@ const Sidebar = ({ open, navItemss = navItems, setOpen }: Props) => {
                     <div className="font-">Register New Student</div>
                 </button>
 
-                <div className={classNames({
-                    "text-gray-600 font-medium hover:bg-gray-800 hover:text-gray-100 text-base": true, //colors
-                    "flex gap-4 items-center": true, //layout
-                    "transition-colors duration-300": true, //animation
-                    "rounded-md p-2 mx-6 mt-4": true, //self style
-                })}>
-                    <img src={IMAGES.bar_icon}></img> Dashboard
-                </div>
+                <Link to="/uni/dashboard/">
+                    <div className={classNames({
+                        "text-gray-600 font-medium hover:bg-gray-800 hover:text-gray-100 text-base": true, //colors
+                        "flex gap-4 items-center": true, //layout
+                        "transition-colors duration-300": true, //animation
+                        "rounded-md p-2 mx-6 mt-4": true, //self style
+                    })}>
+                        <img src={IMAGES.bar_icon}></img> Dashboard
+                    </div>
+                </Link>
+
 
                 <div className={classNames({
                     "text-gray-400 font-medium text-base": true, //colors
