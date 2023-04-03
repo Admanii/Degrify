@@ -9,4 +9,5 @@ export const IMAGES = {
   avatar_icon: require("../assets/avatar.png"),
   landing_image: require("../assets/landing-image.svg").default,
   info_icon: require("../assets/info.svg").default,
+  verified_icon: require("../assets/verified.svg").default,
 };
