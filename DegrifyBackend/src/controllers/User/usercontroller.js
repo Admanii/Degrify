@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { hashCal } from "../../middleware/HashCalculate.js";
 import User from "../../models/User.js";
 import { statusCode } from "../../utils/constant.js";
 import { jsonGenerate } from "../../utils/helper.js";
@@ -31,13 +32,15 @@ export const Login = async (req, res) => {
     { userId: User._id },
     "e282a3561a61b57de67ebb20a2f7a4e83fb9f27ac4fa0774525e9aa7fee8cf84",
     {
-      expiresIn: "1h",
+      expiresIn: "5h",
     }
   );
+  const hash = hashCal(token);
   return res.json(
     jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
       userId: User._id,
       token: token,
+      hash: hash,
     })
   );
 };

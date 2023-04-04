@@ -2,20 +2,17 @@ import Recruiter from "../../models/Recruiter.js";
 import { statusCode } from "../../utils/constant.js";
 import { jsonGenerate } from "../../utils/helper.js";
 
-const AddRecruiter = async (req, res) => {
-  const {
-    name,
-    recuiterNumber,
-    fatherName,
-    employeeID,
-    DateOfBirth,
-    CNIC,
-  } = req.body;
+export const AddRecruiter = async (req, res) => {
+  const { name, recuiterNumber, fatherName, employeeID, DateOfBirth, CNIC } =
+    req.body;
 
   const recruiterExist = await Recruiter.findOne({
     $or: [
       {
         employeeID: employeeID,
+      },
+      {
+        CNIC: CNIC,
       },
     ],
   });
@@ -44,5 +41,3 @@ const AddRecruiter = async (req, res) => {
     console.log(error);
   }
 };
-
-export default AddRecruiter;
