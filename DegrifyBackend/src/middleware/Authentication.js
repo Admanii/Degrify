@@ -12,14 +12,7 @@ const AuthMiddleware = (req, res, next) => {
   try {
     const decoded = Jwt.verify(
       token,
-      "e282a3561a61b57de67ebb20a2f7a4e83fb9f27ac4fa0774525e9aa7fee8cf84",
-      (err, payload) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        req.payload = payload;
-      }
+      "e282a3561a61b57de67ebb20a2f7a4e83fb9f27ac4fa0774525e9aa7fee8cf84"
     );
     console.log(decoded);
 
@@ -28,6 +21,7 @@ const AuthMiddleware = (req, res, next) => {
     return next();
   } catch (error) {
     return res.json(
+      console.log(error),
       jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Invalid token")
     );
   }

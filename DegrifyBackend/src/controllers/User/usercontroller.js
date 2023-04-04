@@ -27,9 +27,13 @@ export const Login = async (req, res) => {
       )
     );
   }
-  const token = jwt.sign({ userId: User._id }, "sdsdsjcdfef", {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign(
+    { userId: User._id },
+    "e282a3561a61b57de67ebb20a2f7a4e83fb9f27ac4fa0774525e9aa7fee8cf84",
+    {
+      expiresIn: "1h",
+    }
+  );
   return res.json(
     jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
       userId: User._id,

@@ -18,7 +18,7 @@ const courseSchema = mongoose.Schema({
     default: false,
   },
   creditHours: {
-    type: Int8Array,
+    type: Number,
     default: false,
   },
   HECVerified: {

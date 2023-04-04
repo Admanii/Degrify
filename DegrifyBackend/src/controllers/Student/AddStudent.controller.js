@@ -20,6 +20,9 @@ export const AddStudent = async (req, res) => {
       {
         studentID: studentID,
       },
+      {
+        CNIC: CNIC,
+      },
     ],
   });
   if (studentExist) {

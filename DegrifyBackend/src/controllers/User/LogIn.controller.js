@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import Organistation from "../../models/Organistation.js";
 
-export const Login = async (req, res) => {
+const Login = async (req, res) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
