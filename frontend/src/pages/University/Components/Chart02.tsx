@@ -11,7 +11,7 @@ const Chart02: React.FC<Props> = ({ id }) => {
       series: [
         {
           name: "Students",
-          data: [44, 55, 41, 67, 22, 43, 65],
+          data: [44, 55, 41, 67, 22, 43],
         },
         // {
         //   name: "Revenue",
