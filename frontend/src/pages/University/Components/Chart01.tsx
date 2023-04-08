@@ -7,20 +7,22 @@ const Chart01: React.FC = (): JSX.Element => {
   const chartOneOptions = {
     series: [
       {
-        name: "Product One",
+        name: "Students",
         data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30, 45],
       },
-      {
-        name: "Product Two",
-        data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39, 51],
-      },
+      // {
+      //   name: "Product Two",
+      //   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39, 51],
+      // },
+
     ],
     legend: {
       show: false,
       position: "top",
       horizontalAlign: "left",
     },
-    colors: ["#3C50E0", "#80CAEE"],
+    // colors: ["#3C50E0", "#80CAEE"],
+        colors: ["#3C50E0"],
     chart: {
       fontFamily: "Satoshi, sans-serif",
       height: 335,

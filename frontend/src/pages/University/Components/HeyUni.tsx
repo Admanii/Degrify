@@ -21,7 +21,7 @@ const HeyUni = ({
     <AnalyticsSection />
     <div className="h-screen flex">
       <div className="w-2/3 h-96 bg-gray-100 m-4 rounded-md border border-gray-300">
-      <h1 className="font-bold text-lg mt-6 ml-4">ENROLLED STUDENT</h1>   
+      <h1 className="font-bold text-lg mt-6 ml-4">ENROLLED STUDENTS</h1>   
         <Chart01  />
 
       </div>
