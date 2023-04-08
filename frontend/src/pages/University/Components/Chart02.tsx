@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ApexCharts from "apexcharts";
 
 interface Props {
   id: string;
 }
 
-const Chart02: React.FC<Props> = ({ id }) => {
-  React.useEffect(() => {
+class Chart02 extends Component<Props> {
+  private chartRef: any;
+
+  componentDidMount() {
     const chartTwoOptions = {
       series: [
         {
@@ -76,18 +78,25 @@ const Chart02: React.FC<Props> = ({ id }) => {
       },
     };
 
-    const chartSelector = document.querySelectorAll(`#${id}`);
+    const chartSelector = document.querySelectorAll(`#${this.props.id}`);
 
     if (chartSelector.length) {
       const chartTwo = new ApexCharts(
-        document.querySelector(`#${id}`),
+        document.querySelector(`#${this.props.id}`),
         chartTwoOptions
       );
       chartTwo.render();
+      this.chartRef = chartTwo;
     }
-  }, [id]);
+  }
 
-  return <div id={id}></div>;
-};
+  componentWillUnmount() {
+    this.chartRef && this.chartRef.destroy();
+  }
+
+  render() {
+    return <div id={this.props.id}></div>;
+  }
+}
 
 export default Chart02;
