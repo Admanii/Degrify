@@ -20,11 +20,14 @@ const HeyUni = ({
     </div>
     <AnalyticsSection />
     <div className="h-screen flex">
-      <div className="w-2/3 bg-gray-200 m-4 rounded-md">
-        <Chart01 />
+      <div className="w-2/3 h-96 bg-gray-100 m-4 rounded-md border border-gray-300">
+      <h1 className="font-bold text-lg mt-6 ml-4">ENROLLED STUDENT</h1>   
+        <Chart01  />
 
       </div>
-      <div className="w-1/3 bg-gray-300 m-4 rounded-md">
+      <div className="w-1/3 h-96 bg-gray-100 m-4 rounded-md border border-gray-300">
+      <h1 className="font-bold text-lg mt-6 ml-4">DEGREE PROGRAMS</h1>   
+        
         <Chart02 id={"Best"} />
 
       </div>
