@@ -314,12 +314,12 @@ function EditShortcut() {
 
     return (
         <div className="max-w-2xl mx-auto">
-            <div className="p-4 max-w-md bg-grey-200 rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div className="p-4 max-w-none bg-grey-200 border shadow-md sm:p-8 bg-gray-0 dark:border-gray-700">
                 <div className="flex justify-between items-center mb-4">
                     <h3 className="text-lg font-bold leading-none text-gray-900 dark:text-white">
                         Latest Edit Requests
                     </h3>
-                    <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                    <a href="/edit/requests" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
                         View all
                     </a>
                 </div>

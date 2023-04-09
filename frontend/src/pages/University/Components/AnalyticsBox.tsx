@@ -11,7 +11,7 @@ interface Props {
     isFirst,
     isLast,
   }: Props) {
-    let boxClasses = "bg-gray-100 rounded-lg p-4 w-72 h-18 flex flex-col justify-center items-center border border-gray-300";
+    let boxClasses = "bg-white shadow-md p-4 w-72 h-24 flex flex-col justify-center items-center";
   
       if (isFirst) {
         boxClasses += " ml-4";
