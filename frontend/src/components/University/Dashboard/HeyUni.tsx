@@ -1,26 +1,23 @@
 import Chart01 from "./Chart01";
 import AnalyticsBox from "./AnalyticsBox";
 import AnalyticsSection from "./AnalyticsSection";
-import Dashboard from "./test";
 import Chart02 from "./Chart02";
 import EditShortcut from "./EditShortcut";
 import { AllDegreesTable } from "../../../components/University/AllDegrees/AllDegreesTable";
 import { UnverifiedDegreesTable } from "../../../components/University/UnverifiedDegrees/UnverifiedDegreesTable";
+import HeadingWithSpan from "../../general/HeadingWithSpan";
 
-interface Props {
-  Text: string;
-}
 
-const HeyUni = ({
-  Text,
-}: Props) => (
+
+const HeyUni = () => (
   <div>
-    <div className="flex flex-row ...">
+    {/* <div className="flex flex-row ...">
 
       <h1 className="font-bold text-2xl mt-6 ml-4">
         {Text} <span className="font-normal">Here's what is happening today</span>
       </h1>
-    </div>
+    </div> */}
+    <HeadingWithSpan Text={"Hey IBA - "}/>
     <AnalyticsSection />
     <div className="h-100 flex" >
       <div className="w-2/3 h-100 bg-white m-4 border shadow-md">
