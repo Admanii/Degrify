@@ -1,8 +1,8 @@
-import { IDegreeDetails } from "../../store/types/types";
+import { IDegreeDetails } from "../../../store/types/types";
 
-const VerifiedDegreesColumn = () => {
+const UnverifiedDegreesColumn = () => {
 
-    const verifiedDegreesColumn = [
+    const unverifiedDegreesColumn = [
         {
             name: "Sno",
             wrap: true,
@@ -80,7 +80,7 @@ const VerifiedDegreesColumn = () => {
             },
         },
     ];
-    return verifiedDegreesColumn;
+    return unverifiedDegreesColumn;
 };
 
-export default VerifiedDegreesColumn;
+export default UnverifiedDegreesColumn;

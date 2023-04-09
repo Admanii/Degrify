@@ -1,6 +1,6 @@
 import { Heading } from '../../components/general/Heading'
 import Layout from '../../components/general/Layout'
-import { UnverifiedDegreesTable } from '../../components/UnverifiedDegrees/UnverifiedDegreesTable'
+import { UnverifiedDegreesTable } from '../../components/University/UnverifiedDegrees/UnverifiedDegreesTable'
 
 const UnverifiedDegreesPage = () => {
     return (

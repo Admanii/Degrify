@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { IDegreeDetails } from "../../store/types/types";
+import { IDegreeDetails } from "../../../store/types/types";
 import UnverifiedDegreesColumn from "./UnverifiedDegreesColumn";
 
 interface Props {

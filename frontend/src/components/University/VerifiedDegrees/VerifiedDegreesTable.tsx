@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { IDegreeDetails } from "../../store/types/types";
+import { IDegreeDetails } from "../../../store/types/types";
 import VerifiedDegreesColumn from "./VerifiedDegreesColumn";
 
 interface Props {
@@ -26,26 +26,6 @@ const degrees: Array<IDegreeDetails> = [
         dateofIssue: '15th June 2023',
         graduatingYear: '2023',
         cnic: '42201-6149122-3',
-        active: false,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
         active: true,
     },
     {
@@ -67,7 +47,7 @@ const degrees: Array<IDegreeDetails> = [
         graduatingYear: '2023',
         cnic: '42201-6149122-3',
         active: true,
-    },    {
+    }, {
         sno: 1,
         erpId: 18584,
         name: 'Ahmed Edhi',
@@ -96,54 +76,6 @@ const degrees: Array<IDegreeDetails> = [
         graduatingYear: '2023',
         cnic: '42201-6149122-3',
         active: true,
-    },    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: false,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    },    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: false,
     },
     {
         sno: 1,
