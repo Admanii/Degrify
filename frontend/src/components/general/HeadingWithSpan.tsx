@@ -1,16 +1,17 @@
 import React from 'react'
 interface Props {
     Text: string;
+    SpanText: string;
   }
   
 function HeadingWithSpan({
-    Text,
+    Text, SpanText
   }: Props) {
   return (
-    <div className="flex flex-row items-center">
+    <div className="flex flex-row justify-start">
 
       <h1 className="font-bold text-2xl mt-6 ml-4">
-        {Text} <span className="font-medium text-gray-500 text-xl ">Here's what is happening today</span>
+        {Text} - <span className="font-medium text-gray-500 text-xl ">{SpanText}</span>
       </h1>
     </div>
   )

@@ -17,7 +17,7 @@ const HeyUni = () => (
         {Text} <span className="font-normal">Here's what is happening today</span>
       </h1>
     </div> */}
-    <HeadingWithSpan Text={"Hey IBA - "}/>
+    <HeadingWithSpan Text={"Hey IBA"} SpanText={"Here's what is happening today"}/>
     <AnalyticsSection />
     <div className="h-100 flex" >
       <div className="w-2/3 h-100 bg-white m-4 border shadow-md">
