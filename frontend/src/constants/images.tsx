@@ -11,7 +11,7 @@ export const IMAGES = {
   user_icon_active: require("../assets/user-active.svg").default,
   logout_icon: require("../assets/logout.svg").default,
   avatar_icon: require("../assets/avatar.png"),
-  landing_image: require("../assets/landing-image.png"),
+  landing_image: require("../assets/landing-image.svg").default,
   info_icon: require("../assets/info.svg").default,
   verified_tick_icon: require("../assets/verified-tick.svg").default,
   verified_icon: require("../assets/verified.svg").default,
