@@ -7,8 +7,6 @@ import MainPageUni from "../pages/University/MainPageUni";
 import TestPage from "../pages/TestPage";
 import VerifiedDegreesPage from "../pages/University/VerifiedDegreesPage";
 import UnverifiedDegreesPage from "../pages/University/UnverifiedDegreesPage";
-import AllDegreesPage from "../pages/University/AllDegreesPage";
-import DegreeViewPage from "../pages/DegreeViewPage";
 
 interface RouteType {
   path: string;
@@ -97,6 +95,11 @@ export const routeList: RouteType[] = [
     path: "/test",
     isPrivate: true,
     component: <TestPage />,
+  },
+  {
+    path: "/AddStudent",
+    isPrivate: true,
+    component: <AddStudent />,
   },
 
 ];
