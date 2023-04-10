@@ -9,6 +9,9 @@ module.exports = {
       gridTemplateRows: {
         header: "64px auto", // 👈 for the navbar layout. adds grid-rows-header class
       },
+      spacing: {
+        '128': '32rem',
+      }
     },
   },
   plugins: [],
