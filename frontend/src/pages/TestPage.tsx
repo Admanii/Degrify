@@ -73,7 +73,7 @@ const TestPage = () => {
 
       <Modal closeButton={true} modalState={modal2} onClick={() => closeModal2()}>
         <div className='flex justify-center'>
-          <img src={IMAGES.verified_icon}></img>
+          <img src={IMAGES.verified_icon_active}></img>
         </div>
         <Title text="Degree Approved?" />
         <div className='flex my-2'>

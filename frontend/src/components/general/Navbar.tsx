@@ -20,7 +20,7 @@ const Navbar = (props: Props) => {
                     <div><img src={IMAGES.degrify_logo} alt="logo" /> </div>
                     <div className="font-bold text-2xl text-black">DegriFy</div>
                 </div>
-                <div className="hidden md:block">
+                {/* <div className="hidden md:block">
                     <img
                         src= {IMAGES.avatar_icon}
                         height={50}
@@ -28,7 +28,7 @@ const Navbar = (props: Props) => {
                         alt="avatar"
                         className="rounded-full"
                     />
-                </div>
+                </div> */}
 
             <div className="flex-grow md:hidden"></div> {/** spacer */}
             <button className="md:hidden" onClick={props.onMenuButtonClick}>

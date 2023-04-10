@@ -53,7 +53,9 @@ const Sidebar = ({ open, navItemss = navItems, setOpen }: Props) => {
                         "rounded-md p-2 mx-6 mt-4", //self style
                         "/uni/dashboard/" == currentUrl ? "font-bold text-black" : "font-medium"
                     )}>
-                        <img src={IMAGES.bar_icon}></img> Dashboard
+                        <img src={
+                            "/uni/dashboard/" == currentUrl ? IMAGES.home_active_icon : IMAGES.home_icon
+                        }></img> Dashboard
                     </div>
                 </Link>
 

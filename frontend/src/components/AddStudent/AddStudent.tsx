@@ -1,4 +1,3 @@
-import Heading from "../../pages/University/Components/test";
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Button from '../general/Button';

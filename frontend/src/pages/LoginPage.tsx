@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Button from '../components/general/Button';
-import Layout from '../components/general/Layout';
 import Navbar from '../components/general/Navbar'
 import { IMAGES } from '../constants/images';
 
@@ -23,7 +22,7 @@ const LoginPage = () => {
                             id="email"
                             autoComplete="email"
                             placeholder="Email Address"
-                            value=""
+                            // value=""
                             //   onChange={}
                             required
                             className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
@@ -36,7 +35,7 @@ const LoginPage = () => {
                             id="password"
                             autoComplete="password"
                             placeholder="Password"
-                            value=""
+                            // value=""
                             //   onChange={}
                             required
                             className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
@@ -53,10 +52,8 @@ const LoginPage = () => {
                     </div>
                 </div>
 
-                <div className='p-16 flex items-center justify-center'>
-                    <img src={IMAGES.landing_image} >
-
-                    </img>
+                <div className='p-2 flex items-center justify-center'>
+                    <img src={IMAGES.landing_image}></img>
                 </div>
             </div >
         </div>
