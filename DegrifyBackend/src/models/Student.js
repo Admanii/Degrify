@@ -43,6 +43,13 @@ const studentSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  organisationID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Organisation",
+  },
 });
 
 export default mongoose.model("Student", studentSchema);
+
+
+// add organisation id in student model

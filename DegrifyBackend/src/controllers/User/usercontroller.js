@@ -7,9 +7,9 @@ import { jsonGenerate } from "../../utils/helper.js";
 
 export const Login = async (req, res) => {
   const { email, password } = req.body;
-  const users = await User.findOne({ email: email });
+  const user = await User.findOne({ email: email });
 
-  if (!users) {
+  if (!user) {
     return res.json(
       jsonGenerate(
         statusCode.UNPROCESSABLE_ENTITY,
@@ -18,7 +18,7 @@ export const Login = async (req, res) => {
     );
   }
 
-  const verified = bcrypt.compareSync(password, users.password);
+  const verified = bcrypt.compareSync(password, user.password);
 
   if (!verified) {
     return res.json(
@@ -29,20 +29,53 @@ export const Login = async (req, res) => {
     );
   }
   const token = jwt.sign(
-    { userId: User._id },
+    { userId: user._id },
     "e282a3561a61b57de67ebb20a2f7a4e83fb9f27ac4fa0774525e9aa7fee8cf84",
     {
       expiresIn: "5h",
     }
   );
   const hash = hashCal(token);
-  return res.json(
-    jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
-      userId: User._id,
-      token: token,
-      hash: hash,
-    })
-  );
+  if (role = "student") {
+
+    const studentDetails = {
+      name: "",
+      enrollmentNumber: "",
+      fatherName: "",
+    }
+    // get student details by id
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
+        userInfo:
+        {
+          user, studentDetails
+        },
+        token: token,
+        hash: hash,
+      })
+    );
+  }
+
+  if (role = "org") {
+    // get org details by id
+
+    const orgDetails = {
+      name: "",
+      address: "",
+      phoneNumber: "",
+    }
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
+        userInfo:
+        {
+          user, orgDetails
+        },
+        orgInfo: org,
+        token: token,
+        hash: hash,
+      })
+    );
+  }
 };
 
 export const Register = async (req, res) => {
@@ -63,13 +96,13 @@ export const Register = async (req, res) => {
       jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Users already Exists")
     );
   }
-
   try {
     const result = await User.create({
       name: name,
       email: email,
       password: hashPassword,
       userRole: userRole,
+      studentID: "",
     });
 
     res.json(
@@ -82,3 +115,24 @@ export const Register = async (req, res) => {
     console.log(error);
   }
 };
+
+
+// 1st api call/route
+// Register student
+// create student
+// pass returned studentid into user
+
+// 2nd api call
+// add degree with student details
+
+
+// 1st api call/route
+// Register organisation
+// create organisation
+// pass returned organisationid into user
+
+// change response in login controller ( return all details)
+
+// get student find by id
+
+// get organisation find by id
