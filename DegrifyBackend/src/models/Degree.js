@@ -31,3 +31,6 @@ export default mongoose.model("Degree", degreeSchema);
 
 
 // studentid, name, program, date of issue, graduating year , cnic, fatherName, DateOfBirth
+
+
+// add degree with student details 

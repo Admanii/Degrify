@@ -36,46 +36,60 @@ export const Login = async (req, res) => {
     }
   );
   const hash = hashCal(token);
-  if (role = "student") {
 
-    const studentDetails = {
-      name: "",
-      enrollmentNumber: "",
-      fatherName: "",
-    }
-    // get student details by id
-    return res.json(
+      return res.json(
       jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
         userInfo:
         {
-          user, studentDetails
+          user, studentDetails: {
+            name: "eee"
+          }
         },
         token: token,
         hash: hash,
       })
     );
-  }
 
-  if (role = "org") {
-    // get org details by id
+  // if (role = "student") {
 
-    const orgDetails = {
-      name: "",
-      address: "",
-      phoneNumber: "",
-    }
-    return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
-        userInfo:
-        {
-          user, orgDetails
-        },
-        orgInfo: org,
-        token: token,
-        hash: hash,
-      })
-    );
-  }
+  //   const studentDetails = {
+  //     name: "",
+  //     enrollmentNumber: "",
+  //     fatherName: "",
+  //   }
+  //   // get student details by id
+  //   return res.json(
+  //     jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
+  //       userInfo:
+  //       {
+  //         user, studentDetails
+  //       },
+  //       token: token,
+  //       hash: hash,
+  //     })
+  //   );
+  // }
+
+  // if (role = "org") {
+  //   // get org details by id
+
+  //   const orgDetails = {
+  //     name: "",
+  //     address: "",
+  //     phoneNumber: "",
+  //   }
+  //   return res.json(
+  //     jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
+  //       userInfo:
+  //       {
+  //         user, orgDetails
+  //       },
+  //       orgInfo: org,
+  //       token: token,
+  //       hash: hash,
+  //     })
+  //   );
+  // }
 };
 
 export const Register = async (req, res) => {
