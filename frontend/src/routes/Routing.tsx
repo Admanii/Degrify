@@ -6,10 +6,6 @@ import MainPageUni from "../pages/University/MainPageUni";
 import TestPage from "../pages/TestPage";
 import VerifiedDegreesPage from "../pages/University/VerifiedDegreesPage";
 import UnverifiedDegreesPage from "../pages/University/UnverifiedDegreesPage";
-import AllDegreesPage from "../pages/University/AllDegreesPage";
-import DegreeViewPage from "../pages/DegreeViewPage";
-import EditRequestsPage from "../pages/University/EditRequestsPage";
-import AddStudent from "../components/AddStudent/AddStudent";
 
 interface RouteType {
   path: string;
