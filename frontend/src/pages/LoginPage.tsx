@@ -10,7 +10,7 @@ import { userLogin } from '../store/actions/authActions';
 
 const LoginPage = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const { loading, userInfo, error, success } = useSelector((state: RootState) => state.auth)
+    const { loading, userInfo, error, success } = useSelector((state: any) => state.auth)
     const dispatch = useDispatch<AppDispatch>();
 
     const { register, handleSubmit } = useForm()
@@ -20,7 +20,13 @@ const LoginPage = () => {
     useEffect(() => {
         //console.log(userInfo);
         if (success) {
-            navigate('/uni/dashboard')
+            if (userInfo?.user?.userRole == 'UNIVERSITY') {
+                navigate('/uni/dashboard')
+            }
+            if (userInfo?.user?.userRole == 'HEC') {
+                navigate('/hec/dashboard')
+            }
+
         }
     }, [navigate, success])
 

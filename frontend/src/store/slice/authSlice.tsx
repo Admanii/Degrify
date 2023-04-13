@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { userLogin } from '../actions/authActions'
+import { RootState } from '../store';
 
 // initialize userToken from local storage
 const accessToken = localStorage.getItem('accessToken')
@@ -48,7 +49,7 @@ const authSlice = createSlice({
             })
             .addCase(userLogin.fulfilled, (state, { payload }) => {
                 state.loading = false
-                state.userInfo = payload.data
+                state.userInfo = payload.data.userInfo
                 state.accessToken = payload.data.userToken
                 state.success = true
             })
@@ -63,3 +64,4 @@ const authSlice = createSlice({
 export const { logout, setCredentials } = authSlice.actions
 
 export default authSlice.reducer
+export const IsLoggedIn = (state: RootState) => state.auth.success;
