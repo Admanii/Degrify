@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { hashCal } from "../../middleware/HashCalculate.js";
+import Student from "../../models/Student.js";
 import User from "../../models/User.js";
 import { statusCode } from "../../utils/constant.js";
 import { jsonGenerate } from "../../utils/helper.js";
@@ -37,18 +38,18 @@ export const Login = async (req, res) => {
   );
   const hash = hashCal(token);
 
-      return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
-        userInfo:
-        {
-          user, studentDetails: {
-            name: "eee"
-          }
+  return res.json(
+    jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
+      userInfo: {
+        user,
+        studentDetails: {
+          name: "eee",
         },
-        token: token,
-        hash: hash,
-      })
-    );
+      },
+      token: token,
+      hash: hash,
+    })
+  );
 
   // if (role = "student") {
 
@@ -92,6 +93,84 @@ export const Login = async (req, res) => {
   // }
 };
 
+export const registerStudent = async (req, res) => {
+  const {
+    name,
+    enrollmentNumber,
+    fatherName,
+    studentID,
+    DateOfBirth,
+    CNIC,
+    DateOfAdmission,
+    DateOfompletion,
+    email,
+    password,
+    userRole,
+  } = req.body;
+
+  const studentExist = await Student.findOne({
+    $or: [
+      {
+        studentID: studentID,
+      },
+      {
+        CNIC: CNIC,
+      },
+    ],
+  });
+  if (studentExist) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Student already Exists")
+    );
+  }
+
+  try {
+    const student = await Student.create({
+      name: name,
+      enrollmentNumber: enrollmentNumber,
+      fatherName: fatherName,
+      studentID: studentID,
+      DateOfBirth: DateOfBirth,
+      CNIC: CNIC,
+      DateOfAdmission: DateOfAdmission,
+      DateOfompletion: DateOfompletion,
+    });
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(password, salt);
+
+    const userExist = await User.findOne({
+      $or: [
+        {
+          email: email,
+        },
+      ],
+    });
+    if (userExist) {
+      return res.json(
+        jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Users already Exists")
+      );
+    }
+    const result = await User.create({
+      name: name,
+      email: email,
+      password: hashPassword,
+      userRole: userRole,
+      studentID: student._id,
+    });
+    res.json(
+      jsonGenerate(statusCode.SUCCESS, "Registration successfull", {
+        userId: result._id,
+      })
+    );
+  } catch (err) {
+    res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error Found", {
+        error: err,
+      })
+    );
+  }
+};
+
 export const Register = async (req, res) => {
   const { name, email, password, userRole } = req.body;
 
@@ -130,7 +209,6 @@ export const Register = async (req, res) => {
   }
 };
 
-
 // 1st api call/route
 // Register student
 // create student
@@ -138,7 +216,6 @@ export const Register = async (req, res) => {
 
 // 2nd api call
 // add degree with student details
-
 
 // 1st api call/route
 // Register organisation

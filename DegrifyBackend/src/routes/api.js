@@ -4,7 +4,11 @@ import { HECAppovedDegree } from "../controllers/Degree/DegreeHECApproved.contro
 import { AddStudent } from "../controllers/Student/AddStudent.controller.js";
 import { deleteStudent } from "../controllers/Student/DeleteStudent.controller.js";
 
-import { Login, Register } from "../controllers/User/usercontroller.js";
+import {
+  Login,
+  Register,
+  registerStudent,
+} from "../controllers/User/usercontroller.js";
 
 import { deleteRecruiter } from "../controllers/Recruiter/DeleteRecruiter.controller.js";
 import { AddCourse } from "../controllers/Course/AddCourse.controller.js";
@@ -16,7 +20,7 @@ export const apiRoute = express.Router();
 export const apiProtected = express.Router();
 
 // this was just for checking purpose
-apiRoute.post("/signup", Register);
+apiRoute.post("/signup", registerStudent);
 apiRoute.post("/login", Login);
 
 apiProtected.post("/adddegree", AddDegree);
