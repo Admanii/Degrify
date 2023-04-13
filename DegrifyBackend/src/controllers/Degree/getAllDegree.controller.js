@@ -38,13 +38,13 @@ export const getAllDegrees = async (req, res) => {
         "completeVerified",
         "dateCreated",
       ]);
-      console.log(student);
+      // console.log(student);
 
       const particular = {
         studentDetail,
         degree,
       };
-      console.log(particular);
+      // console.log(particular);
       result.push(particular);
     }
 
