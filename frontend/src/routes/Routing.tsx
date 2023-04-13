@@ -6,6 +6,11 @@ import MainPageUni from "../pages/University/MainPageUni";
 import TestPage from "../pages/TestPage";
 import VerifiedDegreesPage from "../pages/University/VerifiedDegreesPage";
 import UnverifiedDegreesPage from "../pages/University/UnverifiedDegreesPage";
+import AllDegreesPage from "../pages/University/AllDegreesPage";
+import AddStudent from "../components/University/AddStudent/AddStudent";
+import EditRequestsPage from "../pages/University/EditRequestsPage";
+import DegreeViewPage from "../pages/DegreeViewPage";
+import Modal from "../components/general/Modal/Modal";
 
 interface RouteType {
   path: string;
@@ -105,6 +110,8 @@ export const routeList: RouteType[] = [
     isPrivate: true,
     component: <AddStudent />,
   },
+  
+  
 
 ];
 
