@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import Button from '../general/Button';
-import Layout from '../general/Layout';
-import Navbar from "../general/Navbar";
+import Button from '../../general/Button';
+import Layout from '../../general/Layout';
+import Navbar from "../../general/Navbar";
 
 const AddStudent = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
