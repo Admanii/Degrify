@@ -1,38 +1,38 @@
-import bcrypt from "bcrypt";
-import Organistation from "../../models/Organistation.js";
+// import bcrypt from "bcrypt";
+// import Organistation from "../../models/Organistation.js";
 
-const Login = async (req, res) => {
-  const errors = validationResult(req);
+// const Login = async (req, res) => {
+//   const errors = validationResult(req);
 
-  if (errors.isEmpty()) {
-    const { email, password } = req.body;
-    const user = await Organistation.findOne({ username: username });
+//   if (errors.isEmpty()) {
+//     const { email, password } = req.body;
+//     const user = await Organistation.findOne({ username: username });
 
-    if (!user) {
-      return res.json(
-        jsonGenerate(
-          statusCode.UNPROCESSABLE_ENTITY,
-          "Username or password not exists"
-        )
-      );
-    }
-    const verified = bcrypt.compareSync(password, user.password);
+//     if (!user) {
+//       return res.json(
+//         jsonGenerate(
+//           statusCode.UNPROCESSABLE_ENTITY,
+//           "Username or password not exists"
+//         )
+//       );
+//     }
+//     const verified = bcrypt.compareSync(password, user.password);
 
-    if (!verified) {
-      return res.json(
-        jsonGenerate(
-          statusCode.UNPROCESSABLE_ENTITY,
-          "Username or password not exists"
-        )
-      );
-    }
-    if (!user.active) {
-      return res.json(
-        jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Username is deleted")
-      );
-    }
-  }
-};
+//     if (!verified) {
+//       return res.json(
+//         jsonGenerate(
+//           statusCode.UNPROCESSABLE_ENTITY,
+//           "Username or password not exists"
+//         )
+//       );
+//     }
+//     if (!user.active) {
+//       return res.json(
+//         jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Username is deleted")
+//       );
+//     }
+//   }
+// };
 
 // LogIn is from university
 // LogIn is from HEC

@@ -5,6 +5,7 @@ import Student from "../../models/Student.js";
 import User from "../../models/User.js";
 import { statusCode } from "../../utils/constant.js";
 import { jsonGenerate } from "../../utils/helper.js";
+import Organistation from "../../models/Organistation.js";
 
 export const Login = async (req, res) => {
   const { email, password } = req.body;
@@ -33,64 +34,66 @@ export const Login = async (req, res) => {
     { userId: user._id },
     "e282a3561a61b57de67ebb20a2f7a4e83fb9f27ac4fa0774525e9aa7fee8cf84",
     {
-      expiresIn: "5h",
+      expiresIn: "8h",
     }
   );
   const hash = hashCal(token);
+  if (user.userRole === "STUDENT") {
+    const studentDetails = await Student.findById(user.studentID)
+      .select("")
+      .populate([
+        "name",
+        "enrollmentNumber",
+        "fatherName",
+        "studentID",
+        "DateOfBirth",
+        "CNIC",
+        "DateOfAdmission",
+        "DateOfompletion",
+      ])
+      .exec();
+
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
+        userInfo: {
+          user,
+          studentDetails,
+        },
+        token: token,
+        hash: hash,
+      })
+    );
+  }
+  if (user.userRole === "HEC" || user.userRole === "UNIVERSITY") {
+    const organistionDetails = await Organistation.findById(user.organisationID)
+      .select("")
+      .populate(["name", "phoneNumber", "address"])
+      .exec();
+
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
+        userInfo: {
+          user,
+          organistionDetails,
+        },
+        token: token,
+        hash: hash,
+      })
+    );
+  }
+  if (user.userRole === "RECRUITER") {
+    const recruiterDetails = await Student.findById(user.studentID)
+      .select("")
+      .populate(["name", "recuiterNumber", "fatherName", "employeeID", "CNIC"])
+      .exec();
+  }
 
   return res.json(
-    jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
-      userInfo: {
-        user,
-        studentDetails: {
-          name: "eee",
-        },
-      },
+    jsonGenerate(statusCode.SUCCESS, "Login Succesfull but must be admin", {
       token: token,
       hash: hash,
     })
   );
-
-  // if (role = "student") {
-
-  //   const studentDetails = {
-  //     name: "",
-  //     enrollmentNumber: "",
-  //     fatherName: "",
-  //   }
-  //   // get student details by id
-  //   return res.json(
-  //     jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
-  //       userInfo:
-  //       {
-  //         user, studentDetails
-  //       },
-  //       token: token,
-  //       hash: hash,
-  //     })
-  //   );
-  // }
-
-  // if (role = "org") {
-  //   // get org details by id
-
-  //   const orgDetails = {
-  //     name: "",
-  //     address: "",
-  //     phoneNumber: "",
-  //   }
-  //   return res.json(
-  //     jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
-  //       userInfo:
-  //       {
-  //         user, orgDetails
-  //       },
-  //       orgInfo: org,
-  //       token: token,
-  //       hash: hash,
-  //     })
-  //   );
-  // }
 };
 
 export const registerStudent = async (req, res) => {
@@ -120,7 +123,7 @@ export const registerStudent = async (req, res) => {
   });
   if (studentExist) {
     return res.json(
-      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Student already Exists")
+      jsonGenerate(statusCode.CLIENT_ERROR, "Student already Exists")
     );
   }
 
@@ -147,7 +150,7 @@ export const registerStudent = async (req, res) => {
     });
     if (userExist) {
       return res.json(
-        jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Users already Exists")
+        jsonGenerate(statusCode.CLIENT_ERROR, "Users already Exists")
       );
     }
     const result = await User.create({
@@ -156,6 +159,65 @@ export const registerStudent = async (req, res) => {
       password: hashPassword,
       userRole: userRole,
       studentID: student._id,
+    });
+    res.json(
+      jsonGenerate(statusCode.SUCCESS, "Registration successfull", {
+        userId: result._id,
+      })
+    );
+  } catch (err) {
+    res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error Found", {
+        error: err,
+      })
+    );
+  }
+};
+
+export const registerOrganisation = async (req, res) => {
+  const { name, phoneNumber, address, email, password, userRole } = req.body;
+
+  const organisationExist = await Organistation.findOne({
+    $or: [
+      {
+        name: name,
+      },
+    ],
+  });
+
+  if (organisationExist) {
+    res.json(
+      jsonGenerate(statusCode.CLIENT_ERROR, "Organisation Already exist")
+    );
+  }
+
+  try {
+    const organisation = await Organistation.create({
+      name: name,
+      phoneNumber: phoneNumber,
+      address: address,
+    });
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(password, salt);
+
+    const userExist = await User.findOne({
+      $or: [
+        {
+          email: email,
+        },
+      ],
+    });
+    if (userExist) {
+      return res.json(
+        jsonGenerate(statusCode.CLIENT_ERROR, "Users already Exists")
+      );
+    }
+    const result = await User.create({
+      name: name,
+      email: email,
+      password: hashPassword,
+      userRole: userRole,
+      studentID: organisation._id,
     });
     res.json(
       jsonGenerate(statusCode.SUCCESS, "Registration successfull", {

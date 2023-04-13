@@ -7,6 +7,7 @@ import { deleteStudent } from "../controllers/Student/DeleteStudent.controller.j
 import {
   Login,
   Register,
+  registerOrganisation,
   registerStudent,
 } from "../controllers/User/usercontroller.js";
 
@@ -20,7 +21,8 @@ export const apiRoute = express.Router();
 export const apiProtected = express.Router();
 
 // this was just for checking purpose
-apiRoute.post("/signup", registerStudent);
+apiRoute.post("/signupstudent", registerStudent);
+apiRoute.post("/signuporganisation", registerOrganisation);
 apiRoute.post("/login", Login);
 
 apiProtected.post("/adddegree", AddDegree);
