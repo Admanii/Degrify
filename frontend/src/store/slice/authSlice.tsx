@@ -49,7 +49,7 @@ const authSlice = createSlice({
             })
             .addCase(userLogin.fulfilled, (state, { payload }) => {
                 state.loading = false
-                state.userInfo = payload.data
+                state.userInfo = payload.data.userInfo
                 state.accessToken = payload.data.userToken
                 state.success = true
             })
