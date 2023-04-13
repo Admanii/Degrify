@@ -48,11 +48,11 @@ process.on("SIGINT", async () => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 // app.use(cookieParser());
 // app.use(fileUpload());
 app.use("/api/", apiRoute);
 app.use("/api/", AuthMiddleware, apiProtected);
-app.use(cors());
 
 const port = process.env.PORT || 8000;
 
