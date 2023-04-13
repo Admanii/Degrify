@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { userLogin } from '../actions/authActions'
+import { RootState } from '../store';
 
 // initialize userToken from local storage
 const accessToken = localStorage.getItem('accessToken')
@@ -63,3 +64,4 @@ const authSlice = createSlice({
 export const { logout, setCredentials } = authSlice.actions
 
 export default authSlice.reducer
+export const IsLoggedIn = (state: RootState) => state.auth.success;

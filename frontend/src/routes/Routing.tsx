@@ -10,6 +10,8 @@ import DegreeViewPage from "../pages/DegreeViewPage";
 import EditRequestsPage from "../pages/University/EditRequestsPage";
 import AllDegreesPage from "../pages/University/AllDegreesPage";
 import AddStudent from "../components/University/AddStudent/AddStudent";
+import { useSelector } from "react-redux";
+import { IsLoggedIn } from "../store/slice/authSlice";
 
 interface RouteType {
   path: string;
@@ -24,12 +26,12 @@ const PrivateRoute = ({
   element: any;
   isAuthenticated: Boolean;
 }) => {
-  console.log({ isAuthenticated });
-  return isAuthenticated ? element : <Navigate to="/login" />;
+  console.log(isAuthenticated);
+  return isAuthenticated ? element : <Navigate to='/login' />;
 };
 
 const GetRoutes = () => {
-  //const isAuthenticated = useSelector(IsLoggedIn);
+  const isAuthenticated = useSelector(IsLoggedIn);
 
   return (
     <Routes>
@@ -40,7 +42,7 @@ const GetRoutes = () => {
             key={index}
             element={
               <PrivateRoute
-                isAuthenticated={true}
+                isAuthenticated={isAuthenticated ?? false}
                 element={route.component}
               />
             }
@@ -61,7 +63,7 @@ export const routeList: RouteType[] = [
   },
   {
     path: "/login",
-    isPrivate: true,
+    isPrivate: false,
     component: <LoginPage />,
   },
   {
