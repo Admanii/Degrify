@@ -6,11 +6,13 @@ import MainPageUni from "../pages/University/MainPageUni";
 import TestPage from "../pages/TestPage";
 import VerifiedDegreesPage from "../pages/University/VerifiedDegreesPage";
 import UnverifiedDegreesPage from "../pages/University/UnverifiedDegreesPage";
+import DegreeViewPage from "../pages/DegreeViewPage";
+import EditRequestsPage from "../pages/University/EditRequestsPage";
 import AllDegreesPage from "../pages/University/AllDegreesPage";
 import AddStudent from "../components/University/AddStudent/AddStudent";
-import EditRequestsPage from "../pages/University/EditRequestsPage";
-import DegreeViewPage from "../pages/DegreeViewPage";
-import Modal from "../components/general/Modal/Modal";
+import { useSelector } from "react-redux";
+import { IsLoggedIn } from "../store/slice/authSlice";
+import MainPageHec from "../pages/HEC/MainPageHec";
 
 interface RouteType {
   path: string;
@@ -25,12 +27,12 @@ const PrivateRoute = ({
   element: any;
   isAuthenticated: Boolean;
 }) => {
-  console.log({ isAuthenticated });
-  return isAuthenticated ? element : <Navigate to="/login" />;
+  console.log(isAuthenticated);
+  return isAuthenticated ? element : <Navigate to='/login' />;
 };
 
 const GetRoutes = () => {
-  //const isAuthenticated = useSelector(IsLoggedIn);
+  const isAuthenticated = useSelector(IsLoggedIn);
 
   return (
     <Routes>
@@ -41,7 +43,7 @@ const GetRoutes = () => {
             key={index}
             element={
               <PrivateRoute
-                isAuthenticated={true}
+                isAuthenticated={isAuthenticated ?? false}
                 element={route.component}
               />
             }
@@ -62,7 +64,7 @@ export const routeList: RouteType[] = [
   },
   {
     path: "/login",
-    isPrivate: true,
+    isPrivate: false,
     component: <LoginPage />,
   },
   {
@@ -110,8 +112,6 @@ export const routeList: RouteType[] = [
     isPrivate: true,
     component: <AddStudent />,
   },
-  
-  
 
 ];
 

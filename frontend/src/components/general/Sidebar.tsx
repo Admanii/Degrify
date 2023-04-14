@@ -1,10 +1,13 @@
 // components/layout/Sidebar.tsx
 import React, { useRef } from "react";
-import { navItems } from "./navItems";
+import { navItemsUni, navItemsHec } from "./navItems";
 import { useOnClickOutside } from "usehooks-ts";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IMAGES } from "../../constants/images";
 import { classNames } from "../../utility/util";
+import { logout } from "../../store/slice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../store/store";
 // define a NavItem prop
 export type NavItem = {
     label: string;
@@ -15,10 +18,47 @@ export type NavItem = {
 // add NavItem prop to component prop
 type Props = {
     open: boolean;
-    navItemss?: NavItem[];
+    navItems?:
+    {
+        uni: NavItem[],
+        hec: NavItem[]
+
+    };
     setOpen(open: boolean): void;
 };
-const Sidebar = ({ open, navItemss = navItems, setOpen }: Props) => {
+
+
+const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec }, setOpen }: Props) => {
+
+    const { userInfo, success } = useSelector((state: any) => state.auth)
+
+    var items: NavItem[] = [];
+    var path = '';
+
+    if (userInfo?.user?.userRole == 'HEC') {
+        items = navItems.hec;
+        path = "/hec/dashboard/";
+    }
+    else if (userInfo?.user?.userRole == 'UNIVERSITY') {
+        items = navItems.uni
+        path = "/uni/dashboard/";
+    }
+
+    const dispatch = useDispatch<AppDispatch>();
+
+
+    const logoutHandler = async () => {
+        console.log("Logout clicked");
+        // clear local storage
+        await dispatch(logout())
+        localStorage.clear();
+
+        // navigate to login page
+        navigate("/login");
+    };
+
+    const navigate = useNavigate()
+
     const location = useLocation();
     const currentUrl = location.pathname;
     const ref = useRef<HTMLDivElement>(null);
@@ -40,12 +80,15 @@ const Sidebar = ({ open, navItemss = navItems, setOpen }: Props) => {
 
             <nav className="md:sticky top-0 md:top-16">
 
-                <button className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
-                    <div><img src={IMAGES.plus_icon} alt="plus" /></div>
-                    <div className="font-">Register New Student</div>
-                </button>
+                {userInfo?.user?.userRole == 'UNIVERSITY' ?? (
+                    <button className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
+                        <div><img src={IMAGES.plus_icon} alt="plus" /></div>
+                        <div className="font-">Register New Student</div>
+                    </button>
+                )}
 
-                <Link to="/uni/dashboard/">
+
+                <Link to={path}>
                     <div className={classNames(
                         "text-gray-600 text-base", //colors
                         "flex gap-4 items-center", //layout
@@ -54,7 +97,7 @@ const Sidebar = ({ open, navItemss = navItems, setOpen }: Props) => {
                         "/uni/dashboard/" == currentUrl ? "font-bold text-black" : "font-medium"
                     )}>
                         <img src={
-                            "/uni/dashboard/" == currentUrl ? IMAGES.home_active_icon : IMAGES.home_icon
+                            path == currentUrl ? IMAGES.home_active_icon : IMAGES.home_icon
                         }></img> Dashboard
                     </div>
                 </Link>
@@ -68,7 +111,7 @@ const Sidebar = ({ open, navItemss = navItems, setOpen }: Props) => {
                 </div>
                 {/* nav items */}
                 <ul className="flex mb-1 flex-col gap-1">
-                    {navItemss.map((item, index) => {
+                    {items.map((item, index) => {
                         return (
                             <Link key={index} to={item.href}>
                                 <li
@@ -91,7 +134,8 @@ const Sidebar = ({ open, navItemss = navItems, setOpen }: Props) => {
             </nav>
             {/* account  */}
             <div className="border-t border-gray-700 p-4">
-                <div className="flex gap-4 items-center mx-5 cursor-pointer">
+                <div className="flex gap-4 items-center mx-5 cursor-pointer
+                " onClick={logoutHandler}>
                     <img src={IMAGES.logout_icon}></img>
                     {/* <img
                         src={

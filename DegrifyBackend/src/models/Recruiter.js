@@ -18,7 +18,6 @@ const recruiterSchema = mongoose.Schema({
   },
   DateOfBirth: {
     type: Date,
-    required: true,
   },
   CNIC: {
     type: String,
