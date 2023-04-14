@@ -38,11 +38,11 @@ export const getAllDegrees = async (req, res) => {
         "completeVerified",
         "dateCreated",
       ]);
-      // console.log(student);
+      const degree1 = degree[0];
 
       const particular = {
         studentDetail,
-        degree,
+        degree1,
       };
       // console.log(particular);
       result.push(particular);
@@ -225,7 +225,8 @@ export const getHECVerifiedDegrees = async (req, res) => {
         ])
         .exec();
 
-      const degree = await Degree.find({ studentID: student }).select([
+      const degree = {};
+      degree = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
         "organisationVerified",
@@ -388,4 +389,13 @@ export const getUniversityDegree = async (req, res) => {
       )
     );
   }
+};
+
+export const getUniversityVerifiedDegree = async (req, res) => {
+  //
+};
+
+export const getAllDegreeHEC = async (req, res) => {
+  // student verified
+  // university verified
 };
