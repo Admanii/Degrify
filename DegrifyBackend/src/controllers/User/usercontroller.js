@@ -217,7 +217,7 @@ export const registerOrganisation = async (req, res) => {
       email: email,
       password: hashPassword,
       userRole: userRole,
-      studentID: organisation._id,
+      organisationID: organisation._id,
     });
     res.json(
       jsonGenerate(statusCode.SUCCESS, "Registration successfull", {
