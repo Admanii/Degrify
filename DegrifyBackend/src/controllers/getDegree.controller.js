@@ -62,27 +62,58 @@ export const getAllDegrees = async (req, res) => {
 
 export const getStudentVerifiedDegrees = async (req, res) => {
   try {
-    const degree = await Degree.find({ studentVerified: true }).select([
-      "_id",
+    const list = await Degree.find({ studentVerified: true }).select([
+      "-_id",
       "studentID",
-      "studentVerified",
-      "organisationVerified",
-      "HECVerified",
-      "completeVerified",
-      "dateCreated",
     ]);
 
-    if (!degree) {
+    if (!list) {
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Degree Found", degree)
+        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
       );
+    }
+    const result = [];
+
+    const array = Object.values(list);
+    for (let i = 0; i < array.length; i++) {
+      const student = array[0].studentID;
+      const studentDetail = await Student.findById(student)
+        .select("")
+        .populate([
+          "name",
+          "enrollmentNumber",
+          "fatherName",
+          "studentID",
+          "DateOfBirth",
+          "CNIC",
+          "DateOfAdmission",
+          "DateOfompletion",
+        ])
+        .exec();
+
+      const degree = await Degree.find({ studentID: student }).select([
+        "_id",
+        "studentID",
+        "organisationVerified",
+        "HECVerified",
+        "completeVerified",
+        "dateCreated",
+      ]);
+      // console.log(student);
+
+      const particular = {
+        studentDetail,
+        degree,
+      };
+      // console.log(particular);
+      result.push(particular);
     }
 
     return res.json(
       jsonGenerate(
         statusCode.SUCCESS,
         "displaying Student Verified Degree",
-        degree
+        result
       )
     );
   } catch (err) {
@@ -98,27 +129,58 @@ export const getStudentVerifiedDegrees = async (req, res) => {
 
 export const getOrganisationVerifiedDegrees = async (req, res) => {
   try {
-    const degree = await Degree.find({ organisationVerified: true }).select([
-      "_id",
+    const list = await Degree.find({ organisationVerified: true }).select([
+      "-_id",
       "studentID",
-      "studentVerified",
-      "organisationVerified",
-      "HECVerified",
-      "completeVerified",
-      "dateCreated",
     ]);
 
-    if (!degree) {
+    if (!list) {
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Degree Found", degree)
+        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
       );
+    }
+    const result = [];
+
+    const array = Object.values(list);
+    for (let i = 0; i < array.length; i++) {
+      const student = array[0].studentID;
+      const studentDetail = await Student.findById(student)
+        .select("")
+        .populate([
+          "name",
+          "enrollmentNumber",
+          "fatherName",
+          "studentID",
+          "DateOfBirth",
+          "CNIC",
+          "DateOfAdmission",
+          "DateOfompletion",
+        ])
+        .exec();
+
+      const degree = await Degree.find({ studentID: student }).select([
+        "_id",
+        "studentID",
+        "organisationVerified",
+        "HECVerified",
+        "completeVerified",
+        "dateCreated",
+      ]);
+      // console.log(student);
+
+      const particular = {
+        studentDetail,
+        degree,
+      };
+      // console.log(particular);
+      result.push(particular);
     }
 
     return res.json(
       jsonGenerate(
         statusCode.SUCCESS,
-        "displaying Organisation Verified Degree",
-        degree
+        "displaying Student Verified Degree",
+        result
       )
     );
   } catch (err) {
@@ -134,24 +196,59 @@ export const getOrganisationVerifiedDegrees = async (req, res) => {
 
 export const getHECVerifiedDegrees = async (req, res) => {
   try {
-    const degree = await Degree.find({ HECVerified: true }).select([
-      "_id",
+    const list = await Degree.find({ HECVerified: true }).select([
+      "-_id",
       "studentID",
-      "studentVerified",
-      "organisationVerified",
-      "HECVerified",
-      "completeVerified",
-      "dateCreated",
     ]);
 
-    if (!degree) {
+    if (!list) {
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Degree Found", degree)
+        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
       );
+    }
+    const result = [];
+
+    const array = Object.values(list);
+    for (let i = 0; i < array.length; i++) {
+      const student = array[0].studentID;
+      const studentDetail = await Student.findById(student)
+        .select("")
+        .populate([
+          "name",
+          "enrollmentNumber",
+          "fatherName",
+          "studentID",
+          "DateOfBirth",
+          "CNIC",
+          "DateOfAdmission",
+          "DateOfompletion",
+        ])
+        .exec();
+
+      const degree = await Degree.find({ studentID: student }).select([
+        "_id",
+        "studentID",
+        "organisationVerified",
+        "HECVerified",
+        "completeVerified",
+        "dateCreated",
+      ]);
+      // console.log(student);
+
+      const particular = {
+        studentDetail,
+        degree,
+      };
+      // console.log(particular);
+      result.push(particular);
     }
 
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "displaying HEC Verified Degree", degree)
+      jsonGenerate(
+        statusCode.SUCCESS,
+        "displaying Student Verified Degree",
+        result
+      )
     );
   } catch (err) {
     return res.json(
@@ -166,27 +263,58 @@ export const getHECVerifiedDegrees = async (req, res) => {
 
 export const getCompleteVerifiedDegrees = async (req, res) => {
   try {
-    const degree = await Degree.find({ completeVerified: true }).select([
-      "_id",
+    const list = await Degree.find({ completeVerified: true }).select([
+      "-_id",
       "studentID",
-      "studentVerified",
-      "organisationVerified",
-      "HECVerified",
-      "completeVerified",
-      "dateCreated",
     ]);
 
-    if (!degree) {
+    if (!list) {
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Degree Found", degree)
+        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
       );
+    }
+    const result = [];
+
+    const array = Object.values(list);
+    for (let i = 0; i < array.length; i++) {
+      const student = array[0].studentID;
+      const studentDetail = await Student.findById(student)
+        .select("")
+        .populate([
+          "name",
+          "enrollmentNumber",
+          "fatherName",
+          "studentID",
+          "DateOfBirth",
+          "CNIC",
+          "DateOfAdmission",
+          "DateOfompletion",
+        ])
+        .exec();
+
+      const degree = await Degree.find({ studentID: student }).select([
+        "_id",
+        "studentID",
+        "organisationVerified",
+        "HECVerified",
+        "completeVerified",
+        "dateCreated",
+      ]);
+      // console.log(student);
+
+      const particular = {
+        studentDetail,
+        degree,
+      };
+      // console.log(particular);
+      result.push(particular);
     }
 
     return res.json(
       jsonGenerate(
         statusCode.SUCCESS,
-        "displaying Complete Verified Degree",
-        degree
+        "displaying Student Verified Degree",
+        result
       )
     );
   } catch (err) {
