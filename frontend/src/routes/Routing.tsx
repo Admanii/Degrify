@@ -18,22 +18,54 @@ import MainPageStudent from "../pages/Student/MainPageStudent";
 interface RouteType {
   path: string;
   isPrivate: boolean;
+  isUni?: boolean;
+  isHec?: boolean;
+  isStudent?: boolean;
   component: any;
 }
 
 const PrivateRoute = ({
   element,
   isAuthenticated,
+  isUni,
+  isHec,
+  isStudent,
+  userRole
 }: {
   element: any;
-  isAuthenticated: Boolean;
+  isAuthenticated: boolean;
+  isUni?: boolean;
+  isHec?: boolean;
+  isStudent?: boolean;
+  userRole: string;
 }) => {
   console.log(isAuthenticated);
-  return isAuthenticated ? element : <Navigate to='/login' />;
+  if (isAuthenticated) {
+    if (isUni === true && userRole !== 'UNIVERSITY') {
+      //console.log("redirected to home")
+      return <Navigate to='/login' />;
+    }
+    else if (isHec === true && userRole !== 'HEC') {
+      //console.log("redirected to home")
+      return <Navigate to='/login' />;
+    }
+    else if (isStudent === true && userRole !== 'STUDENT') {
+      //console.log("redirected to home")
+      return <Navigate to='/login' />;
+    }
+    else {
+      return element;
+    }
+  }
+  else {
+    return <Navigate to='/login' />;
+  }
+  //return isAuthenticated ? element : <Navigate to='/login' />;
 };
 
 const GetRoutes = () => {
   const isAuthenticated = useSelector(IsLoggedIn);
+  const { userInfo } = useSelector((state: any) => state.auth)
 
   return (
     <Routes>
@@ -46,6 +78,10 @@ const GetRoutes = () => {
               <PrivateRoute
                 isAuthenticated={isAuthenticated ?? false}
                 element={route.component}
+                isUni={route.isUni}
+                isHec={route.isHec}
+                isStudent={route.isStudent}
+                userRole={userInfo?.user?.userRole ?? ''}
               />
             }
           />
@@ -76,6 +112,7 @@ export const routeList: RouteType[] = [
   {
     path: "/uni/dashboard/",
     isPrivate: true,
+    isUni: true,
     component: <MainPageUni />,
   },
   {
@@ -116,11 +153,13 @@ export const routeList: RouteType[] = [
   {
     path: "/hec/dashboard/",
     isPrivate: true,
+    isHec: true,
     component: <MainPageHec />,
   },
   {
     path: "/student/dashboard/",
     isPrivate: true,
+    isStudent: true,
     component: <MainPageStudent />,
   },
 ];
