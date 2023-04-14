@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt";
-import Degree from "../../models/Degree.js";
-import { statusCode } from "../../utils/constant.js";
-import { jsonGenerate } from "../../utils/helper.js";
-import Student from "../../models/Student.js";
+import Degree from "../models/Degree.js";
+import { statusCode } from "../utils/constant.js";
+import { jsonGenerate } from "../utils/helper.js";
+import Student from "../models/Student.js";
 
 export const getAllDegrees = async (req, res) => {
   try {

@@ -1,11 +1,11 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { hashCal } from "../../middleware/HashCalculate.js";
-import Student from "../../models/Student.js";
-import User from "../../models/User.js";
-import { statusCode } from "../../utils/constant.js";
-import { jsonGenerate } from "../../utils/helper.js";
-import Organistation from "../../models/Organistation.js";
+import { hashCal } from "../middleware/HashCalculate.js";
+import Student from "../models/Student.js";
+import User from "../models/User.js";
+import { statusCode } from "../utils/constant.js";
+import { jsonGenerate } from "../utils/helper.js";
+import Organistation from "../models/Organistation.js";
 
 export const Login = async (req, res) => {
   const { email, password } = req.body;

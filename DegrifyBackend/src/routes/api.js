@@ -1,34 +1,36 @@
 import express from "express";
-import { AddDegree } from "../controllers/Degree/AddDegree.controller.js";
+import { AddDegree } from "../controllers/AddDegree.controller.js";
 import {
   CompleteAppovedDegree,
   HECAppovedDegree,
   OrganisationAppovedDegree,
   StudentAppovedDegree,
-} from "../controllers/Degree/DegreeApproved.controller.js";
+} from "../controllers/DegreeApproved.controller.js";
 
 import {
   Login,
   Register,
   registerOrganisation,
   registerStudent,
-} from "../controllers/User/usercontroller.js";
-import { deleteRecruiter } from "../controllers/Recruiter/DeleteRecruiter.controller.js";
-import { AddCourse } from "../controllers/Course/AddCourse.controller.js";
-import { deleteCourse } from "../controllers/Course/DeleteCourse.controller.js";
+} from "../controllers/usercontroller.js";
+import { AddCourse, deleteCourse } from "../controllers/course.controller.js";
+
 import {
   getAllDegrees,
   getCompleteVerifiedDegrees,
   getHECVerifiedDegrees,
   getOrganisationVerifiedDegrees,
   getStudentVerifiedDegrees,
-} from "../controllers/Degree/getAllDegree.controller.js";
-import { AddRecruiter } from "../controllers/Recruiter/AddRecruiter.controller.js";
+} from "../controllers/getDegree.controller.js";
+import {
+  AddRecruiter,
+  deleteRecruiter,
+} from "../controllers/Recruiter.controller.js";
 import {
   AddStudent,
   deleteStudent,
   getAllStudent,
-} from "../controllers/Student/studentcontroller.js";
+} from "../controllers/studentcontroller.js";
 
 export const apiRoute = express.Router();
 export const apiProtected = express.Router();

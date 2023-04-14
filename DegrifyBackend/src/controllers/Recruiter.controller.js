@@ -1,7 +1,47 @@
-import Recruiter from "../../models/Recruiter.js";
-import User from "../../models/User.js";
-import { statusCode } from "../../utils/constant.js";
-import { jsonGenerate } from "../../utils/helper.js";
+import Recruiter from "../models/Recruiter.js";
+import User from "../models/User.js";
+import { statusCode } from "../utils/constant.js";
+import { jsonGenerate } from "../utils/helper.js";
+
+export const AddRecruiter = async (req, res) => {
+  const { name, recuiterNumber, fatherName, employeeID, DateOfBirth, CNIC } =
+    req.body;
+
+  const recruiterExist = await Recruiter.findOne({
+    $or: [
+      {
+        employeeID: employeeID,
+      },
+      {
+        CNIC: CNIC,
+      },
+    ],
+  });
+  if (recruiterExist) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Recruiter already Exists")
+    );
+  }
+  try {
+    const result = await Recruiter.create({
+      name: name,
+      recuiterNumber: recuiterNumber,
+      fatherName: fatherName,
+      employeeID: employeeID,
+      DateOfBirth: DateOfBirth,
+      CNIC: CNIC,
+    });
+
+    res.json(
+      jsonGenerate(statusCode.SUCCESS, "Recruiter Registered", {
+        recruiterMongoID: result._id,
+        // token: token,
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const deleteRecruiter = async (req, res) => {
   const newUser = {

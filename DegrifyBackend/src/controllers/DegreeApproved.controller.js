@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
-import Degree from "../../models/Degree.js";
-import { statusCode } from "../../utils/constant.js";
-import { jsonGenerate } from "../../utils/helper.js";
+import Degree from "../models/Degree.js";
+import { statusCode } from "../utils/constant.js";
+import { jsonGenerate } from "../utils/helper.js";
 
 export const HECAppovedDegree = async (req, res) => {
   try {
