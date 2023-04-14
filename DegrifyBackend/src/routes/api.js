@@ -21,6 +21,7 @@ import {
   getHECVerifiedDegrees,
   getOrganisationVerifiedDegrees,
   getStudentVerifiedDegrees,
+  getUniversityDegree,
 } from "../controllers/getDegree.controller.js";
 import {
   AddRecruiter,
@@ -63,6 +64,7 @@ apiProtected.get(
 );
 apiProtected.get("/gethecverifieddegree", getHECVerifiedDegrees);
 apiProtected.get("/getcompleteverifieddegree", getCompleteVerifiedDegrees);
+apiProtected.get("/getuniversitydegree", getUniversityDegree);
 
 // get all students
 apiProtected.get("/getallStudents", getAllStudent);

@@ -5,6 +5,10 @@ const degreeSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Student",
   },
+  organisationID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Organisation",
+  },
   studentVerified: {
     type: Boolean,
     default: false,
