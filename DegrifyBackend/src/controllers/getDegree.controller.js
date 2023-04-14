@@ -15,7 +15,7 @@ export const getAllDegrees = async (req, res) => {
     const array = Object.values(list);
 
     for (let i = 0; i < array.length; i++) {
-      const student = array[0].studentID;
+      const student = array[i].studentID;
       const studentDetail = await Student.findById(student)
         .select("")
         .populate([
@@ -76,7 +76,7 @@ export const getStudentVerifiedDegrees = async (req, res) => {
 
     const array = Object.values(list);
     for (let i = 0; i < array.length; i++) {
-      const student = array[0].studentID;
+      const student = array[i].studentID;
       const studentDetail = await Student.findById(student)
         .select("")
         .populate([
@@ -143,7 +143,7 @@ export const getOrganisationVerifiedDegrees = async (req, res) => {
 
     const array = Object.values(list);
     for (let i = 0; i < array.length; i++) {
-      const student = array[0].studentID;
+      const student = array[i].studentID;
       const studentDetail = await Student.findById(student)
         .select("")
         .populate([
@@ -210,7 +210,7 @@ export const getHECVerifiedDegrees = async (req, res) => {
 
     const array = Object.values(list);
     for (let i = 0; i < array.length; i++) {
-      const student = array[0].studentID;
+      const student = array[i].studentID;
       const studentDetail = await Student.findById(student)
         .select("")
         .populate([
@@ -277,7 +277,7 @@ export const getCompleteVerifiedDegrees = async (req, res) => {
 
     const array = Object.values(list);
     for (let i = 0; i < array.length; i++) {
-      const student = array[0].studentID;
+      const student = array[i].studentID;
       const studentDetail = await Student.findById(student)
         .select("")
         .populate([
@@ -345,7 +345,7 @@ export const getUniversityDegree = async (req, res) => {
     const array = Object.values(list);
 
     for (let i = 0; i < array.length; i++) {
-      const student = array[0].studentID;
+      const student = array[i].studentID;
       const studentDetail = await Student.findById(student)
         .select("")
         .populate([
