@@ -28,7 +28,15 @@ export const AddDegree = async (req, res) => {
         degreeId: result._id,
       })
     );
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    res.json(
+      jsonGenerate(
+        statusCode.UNPROCESSABLE_ENTITY,
+        "Degree Registration Failed",
+        {
+          error: err,
+        }
+      )
+    );
   }
 };

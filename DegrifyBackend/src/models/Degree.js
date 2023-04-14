@@ -5,6 +5,10 @@ const degreeSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Student",
   },
+  studentVerified: {
+    type: Boolean,
+    default: false,
+  },
   organisationVerified: {
     type: Boolean,
     default: false,
@@ -29,8 +33,6 @@ const degreeSchema = mongoose.Schema({
 
 export default mongoose.model("Degree", degreeSchema);
 
-
 // studentid, name, program, date of issue, graduating year , cnic, fatherName, DateOfBirth
 
-
-// add degree with student details 
+// add degree with student details

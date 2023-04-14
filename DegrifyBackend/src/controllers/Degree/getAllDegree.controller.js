@@ -31,7 +31,7 @@ export const getAllDegrees = async (req, res) => {
         .exec();
 
       const degree = await Degree.find({ studentID: student }).select([
-        "-_id",
+        "_id",
         "studentID",
         "organisationVerified",
         "HECVerified",
@@ -55,6 +55,146 @@ export const getAllDegrees = async (req, res) => {
         statusCode.UNPROCESSABLE_ENTITY,
         "Error is displaying Degree",
         error
+      )
+    );
+  }
+};
+
+export const getStudentVerifiedDegrees = async (req, res) => {
+  try {
+    const degree = await Degree.find({ studentVerified: true }).select([
+      "_id",
+      "studentID",
+      "studentVerified",
+      "organisationVerified",
+      "HECVerified",
+      "completeVerified",
+      "dateCreated",
+    ]);
+
+    if (!degree) {
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "No Degree Found", degree)
+      );
+    }
+
+    return res.json(
+      jsonGenerate(
+        statusCode.SUCCESS,
+        "displaying Student Verified Degree",
+        degree
+      )
+    );
+  } catch (err) {
+    return res.json(
+      jsonGenerate(
+        statusCode.UNPROCESSABLE_ENTITY,
+        "Error is displaying Student Verified Degree",
+        err
+      )
+    );
+  }
+};
+
+export const getOrganisationVerifiedDegrees = async (req, res) => {
+  try {
+    const degree = await Degree.find({ organisationVerified: true }).select([
+      "_id",
+      "studentID",
+      "studentVerified",
+      "organisationVerified",
+      "HECVerified",
+      "completeVerified",
+      "dateCreated",
+    ]);
+
+    if (!degree) {
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "No Degree Found", degree)
+      );
+    }
+
+    return res.json(
+      jsonGenerate(
+        statusCode.SUCCESS,
+        "displaying Organisation Verified Degree",
+        degree
+      )
+    );
+  } catch (err) {
+    return res.json(
+      jsonGenerate(
+        statusCode.UNPROCESSABLE_ENTITY,
+        "Error is displaying Organisation Verified Degree",
+        err
+      )
+    );
+  }
+};
+
+export const getHECVerifiedDegrees = async (req, res) => {
+  try {
+    const degree = await Degree.find({ HECVerified: true }).select([
+      "_id",
+      "studentID",
+      "studentVerified",
+      "organisationVerified",
+      "HECVerified",
+      "completeVerified",
+      "dateCreated",
+    ]);
+
+    if (!degree) {
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "No Degree Found", degree)
+      );
+    }
+
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "displaying HEC Verified Degree", degree)
+    );
+  } catch (err) {
+    return res.json(
+      jsonGenerate(
+        statusCode.UNPROCESSABLE_ENTITY,
+        "Error is displaying HEC Verified Degree",
+        err
+      )
+    );
+  }
+};
+
+export const getCompleteVerifiedDegrees = async (req, res) => {
+  try {
+    const degree = await Degree.find({ completeVerified: true }).select([
+      "_id",
+      "studentID",
+      "studentVerified",
+      "organisationVerified",
+      "HECVerified",
+      "completeVerified",
+      "dateCreated",
+    ]);
+
+    if (!degree) {
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "No Degree Found", degree)
+      );
+    }
+
+    return res.json(
+      jsonGenerate(
+        statusCode.SUCCESS,
+        "displaying Complete Verified Degree",
+        degree
+      )
+    );
+  } catch (err) {
+    return res.json(
+      jsonGenerate(
+        statusCode.UNPROCESSABLE_ENTITY,
+        "Error is displaying Complete Verified Degree",
+        err
       )
     );
   }

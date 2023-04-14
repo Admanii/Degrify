@@ -1,6 +1,11 @@
 import express from "express";
 import { AddDegree } from "../controllers/Degree/AddDegree.controller.js";
-import { HECAppovedDegree } from "../controllers/Degree/DegreeHECApproved.controller.js";
+import {
+  CompleteAppovedDegree,
+  HECAppovedDegree,
+  OrganisationAppovedDegree,
+  StudentAppovedDegree,
+} from "../controllers/Degree/DegreeApproved.controller.js";
 
 import {
   Login,
@@ -11,7 +16,13 @@ import {
 import { deleteRecruiter } from "../controllers/Recruiter/DeleteRecruiter.controller.js";
 import { AddCourse } from "../controllers/Course/AddCourse.controller.js";
 import { deleteCourse } from "../controllers/Course/DeleteCourse.controller.js";
-import { getAllDegrees } from "../controllers/Degree/getAllDegree.controller.js";
+import {
+  getAllDegrees,
+  getCompleteVerifiedDegrees,
+  getHECVerifiedDegrees,
+  getOrganisationVerifiedDegrees,
+  getStudentVerifiedDegrees,
+} from "../controllers/Degree/getAllDegree.controller.js";
 import { AddRecruiter } from "../controllers/Recruiter/AddRecruiter.controller.js";
 import {
   AddStudent,
@@ -22,13 +33,11 @@ import {
 export const apiRoute = express.Router();
 export const apiProtected = express.Router();
 
-// this was just for checking purpose
+// Register and SignUp
 apiRoute.post("/signupstudent", registerStudent);
 apiRoute.post("/signuporganisation", registerOrganisation);
 apiRoute.post("/login", Login);
 
-apiProtected.post("/adddegree", AddDegree);
-apiProtected.post("/hecapproveddegree", HECAppovedDegree);
 apiProtected.post("/addstudent", AddStudent);
 apiProtected.post("/deletestudent", deleteStudent);
 apiProtected.post("/addrecruiter", AddRecruiter);
@@ -36,5 +45,22 @@ apiProtected.post("/deleterecruiter", deleteRecruiter);
 apiProtected.post("/addcourse", AddCourse);
 apiProtected.post("/deletecourse", deleteCourse);
 
+// post approved degrees
+apiProtected.post("/adddegree", AddDegree);
+apiProtected.post("/hecapproveddegree", HECAppovedDegree);
+apiProtected.post("/studentapproveddegree", StudentAppovedDegree);
+apiProtected.post("/organisationapproveddegree", OrganisationAppovedDegree);
+apiProtected.post("/completeapproveddegree", CompleteAppovedDegree);
+
+// get degrees
 apiProtected.get("/getalldegree", getAllDegrees);
+apiProtected.get("/getstudentverifieddegree", getStudentVerifiedDegrees);
+apiProtected.get(
+  "/getorganisationverifieddegree",
+  getOrganisationVerifiedDegrees
+);
+apiProtected.get("/gethecverifieddegree", getHECVerifiedDegrees);
+apiProtected.get("/getcompleteverifieddegree", getCompleteVerifiedDegrees);
+
+// get all students
 apiProtected.get("/getallStudents", getAllStudent);
