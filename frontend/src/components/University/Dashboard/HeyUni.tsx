@@ -13,8 +13,7 @@ import { RootState } from "../../../store/store";
 
 const HeyUni = () => {
 
-  const { loading, userInfo, error, success } = useSelector((state: any) => state.auth)
-  console.log(userInfo)
+  const { userInfo } = useSelector((state: any) => state.auth)
 
   return (
     <div>

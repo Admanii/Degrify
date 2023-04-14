@@ -49,3 +49,12 @@ export const navItemsHec: NavItem[] = [
     inactiveIcon: IMAGES.user_icon,
   },
 ];
+
+export const navItemsStudent: NavItem[] = [
+  {
+    label: "View Details",
+    href: "/view/details",
+    activeIcon: IMAGES.user_icon_active,
+    inactiveIcon: IMAGES.user_icon,
+  },
+];

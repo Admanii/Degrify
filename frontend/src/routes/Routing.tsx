@@ -13,6 +13,7 @@ import AddStudent from "../components/University/AddStudent/AddStudent";
 import { useSelector } from "react-redux";
 import { IsLoggedIn } from "../store/slice/authSlice";
 import MainPageHec from "../pages/HEC/MainPageHec";
+import MainPageStudent from "../pages/Student/MainPageStudent";
 
 interface RouteType {
   path: string;
@@ -112,7 +113,16 @@ export const routeList: RouteType[] = [
     isPrivate: true,
     component: <AddStudent />,
   },
-
+  {
+    path: "/hec/dashboard/",
+    isPrivate: true,
+    component: <MainPageHec />,
+  },
+  {
+    path: "/student/dashboard/",
+    isPrivate: true,
+    component: <MainPageStudent />,
+  },
 ];
 
 export default GetRoutes;

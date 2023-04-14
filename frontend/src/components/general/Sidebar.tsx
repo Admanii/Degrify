@@ -1,6 +1,6 @@
 // components/layout/Sidebar.tsx
 import React, { useRef } from "react";
-import { navItemsUni, navItemsHec } from "./navItems";
+import { navItemsUni, navItemsHec, navItemsStudent } from "./navItems";
 import { useOnClickOutside } from "usehooks-ts";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IMAGES } from "../../constants/images";
@@ -21,27 +21,32 @@ type Props = {
     navItems?:
     {
         uni: NavItem[],
-        hec: NavItem[]
-
+        hec: NavItem[],
+        student: NavItem[]
     };
     setOpen(open: boolean): void;
 };
 
 
-const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec }, setOpen }: Props) => {
+const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec, student: navItemsStudent }, setOpen }: Props) => {
 
-    const { userInfo, success } = useSelector((state: any) => state.auth)
+    const { userInfo } = useSelector((state: any) => state.auth)
 
     var items: NavItem[] = [];
     var path = '';
+    var userRole = userInfo?.user?.userRole ?? '';
 
-    if (userInfo?.user?.userRole == 'HEC') {
+    if (userRole === 'HEC') {
         items = navItems.hec;
         path = "/hec/dashboard/";
     }
-    else if (userInfo?.user?.userRole == 'UNIVERSITY') {
+    else if (userRole === 'UNIVERSITY') {
         items = navItems.uni
         path = "/uni/dashboard/";
+    }
+    else if (userRole === 'STUDENT') {
+        items = navItems.student
+        path = "/student/dashboard";
     }
 
     const dispatch = useDispatch<AppDispatch>();
@@ -52,7 +57,6 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec }, setO
         // clear local storage
         await dispatch(logout())
         localStorage.clear();
-
         // navigate to login page
         navigate("/login");
     };
@@ -80,10 +84,30 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec }, setO
 
             <nav className="md:sticky top-0 md:top-16">
 
-                {userInfo?.user?.userRole == 'UNIVERSITY' ?? (
+                {userRole == 'UNIVERSITY' && (
+                    <div>
+                        <button className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
+                            <div><img src={IMAGES.plus_icon} alt="plus" /></div>
+                            <div className="font-">Register New Student</div>
+                        </button>
+                        <button className="p-2 mx-3 mt-4 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
+                            <div><img src={IMAGES.plus_icon} alt="plus" /></div>
+                            <div className="font-">Add New Degree</div>
+                        </button>
+                    </div>
+                )}
+
+                {userRole === 'HEC' && (
                     <button className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
                         <div><img src={IMAGES.plus_icon} alt="plus" /></div>
-                        <div className="font-">Register New Student</div>
+                        <div className="font-">Add New University</div>
+                    </button>
+                )}
+
+                {userRole === 'STUDENT' && (
+                    <button className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
+                        <div><img src={IMAGES.plus_icon} alt="plus" /></div>
+                        <div className="font-">Add New Request</div>
                     </button>
                 )}
 
@@ -94,10 +118,10 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec }, setO
                         "flex gap-4 items-center", //layout
                         "transition-colors duration-300", //animation
                         "rounded-md p-2 mx-6 mt-4", //self style
-                        "/uni/dashboard/" == currentUrl ? "font-bold text-black" : "font-medium"
+                        "/uni/dashboard/" === currentUrl ? "font-bold text-black" : "font-medium"
                     )}>
                         <img src={
-                            path == currentUrl ? IMAGES.home_active_icon : IMAGES.home_icon
+                            path === currentUrl ? IMAGES.home_active_icon : IMAGES.home_icon
                         }></img> Dashboard
                     </div>
                 </Link>
@@ -120,11 +144,11 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec }, setO
                                         "flex gap-4 items-center", //layout
                                         "transition-colors duration-300", //animation
                                         "rounded-md p-2 mx-6", //self style
-                                        item.href == currentUrl ? "font-bold text-black" : "font-medium"
+                                        item.href === currentUrl ? "font-bold text-black" : "font-medium"
                                     )}
                                 >
                                     <img src={
-                                        item.href == currentUrl ? item.activeIcon : item.inactiveIcon
+                                        item.href === currentUrl ? item.activeIcon : item.inactiveIcon
                                     }></img> {item.label}
                                 </li>
                             </Link>

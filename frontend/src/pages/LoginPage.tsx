@@ -19,12 +19,16 @@ const LoginPage = () => {
 
     useEffect(() => {
         //console.log(userInfo);
+        var userRole = userInfo?.user?.userRole ?? '';
         if (success) {
-            if (userInfo?.user?.userRole == 'UNIVERSITY') {
+            if (userRole === 'UNIVERSITY') {
                 navigate('/uni/dashboard')
             }
-            if (userInfo?.user?.userRole == 'HEC') {
+            else if (userRole === 'HEC') {
                 navigate('/hec/dashboard')
+            }
+            else if (userRole === 'STUDENT') {
+                navigate('/student/dashboard')
             }
 
         }

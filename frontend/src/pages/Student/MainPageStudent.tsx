@@ -3,10 +3,8 @@ import { useSelector } from 'react-redux'
 import HeadingWithSpan from '../../components/general/HeadingWithSpan'
 
 
-const MainPageHec = () => {
-
+const MainPageStudent = () => {
   const { userInfo } = useSelector((state: any) => state.auth)
-
   return (
     <Layout>
       <HeadingWithSpan Text={userInfo?.user?.name} SpanText={"Here's what is happening today"} />
@@ -14,4 +12,4 @@ const MainPageHec = () => {
   )
 }
 
-export default MainPageHec
+export default MainPageStudent
