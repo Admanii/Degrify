@@ -30,7 +30,7 @@ export const getAllDegrees = async (req, res) => {
         ])
         .exec();
 
-      const degree = await Degree.find({ studentID: student }).select([
+      const degree1 = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
         "organisationVerified",
@@ -38,11 +38,11 @@ export const getAllDegrees = async (req, res) => {
         "completeVerified",
         "dateCreated",
       ]);
-      const degree1 = degree[0];
+      const degree = degree1[0];
 
       const particular = {
         studentDetail,
-        degree1,
+        degree,
       };
       // console.log(particular);
       result.push(particular);
