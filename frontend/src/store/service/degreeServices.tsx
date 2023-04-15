@@ -16,5 +16,5 @@ const config = {
 }
 
 export const getAllDegrees = () => {
-    return api.get("/getalldegree", config);
+    return api.get("/getalldegreeshec", config);
 };

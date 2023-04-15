@@ -24,6 +24,7 @@ import {
   getStudentVerifiedDegrees,
   getUniversityAllDegree,
   getUnvserifiedHECDegree,
+  getVerifiedUniversityDegree,
 } from "../controllers/getDegree.controller.js";
 import {
   AddRecruiter,
@@ -58,7 +59,7 @@ apiProtected.post("/organisationapproveddegree", OrganisationAppovedDegree);
 apiProtected.post("/completeapproveddegree", CompleteAppovedDegree);
 
 // get degrees
-apiProtected.get("/getalldegree", getAllDegrees);
+// apiProtected.get("/getalldegree", getAllDegrees);
 apiProtected.get("/getstudentverifieddegree", getStudentVerifiedDegrees);
 apiProtected.get(
   "/getorganisationverifieddegree",
@@ -68,16 +69,16 @@ apiProtected.get(
 apiProtected.get("/getcompleteverifieddegree", getCompleteVerifiedDegrees);
 
 // all degrees by HEC
-apiProtected.get("/gethecdegree", getHECAllDegree);
+apiProtected.get("/getalldegreeshec", getHECAllDegree);
 // verified Degree by HEC
-apiProtected.get("/getverifiedhecdegree", getHECVerifiedDegrees);
+apiProtected.get("/getverifieddegreeshec", getHECVerifiedDegrees);
 // Unverified Degree by HEC
-apiProtected.get("/getunverifiedhecdegree", getUnvserifiedHECDegree);
+apiProtected.get("/getunverifieddegreeshec", getUnvserifiedHECDegree);
 // all degrees by UniID
-apiProtected.get("/getuniversitydegree", getUniversityAllDegree);
+apiProtected.get("/getalldegreesuniversity", getUniversityAllDegree);
 // verified Degree by UniID
-apiProtected.get("/getverifieduniversitydegree", getHECVerifiedDegrees);
+apiProtected.get("/getverifieddegreesuniversity", getVerifiedUniversityDegree);
 // Unverified Degree by UniID
-apiProtected.get("/getunverifieduniversitydegree", getUnvserifiedHECDegree);
+apiProtected.get("/getunverifieddegreesuniversity", getUnvserifiedHECDegree);
 // get all students
 apiProtected.get("/getallStudents", getAllStudent);

@@ -262,7 +262,7 @@ export const getHECVerifiedDegrees = async (req, res) => {
     return res.json(
       jsonGenerate(
         statusCode.SUCCESS,
-        "displaying Student Verified Degree",
+        "HEC Verified Degrees",
         result
       )
     );
@@ -605,7 +605,7 @@ export const getHECAllDegree = async (req, res) => {
       result.push(particular);
     }
 
-    return res.json(jsonGenerate(statusCode.SUCCESS, "All Degrees", result));
+    return res.json(jsonGenerate(statusCode.SUCCESS, "All Degrees HEC", result));
   } catch (error) {
     return res.json(
       jsonGenerate(
@@ -741,7 +741,7 @@ export const getUnvserifiedHECDegree = async (req, res) => {
       result.push(particular);
     }
 
-    return res.json(jsonGenerate(statusCode.SUCCESS, "All Degrees", result));
+    return res.json(jsonGenerate(statusCode.SUCCESS, "HEC Unverified Degrees", result));
   } catch (error) {
     return res.json(
       jsonGenerate(
