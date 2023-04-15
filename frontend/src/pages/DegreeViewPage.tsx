@@ -24,7 +24,7 @@ function getCaseClass(programDeg: string) {
 function DegreeViewPage() {
   return (
     <Layout>
-      <div className=' ml-16 mt-16'>
+      <div>
         {/* <div> */}
         <HeadingWithSpan Text="STUDENT DEGREE" SpanText={NameErp} />
         <div className="flex">
