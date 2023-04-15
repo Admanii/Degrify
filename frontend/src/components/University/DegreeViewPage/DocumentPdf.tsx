@@ -35,8 +35,8 @@ function DegreeCertificate({ name, program, graduatingYear }: Props) {
           <div className="absolute inset-10 bg-white flex flex-col items-center justify-center">
             <div className="flex justify-between px-2 py-2 absolute top-0 left-0 w-full h-10">
              {/* ADD RELEVANT UNI LOGO */}
-              <img src={IMAGES.home_icon}></img>
-              <img src={IMAGES.degrify_logo}></img>
+              <img src={IMAGES.iba_logo}></img>
+              <img src={IMAGES.unverified_icon}></img>
             </div>
             <h1 className="text-5xl font-bold mb-4 font-certificate">Certificate of Completion</h1>
             <p className="text-xl mb-4">This certifies that</p>
