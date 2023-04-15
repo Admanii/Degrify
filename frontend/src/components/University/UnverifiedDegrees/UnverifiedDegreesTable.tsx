@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { IDegreeDetails } from "../../../store/types/types";
+import { IDegreeDetailsTemp } from "../../../store/types/types";
 import UnverifiedDegreesColumn from "./UnverifiedDegreesColumn";
 
 interface Props {
     search: string;
 }
 
-const degrees: Array<IDegreeDetails> = [
+const degrees: Array<IDegreeDetailsTemp> = [
     {
         sno: 1,
         erpId: 18584,

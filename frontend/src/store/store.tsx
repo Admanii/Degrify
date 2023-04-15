@@ -6,9 +6,10 @@ import {
     ThunkAction,
 } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
-import axiosInstance from "./service/api";
+import axiosInstance from "./api";
 import { persistReducer, persistStore } from "redux-persist";
 import authSlice from "./slice/authSlice";
+import degreeSlice from "./slice/degreeSlice";
 
 const middleware = [
     ...getDefaultMiddleware({
@@ -43,6 +44,7 @@ const middleware = [
 
 export const allReducers = combineReducers({
     auth: authSlice,
+    degree: degreeSlice,
 });
 const persistConfig = {
     key: "root",
@@ -53,16 +55,21 @@ const persistedReducer = persistReducer(persistConfig, allReducers);
 const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware(),
-})
+    getDefaultMiddleware({
+        thunk: {
+          extraArgument: { axios: axiosInstance },
+        },
+        serializableCheck: false,
+      }),
+});
 
 export const persistor = persistStore(store);
-// export type AppThunk<ReturnType = void> = ThunkAction<
-//   ReturnType,
-//   RootState,
-//   unknown,
-//   Action<string>
-// >;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 
 export type AppDispatch = typeof store.dispatch;
 

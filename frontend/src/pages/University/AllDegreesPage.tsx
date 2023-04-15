@@ -1,6 +1,6 @@
 import { Heading } from '../../components/general/Heading'
 import Layout from '../../components/general/Layout'
-import { AllDegreesTable } from '../../components/University/AllDegrees/AllDegreesTable'
+import { AllDegreesTable } from '../../components/HEC/AllDegrees/AllDegreesTable'
 import { VerifiedDegreesTable } from '../../components/University/VerifiedDegrees/VerifiedDegreesTable'
 
 const AllDegreesPage = () => {

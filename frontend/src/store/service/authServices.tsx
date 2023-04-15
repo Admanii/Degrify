@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "../api";
 const config = {
   headers: {
     'Content-Type': 'application/json',
@@ -7,7 +7,7 @@ const config = {
 
 export const login = (email: string, password: string) => {
   return api.post(
-    "/api/login",
+    "/login",
     {
       email: email,
       password: password,

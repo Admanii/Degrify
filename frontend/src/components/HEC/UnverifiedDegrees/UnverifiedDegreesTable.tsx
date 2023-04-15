@@ -1,23 +1,14 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { IDegreeDetailsTemp } from "../../../store/types/types";
-import VerifiedDegreesColumn from "./VerifiedDegreesColumn";
+import UnverifiedDegreesColumn from "./UnverifiedDegreesColumn";
+import { useSelector } from "react-redux";
+import { AllDegrees } from "../../../store/slice/degreeSlice";
 
 interface Props {
     search: string;
 }
 
-const degrees: Array<IDegreeDetailsTemp> = [
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    },
+const degrees: Array<any> = [
     {
         sno: 1,
         erpId: 18584,
@@ -37,45 +28,6 @@ const degrees: Array<IDegreeDetailsTemp> = [
         graduatingYear: '2023',
         cnic: '42201-6149122-3',
         active: false,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    }, {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: false,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
     },
     {
         sno: 1,
@@ -89,9 +41,11 @@ const degrees: Array<IDegreeDetailsTemp> = [
     },
 ]
 
-export const VerifiedDegreesTable = ({ search }: Props) => {
+export const UnverifiedDegreesTable = ({ search }: Props) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+
+    const allDegrees = useSelector(AllDegrees);
 
     const fetchVerifiedDegrees = async () => {
         setIsLoading(true);
@@ -106,13 +60,13 @@ export const VerifiedDegreesTable = ({ search }: Props) => {
     return (
         <DataTable
             noHeader
-            data={degrees ?? []}
+            data={allDegrees ?? []}
             pagination
             progressPending={isLoading}
             //   progressComponent={<Loader text="Loading" />}
             highlightOnHover
             pointerOnHover
-            columns={VerifiedDegreesColumn()}
+            columns={UnverifiedDegreesColumn()}
             className="react-dataTable"
         />
     );

@@ -1,56 +1,56 @@
 import { IDegreeDetails } from "../../../store/types/types";
 
-const AllDegreesColumn = () => {
+const VerifiedDegreesColumn = () => {
 
-    const allDegreesColumn = [
+    const verifiedDegreesColumn = [
         {
-            name: "Sno",
+            name: "Degree ID",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.sno ?? "N/A",
+            cell: (row: IDegreeDetails) => row?.degree?._id ?? "N/A",
         },
         {
             name: "ERP ID",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.erpId ?? "N/A",
+            cell: (row: IDegreeDetails) => row?.studentDetail?.studentID ?? "N/A",
         },
         {
             name: "Name",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.name ?? "N/A",
-        },
-        {
-            name: "Program",
-            wrap: true,
-            minWidth: "50px",
-            sortable: true,
-            cell: (row: IDegreeDetails) => row?.program ?? "N/A",
-        },
-        {
-            name: "Date of Issue",
-            wrap: true,
-            minWidth: "50px",
-            sortable: true,
-            cell: (row: IDegreeDetails) => row?.dateofIssue ?? "N/A",
-        },
-        {
-            name: "Graduating Year",
-            wrap: true,
-            minWidth: "50px",
-            sortable: true,
-            cell: (row: IDegreeDetails) => row?.graduatingYear ?? "N/A",
+            cell: (row: IDegreeDetails) => row?.studentDetail?.name ?? "N/A",
         },
         {
             name: "CNIC",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.cnic ?? "N/A",
+            cell: (row: IDegreeDetails) => row?.studentDetail.CNIC ?? "N/A",
+        },
+        {
+            name: "Program",
+            wrap: true,
+            minWidth: "50px",
+            sortable: true,
+            cell: (row: IDegreeDetails) => row?.studentDetail.enrollmentNumber ?? "N/A",
+        },
+        {
+            name: "Date of Issue",
+            wrap: true,
+            minWidth: "50px",
+            sortable: true,
+            cell: (row: IDegreeDetails) => row?.degree?.dateCreated ?? "N/A",
+        },
+        {
+            name: "Graduating Year",
+            wrap: true,
+            minWidth: "50px",
+            sortable: true,
+            cell: (row: IDegreeDetails) => row?.studentDetail.DateOfompletion ?? "N/A",
         },
         {
             name: "Status",
@@ -58,21 +58,21 @@ const AllDegreesColumn = () => {
             minWidth: "100px",
             sortable: true,
             cell: (row: IDegreeDetails) => {
-                if (row?.active) {
+                if (row?.degree?.completeVerified) {
                     return (
                         <div
-                            className={`h-6 w-20 flex bg-green-600 items-center justify-center rounded-full px-3 py-0.5 text-sm font-medium text-gray-900">`}
+                            className={`h-6 w-22 flex bg-green-600 items-center justify-center rounded-full px-3 py-0.5 text-sm font-medium text-gray-900">`}
                         >
-                            Active
+                            Verified
                         </div>
                     );
                 }
                 else {
                     return (
                         <div
-                            className={`h-6 w-20 flex bg-red-600 items-center justify-center rounded-full px-3 py-0.5 text-sm font-medium text-gray-900">`}
+                            className={`h-6 w-22 flex bg-red-600 items-center justify-center rounded-full px-3 py-0.5 text-sm font-medium text-gray-900">`}
                         >
-                            Inactive
+                            Unverified
                         </div>
 
                     );
@@ -80,7 +80,7 @@ const AllDegreesColumn = () => {
             },
         },
     ];
-    return allDegreesColumn;
+    return verifiedDegreesColumn;
 };
 
-export default AllDegreesColumn;
+export default VerifiedDegreesColumn;

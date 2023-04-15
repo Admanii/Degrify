@@ -5,8 +5,8 @@ import Button from '../components/general/Button';
 import Navbar from '../components/general/Navbar'
 import { IMAGES } from '../constants/images';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../store/store';
 import { userLogin } from '../store/actions/authActions';
+import { AppDispatch } from '../store/store';
 
 const LoginPage = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);

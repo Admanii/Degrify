@@ -1,4 +1,4 @@
-import { IDegreeDetails } from "../../../store/types/types";
+import { IDegreeDetailsTemp } from "../../../store/types/types";
 
 const VerifiedDegreesColumn = () => {
 
@@ -8,56 +8,56 @@ const VerifiedDegreesColumn = () => {
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.sno ?? "N/A",
+            cell: (row: IDegreeDetailsTemp) => row?.sno ?? "N/A",
         },
         {
             name: "ERP ID",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.erpId ?? "N/A",
+            cell: (row: IDegreeDetailsTemp) => row?.erpId ?? "N/A",
         },
         {
             name: "Name",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.name ?? "N/A",
+            cell: (row: IDegreeDetailsTemp) => row?.name ?? "N/A",
         },
         {
             name: "Program",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.program ?? "N/A",
+            cell: (row: IDegreeDetailsTemp) => row?.program ?? "N/A",
         },
         {
             name: "Date of Issue",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.dateofIssue ?? "N/A",
+            cell: (row: IDegreeDetailsTemp) => row?.dateofIssue ?? "N/A",
         },
         {
             name: "Graduating Year",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.graduatingYear ?? "N/A",
+            cell: (row: IDegreeDetailsTemp) => row?.graduatingYear ?? "N/A",
         },
         {
             name: "CNIC",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.cnic ?? "N/A",
+            cell: (row: IDegreeDetailsTemp) => row?.cnic ?? "N/A",
         },
         {
             name: "Status",
             wrap: true,
             minWidth: "100px",
             sortable: true,
-            cell: (row: IDegreeDetails) => {
+            cell: (row: IDegreeDetailsTemp) => {
                 if (row?.active) {
                     return (
                         <div

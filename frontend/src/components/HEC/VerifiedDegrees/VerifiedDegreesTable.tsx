@@ -1,33 +1,14 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { IDegreeDetails } from "../../../store/types/types";
-import AllDegreesColumn from "./AllDegreesColumn";
+import VerifiedDegreesColumn from "./VerifiedDegreesColumn";
+import { useSelector } from "react-redux";
+import { AllDegrees } from "../../../store/slice/degreeSlice";
 
 interface Props {
     search: string;
 }
 
-const degrees: Array<IDegreeDetails> = [
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: false,
-    },
+const degrees: Array<any> = [
     {
         sno: 1,
         erpId: 18584,
@@ -67,7 +48,7 @@ const degrees: Array<IDegreeDetails> = [
         graduatingYear: '2023',
         cnic: '42201-6149122-3',
         active: true,
-    },    {
+    }, {
         sno: 1,
         erpId: 18584,
         name: 'Ahmed Edhi',
@@ -96,54 +77,6 @@ const degrees: Array<IDegreeDetails> = [
         graduatingYear: '2023',
         cnic: '42201-6149122-3',
         active: true,
-    },    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: false,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    },    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: true,
-    },
-    {
-        sno: 1,
-        erpId: 18584,
-        name: 'Ahmed Edhi',
-        program: 'BSCS',
-        dateofIssue: '15th June 2023',
-        graduatingYear: '2023',
-        cnic: '42201-6149122-3',
-        active: false,
     },
     {
         sno: 1,
@@ -157,9 +90,11 @@ const degrees: Array<IDegreeDetails> = [
     },
 ]
 
-export const AllDegreesTable = ({ search }: Props) => {
+export const VerifiedDegreesTable = ({ search }: Props) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+
+    const allDegrees = useSelector(AllDegrees);
 
     const fetchVerifiedDegrees = async () => {
         setIsLoading(true);
@@ -180,7 +115,7 @@ export const AllDegreesTable = ({ search }: Props) => {
             //   progressComponent={<Loader text="Loading" />}
             highlightOnHover
             pointerOnHover
-            columns={AllDegreesColumn()}
+            columns={VerifiedDegreesColumn()}
             className="react-dataTable"
         />
     );
