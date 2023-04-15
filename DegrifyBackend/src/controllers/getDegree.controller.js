@@ -27,12 +27,15 @@ export const getAllDegrees = async (req, res) => {
           "CNIC",
           "DateOfAdmission",
           "DateOfompletion",
+          "Program",
+          "GraduatingYear",
         ])
         .exec();
 
       const degree1 = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
+        "studentVerified",
         "organisationVerified",
         "HECVerified",
         "completeVerified",
@@ -88,17 +91,21 @@ export const getStudentVerifiedDegrees = async (req, res) => {
           "CNIC",
           "DateOfAdmission",
           "DateOfompletion",
+          "Program",
+          "GraduatingYear",
         ])
         .exec();
 
-      const degree = await Degree.find({ studentID: student }).select([
+      const degree1 = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
+        "studentVerified",
         "organisationVerified",
         "HECVerified",
         "completeVerified",
         "dateCreated",
       ]);
+      const degree = degree1[0];
       // console.log(student);
 
       const particular = {
@@ -155,17 +162,21 @@ export const getOrganisationVerifiedDegrees = async (req, res) => {
           "CNIC",
           "DateOfAdmission",
           "DateOfompletion",
+          "Program",
+          "GraduatingYear",
         ])
         .exec();
 
-      const degree = await Degree.find({ studentID: student }).select([
+      const degree1 = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
+        "studentVerified",
         "organisationVerified",
         "HECVerified",
         "completeVerified",
         "dateCreated",
       ]);
+      const degree = degree1[0];
       // console.log(student);
 
       const particular = {
@@ -222,18 +233,21 @@ export const getHECVerifiedDegrees = async (req, res) => {
           "CNIC",
           "DateOfAdmission",
           "DateOfompletion",
+          "Program",
+          "GraduatingYear",
         ])
         .exec();
 
-      const degree = {};
-      degree = await Degree.find({ studentID: student }).select([
+      const degree1 = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
+        "studentVerified",
         "organisationVerified",
         "HECVerified",
         "completeVerified",
         "dateCreated",
       ]);
+      const degree = degree1[0];
       // console.log(student);
 
       const particular = {
@@ -290,17 +304,21 @@ export const getCompleteVerifiedDegrees = async (req, res) => {
           "CNIC",
           "DateOfAdmission",
           "DateOfompletion",
+          "Program",
+          "GraduatingYear",
         ])
         .exec();
 
-      const degree = await Degree.find({ studentID: student }).select([
+      const degree1 = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
+        "studentVerified",
         "organisationVerified",
         "HECVerified",
         "completeVerified",
         "dateCreated",
       ]);
+      const degree = degree1[0];
       // console.log(student);
 
       const particular = {
@@ -358,17 +376,21 @@ export const getUniversityDegree = async (req, res) => {
           "CNIC",
           "DateOfAdmission",
           "DateOfompletion",
+          "Program",
+          "GraduatingYear",
         ])
         .exec();
 
-      const degree = await Degree.find({ studentID: student }).select([
+      const degree1 = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
+        "studentVerified",
         "organisationVerified",
         "HECVerified",
         "completeVerified",
         "dateCreated",
       ]);
+      const degree = degree1[0];
       // console.log(student);
 
       const particular = {

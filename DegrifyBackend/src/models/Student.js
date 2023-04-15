@@ -35,6 +35,14 @@ const studentSchema = mongoose.Schema({
     type: Date,
     required: true,
   },
+  Program: {
+    type: String,
+    required: true,
+  },
+  GraduatingYear: {
+    type: String,
+    required: true,
+  },
   active: {
     type: Boolean,
     default: true,
@@ -50,6 +58,5 @@ const studentSchema = mongoose.Schema({
 });
 
 export default mongoose.model("Student", studentSchema);
-
 
 // add organisation id in student model

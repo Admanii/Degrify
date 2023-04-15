@@ -106,6 +106,8 @@ export const registerStudent = async (req, res) => {
     CNIC,
     DateOfAdmission,
     DateOfompletion,
+    Program,
+    GraduatingYear,
     email,
     password,
     userRole,
@@ -137,6 +139,8 @@ export const registerStudent = async (req, res) => {
       CNIC: CNIC,
       DateOfAdmission: DateOfAdmission,
       DateOfompletion: DateOfompletion,
+      Program: Program,
+      GraduatingYear: GraduatingYear,
     });
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);

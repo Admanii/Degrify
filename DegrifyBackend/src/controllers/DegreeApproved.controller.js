@@ -9,6 +9,7 @@ export const HECAppovedDegree = async (req, res) => {
       req.query.degree_id,
       {
         HECVerified: true,
+        dateCreated: Date.now,
       },
       {
         new: true,

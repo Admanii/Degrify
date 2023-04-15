@@ -14,6 +14,8 @@ export const AddStudent = async (req, res) => {
     CNIC,
     DateOfAdmission,
     DateOfompletion,
+    Program,
+    GraduatingYear,
   } = req.body;
 
   const studentExist = await Student.findOne({
@@ -41,6 +43,8 @@ export const AddStudent = async (req, res) => {
       CNIC: CNIC,
       DateOfAdmission: DateOfAdmission,
       DateOfompletion: DateOfompletion,
+      Program: Program,
+      GraduatingYear: GraduatingYear,
     });
 
     res.json(
@@ -63,6 +67,8 @@ export const deleteStudent = async (req, res) => {
     CNIC: req.body.CNIC,
     DateOfAdmission: req.body.DateOfAdmission,
     DateOfompletion: req.body.DateOfompletion,
+    Program: req.body.Program,
+    GraduatingYear: req.body.GraduatingYear,
   };
 
   const isAdmin = await User.findById(req.userId).select("userRole");
@@ -116,6 +122,8 @@ export const getAllStudent = async (req, res) => {
       "CNIC",
       "DateOfAdmission",
       "DateOfompletion",
+      "Program",
+      "GraduatingYear",
     ]);
     return res.json(
       jsonGenerate(statusCode.SUCCESS, "All Students", allStudents)
@@ -142,6 +150,8 @@ export const getStudent = async (req, res) => {
         "CNIC",
         "DateOfAdmission",
         "DateOfompletion",
+        "Program",
+        "GraduatingYear",
       ])
       .exec();
 
