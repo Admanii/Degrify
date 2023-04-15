@@ -1,9 +1,14 @@
 import api from "../api";
 
-const accessToken = localStorage.getItem('accessToken') ?? '';
+var accessToken = '';
+
+if (localStorage.getItem('accessToken')) {
+    accessToken = JSON.parse(localStorage.getItem('accessToken') ?? '');
+}
+
 const config = {
     headers: {
-        'auth': JSON.parse(accessToken),
+        'auth': accessToken,
     }
     // headers: {
     //     'Content-Type': 'application/json',
