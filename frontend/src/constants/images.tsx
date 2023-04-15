@@ -16,4 +16,5 @@ export const IMAGES = {
   verified_tick_icon: require("../assets/verified-tick.svg").default,
   verified_icon: require("../assets/verified.svg").default,
   verified_icon_active: require("../assets/verified-active.svg").default,
+  iba_logo: require("../assets/IBA-logo.png").default
 };
