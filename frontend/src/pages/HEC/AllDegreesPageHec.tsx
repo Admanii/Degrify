@@ -1,8 +1,8 @@
-import { AllDegreesTable } from '../../components/University/AllDegrees/AllDegreesTable'
 import { Heading } from '../../components/general/Heading'
 import Layout from '../../components/general/Layout'
+import { AllDegreesTable } from '../../components/HEC/AllDegrees/AllDegreesTable'
 
-const AllDegreesPage = () => {
+const AllDegreesPageHec = () => {
     return (
         <Layout>
             <div className='mt-6 ml-10 mr-8 '>
@@ -15,4 +15,4 @@ const AllDegreesPage = () => {
     )
 }
 
-export default AllDegreesPage
+export default AllDegreesPageHec

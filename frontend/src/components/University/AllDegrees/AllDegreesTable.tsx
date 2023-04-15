@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import VerifiedDegreesColumn from "./VerifiedDegreesColumn";
-import { useSelector } from "react-redux";
-import { AllDegrees } from "../../../store/slice/degreeSlice";
+import { IDegreeDetailsTemp } from "../../../store/types/types";
+import AllDegreesColumn from "./AllDegreesColumn";
 
 interface Props {
     search: string;
 }
 
-const degrees: Array<any> = [
+const degrees: Array<IDegreeDetailsTemp> = [
     {
         sno: 1,
         erpId: 18584,
@@ -90,11 +89,9 @@ const degrees: Array<any> = [
     },
 ]
 
-export const VerifiedDegreesTable = ({ search }: Props) => {
+export const AllDegreesTable = ({ search }: Props) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
-
-    const allDegrees = useSelector(AllDegrees);
 
     const fetchVerifiedDegrees = async () => {
         setIsLoading(true);
@@ -109,13 +106,13 @@ export const VerifiedDegreesTable = ({ search }: Props) => {
     return (
         <DataTable
             noHeader
-            data={allDegrees ?? []}
+            data={degrees ?? []}
             pagination
             progressPending={isLoading}
             //   progressComponent={<Loader text="Loading" />}
             highlightOnHover
             pointerOnHover
-            columns={VerifiedDegreesColumn()}
+            columns={AllDegreesColumn()}
             className="react-dataTable"
         />
     );

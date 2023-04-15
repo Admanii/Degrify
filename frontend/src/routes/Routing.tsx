@@ -14,6 +14,9 @@ import { useSelector } from "react-redux";
 import { IsLoggedIn } from "../store/slice/authSlice";
 import MainPageHec from "../pages/HEC/MainPageHec";
 import MainPageStudent from "../pages/Student/MainPageStudent";
+import AllDegreesPageHec from "../pages/HEC/AllDegreesPageHec";
+import VerifiedDegreesPageHec from "../pages/HEC/VerifiedDegreesPageHec";
+import UnverifiedDegreesPageHec from "../pages/HEC/UnverifiedDegreesPageHec";
 
 interface RouteType {
   path: string;
@@ -116,22 +119,22 @@ export const routeList: RouteType[] = [
     component: <MainPageUni />,
   },
   {
-    path: "/all/degrees",
+    path: "/uni/all/degrees",
     isPrivate: true,
     component: <AllDegreesPage />,
   },
   {
-    path: "/verified/degrees",
+    path: "/uni/verified/degrees",
     isPrivate: true,
     component: <VerifiedDegreesPage />,
   },
   {
-    path: "/unverified/degrees",
+    path: "/uni/unverified/degrees",
     isPrivate: true,
     component: <UnverifiedDegreesPage />,
   },
   {
-    path: "/edit/requests",
+    path: "/uni/edit/requests",
     isPrivate: true,
     component: <EditRequestsPage />,
   },
@@ -155,6 +158,21 @@ export const routeList: RouteType[] = [
     isPrivate: true,
     isHec: true,
     component: <MainPageHec />,
+  },
+  {
+    path: "/hec/all/degrees",
+    isPrivate: true,
+    component: <AllDegreesPageHec />,
+  },
+  {
+    path: "/hec/verified/degrees",
+    isPrivate: true,
+    component: <VerifiedDegreesPageHec />,
+  },
+  {
+    path: "/hec/unverified/degrees",
+    isPrivate: true,
+    component: <UnverifiedDegreesPageHec />,
   },
   {
     path: "/student/dashboard/",

@@ -1,18 +1,18 @@
-import { AllDegreesTable } from '../../components/University/AllDegrees/AllDegreesTable'
+import { VerifiedDegreesTable } from '../../components/HEC/VerifiedDegrees/VerifiedDegreesTable'
 import { Heading } from '../../components/general/Heading'
 import Layout from '../../components/general/Layout'
 
-const AllDegreesPage = () => {
+const VerifiedDegreesPageHec = () => {
     return (
         <Layout>
             <div className='mt-6 ml-10 mr-8 '>
-                <Heading text='All Degrees' />
+                <Heading text='Verified Degrees' />
                 <div className='mt-6'>
-                    <AllDegreesTable search='' />
+                    <VerifiedDegreesTable search='' />
                 </div>
             </div>
         </Layout>
     )
 }
 
-export default AllDegreesPage
+export default VerifiedDegreesPageHec

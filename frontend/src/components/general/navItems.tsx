@@ -4,25 +4,25 @@ import { IMAGES } from "../../constants/images";
 export const navItemsUni: NavItem[] = [
   {
     label: "All Degrees",
-    href: "/all/degrees",
+    href: "/uni/all/degrees",
     activeIcon: IMAGES.bar_icon_active,
     inactiveIcon: IMAGES.bar_icon,
   },
   {
     label: "Verified Degrees",
-    href: "/verified/degrees",
+    href: "/uni/verified/degrees",
     activeIcon: IMAGES.verified_icon_active,
     inactiveIcon: IMAGES.verified_icon,
   },
   {
     label: "Unverified Degrees",
-    href: "/unverified/degrees",
+    href: "/uni/unverified/degrees",
     activeIcon: IMAGES.user_icon_active,
     inactiveIcon: IMAGES.user_icon,
   },
   {
     label: "Edit Requests",
-    href: "/edit/requests",
+    href: "/uni/edit/requests",
     activeIcon: IMAGES.users_icon_active,
     inactiveIcon: IMAGES.users_icon,
   },
@@ -32,19 +32,19 @@ export const navItemsUni: NavItem[] = [
 export const navItemsHec: NavItem[] = [
   {
     label: "All Degrees",
-    href: "/all/degrees",
+    href: "/hec/all/degrees",
     activeIcon: IMAGES.bar_icon_active,
     inactiveIcon: IMAGES.bar_icon,
   },
   {
     label: "Verified Degrees",
-    href: "/verified/degrees",
+    href: "/hec/verified/degrees",
     activeIcon: IMAGES.verified_icon_active,
     inactiveIcon: IMAGES.verified_icon,
   },
   {
     label: "Unverified Degrees",
-    href: "/unverified/degrees",
+    href: "/hec/unverified/degrees",
     activeIcon: IMAGES.user_icon_active,
     inactiveIcon: IMAGES.user_icon,
   },
