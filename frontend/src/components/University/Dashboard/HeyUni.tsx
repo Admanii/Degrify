@@ -6,14 +6,29 @@ import EditShortcut from "./EditShortcut";
 import { AllDegreesTable } from "../../HEC/AllDegrees/AllDegreesTable";
 import { UnverifiedDegreesTable } from "../UnverifiedDegrees/UnverifiedDegreesTable";
 import HeadingWithSpan from "../../general/HeadingWithSpan";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store/store";
 import { UnverifiedDegreesComp } from "./UnverifiedDegreesComp";
+import { useEffect } from "react";
+import { GetAllDegreesbyUniId } from "../../../store/actions/degreeActions";
 
 
 const HeyUni = () => {
 
   const { userInfo } = useSelector((state: any) => state.auth)
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const organisation_id = userInfo?.user?.organisationID ?? '';
+
+  useEffect(() => {
+    getAllDegrees();
+  }, [])
+
+  const getAllDegrees = async () => {
+    await dispatch(GetAllDegreesbyUniId({organisation_id: organisation_id}))
+  }
+
 
   return (
     <div>

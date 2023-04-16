@@ -18,3 +18,8 @@ const config = {
 export const getAllDegrees = () => {
     return api.get("/getalldegreeshec", config);
 };
+
+export const getAllDegreesbyUniId = (organisation_id: string) => {
+    return api.get(`getalldegreesuniversity/${organisation_id}`);
+  };
+  

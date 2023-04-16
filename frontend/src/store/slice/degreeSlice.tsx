@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
-import { GetAllDegrees } from '../actions/degreeActions';
+import { GetAllDegrees, GetAllDegreesbyUniId } from '../actions/degreeActions';
 import { IDegreeDetails } from '../types/types';
 
 const initialState: IState = {
@@ -33,6 +33,20 @@ const degreeSlice = createSlice({
                 state.success = true
             })
             .addCase(GetAllDegrees.rejected, (state, payload) => {
+                state.loading = false
+                state.error = payload.payload ?? ''
+                state.success = false
+            })
+            .addCase(GetAllDegreesbyUniId.pending, (state) => {
+                state.loading = true
+                state.error = {}
+            })
+            .addCase(GetAllDegreesbyUniId.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.allDegrees = payload
+                state.success = true
+            })
+            .addCase(GetAllDegreesbyUniId.rejected, (state, payload) => {
                 state.loading = false
                 state.error = payload.payload ?? ''
                 state.success = false

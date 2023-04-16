@@ -44,7 +44,7 @@ export const UnverifiedDegreesComp = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white text-left">
-                  {allDegrees.length > 0 && allDegrees?.map((degree, index) => (
+                  {allDegrees?.length > 0 && allDegrees?.map((degree, index) => (
                     <tr key={index}>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
                         <div className="text-gray-700">{degree?.degree?._id?.substring(1, 10)}</div>
@@ -72,7 +72,7 @@ export const UnverifiedDegreesComp = () => {
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        {degree?.degree.completeVerified ?
+                        {degree?.degree?.completeVerified ?
                           <span
                             className={`h-5 w-22 flex bg-green-600 items-center justify-center rounded-full px-3 py-0.5">`}
                           >Verified</span>
