@@ -14,6 +14,13 @@ import AddStudent from "../components/University/AddStudent/AddStudent";
 import MainPageHec from "../pages/HEC/MainPageHec";
 import VerifiedDegreesPageHec from "../pages/HEC/VerifiedDegreesPageHec";
 import UnverifiedDegreesPageHec from "../pages/HEC/UnverifiedDegreesPageHec";
+import AllDegreesPageHec from "../pages/HEC/AllDegreesPageHec";
+import MainPageStudent from "../pages/Student/MainPageStudent";
+import { useSelector } from "react-redux";
+import { IsLoggedIn } from "../store/slice/authSlice";
+import StudentProfileView from "../pages/StudentProfileView";
+import DegreeStudent from "../pages/DegreeStudent";
+import ApproveDegree from "../pages/University/ApproveDegree";
 
 interface RouteType {
   path: string;
