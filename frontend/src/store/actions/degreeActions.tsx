@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getAllDegrees, getAllDegreesbyUniId, getCountDegreeByYears, getUnverifiedDegreesbyUniId, getVerifiedDegreesbyUniId } from '../service/degreeServices';
+import { getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByYears, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId } from '../service/degreeServices';
 import { IDegreeCountByYear, IDegreeDetails } from '../types/types';
 
-export const GetAllDegrees = createAsyncThunk<
+export const GetAllDegreesHec = createAsyncThunk<
     Array<IDegreeDetails>,
     {},
     any
@@ -11,7 +11,62 @@ export const GetAllDegrees = createAsyncThunk<
     async ({ }, { rejectWithValue }) => {
         var response: any = {};
         try {
-            response = await getAllDegrees();
+            response = await getAllDegreesHec();
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data.data
+        } catch (error) {
+            //@ts-ignore
+            if (error.response && error.response.data.message) {
+                //@ts-ignore
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(response.data.message)
+            }
+        }
+    }
+)
+
+export const GetVerifiedDegreesHec = createAsyncThunk<
+    Array<IDegreeDetails>,
+    {},
+    any
+>(
+    'hec/verified/degrees',
+    async ({ }, { rejectWithValue }) => {
+        var response: any = {};
+        try {
+            response = await getVerifiedDegreesHec();
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data.data
+        } catch (error) {
+            //@ts-ignore
+            if (error.response && error.response.data.message) {
+                //@ts-ignore
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(response.data.message)
+            }
+        }
+    }
+)
+
+export const GetUnverifiedDegreesHec = createAsyncThunk<
+    Array<IDegreeDetails>,
+    {},
+    any
+>(
+    'hec/unverified/degrees',
+    async ({ }, { rejectWithValue }) => {
+        var response: any = {};
+        try {
+            response = await getUnverifiedDegreesHec();
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
             return response.data.data
         } catch (error) {
             //@ts-ignore

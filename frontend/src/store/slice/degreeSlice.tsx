@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
-import { GetAllDegrees, GetAllDegreesbyUniId, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId } from '../actions/degreeActions';
+import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByYears, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId } from '../actions/degreeActions';
 import { IDegreeCountByYear, IDegreeDetails } from '../types/types';
 
 const initialState: IState = {
@@ -29,16 +29,44 @@ const degreeSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(GetAllDegrees.pending, (state) => {
+            .addCase(GetAllDegreesHec.pending, (state) => {
                 state.loading = true
                 state.error = {}
             })
-            .addCase(GetAllDegrees.fulfilled, (state, { payload }) => {
+            .addCase(GetAllDegreesHec.fulfilled, (state, { payload }) => {
                 state.loading = false
                 state.allDegrees = payload
                 state.success = true
             })
-            .addCase(GetAllDegrees.rejected, (state, payload) => {
+            .addCase(GetAllDegreesHec.rejected, (state, payload) => {
+                state.loading = false
+                state.error = payload.payload ?? ''
+                state.success = false
+            })
+            .addCase(GetVerifiedDegreesHec.pending, (state) => {
+                state.loading = true
+                state.error = {}
+            })
+            .addCase(GetVerifiedDegreesHec.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.verifiedDegrees = payload
+                state.success = true
+            })
+            .addCase(GetVerifiedDegreesHec.rejected, (state, payload) => {
+                state.loading = false
+                state.error = payload.payload ?? ''
+                state.success = false
+            })
+            .addCase(GetUnverifiedDegreesHec.pending, (state) => {
+                state.loading = true
+                state.error = {}
+            })
+            .addCase(GetUnverifiedDegreesHec.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.unverifiedDegrees = payload
+                state.success = true
+            })
+            .addCase(GetUnverifiedDegreesHec.rejected, (state, payload) => {
                 state.loading = false
                 state.error = payload.payload ?? ''
                 state.success = false

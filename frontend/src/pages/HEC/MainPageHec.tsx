@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import HeadingWithSpan from '../../components/general/HeadingWithSpan'
 import { AppDispatch } from '../../store/store'
 import { useEffect } from 'react'
-import { GetAllDegrees } from '../../store/actions/degreeActions'
+import { GetAllDegreesHec, GetUnverifiedDegreesHec, GetVerifiedDegreesHec } from '../../store/actions/degreeActions'
 
 
 const MainPageHec = () => {
@@ -12,11 +12,13 @@ const MainPageHec = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    getAllDegrees();
+    getDegrees();
   }, [])
 
-  const getAllDegrees = async () => {
-    await dispatch(GetAllDegrees({}))
+  const getDegrees = async () => {
+    await dispatch(GetAllDegreesHec({}))
+    await dispatch(GetVerifiedDegreesHec({}))
+    await dispatch(GetUnverifiedDegreesHec({}))
   }
 
 

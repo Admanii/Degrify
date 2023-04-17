@@ -26,10 +26,20 @@ async function getConfig() {
 }
 
 
-export const getAllDegrees = async () => {
+export const getAllDegreesHec = async () => {
     await getConfig();
     // console.log("accessToken:    " + accessToken)
     return api.get("/getalldegreeshec", config);
+};
+
+export const getVerifiedDegreesHec = async () => {
+    await getConfig();
+    return api.get("/getverifieddegreeshec", config);
+};
+
+export const getUnverifiedDegreesHec = async () => {
+    await getConfig();
+    return api.get("/getunverifieddegreeshec", config);
 };
 
 export const getAllDegreesbyUniId = async (organisation_id: string) => {
