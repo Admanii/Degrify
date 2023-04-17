@@ -1,10 +1,8 @@
 import { useSelector } from "react-redux";
 import { AllDegrees } from "../../../store/slice/degreeSlice";
-import { IMAGES } from "../../../constants/images";
-import { IDegreeDetails } from "../../../store/types/types";
 
 export const UnverifiedDegreesComp = () => {
-  const allDegrees: Array<IDegreeDetails> = useSelector(AllDegrees);
+  const allDegrees = useSelector(AllDegrees);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
-import { GetAllDegrees, GetAllDegreesbyUniId, GetCountDegreeByYears } from '../actions/degreeActions';
+import { GetAllDegrees, GetAllDegreesbyUniId, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId } from '../actions/degreeActions';
 import { IDegreeCountByYear, IDegreeDetails } from '../types/types';
 
 const initialState: IState = {
@@ -53,6 +53,34 @@ const degreeSlice = createSlice({
                 state.success = true
             })
             .addCase(GetAllDegreesbyUniId.rejected, (state, payload) => {
+                state.loading = false
+                state.error = payload.payload ?? ''
+                state.success = false
+            })
+            .addCase(GetVerifiedDegreesbyUniId.pending, (state) => {
+                state.loading = true
+                state.error = {}
+            })
+            .addCase(GetVerifiedDegreesbyUniId.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.verifiedDegrees = payload
+                state.success = true
+            })
+            .addCase(GetVerifiedDegreesbyUniId.rejected, (state, payload) => {
+                state.loading = false
+                state.error = payload.payload ?? ''
+                state.success = false
+            })
+            .addCase(GetUnverifiedDegreesbyUniId.pending, (state) => {
+                state.loading = true
+                state.error = {}
+            })
+            .addCase(GetUnverifiedDegreesbyUniId.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.unverifiedDegrees = payload
+                state.success = true
+            })
+            .addCase(GetUnverifiedDegreesbyUniId.rejected, (state, payload) => {
                 state.loading = false
                 state.error = payload.payload ?? ''
                 state.success = false

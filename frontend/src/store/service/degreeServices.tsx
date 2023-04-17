@@ -17,7 +17,7 @@ async function getConfig() {
     accessToken = token.substring(1, token.length - 1)
     config = {
         headers: {
-            'auth': accessToken,
+            'Authorization': `Bearer ${accessToken}`,
         }
         // headers: {
         //     'Content-Type': 'application/json',

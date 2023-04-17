@@ -12,16 +12,14 @@ export const GetAllDegrees = createAsyncThunk<
         var response: any = {};
         try {
             response = await getAllDegrees();
-            console.log(response.data)
             return response.data.data
         } catch (error) {
-            console.log(response.message);
             //@ts-ignore
             if (error.response && error.response.data.message) {
                 //@ts-ignore
                 return rejectWithValue(error.response.data.message)
             } else {
-                return rejectWithValue(response.message)
+                return rejectWithValue(response.data.message)
             }
         }
     }
@@ -39,13 +37,12 @@ export const GetAllDegreesbyUniId = createAsyncThunk<
         var response: any = {};
         try {
             response = await getAllDegreesbyUniId(organisation_id);
-            console.log(response.data)
+            // console.log(response.data.message);
             if (response.data.statusCode === 401) {
                 return rejectWithValue(response.data.message)
             }
             return response.data.data
         } catch (error) {
-            console.log(response.message);
             //@ts-ignore
             if (error.response && error.response.data.message) {
                 //@ts-ignore
@@ -70,13 +67,12 @@ export const GetVerifiedDegreesbyUniId = createAsyncThunk<
         var response: any = {};
         try {
             response = await getVerifiedDegreesbyUniId(organisation_id);
-            console.log(response.data)
+            //console.log(response.data)
             if (response.data.statusCode === 401) {
                 return rejectWithValue(response.data.message)
             }
             return response.data.data
         } catch (error) {
-            console.log(response.message);
             //@ts-ignore
             if (error.response && error.response.data.message) {
                 //@ts-ignore
@@ -106,13 +102,12 @@ export const GetUnverifiedDegreesbyUniId = createAsyncThunk<
             }
             return response.data.data
         } catch (error) {
-            console.log(response.message);
             //@ts-ignore
             if (error.response && error.response.data.message) {
                 //@ts-ignore
                 return rejectWithValue(error.response.data.message)
             } else {
-                return rejectWithValue(response.message)
+                return rejectWithValue(response.data.message)
             }
         }
     }
@@ -129,9 +124,11 @@ export const GetCountDegreeByYears = createAsyncThunk<
         try {
             response = await getCountDegreeByYears();
             //console.log(response.data)
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
             return response.data.data
         } catch (error) {
-            console.log(response.message);
             //@ts-ignore
             if (error.response && error.response.data.message) {
                 //@ts-ignore

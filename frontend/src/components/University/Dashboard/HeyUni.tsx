@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { UnverifiedDegreesComp } from "./UnverifiedDegreesComp";
 import { useEffect } from "react";
-import { GetAllDegreesbyUniId, GetCountDegreeByYears } from "../../../store/actions/degreeActions";
+import { GetAllDegreesbyUniId, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId } from "../../../store/actions/degreeActions";
 
 
 const HeyUni = () => {
@@ -22,12 +22,14 @@ const HeyUni = () => {
   const organisation_id = userInfo?.user?.organisationID ?? '';
 
   useEffect(() => {
-    getAllDegrees();
+    getDegrees();
     getDegreeByYear();
   }, [])
 
-  const getAllDegrees = async () => {
-    await dispatch(GetAllDegreesbyUniId({organisation_id: organisation_id}))
+  const getDegrees = async () => {
+    await dispatch(GetAllDegreesbyUniId({ organisation_id: organisation_id }))
+    await dispatch(GetVerifiedDegreesbyUniId({ organisation_id: organisation_id }))
+    await dispatch(GetUnverifiedDegreesbyUniId({ organisation_id: organisation_id }))
   }
 
   const getDegreeByYear = async () => {
@@ -70,7 +72,7 @@ const HeyUni = () => {
           {/* <h1 className="font-bold text-lg mt-6 ml-4">Edhi All Students Chart daal idher</h1> */}
 
           {/* <AllDegreesTable search='' /> */}
-          <UnverifiedDegreesComp/>
+          <UnverifiedDegreesComp />
           {/* <UnverifiedDegreesTable search={""}/> */}
 
         </div>
