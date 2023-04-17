@@ -1,14 +1,37 @@
 import React from 'react'
 import DetailsHeading from '../components/University/DegreeViewPage/DetailsHeading'
+import Layout from '../components/general/Layout'
+const name = "Muhammad Ahmed"
+const erp = "19717"
+const NameErp = name + " " + erp
+const programDeg = "BSCS"
+const graduatingYear = "2023"
+const fatherName = "Riaz"
+const dateOfBirth = "4354"
+const dateOfAdmission = '02/02/23'
+const dateOfCompletion = '02/02/2023'
+const cnic = '42000-000000-2'
+const email = 'ahmed@iba.pk'
+function getCaseClass(programDeg: string) {
+  switch (programDeg) {
+    case 'BSCS':
+      return programDeg = "Bachelor of Science in Computer Science (BSCS)";
+    case 'BBA':
+      return 'Bachelor of Business Administration (BBA)';
+    default:
+      return '';
+  }
+}
 
 function DegreeStudent() {
   return (
+    <Layout>
     <div className="flex">
   {/* <!-- PROFILE DETAILS LEFT SIDE --> */}
   <div className="w-1/2 p-4">
     <div className="bg-white p-3 border-t-4 border-green-400 text-left">
       <div className="grid grid-cols-2 gap-4 my-6">
-        {/* <DetailsHeading text={'Name:'} spanText={`${name}`} />
+        <DetailsHeading text={'Name:'} spanText={`${name}`} />
         <DetailsHeading text={'Serial Number:'} spanText={`${erp}`} />
         <DetailsHeading text={'ERP ID:'} spanText={`${erp}`} />
         <DetailsHeading text={'Program: '} spanText={`${getCaseClass(programDeg)}`} />
@@ -19,7 +42,7 @@ function DegreeStudent() {
         <DetailsHeading text={'Date of Admission:'} spanText={`${dateOfAdmission}`} />
         <DetailsHeading text={'Date of Completion:'} spanText={`${dateOfCompletion}`} />
         <DetailsHeading text={'Email ID:'} spanText={`${email}`} />
-        <DetailsHeading text={'Password:'} spanText="*********" /> */}
+        <DetailsHeading text={'Password:'} spanText="*********" />
       </div>
       <div className="flex justify-start">
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-4">
@@ -65,6 +88,7 @@ function DegreeStudent() {
           </div>
           </div>
           </div>
+          </Layout>
   )
 }
 

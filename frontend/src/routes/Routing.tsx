@@ -19,6 +19,7 @@ import VerifiedDegreesPageHec from "../pages/HEC/VerifiedDegreesPageHec";
 import UnverifiedDegreesPageHec from "../pages/HEC/UnverifiedDegreesPageHec";
 import ApproveDegree from "../pages/University/ApproveDegree";
 import StudentProfileView from "../pages/StudentProfileView";
+import DegreeStudent from "../pages/DegreeStudent";
 
 interface RouteType {
   path: string;
@@ -149,6 +150,11 @@ export const routeList: RouteType[] = [
     path: "/view/studentprofile",
     isPrivate: true,
     component: <StudentProfileView />,
+  },
+  {
+    path: "/view/degreedetails",
+    isPrivate: true,
+    component: <DegreeStudent />,
   },
   {
     path: "/approvedegree",

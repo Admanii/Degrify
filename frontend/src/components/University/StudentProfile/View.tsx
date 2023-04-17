@@ -146,7 +146,8 @@ function View() {
         <div className="w-2/6">
           {/* FIRST BOX TOP LEFT */}
           <div className="p-2">
-            <div className="h-80 bg-white shadow-md p-4 flex flex-col justify-center">
+            <div className="h-80 bg-white shadow-md p-4 flex flex-col items-center justify-center">
+            <div className="w-40 h-40 rounded-full bg-gray-500"></div>
               <DetailsHeading text={name} />
               <DetailsHeading spanText={`${getCaseClass(programDeg)}`} />
             </div>
