@@ -13,14 +13,14 @@ const LandingPage = () => {
             </div>
 
             <div className="grid min-h-full grid-cols-2">
-                <div className='p-16 flex flex-col items-center justify-center'>
+                <div className='p-16 flex flex-col items-left justify-left ml-24'>
 
-                    <div className='font-semibold text-black text-5xl mb-4'>Verify Degree</div>
-                    <div className=' text-gray-600 text-1xl mb-4'>
-                        Verify Degree
+                    <div className='font-semibold text-black text-5xl mb-4 text-left'>Verify Degree</div>
+                    <div className=' text-gray-600 text-1xl mb-4 mr-28 mt-8'>
+                        Are you a recruiter trying to verify student Degree?
                     </div>
                     <form>
-                        <div className="relative">
+                        <div className="relative mt-4">
                             <input
                                 type="search"
                                 id="search"
@@ -37,10 +37,25 @@ const LandingPage = () => {
                         </div>
                     </form>
 
-
-                    <div className='flex justify-between mt-2 w-96 text-gray-900'>
-                       
+                    <div className="grid grid-cols-2">
+                        <div className="grid grid-cols-2">
+                            <div>
+                            test 1
+                            </div>
+                            <div>
+                            test 2
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-2">
+                            <div>
+                                test 3
+                            </div>
+                            <div>
+                                test 4
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
                 <div className='p-2 flex items-center justify-center'>
