@@ -1,7 +1,7 @@
 import React from 'react'
 interface Props {
     Text: string;
-    SpanText: string;
+    SpanText?: string;
   }
   
 function HeadingWithSpan({

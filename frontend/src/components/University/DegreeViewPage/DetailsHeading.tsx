@@ -1,7 +1,7 @@
 import React from 'react'
 interface Props {
-    text: string,
-    spanText: string,
+    text?: string,
+    spanText?: string,
 }
 function DetailsHeading({text, spanText}: Props) {
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../../components/general/Layout'
-import View from '../../components/University/DegreeViewPage/View'
+import View from '../../components/University/StudentProfile/View'
 import Button from '../../components/general/Button'
 
 function ApproveDegree() {
