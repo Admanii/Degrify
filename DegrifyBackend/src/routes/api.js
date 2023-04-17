@@ -77,10 +77,10 @@ apiProtected.get("/getverifieddegreeshec", getHECVerifiedDegrees);
 // Unverified Degree by HEC
 apiProtected.get("/getunverifieddegreeshec", getUnvserifiedHECDegree);
 // all degrees by UniID
-apiProtected.get("/getalldegreesuniversity/:id", getUniversityAllDegree);
+apiProtected.get("/getalldegreesuniversity", getUniversityAllDegree);
 // verified Degree by UniID
-apiProtected.get("/getverifieddegreesuniversity/:id", getVerifiedUniversityDegree);
+apiProtected.get("/getverifieddegreesuniversity", getVerifiedUniversityDegree);
 // Unverified Degree by UniID
-apiProtected.get("/getunverifieddegreesuniversity/:id", getUnvserifiedHECDegree);
+apiProtected.get("/getunverifieddegreesuniversity", getUnvserifiedHECDegree);
 // get all students
 apiProtected.get("/getallStudents", getAllStudent);

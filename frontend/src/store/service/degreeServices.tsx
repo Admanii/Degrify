@@ -39,5 +39,5 @@ export const getAllDegrees = async () => {
 
 export const getAllDegreesbyUniId = async (organisation_id: string) => {
     await getConfig();
-    return api.get(`getalldegreesuniversity/${organisation_id}`, config);
+    return api.get(`getalldegreesuniversity?organisation_id=${organisation_id}`, config);
 };
