@@ -20,6 +20,6 @@ export const getAllDegrees = () => {
 };
 
 export const getAllDegreesbyUniId = (organisation_id: string) => {
-    return api.get(`getalldegreesuniversity/${organisation_id}`);
+    return api.get(`getalldegreesuniversity/${organisation_id}`, config);
   };
   

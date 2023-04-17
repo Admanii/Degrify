@@ -6,6 +6,8 @@ import { IDegreeDetails } from '../types/types';
 const initialState: IState = {
     loading: false,
     allDegrees: [],
+    verifiedDegrees: [],
+    unverifiedDegrees: [],
     error: {},
     success: false,
 }
@@ -13,6 +15,8 @@ const initialState: IState = {
 interface IState {
     loading: boolean;
     allDegrees: Array<IDegreeDetails>;
+    verifiedDegrees: Array<IDegreeDetails>;
+    unverifiedDegrees: Array<IDegreeDetails>;
     error: {};
     success: boolean;
 }
@@ -56,3 +60,5 @@ const degreeSlice = createSlice({
 
 export default degreeSlice.reducer
 export const AllDegrees = (state: RootState) => state.degree.allDegrees;
+export const VerifiedDegrees = (state: RootState) => state.degree.verifiedDegrees;
+export const UnverifiedDegrees = (state: RootState) => state.degree.unverifiedDegrees;

@@ -40,6 +40,9 @@ export const GetAllDegreesbyUniId = createAsyncThunk<
         try {
             response = await getAllDegreesbyUniId(organisation_id);
             console.log(response.data)
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
             return response.data.data
         } catch (error) {
             console.log(response.message);
