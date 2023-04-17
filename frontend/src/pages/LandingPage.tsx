@@ -14,25 +14,32 @@ const LandingPage = () => {
 
             <div className="grid min-h-full grid-cols-2">
                 <div className='p-16 flex flex-col items-center justify-center'>
+
                     <div className='font-semibold text-black text-5xl mb-4'>Verify Degree</div>
-                    <div className="mt-3">
-                        <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            autoComplete="email"
-                            placeholder="Enter Hash Value"
-                            // value=""
-                            //   onChange={}
-                            required
-                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
-                        />
+                    <div className=' text-gray-600 text-1xl mb-4'>
+                        Verify Degree
                     </div>
-                    <Button className='mt-8' buttonText="Verify" width={384} onClick={() => { }} />
+                    <form>
+                        <div className="relative">
+                            <input
+                                type="search"
+                                id="search"
+                                className="block w-full pr-16 py-2 pl-4 text-lg  text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                placeholder="Enter Hash Value"
+                                required
+                            />
+                            <button
+                                type="submit"
+                                className="text-white absolute right-2.5 bottom-1.5 bg-black hover:bg-gray-800 font-medium rounded-lg text-sm px-8 py-1.5 "
+                            >
+                                Verify
+                            </button>
+                        </div>
+                    </form>
+
+
                     <div className='flex justify-between mt-2 w-96 text-gray-900'>
-                        <Link to="/">
-                            Remember me
-                        </Link>
+                       
                     </div>
                 </div>
 
@@ -70,3 +77,5 @@ const LandingPage = () => {
 }
 
 export default LandingPage
+
+

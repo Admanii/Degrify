@@ -6,17 +6,18 @@ import MainPageUni from "../pages/University/MainPageUni";
 import TestPage from "../pages/TestPage";
 import VerifiedDegreesPage from "../pages/University/VerifiedDegreesPage";
 import UnverifiedDegreesPage from "../pages/University/UnverifiedDegreesPage";
-import DegreeViewPage from "../pages/DegreeViewPage";
-import EditRequestsPage from "../pages/University/EditRequestsPage";
+import LandingPage from "../pages/LandingPage";
 import AllDegreesPage from "../pages/University/AllDegreesPage";
+import EditRequestsPage from "../pages/University/EditRequestsPage";
+import DegreeViewPage from "../pages/DegreeViewPage";
 import AddStudent from "../components/University/AddStudent/AddStudent";
-import { useSelector } from "react-redux";
-import { IsLoggedIn } from "../store/slice/authSlice";
 import MainPageHec from "../pages/HEC/MainPageHec";
-import MainPageStudent from "../pages/Student/MainPageStudent";
-import AllDegreesPageHec from "../pages/HEC/AllDegreesPageHec";
 import VerifiedDegreesPageHec from "../pages/HEC/VerifiedDegreesPageHec";
 import UnverifiedDegreesPageHec from "../pages/HEC/UnverifiedDegreesPageHec";
+import MainPageStudent from "../pages/Student/MainPageStudent";
+import { useSelector } from "react-redux";
+import { IsLoggedIn } from "../store/slice/authSlice";
+import AllDegreesPageHec from "../pages/HEC/AllDegreesPageHec";
 
 interface RouteType {
   path: string;
@@ -106,6 +107,11 @@ export const routeList: RouteType[] = [
     path: "/login",
     isPrivate: false,
     component: <LoginPage />,
+  },
+  {
+    path: "/landing",
+    isPrivate: true,
+    component: <LandingPage />,
   },
   {
     path: "/home",

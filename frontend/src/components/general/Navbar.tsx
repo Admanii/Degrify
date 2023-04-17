@@ -2,7 +2,8 @@
 import React, { Children } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import classNames from "classnames";
-import { IMAGES } from "../../constants/images";
+import { IMAGES } from "../../constants/images"; 
+
 type Props = {
     onMenuButtonClick(): void;
     children?: React.ReactNode;
