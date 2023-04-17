@@ -28,18 +28,31 @@ async function getConfig() {
 
 export const getAllDegrees = async () => {
     await getConfig();
-    console.log("accessToken:    " + accessToken)
+    // console.log("accessToken:    " + accessToken)
     return api.get("/getalldegreeshec", config);
-    // return api.get("/getalldegreeshec", {
+};
+
+export const getAllDegreesbyUniId = async (organisation_id: string) => {
+    await getConfig();
+    return api.get(`/getalldegreesuniversity?organisation_id=${organisation_id}`, config);
+    // return api.get("/getalldegreesuniversity", {
+    //     params: {
+    //         organisation_id
+    //     },
     //     headers: {
     //         'auth': accessToken,
     //     }
     // });
 };
 
-export const getAllDegreesbyUniId = async (organisation_id: string) => {
+export const getVerifiedDegreesbyUniId = async (organisation_id: string) => {
     await getConfig();
-    return api.get(`getalldegreesuniversity?organisation_id=${organisation_id}`, config);
+    return api.get(`/getverifieddegreesuniversity?organisation_id=${organisation_id}`, config);
+};
+
+export const getUnverifiedDegreesbyUniId = async (organisation_id: string) => {
+    await getConfig();
+    return api.get(`/getunverifieddegreesuniversity?organisation_id=${organisation_id}`, config);
 };
 
 export const getCountDegreeByYears = async () => {
