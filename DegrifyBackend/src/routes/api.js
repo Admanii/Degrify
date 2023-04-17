@@ -23,6 +23,7 @@ import {
   getOrganisationVerifiedDegrees,
   getStudentVerifiedDegrees,
   getUniversityAllDegree,
+  getUnverifiedUniversityDegree,
   getUnvserifiedHECDegree,
   getVerifiedUniversityDegree,
 } from "../controllers/getDegree.controller.js";
@@ -76,11 +77,13 @@ apiProtected.get("/getalldegreeshec", getHECAllDegree);
 apiProtected.get("/getverifieddegreeshec", getHECVerifiedDegrees);
 // Unverified Degree by HEC
 apiProtected.get("/getunverifieddegreeshec", getUnvserifiedHECDegree);
+
 // all degrees by UniID
 apiProtected.get("/getalldegreesuniversity", getUniversityAllDegree);
 // verified Degree by UniID
 apiProtected.get("/getverifieddegreesuniversity", getVerifiedUniversityDegree);
 // Unverified Degree by UniID
-apiProtected.get("/getunverifieddegreesuniversity", getUnvserifiedHECDegree);
+apiProtected.get("/getunverifieddegreesuniversity", getUnverifiedUniversityDegree);
+
 // get all students
 apiProtected.get("/getallStudents", getAllStudent);

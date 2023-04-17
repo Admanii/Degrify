@@ -3,14 +3,16 @@ import { statusCode } from "../utils/constant.js";
 import { jsonGenerate } from "../utils/helper.js";
 
 const AuthMiddleware = (req, res, next) => {
-  if (req.headers["auth"] === undefined) {
+  if (req.headers["authorization"] === undefined) {
     return res.json(jsonGenerate(statusCode.AUTH_ERROR, "Excess denied"));
   }
 
-  const token = req.headers["auth"];
+  // const token = req.headers["auth"];
   //console.log(token);
 
-  //sconst token1 = bearerToken[1];
+  const authHeader = req.headers["authorization"];
+  const bearerToken = authHeader.split(" ");
+  const token = bearerToken[1];
 
   try {
     const decoded = Jwt.verify(
