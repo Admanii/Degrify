@@ -168,3 +168,31 @@ export const getStudent = async (req, res) => {
     );
   }
 };
+
+export const getStudentbyYear = async (req, res) => {
+  try {
+    // const field = req.query.field;
+    const pipeline = [
+      {
+        $group: {
+          _id: "$GraduatingYear",
+          count: { $sum: 1 },
+        },
+      },
+    ];
+    Student.aggregate(pipeline, function (err, results) {
+      if (err) {
+        return res.status(500).json({ error: err });
+      }
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "Students by Year", results)
+      );
+    });
+
+    // select count(StudentID), Year from Students group by Year
+  } catch (err) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed to disply", err)
+    );
+  }
+};

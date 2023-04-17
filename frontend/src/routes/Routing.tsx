@@ -14,10 +14,6 @@ import AddStudent from "../components/University/AddStudent/AddStudent";
 import MainPageHec from "../pages/HEC/MainPageHec";
 import VerifiedDegreesPageHec from "../pages/HEC/VerifiedDegreesPageHec";
 import UnverifiedDegreesPageHec from "../pages/HEC/UnverifiedDegreesPageHec";
-import MainPageStudent from "../pages/Student/MainPageStudent";
-import { useSelector } from "react-redux";
-import { IsLoggedIn } from "../store/slice/authSlice";
-import AllDegreesPageHec from "../pages/HEC/AllDegreesPageHec";
 
 interface RouteType {
   path: string;
@@ -145,9 +141,24 @@ export const routeList: RouteType[] = [
     component: <EditRequestsPage />,
   },
   {
-    path: "/view/degree",
+    path: "/view/degreecertificate",
     isPrivate: true,
     component: <DegreeViewPage />,
+  },
+  {
+    path: "/view/studentprofile",
+    isPrivate: true,
+    component: <StudentProfileView />,
+  },
+  {
+    path: "/view/degreedetails",
+    isPrivate: true,
+    component: <DegreeStudent />,
+  },
+  {
+    path: "/approvedegree",
+    isPrivate: true,
+    component: <ApproveDegree/>,
   },
   {
     path: "/test",

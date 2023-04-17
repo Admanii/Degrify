@@ -6,14 +6,29 @@ import EditShortcut from "./EditShortcut";
 import { AllDegreesTable } from "../../HEC/AllDegrees/AllDegreesTable";
 import { UnverifiedDegreesTable } from "../UnverifiedDegrees/UnverifiedDegreesTable";
 import HeadingWithSpan from "../../general/HeadingWithSpan";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
-
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store/store";
+import { UnverifiedDegreesComp } from "./UnverifiedDegreesComp";
+import { useEffect } from "react";
+import { GetAllDegreesbyUniId } from "../../../store/actions/degreeActions";
 
 
 const HeyUni = () => {
 
   const { userInfo } = useSelector((state: any) => state.auth)
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const organisation_id = userInfo?.user?.organisationID ?? '';
+
+  useEffect(() => {
+    getAllDegrees();
+  }, [])
+
+  const getAllDegrees = async () => {
+    await dispatch(GetAllDegreesbyUniId({organisation_id: organisation_id}))
+  }
+
 
   return (
     <div>
@@ -40,9 +55,8 @@ const HeyUni = () => {
       </div>
       <div className="h-100 flex">
         <div className="w-2/3 h-96 bg-white m-4 shadow-md border overflow-hidden hover:overflow-y-auto">
-          <div className="flex justify-between items-center sm:p-8 ">
+          <div className="flex justify-between items-center sm:py-8 sm:px-4">
             <h3 className="text-lg font-bold leading-none text-gray-900 dark:text-white">
-
               Verify Degrees
             </h3>
             <a href="/unverified/degrees" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
@@ -51,7 +65,8 @@ const HeyUni = () => {
           </div>
           {/* <h1 className="font-bold text-lg mt-6 ml-4">Edhi All Students Chart daal idher</h1> */}
 
-          <AllDegreesTable search='' />
+          {/* <AllDegreesTable search='' /> */}
+          <UnverifiedDegreesComp/>
           {/* <UnverifiedDegreesTable search={""}/> */}
 
         </div>

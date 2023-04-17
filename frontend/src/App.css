@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: 'CertificateFont';
+  src: url('../src/fonts/Certificate.ttf') format('truetype');
+  /* font-weight: normal; */
+  /* font-style: italic; */
+ /* / font-size: ; */
+}

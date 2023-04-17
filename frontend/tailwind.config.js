@@ -10,9 +10,14 @@ module.exports = {
         header: "64px auto", // 👈 for the navbar layout. adds grid-rows-header class
       },
       spacing: {
+        '135': '36rem',
+        '130': '33rem',
         '128': '32rem',
         '110': '30rem'
-      }
+      },
+      fontFamily: {
+        certificate: ['CertificateFont', 'sans-serif'],
+      },
     },
   },
   plugins: [],

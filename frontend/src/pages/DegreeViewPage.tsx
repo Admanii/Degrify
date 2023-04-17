@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import ReactDOMServer from 'react-dom/server';
 import Layout from '../components/general/Layout'
 import HeadingWithSpan from '../components/general/HeadingWithSpan'
 import DetailsHeading from '../components/University/DegreeViewPage/DetailsHeading'
-import DegreeCertificate from '../components/University/DegreeViewPage/DocumentPdf'
+import DegreeCertificate from '../components/University/DegreeViewPage/DegreeCertificate'
 import VerifiedTickIcon from '../components/University/DegreeViewPage/VerifiedTickIcon'
+import View from '../components/University/StudentProfile/View'
+import Degree from '../components/general/Modal/Degree'
+import Modal from '../components/general/Modal/Modal'
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
@@ -22,61 +27,89 @@ function getCaseClass(programDeg: string) {
 }
 
 function DegreeViewPage() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  // const openDegree = () => {
+  //   const newWindow = window.open(
+  //     '',
+  //     'Degree Certificate',
+  //     'width=1400,height=600,left=200,top=200'
+  //   );
+  //   if (newWindow) {
+  //     newWindow.onload = () => {
+  //       newWindow.document.body.innerHTML = ReactDOMServer.renderToString(
+  //         <div>
+  //           <h1>fsdfsdfsdf</h1>
+  //         <DegreeCertificate
+  //           name={name}
+  //           program={getCaseClass(programDeg)}
+  //           graduatingYear={graduatingYear}
+  //         />
+  //         </div>
+  //       );
+  //     };
+  //   }
+  // };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+
   return (
-    <Layout>
-      <div className=' ml-16 mt-16'>
-        {/* <div> */}
-        <HeadingWithSpan Text="STUDENT DEGREE" SpanText={NameErp} />
-        <div className="flex">
-          {/* DEGREE DETAILS AND PIC LEFT SIDE */}
-          <div className="w-1/3 p-4">
-            <div className='w-12/12 ml-6 mt-6'>
-              <div className="bg-white p-3 border-t-4 border-green-400 text-left">
-                <div className="image overflow-auto">
-                  <img className="h-auto w-full mx-auto bg-black" src="frontend\src\assets\man.jpg" alt=""></img>
-                </div>
-                <DetailsHeading text={'Name:'} spanText={`${name}`} />
-                <DetailsHeading text={'Serial Number:'} spanText={`${erp}`} />
-                <DetailsHeading text={'ERP ID:'} spanText={`${erp}`} />
-                <DetailsHeading text={'Program: '} spanText={`${getCaseClass(programDeg)}`} />
-                {/* <DetailsHeading text={'Date of Issue: '} spanText={`${graduatingYear}`}/>   */}
-                <DetailsHeading text={'Graduating Year: '} spanText={`${graduatingYear}`} />
+    <div className='flex justify-center items-center w-screen h-screen'>
+      <DegreeCertificate name={name} program={getCaseClass(programDeg)} graduatingYear={graduatingYear} />
+    </div>
 
-                <ul
-                  className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
-                  <li className="flex items-center py-3">
-                    <span>Status</span>
-                    <span className="ml-auto"><span
-                      className="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
-                  </li>
-                  <li className="flex items-center py-3">
-                    <span>Date of Issue</span>
-                    <span className="ml-auto">Nov 07, 2016</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+    // {/* <HeadingWithSpan Text="STUDENT DEGREE" SpanText={NameErp} /> */}
+
+    // <div className='justify-center items-center ml-10 pl-28'>
+    //   <DegreeCertificate name={name} program={getCaseClass(programDeg)} graduatingYear={graduatingYear} />
+
+    // </div>
+
+    //MODAL CODE
+    // <div>
+    //     <button onClick={openModal}>View Degree</button>
+    //     <Modal 
+    //     // className="modal-container custom-map-modal"
+    //     modalState={modalIsOpen} 
+    //     closeButton={true} 
+    //     onClick={()=> closeModal()}
+
+    //     >
+
+    //       <DegreeCertificate name={name} program={getCaseClass(programDeg)} graduatingYear={graduatingYear} />
+
+    //     </Modal>
+    //   </div>
 
 
+    //MODAL CODE END
 
-            {/* <div className="mt-10 w-72 h-72 rounded-full bg-gray-500 ml-4"></div> */}
-          </div>
-          {/* DEGREEE ITSELF */}
-         <DegreeCertificate name={name} program={getCaseClass(programDeg)} graduatingYear={graduatingYear}/>
-         
-          {/* DEGREE END */}
-        </div>
+    // <Layout>
+    //   <View/>
 
+    // </Layout>
 
+    // FOR NEW WINDOW CODE
+    // <div className="flex flex-col items-center justify-center h-screen">
+    //   <button
+    //     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    //     onClick={openDegree}
+    //   >
+    //     View Degree
+    //   </button>
+    // </div>
+    // FOR NEW WINDOW CODE END
 
-
-
-
-
-      </div>
-    </Layout>
   )
 }
+
 
 export default DegreeViewPage
 

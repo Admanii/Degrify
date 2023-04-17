@@ -26,7 +26,7 @@ const Button = ({
     }}
     className={`
          ${inverted
-        ? "bg-white outline-none border-2 border-solid rounded-md text-white cursor-pointer px-3 py-2 border-white"
+        ? "bg-white outline-none border-2 border-solid rounded-md text-black cursor-pointer px-3 py-2 border-black"
         : "bg-black outline-none border-2 border-solid rounded-md text-white cursor-pointer px-5 py-2 border-black"
       }
         
