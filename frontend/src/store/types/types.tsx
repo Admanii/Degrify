@@ -34,3 +34,9 @@ export interface IDegreeDetailsTemp {
     cnic: string;
     active: boolean;
 }
+
+
+export interface IDegreeCountByYear {
+    _id: string,
+    count: number
+}

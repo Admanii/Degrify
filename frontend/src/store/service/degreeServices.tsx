@@ -41,3 +41,8 @@ export const getAllDegreesbyUniId = async (organisation_id: string) => {
     await getConfig();
     return api.get(`getalldegreesuniversity?organisation_id=${organisation_id}`, config);
 };
+
+export const getCountDegreeByYears = async () => {
+    await getConfig();
+    return api.get("/studentsbyyear", config);
+}

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { UnverifiedDegreesComp } from "./UnverifiedDegreesComp";
 import { useEffect } from "react";
-import { GetAllDegreesbyUniId } from "../../../store/actions/degreeActions";
+import { GetAllDegreesbyUniId, GetCountDegreeByYears } from "../../../store/actions/degreeActions";
 
 
 const HeyUni = () => {
@@ -23,17 +23,21 @@ const HeyUni = () => {
 
   useEffect(() => {
     getAllDegrees();
+    getDegreeByYear();
   }, [])
 
   const getAllDegrees = async () => {
     await dispatch(GetAllDegreesbyUniId({organisation_id: organisation_id}))
   }
 
+  const getDegreeByYear = async () => {
+    await dispatch(GetCountDegreeByYears({}))
+  }
+
 
   return (
     <div>
       {/* <div className="flex flex-row ...">
-
       <h1 className="font-bold text-2xl mt-6 ml-4">
         {Text} <span className="font-normal">Here's what is happening today</span>
       </h1>

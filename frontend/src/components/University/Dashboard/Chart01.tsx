@@ -1,14 +1,25 @@
 import React, { useRef, useEffect } from "react";
 import ApexCharts, { ApexOptions } from "apexcharts";
+import { DegreesByYear } from "../../../store/slice/degreeSlice";
+import { useSelector } from "react-redux";
 
 const Chart01: React.FC = (): JSX.Element => {
   const chartRef = useRef<HTMLDivElement>(null);
+  const degreesByYear = useSelector(DegreesByYear);
+
+  console.log(degreesByYear[0]?.count)
+
+  
+
+  // const byYear(){
+    // degreesByYear
+  // }
 
   const chartOneOptions = {
     series: [
       {
         name: "Students",
-        data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30, 45],
+        data: [23, 11, 22, 27, 13, 22, 0, 21, 44, 22, 30, 45],
       },
       // {
       //   name: "Product Two",
@@ -97,7 +108,7 @@ const Chart01: React.FC = (): JSX.Element => {
     xaxis: {
       type: "category",
       categories: [
-        "2012","2013",        "2014",        "2015",        "2016",        "2017",        "2018",        "2019",        "2020",        "2021",        "2022",        "2023",      ],
+        "2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023",],
       axisBorder: {
         show: false,
       },
