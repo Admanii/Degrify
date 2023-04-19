@@ -111,6 +111,46 @@ export const deleteStudent = async (req, res) => {
   }
 };
 
+export const updateStudent = async (req, res) => {
+  try {
+    const newUser = {
+      name: req.body.name,
+      enrollmentNumber: req.body.enrollmentNumber,
+      fatherName: req.body.fatherName,
+      studentID: req.body.studentID,
+      DateOfBirth: req.body.DateOfBirth,
+      CNIC: req.body.CNIC,
+      DateOfAdmission: req.body.DateOfAdmission,
+      DateOfompletion: req.body.DateOfompletion,
+      Program: req.body.Program,
+      GraduatingYear: req.body.GraduatingYear,
+    };
+
+    const updated = await Student.findByIdAndUpdate(
+      req.query.student_id,
+      {
+        newUser,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
+    return res.json(
+      jsonGenerate(
+        statusCode.SUCCESS,
+        "Profile of the Student Updated",
+        updated
+      )
+    );
+  } catch (err) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error is displaying ", err)
+    );
+  }
+};
+
 export const getAllStudent = async (req, res) => {
   try {
     const allStudents = await Student.find({ active: true }).select([

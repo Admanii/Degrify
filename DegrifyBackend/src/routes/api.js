@@ -18,6 +18,7 @@ import { AddCourse, deleteCourse } from "../controllers/course.controller.js";
 import {
   getAllDegrees,
   getCompleteVerifiedDegrees,
+  getDegreeByID,
   getHECAllDegree,
   getHECVerifiedDegrees,
   getOrganisationVerifiedDegrees,
@@ -37,6 +38,10 @@ import {
   getAllStudent,
   getStudentbyYear,
 } from "../controllers/studentcontroller.js";
+import {
+  getOrganisationByID,
+  getUniversities,
+} from "../controllers/organisation.controller.js";
 
 export const apiRoute = express.Router();
 export const apiProtected = express.Router();
@@ -62,7 +67,8 @@ apiProtected.post("/organisationapproveddegree", OrganisationAppovedDegree);
 apiProtected.post("/completeapproveddegree", CompleteAppovedDegree);
 
 // get degrees
-// apiProtected.get("/getalldegree", getAllDegrees);
+apiProtected.get("/getalldegree", getAllDegrees);
+apiProtected.get("/getdegreebyid", getDegreeByID);
 apiProtected.get("/getstudentverifieddegree", getStudentVerifiedDegrees);
 apiProtected.get(
   "/getorganisationverifieddegree",
@@ -70,6 +76,10 @@ apiProtected.get(
 );
 
 apiProtected.get("/getcompleteverifieddegree", getCompleteVerifiedDegrees);
+
+// get organisation and university
+apiProtected.get("/getorganisationbyid", getOrganisationByID);
+apiProtected.get("/getuniversities", getUniversities);
 
 // all degrees by HEC
 apiProtected.get("/getalldegreeshec", getHECAllDegree);
@@ -83,7 +93,10 @@ apiProtected.get("/getalldegreesuniversity", getUniversityAllDegree);
 // verified Degree by UniID
 apiProtected.get("/getverifieddegreesuniversity", getVerifiedUniversityDegree);
 // Unverified Degree by UniID
-apiProtected.get("/getunverifieddegreesuniversity", getUnverifiedUniversityDegree);
+apiProtected.get(
+  "/getunverifieddegreesuniversity",
+  getUnverifiedUniversityDegree
+);
 
 // get all students
 apiProtected.get("/getallStudents", getAllStudent);

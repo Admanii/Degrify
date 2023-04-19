@@ -36,7 +36,11 @@ const organisationSchema = mongoose.Schema({
   //     },
   //   },
   // ],
-
+  userRole: {
+    type: String,
+    enum: ["UNIVERSITY", "HEC"],
+    required: true,
+  },
   active: {
     type: Boolean,
     default: true,

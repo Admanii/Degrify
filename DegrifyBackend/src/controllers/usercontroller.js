@@ -34,7 +34,7 @@ export const Login = async (req, res) => {
     { userId: user._id },
     "e282a3561a61b57de67ebb20a2f7a4e83fb9f27ac4fa0774525e9aa7fee8cf84",
     {
-      expiresIn: "8h",
+      expiresIn: "100d",
     }
   );
   const hash = hashCal(token);
@@ -200,6 +200,7 @@ export const registerOrganisation = async (req, res) => {
       name: name,
       phoneNumber: phoneNumber,
       address: address,
+      userRole: userRole,
     });
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
