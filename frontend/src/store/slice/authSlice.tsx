@@ -1,24 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { userLogin } from '../actions/authActions'
 import { RootState } from '../store';
+import { IUserDetails } from '../types/types';
 
 // initialize userToken from local storage
-const accessToken = localStorage.getItem('accessToken')
-    ? localStorage.getItem('accessToken')
+const token = localStorage.getItem('token')
+    ? localStorage.getItem('token')
     : null
 
 const initialState: IState = {
     loading: false,
-    userInfo: {},
-    accessToken: accessToken ?? '',
+    userInfo: {} as IUserDetails,
+    token: token ?? '',
     error: {},
     success: false,
 }
 
 interface IState {
     loading: boolean;
-    userInfo: {};
-    accessToken: string;
+    userInfo: IUserDetails;
+    token: string;
     error: {};
     success: boolean;
 }
@@ -28,11 +29,11 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            localStorage.removeItem('accessToken') // delete token from storage
-            localStorage.removeItem('userData') 
+            localStorage.removeItem('token') // delete token from storage
+            localStorage.removeItem('userData')
             state.loading = false
-            state.userInfo = {}
-            state.accessToken = ''
+            state.userInfo = {} as IUserDetails
+            state.token = ''
             state.error = ''
             state.success = false;
         },
@@ -49,8 +50,8 @@ const authSlice = createSlice({
             })
             .addCase(userLogin.fulfilled, (state, { payload }) => {
                 state.loading = false
-                state.userInfo = payload.data.userInfo
-                state.accessToken = payload.data.token
+                state.userInfo = payload.userInfo
+                state.token = payload.token
                 state.success = true
             })
             .addCase(userLogin.rejected, (state, payload) => {

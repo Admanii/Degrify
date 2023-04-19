@@ -3,6 +3,12 @@ import { IMAGES } from "../../constants/images";
 
 export const navItemsUni: NavItem[] = [
   {
+    label: "All Students",
+    href: "/uni/all/students",
+    activeIcon: IMAGES.users_icon_active,
+    inactiveIcon: IMAGES.users_icon,
+  },
+  {
     label: "All Degrees",
     href: "/uni/all/degrees",
     activeIcon: IMAGES.bar_icon_active,
@@ -23,8 +29,8 @@ export const navItemsUni: NavItem[] = [
   {
     label: "Edit Requests",
     href: "/uni/edit/requests",
-    activeIcon: IMAGES.users_icon_active,
-    inactiveIcon: IMAGES.users_icon,
+    activeIcon: IMAGES.user_icon_active,
+    inactiveIcon: IMAGES.user_icon,
   },
 ];
 

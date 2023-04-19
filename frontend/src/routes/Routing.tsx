@@ -21,6 +21,7 @@ import { IsLoggedIn } from "../store/slice/authSlice";
 import StudentProfileView from "../pages/StudentProfileView";
 import DegreeStudent from "../pages/DegreeStudent";
 import ApproveDegree from "../pages/University/ApproveDegree";
+import AllStudentPage from "../pages/University/AllStudentPage";
 
 interface RouteType {
   path: string;
@@ -126,6 +127,12 @@ export const routeList: RouteType[] = [
     isPrivate: true,
     isUni: true,
     component: <MainPageUni />,
+  },
+  {
+    path: "/uni/all/students",
+    isPrivate: true,
+    isUni: true,
+    component: <AllStudentPage />,
   },
   {
     path: "/uni/all/degrees",

@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { login } from '../service/authServices';
+import { ILoginResponse } from '../types/types';
 
 export const userLogin = createAsyncThunk<
-    any,
+    ILoginResponse,
     { email: string; password: string },
     any
 >(
@@ -15,15 +16,14 @@ export const userLogin = createAsyncThunk<
             //console.log(response.data)
             localStorage.setItem("userData", JSON.stringify(response.data.data.userInfo));
             localStorage.setItem(
-                "accessToken",
+                "token",
                 JSON.stringify(response.data.data.token)
             );
 
-            return response.data
+            return response.data.data
         } catch (error) {
             //@ts-ignore
             if (error.response && error.response.data.message) {
-                console.log("eeeeeeeeeeeeeee")
                 //@ts-ignore
                 return rejectWithValue(error.response.data.message)
             } else {

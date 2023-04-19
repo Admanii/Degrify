@@ -53,7 +53,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, allReducers);
 
 const store = configureStore({
-    reducer: persistedReducer,
+    reducer: allReducers,
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
         thunk: {

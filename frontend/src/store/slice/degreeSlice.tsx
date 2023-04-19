@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
 import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYears, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId } from '../actions/degreeActions';
-import { IDegreeCountByProgram, IDegreeCountByYear, IDegreeDetails } from '../types/types';
+import { IDegreeCountByProgram, IDegreeCountByYear, IDegreeDetails, IStudentDetails } from '../types/types';
 
 const initialState: IState = {
     loading: false,
+    allStudents: [],
     allDegrees: [],
     verifiedDegrees: [],
     unverifiedDegrees: [],
@@ -16,6 +17,7 @@ const initialState: IState = {
 
 interface IState {
     loading: boolean;
+    allStudents: Array<IStudentDetails>
     allDegrees: Array<IDegreeDetails>;
     verifiedDegrees: Array<IDegreeDetails>;
     unverifiedDegrees: Array<IDegreeDetails>;
