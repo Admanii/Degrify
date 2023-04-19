@@ -7,7 +7,7 @@ const MainPageStudent = () => {
   const { userInfo } = useSelector((state: any) => state.auth)
   return (
     <Layout>
-      <HeadingWithSpan Text={userInfo?.user?.name} SpanText={"Here's what is happening today"} />
+      <HeadingWithSpan Text={userInfo?.user?.name} SpanText={"Here's what is happening today"} marginTop={'6'} />
     </Layout>
   )
 }

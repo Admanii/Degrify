@@ -42,7 +42,7 @@ const HeyUni = () => {
         {Text} <span className="font-normal">Here's what is happening today</span>
       </h1>
     </div> */}
-      <HeadingWithSpan Text={userInfo?.user?.name} SpanText={"Here's what is happening today"} />
+      <HeadingWithSpan Text={userInfo?.user?.name + " -"} SpanText={"Here's what is happening today"} marginTop={"6"} />
       <AnalyticsSection />
       <div className="h-100 flex" >
         <div className="w-2/3 h-100 bg-white m-4 border shadow-md">

@@ -19,6 +19,8 @@ const dateOfAdmission = '02/02/23'
 const dateOfCompletion = '02/02/2023'
 const cnic = '42000-000000-2'
 const email = 'ahmed@iba.pk'
+
+
 function getCaseClass(programDeg: string) {
   switch (programDeg) {
     case 'BSCS':
@@ -30,8 +32,11 @@ function getCaseClass(programDeg: string) {
   }
 }
 
+interface Props{
+  headingText: string,
+}
 
-function View() {
+function View({headingText}:Props) {
   const navigate = useNavigate()
 
   return (
@@ -83,7 +88,7 @@ function View() {
     //   </div>
     // </div>
     <div>
-      <HeadingWithSpan Text="STUDENT PROFILE" SpanText={name} />
+      <HeadingWithSpan Text={headingText} marginTop={'3'} />
 
 
 
