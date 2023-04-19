@@ -40,3 +40,8 @@ export interface IDegreeCountByYear {
     _id: string,
     count: number
 }
+
+export interface IDegreeCountByProgram {
+    _id: string,
+    count: number
+}

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import ApexCharts from "apexcharts";
+import { useSelector } from 'react-redux';
+import { DegreesByProgram } from '../../../store/slice/degreeSlice';
+
+console.log("DegreesByProgram" + DegreesByProgram)
 
 interface Props {
   id: string;
 }
 
 class Chart02 extends Component<Props> {
+  // degreesByProgram = useSelector(DegreesByProgram);
   private chartRef: any;
 
   componentDidMount() {

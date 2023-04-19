@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByYears, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId } from '../service/degreeServices';
-import { IDegreeCountByYear, IDegreeDetails } from '../types/types';
+import { IDegreeCountByProgram, IDegreeCountByYear, IDegreeDetails } from '../types/types';
 
 export const GetAllDegreesHec = createAsyncThunk<
     Array<IDegreeDetails>,
@@ -174,6 +174,34 @@ export const GetCountDegreeByYears = createAsyncThunk<
     any
 >(
     'uni/year/count',
+    async ({ }, { rejectWithValue }) => {
+        var response: any = {};
+        try {
+            response = await getCountDegreeByYears();
+            //console.log(response.data)
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data.data
+        } catch (error) {
+            //@ts-ignore
+            if (error.response && error.response.data.message) {
+                //@ts-ignore
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(response.message)
+            }
+        }
+    }
+)
+
+
+export const GetCountDegreeByProgram = createAsyncThunk<
+    Array<IDegreeCountByProgram>,
+    {},
+    any
+>(
+    'uni/program/count',
     async ({ }, { rejectWithValue }) => {
         var response: any = {};
         try {
