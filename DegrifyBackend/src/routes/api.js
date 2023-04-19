@@ -36,6 +36,7 @@ import {
   AddStudent,
   deleteStudent,
   getAllStudent,
+  getStudent,
   getStudentbyProgram,
   getStudentbyProgramAndUni,
   getStudentbyUni,
@@ -102,6 +103,7 @@ apiProtected.get(
 
 // get all students
 apiProtected.get("/getallStudents", getAllStudent);
+apiProtected.get("/getstudent", getStudent);
 apiProtected.get("/studentsbyyear", getStudentbyYear);
 apiProtected.get("/studentsbyuni", getStudentbyUni);
 apiProtected.get("/studentsbyprogram", getStudentbyProgram);

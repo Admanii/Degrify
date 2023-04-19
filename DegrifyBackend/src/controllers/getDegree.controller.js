@@ -29,6 +29,7 @@ export const getAllDegrees = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 
@@ -120,6 +121,7 @@ export const getStudentVerifiedDegrees = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 
@@ -190,6 +192,7 @@ export const getOrganisationVerifiedDegrees = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 
@@ -263,6 +266,7 @@ export const getHECVerifiedDegrees = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 
@@ -330,6 +334,7 @@ export const getCompleteVerifiedDegrees = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 
@@ -402,6 +407,7 @@ export const getUniversityAllDegree = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 
@@ -471,6 +477,7 @@ export const getVerifiedUniversityDegree = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 
@@ -538,6 +545,7 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 
@@ -605,6 +613,7 @@ export const getHECAllDegree = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 
@@ -675,6 +684,7 @@ export const getVerifiedHECDegree = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 
@@ -743,6 +753,7 @@ export const getUnvserifiedHECDegree = async (req, res) => {
           "DateOfompletion",
           "Program",
           "GraduatingYear",
+          "organisationID",
         ])
         .exec();
 

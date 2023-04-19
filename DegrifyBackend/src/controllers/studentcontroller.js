@@ -164,6 +164,7 @@ export const getAllStudent = async (req, res) => {
       "DateOfompletion",
       "Program",
       "GraduatingYear",
+      "organisationID",
     ]);
     return res.json(
       jsonGenerate(statusCode.SUCCESS, "All Students", allStudents)
@@ -192,6 +193,7 @@ export const getStudent = async (req, res) => {
         "DateOfompletion",
         "Program",
         "GraduatingYear",
+        "organisationID",
       ])
       .exec();
 

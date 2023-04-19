@@ -50,6 +50,9 @@ export const Login = async (req, res) => {
         "CNIC",
         "DateOfAdmission",
         "DateOfompletion",
+        "Program",
+        "GraduatingYear",
+        "organisationID",
       ])
       .exec();
 
@@ -111,6 +114,7 @@ export const registerStudent = async (req, res) => {
     email,
     password,
     userRole,
+    organisationID,
   } = req.body;
 
   const studentExist = await Student.findOne({
@@ -141,6 +145,7 @@ export const registerStudent = async (req, res) => {
       DateOfompletion: DateOfompletion,
       Program: Program,
       GraduatingYear: GraduatingYear,
+      organisationID: organisationID,
     });
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
