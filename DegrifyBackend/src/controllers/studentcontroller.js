@@ -237,9 +237,6 @@ export const getStudentbyYear = async (req, res) => {
   }
 };
 
-//Number of student per uni
-// Number of student per degree course
-
 export const getStudentbyUni = async (req, res) => {
   try {
     const pipeline = [
@@ -268,6 +265,36 @@ export const getStudentbyUni = async (req, res) => {
 export const getStudentbyProgram = async (req, res) => {
   try {
     const pipeline = [
+      {
+        $group: {
+          _id: "$Program",
+          count: { $sum: 1 },
+        },
+      },
+    ];
+    Student.aggregate(pipeline, function (err, results) {
+      if (err) {
+        return res.status(500).json({ error: err });
+      }
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "Students by Year", results)
+      );
+    });
+  } catch (err) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed to disply", err)
+    );
+  }
+};
+
+export const getStudentbyProgramAndUni = async (req, res) => {
+  try {
+    const pipeline = [
+      {
+        $match: {
+          organisationID: req.query.organisation_id,
+        },
+      },
       {
         $group: {
           _id: "$Program",

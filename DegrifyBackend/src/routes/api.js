@@ -37,6 +37,7 @@ import {
   deleteStudent,
   getAllStudent,
   getStudentbyProgram,
+  getStudentbyProgramAndUni,
   getStudentbyUni,
   getStudentbyYear,
 } from "../controllers/studentcontroller.js";
@@ -104,3 +105,4 @@ apiProtected.get("/getallStudents", getAllStudent);
 apiProtected.get("/studentsbyyear", getStudentbyYear);
 apiProtected.get("/studentsbyuni", getStudentbyUni);
 apiProtected.get("/studentsbyprogram", getStudentbyProgram);
+apiProtected.get("/studentsbyprogramanduni", getStudentbyProgramAndUni);
