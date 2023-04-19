@@ -63,6 +63,33 @@ export const getAllDegrees = async (req, res) => {
   }
 };
 
+export const getDegreeByID = async (req, res) => {
+  try {
+    const list = await Degree.findById(req.query.degree_id).select([
+      "_id",
+      "studentID",
+      "studentVerified",
+      "organisationVerified",
+      "HECVerified",
+      "completeVerified",
+      "dateCreated",
+    ]);
+
+    if (!list) {
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
+      );
+    }
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "Degree Information", list)
+    );
+  } catch (err) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed", err)
+    );
+  }
+};
+
 export const getStudentVerifiedDegrees = async (req, res) => {
   try {
     const list = await Degree.find({ studentVerified: true }).select([
@@ -260,11 +287,7 @@ export const getHECVerifiedDegrees = async (req, res) => {
     }
 
     return res.json(
-      jsonGenerate(
-        statusCode.SUCCESS,
-        "HEC Verified Degrees",
-        result
-      )
+      jsonGenerate(statusCode.SUCCESS, "HEC Verified Degrees", result)
     );
   } catch (err) {
     return res.json(
@@ -605,7 +628,9 @@ export const getHECAllDegree = async (req, res) => {
       result.push(particular);
     }
 
-    return res.json(jsonGenerate(statusCode.SUCCESS, "All Degrees HEC", result));
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "All Degrees HEC", result)
+    );
   } catch (error) {
     return res.json(
       jsonGenerate(
@@ -741,7 +766,9 @@ export const getUnvserifiedHECDegree = async (req, res) => {
       result.push(particular);
     }
 
-    return res.json(jsonGenerate(statusCode.SUCCESS, "HEC Unverified Degrees", result));
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "HEC Unverified Degrees", result)
+    );
   } catch (error) {
     return res.json(
       jsonGenerate(
