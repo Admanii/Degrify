@@ -7,10 +7,18 @@ const Chart01: React.FC = (): JSX.Element => {
   const chartRef = useRef<HTMLDivElement>(null);
   const degreesByYear = useSelector(DegreesByYear);
 
-  console.log(degreesByYear[0]?.count)
+  console.log(degreesByYear)
 
+  function searchYearCount(year: { toString: () => string; }) {
+    for (let i = 0; i < degreesByYear.length; i++) {
+      if (degreesByYear[i]._id === year.toString()) {
+        return degreesByYear[i].count;
+      }
+    }
+    return 0;
+  }
   
-
+  // console.log("Check 2023: "+searchYearCount(2024))
   // const byYear(){
     // degreesByYear
   // }
@@ -19,7 +27,7 @@ const Chart01: React.FC = (): JSX.Element => {
     series: [
       {
         name: "Students",
-        data: [23, 11, 22, 27, 13, 22, 0, 21, 44, 22, 30, 45],
+        data: [searchYearCount(2012), searchYearCount(2013), searchYearCount(2014), searchYearCount(2015), searchYearCount(2016), searchYearCount(2017), searchYearCount(2018), searchYearCount(2019), searchYearCount(2020), searchYearCount(2021), searchYearCount(2022), searchYearCount(2023)],
       },
       // {
       //   name: "Product Two",
