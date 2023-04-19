@@ -135,7 +135,7 @@ const degreeSlice = createSlice({
             })
             .addCase(GetCountDegreeByProgram.fulfilled, (state, { payload }) => {
                 state.loading = false
-                state.degreesByYear = payload
+                state.degreesByProgram = payload
                 state.success = true
             })
             .addCase(GetCountDegreeByProgram.rejected, (state, payload) => {

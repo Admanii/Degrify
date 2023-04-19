@@ -4,36 +4,12 @@ import AnalyticsSection from "./AnalyticsSection";
 import Chart02 from "./Chart02";
 import EditShortcut from "./EditShortcut";
 import HeadingWithSpan from "../../general/HeadingWithSpan";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../../store/store";
+import { useSelector } from "react-redux";
 import { UnverifiedDegreesComp } from "./UnverifiedDegreesComp";
-import { useEffect } from "react";
-import { GetAllDegreesbyUniId, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId } from "../../../store/actions/degreeActions";
-
 
 const HeyUni = () => {
 
   const { userInfo } = useSelector((state: any) => state.auth)
-
-  const dispatch = useDispatch<AppDispatch>();
-
-  const organisation_id = userInfo?.user?.organisationID ?? '';
-
-  useEffect(() => {
-    getDegrees();
-    getDegreeByYear();
-  }, [])
-
-  const getDegrees = async () => {
-    await dispatch(GetAllDegreesbyUniId({ organisation_id: organisation_id }))
-    await dispatch(GetVerifiedDegreesbyUniId({ organisation_id: organisation_id }))
-    await dispatch(GetUnverifiedDegreesbyUniId({ organisation_id: organisation_id }))
-  }
-
-  const getDegreeByYear = async () => {
-    await dispatch(GetCountDegreeByYears({}))
-  }
-
 
   return (
     <div>

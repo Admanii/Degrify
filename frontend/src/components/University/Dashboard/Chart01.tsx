@@ -9,7 +9,8 @@ const Chart01: React.FC = (): JSX.Element => {
   const degreesByProgram = useSelector(DegreesByProgram);
 
   // console.log(degreesByYear)
-  console.log("degreesByProgram: "+degreesByProgram)
+  console.log("degreesByProgram: "+ degreesByProgram)
+  //console.log("degreesByProgram: "+ degreesByProgram[0].count)
 
   function searchYearCount(year: { toString: () => string; }) {
     for (let i = 0; i < degreesByYear.length; i++) {
