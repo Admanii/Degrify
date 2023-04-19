@@ -11,6 +11,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import authSlice from "./slice/authSlice";
 import degreeSlice from "./slice/degreeSlice";
 import studentSlice from "./slice/studentSlice";
+import organisationSlice from "./slice/organisationSlice";
 
 const middleware = [
     ...getDefaultMiddleware({
@@ -46,6 +47,7 @@ const middleware = [
 export const allReducers = combineReducers({
     auth: authSlice,
     student: studentSlice,
+    organisation: organisationSlice,
     degree: degreeSlice,
 });
 const persistConfig = {

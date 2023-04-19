@@ -37,6 +37,12 @@ export const navItemsUni: NavItem[] = [
 
 export const navItemsHec: NavItem[] = [
   {
+    label: "All Universities",
+    href: "/hec/all/universities",
+    activeIcon: IMAGES.users_icon_active,
+    inactiveIcon: IMAGES.users_icon,
+  },
+  {
     label: "All Degrees",
     href: "/hec/all/degrees",
     activeIcon: IMAGES.bar_icon_active,
