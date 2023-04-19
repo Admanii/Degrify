@@ -18,4 +18,5 @@ export const IMAGES = {
   verified_icon_active: require("../assets/verified-active.svg").default,
   unverified_icon: require("../assets/unverified.svg").default,
   iba_logo: require("../assets/IBA-logo.png"),
+  man_avatar: require("../assets/man.png")
 };

@@ -3,7 +3,7 @@ import ApexCharts from "apexcharts";
 import { useSelector } from 'react-redux';
 import { DegreesByProgram } from '../../../store/slice/degreeSlice';
 
-console.log("DegreesByProgram" + DegreesByProgram)
+// console.log("DegreesByProgram" + DegreesByProgram)
 
 interface Props {
   id: string;
