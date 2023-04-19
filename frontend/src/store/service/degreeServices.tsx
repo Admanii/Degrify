@@ -6,7 +6,7 @@ var config = {}
 function getAccessToken(): Promise<string> {
     return new Promise((resolve) => {
         setTimeout(() => {
-            const accessToken = localStorage.getItem('accessToken');
+            const accessToken = localStorage.getItem('token');
             resolve(accessToken ?? '');
         }, 0);
     });

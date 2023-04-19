@@ -10,6 +10,7 @@ import axiosInstance from "./api";
 import { persistReducer, persistStore } from "redux-persist";
 import authSlice from "./slice/authSlice";
 import degreeSlice from "./slice/degreeSlice";
+import studentSlice from "./slice/studentSlice";
 
 const middleware = [
     ...getDefaultMiddleware({
@@ -44,6 +45,7 @@ const middleware = [
 
 export const allReducers = combineReducers({
     auth: authSlice,
+    student: studentSlice,
     degree: degreeSlice,
 });
 const persistConfig = {
@@ -53,7 +55,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, allReducers);
 
 const store = configureStore({
-    reducer: allReducers,
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
         thunk: {

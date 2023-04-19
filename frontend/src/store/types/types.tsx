@@ -6,6 +6,9 @@ export interface IStudentDetails {
     studentID: string;
     DateOfBirth: string;
     CNIC: string;
+    Program: string;
+    GraduatingYear: string;
+    organisationID: string;
     DateOfAdmission: string;
     DateOfompletion: string;
     active: boolean;

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../store/store';
 import { useEffect } from "react";
 import { GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId } from '../../store/actions/degreeActions';
+import { GetAllStudentsbyUniId } from '../../store/actions/studentActions';
 
 
 const MainPageUni = () => {
@@ -15,6 +16,7 @@ const MainPageUni = () => {
 
   useEffect(() => {
     getDegrees();
+    getStudents();
   }, [])
 
   const getDegrees = async () => {
@@ -23,6 +25,10 @@ const MainPageUni = () => {
     await dispatch(GetUnverifiedDegreesbyUniId({ organisation_id: organisation_id }))
     await dispatch(GetCountDegreeByYears({}))
     await dispatch(GetCountDegreeByProgram({}))
+  }
+
+  const getStudents = async () => {
+    await dispatch(GetAllStudentsbyUniId({ organisation_id: organisation_id }))
   }
 
   return (
