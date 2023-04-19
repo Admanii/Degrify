@@ -3,6 +3,7 @@ import Student from "../models/Student.js";
 import { statusCode } from "../utils/constant.js";
 import { jsonGenerate } from "../utils/helper.js";
 import User from "../models/User.js";
+import mongoose from "mongoose";
 
 export const AddStudent = async (req, res) => {
   const {
@@ -153,7 +154,10 @@ export const updateStudent = async (req, res) => {
 
 export const getAllStudent = async (req, res) => {
   try {
-    const allStudents = await Student.find({ active: true }).select([
+    const allStudents = await Student.find({
+      organisationID: req.query.organisation_id,
+      active: true,
+    }).select([
       "name",
       "enrollmentNumber",
       "fatherName",
@@ -294,7 +298,7 @@ export const getStudentbyProgramAndUni = async (req, res) => {
     const pipeline = [
       {
         $match: {
-          organisationID: req.query.organisation_id,
+          organisationID: mongoose.Types.ObjectId(req.query.organisation_id),
         },
       },
       {
@@ -308,11 +312,47 @@ export const getStudentbyProgramAndUni = async (req, res) => {
       if (err) {
         return res.status(500).json({ error: err });
       }
+
       return res.json(
         jsonGenerate(statusCode.SUCCESS, "Students by Year", results)
       );
     });
   } catch (err) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed to disply", err)
+    );
+  }
+};
+
+export const getStudentbyYearAndUni = async (req, res) => {
+  try {
+    // const field = req.query.field;
+    const pipeline = [
+      {
+        $match: {
+          organisationID: mongoose.Types.ObjectId(req.query.organisation_id),
+        },
+      },
+      {
+        $group: {
+          _id: "$GraduatingYear",
+          count: { $sum: 1 },
+        },
+      },
+    ];
+    console.log(req.query.organisation_id);
+    Student.aggregate(pipeline, function (err, results) {
+      if (err) {
+        return res.status(500).json({ error: err });
+      }
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "Students by Year", results)
+      );
+    });
+
+    // select count(StudentID), Year from Students group by Year
+  } catch (err) {
+    console.log(err);
     return res.json(
       jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed to disply", err)
     );

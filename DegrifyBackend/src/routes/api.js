@@ -41,6 +41,7 @@ import {
   getStudentbyProgramAndUni,
   getStudentbyUni,
   getStudentbyYear,
+  getStudentbyYearAndUni,
 } from "../controllers/studentcontroller.js";
 import {
   getOrganisationByID,
@@ -108,3 +109,4 @@ apiProtected.get("/studentsbyyear", getStudentbyYear);
 apiProtected.get("/studentsbyuni", getStudentbyUni);
 apiProtected.get("/studentsbyprogram", getStudentbyProgram);
 apiProtected.get("/studentsbyprogramanduni", getStudentbyProgramAndUni);
+apiProtected.get("/studentsbyyearanduni", getStudentbyYearAndUni);

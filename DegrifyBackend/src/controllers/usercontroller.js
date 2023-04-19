@@ -134,19 +134,6 @@ export const registerStudent = async (req, res) => {
   }
 
   try {
-    const student = await Student.create({
-      name: name,
-      enrollmentNumber: enrollmentNumber,
-      fatherName: fatherName,
-      studentID: studentID,
-      DateOfBirth: DateOfBirth,
-      CNIC: CNIC,
-      DateOfAdmission: DateOfAdmission,
-      DateOfompletion: DateOfompletion,
-      Program: Program,
-      GraduatingYear: GraduatingYear,
-      organisationID: organisationID,
-    });
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
@@ -162,6 +149,19 @@ export const registerStudent = async (req, res) => {
         jsonGenerate(statusCode.CLIENT_ERROR, "Users already Exists")
       );
     }
+    const student = await Student.create({
+      name: name,
+      enrollmentNumber: enrollmentNumber,
+      fatherName: fatherName,
+      studentID: studentID,
+      DateOfBirth: DateOfBirth,
+      CNIC: CNIC,
+      DateOfAdmission: DateOfAdmission,
+      DateOfompletion: DateOfompletion,
+      Program: Program,
+      GraduatingYear: GraduatingYear,
+      organisationID: organisationID,
+    });
     const result = await User.create({
       name: name,
       email: email,
