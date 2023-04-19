@@ -4,6 +4,7 @@ import HeadingWithSpan from '../../components/general/HeadingWithSpan'
 import { AppDispatch } from '../../store/store'
 import { useEffect } from 'react'
 import { GetAllDegreesHec, GetUnverifiedDegreesHec, GetVerifiedDegreesHec } from '../../store/actions/degreeActions'
+import { GetAllUniversities } from '../../store/actions/organisationActions'
 
 
 const MainPageHec = () => {
@@ -13,6 +14,7 @@ const MainPageHec = () => {
 
   useEffect(() => {
     getDegrees();
+    getUniversities();
   }, [])
 
   const getDegrees = async () => {
@@ -21,6 +23,9 @@ const MainPageHec = () => {
     await dispatch(GetUnverifiedDegreesHec({}))
   }
 
+  const getUniversities = async () => {
+    await dispatch(GetAllUniversities({}))
+  }
 
   return (
     <Layout>

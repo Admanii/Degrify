@@ -25,7 +25,6 @@ const studentSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        // login user
         builder
             .addCase(GetAllStudentsbyUniId.pending, (state) => {
                 state.loading = true
