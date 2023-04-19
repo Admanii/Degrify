@@ -36,6 +36,8 @@ import {
   AddStudent,
   deleteStudent,
   getAllStudent,
+  getStudentbyProgram,
+  getStudentbyUni,
   getStudentbyYear,
 } from "../controllers/studentcontroller.js";
 import {
@@ -50,7 +52,6 @@ export const apiProtected = express.Router();
 apiRoute.post("/signupstudent", registerStudent);
 apiRoute.post("/signuporganisation", registerOrganisation);
 apiRoute.post("/login", Login);
-apiProtected.get("/studentsbyyear", getStudentbyYear);
 
 apiProtected.post("/addstudent", AddStudent);
 apiProtected.post("/deletestudent", deleteStudent);
@@ -100,3 +101,6 @@ apiProtected.get(
 
 // get all students
 apiProtected.get("/getallStudents", getAllStudent);
+apiProtected.get("/studentsbyyear", getStudentbyYear);
+apiProtected.get("/studentsbyuni", getStudentbyUni);
+apiProtected.get("/studentsbyprogram", getStudentbyProgram);
