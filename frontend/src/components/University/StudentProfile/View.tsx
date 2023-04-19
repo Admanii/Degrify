@@ -19,6 +19,8 @@ const dateOfAdmission = '02/02/23'
 const dateOfCompletion = '02/02/2023'
 const cnic = '42000-000000-2'
 const email = 'ahmed@iba.pk'
+
+
 function getCaseClass(programDeg: string) {
   switch (programDeg) {
     case 'BSCS':
@@ -30,8 +32,11 @@ function getCaseClass(programDeg: string) {
   }
 }
 
+interface Props{
+  headingText: string,
+}
 
-function View() {
+function View({headingText}:Props) {
   const navigate = useNavigate()
 
   return (
@@ -83,7 +88,7 @@ function View() {
     //   </div>
     // </div>
     <div>
-      <HeadingWithSpan Text="STUDENT PROFILE" SpanText={name} />
+      <HeadingWithSpan Text={headingText} marginTop={'3'} />
 
 
 
@@ -93,8 +98,10 @@ function View() {
           {/* FIRST BOX TOP LEFT */}
           <div className="p-4">
             <div className="h-80 bg-white shadow-md p-4 flex flex-col items-center justify-center">
-              <div className="w-40 h-40 rounded-full bg-gray-500"></div>
-              <DetailsHeading text={name} />
+              <div className="w-40 h-40 rounded-full bg-gray-500">
+                <img src={IMAGES.man_avatar}></img>
+              </div>
+              <DetailsHeading text={name} size='2xl' />
               <DetailsHeading spanText={`${getCaseClass(programDeg)}`} />
             </div>
           </div>
@@ -136,12 +143,13 @@ function View() {
               <UnderlineRow text={"Graduating Year: "} spanText={`${graduatingYear}`} showBorder={true} />
               <UnderlineRow text={"Date of Admission:"} spanText={`${dateOfAdmission}`} showBorder={true} />
               <UnderlineRow text={"Date of Completion:"} spanText={`${dateOfCompletion}`} showBorder={false} />
-              <div className="my-6 flex flex-row justify-around items-center">
-              <Button inverted={true} buttonText={'Edit Profile'}></Button>
-              <Button onClick={() => navigate("/view/degreecertificate")} buttonText={'Add Degree'}></Button>
+              <div className='h-5'></div>
+              <div className="flex flex-row justify-between items-start w-2/3 pr-5">
+                <Button inverted={true} buttonText={'Edit Profile'} />
+                <Button onClick={() => navigate("/view/degreecertificate")} buttonText={'Add Degree'} />
+              </div>
             </div>
-            </div>
-            
+
           </div>
 
 

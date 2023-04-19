@@ -23,7 +23,7 @@ function getCaseClass(programDeg: string) {
 function StudentProfileView() {
     return (
         <Layout>
-        <View/>
+        <View headingText={'STUDENT PROFILE'}/>
     
       </Layout>
     )

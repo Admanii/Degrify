@@ -7,7 +7,7 @@ function ApproveDegree() {
   return (
     <Layout>
       <div>
-      <View/>
+      <View headingText={'APPROVE DEGREE'}/>
       <div className=' items-end'>
       <Button buttonText="Approve" width={200} />
       <Button className='bg-white text-black' buttonText="Cancel" width={200} />

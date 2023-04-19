@@ -24,7 +24,7 @@ const MainPageHec = () => {
 
   return (
     <Layout>
-      <HeadingWithSpan Text={userInfo?.user?.name} SpanText={"Here's what is happening today"} />
+      <HeadingWithSpan Text={userInfo?.user?.name} SpanText={"Here's what is happening today"} marginTop={'6'} />
     </Layout>
   )
 }
