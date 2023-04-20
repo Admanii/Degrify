@@ -1,4 +1,5 @@
 import api from "../api";
+import { IRegisterStudent } from "../types/types";
 
 var accessToken = '';
 var config = {}
@@ -24,6 +25,11 @@ async function getConfig() {
         // },
     }
 }
+
+export const registerStudent = (payload: IRegisterStudent) => {
+    console.log("register student:", payload);
+    return api.post("/signupstudent", payload);
+};
 
 export const getAllStudentsbyUniId = async (organisation_id: string) => {
     await getConfig();
