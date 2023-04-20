@@ -52,12 +52,13 @@ export const apiRoute = express.Router();
 export const apiProtected = express.Router();
 
 // Register and SignUp
-apiRoute.post("/signupstudent", registerStudent);
-apiRoute.post("/signuporganisation", registerOrganisation);
-apiRoute.post("/login", Login);
+apiRoute.post("/signupstudent", registerStudent);  // done
+apiRoute.post("/signuporganisation", registerOrganisation); // done
+apiRoute.post("/login", Login); // done
 
-apiProtected.post("/addstudent", AddStudent);
-apiProtected.post("/deletestudent", deleteStudent);
+//apiProtected.post("/addstudent", AddStudent);
+//apiProtected.post("/deletestudent", deleteStudent);
+
 apiProtected.post("/addrecruiter", AddRecruiter);
 apiProtected.post("/deleterecruiter", deleteRecruiter);
 apiProtected.post("/addcourse", AddCourse);
@@ -68,45 +69,44 @@ apiProtected.post("/adddegree", AddDegree);
 apiProtected.post("/hecapproveddegree", HECAppovedDegree);
 apiProtected.post("/studentapproveddegree", StudentAppovedDegree);
 apiProtected.post("/organisationapproveddegree", OrganisationAppovedDegree);
-apiProtected.post("/completeapproveddegree", CompleteAppovedDegree);
+
+apiProtected.post("/completeapproveddegree", CompleteAppovedDegree);  // ?? 
+apiProtected.get("/getcompleteverifieddegree", getCompleteVerifiedDegrees); // ??
 
 // get degrees
-apiProtected.get("/getalldegree", getAllDegrees);
-apiProtected.get("/getdegreebyid", getDegreeByID);
-apiProtected.get("/getstudentverifieddegree", getStudentVerifiedDegrees);
-apiProtected.get(
-  "/getorganisationverifieddegree",
-  getOrganisationVerifiedDegrees
-);
+// apiProtected.get("/getalldegree", getAllDegrees);
+// apiProtected.get("/getorganisationverifieddegree", getOrganisationVerifiedDegrees);
 
-apiProtected.get("/getcompleteverifieddegree", getCompleteVerifiedDegrees);
 
 // get organisation and university
-apiProtected.get("/getorganisationbyid", getOrganisationByID);
-apiProtected.get("/getuniversities", getUniversities);
+apiProtected.get("/getuniversities", getUniversities); // done
 
 // all degrees by HEC
-apiProtected.get("/getalldegreeshec", getHECAllDegree);
+apiProtected.get("/getalldegreeshec", getHECAllDegree); // done
 // verified Degree by HEC
-apiProtected.get("/getverifieddegreeshec", getHECVerifiedDegrees);
+apiProtected.get("/getverifieddegreeshec", getHECVerifiedDegrees); // done
 // Unverified Degree by HEC
-apiProtected.get("/getunverifieddegreeshec", getUnvserifiedHECDegree);
+apiProtected.get("/getunverifieddegreeshec", getUnvserifiedHECDegree); // done
 
 // all degrees by UniID
-apiProtected.get("/getalldegreesuniversity", getUniversityAllDegree);
+apiProtected.get("/getalldegreesuniversity", getUniversityAllDegree); // done
 // verified Degree by UniID
-apiProtected.get("/getverifieddegreesuniversity", getVerifiedUniversityDegree);
+apiProtected.get("/getverifieddegreesuniversity", getVerifiedUniversityDegree); // done
 // Unverified Degree by UniID
-apiProtected.get(
-  "/getunverifieddegreesuniversity",
-  getUnverifiedUniversityDegree
-);
+apiProtected.get("/getunverifieddegreesuniversity", getUnverifiedUniversityDegree); // done
 
 // get all students
-apiProtected.get("/getallStudents", getAllStudent);
-apiProtected.get("/getstudent", getStudent);
+apiProtected.get("/getallStudents", getAllStudent); // done
 apiProtected.get("/studentsbyyear", getStudentbyYear);
 apiProtected.get("/studentsbyuni", getStudentbyUni);
 apiProtected.get("/studentsbyprogram", getStudentbyProgram);
 apiProtected.get("/studentsbyprogramanduni", getStudentbyProgramAndUni);
 apiProtected.get("/studentsbyyearanduni", getStudentbyYearAndUni);
+
+// get details by ID 
+apiProtected.get("/getstudentbyid", getStudent);
+apiProtected.get("/getdegreebyid", getDegreeByID);
+apiProtected.get("/getorganisationbyid", getOrganisationByID);
+
+// will do this if required
+apiProtected.get("/getstudentverifieddegrees", getStudentVerifiedDegrees);

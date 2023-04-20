@@ -18,7 +18,7 @@ const MainPageHec = () => {
   useEffect(() => {
     getDegrees();
     getUniversities();
-    //registerOrganisation(organisation);
+    registerOrganisation(organisation);
   }, [])
 
   const getDegrees = async () => {
