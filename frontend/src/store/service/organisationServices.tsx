@@ -1,4 +1,5 @@
 import api from "../api";
+import { IRegisterOrganisation } from "../types/types";
 
 var accessToken = '';
 var config = {}
@@ -19,11 +20,18 @@ async function getConfig() {
         headers: {
             'Authorization': `Bearer ${accessToken}`,
         }
-        // headers: {
-        //     'Content-Type': 'application/json',
-        // },
     }
 }
+
+export const registerOrganisation = (payload: IRegisterOrganisation) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    console.log("register organisation:", payload);
+    return api.post("/signuporganisation", payload, config);
+};
 
 export const getAllUniversities = async () => {
     await getConfig();

@@ -27,8 +27,13 @@ async function getConfig() {
 }
 
 export const registerStudent = (payload: IRegisterStudent) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
     console.log("register student:", payload);
-    return api.post("/signupstudent", payload);
+    return api.post("/signupstudent", payload, config);
 };
 
 export const getAllStudentsbyUniId = async (organisation_id: string) => {
