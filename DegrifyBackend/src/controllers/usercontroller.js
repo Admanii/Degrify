@@ -195,7 +195,7 @@ export const registerOrganisation = async (req, res) => {
   });
 
   if (organisationExist) {
-    res.json(
+    return res.json(
       jsonGenerate(statusCode.CLIENT_ERROR, "Organisation Already exist")
     );
   }
