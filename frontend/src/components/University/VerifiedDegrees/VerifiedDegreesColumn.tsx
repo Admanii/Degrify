@@ -29,14 +29,14 @@ const VerifiedDegreesColumn = () => {
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.studentDetail.CNIC ?? "N/A",
+            cell: (row: IDegreeDetails) => row?.studentDetail?.CNIC ?? "N/A",
         },
         {
             name: "Program",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.studentDetail.enrollmentNumber ?? "N/A",
+            cell: (row: IDegreeDetails) => row?.studentDetail?.enrollmentNumber ?? "N/A",
         },
         {
             name: "Date of Issue",
@@ -50,7 +50,7 @@ const VerifiedDegreesColumn = () => {
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IDegreeDetails) => row?.studentDetail.DateOfompletion ?? "N/A",
+            cell: (row: IDegreeDetails) => row?.studentDetail?.DateOfompletion ?? "N/A",
         },
         {
             name: "Status",

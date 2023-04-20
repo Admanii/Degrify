@@ -1,3 +1,9 @@
+export interface IResponse {
+    statusCode: string;
+    message: string;
+    data: any;
+}
+
 export interface IStudentDetails {
     _id: string;
     name: string;
@@ -75,4 +81,34 @@ export interface IDegreeCountByYear {
 export interface IDegreeCountByProgram {
     _id: string,
     count: number
+}
+
+export interface IRegisterStudent {
+    //_id?: string;
+    name: string;
+    enrollmentNumber: string;
+    fatherName: string;
+    studentID: string;
+    DateOfBirth: string;
+    CNIC: string;
+    Program: string;
+    GraduatingYear: string;
+    organisationID: string;
+    DateOfAdmission: string;
+    DateOfompletion: string;
+    email: string;
+    password: string;
+    userRole: string;
+    //active?: boolean;
+}
+
+export interface IRegisterOrganisation {
+    //_id?: string;
+    name: string;
+    phoneNumber: string;
+    address: string;
+    email: string;
+    password: string;
+    userRole: string;
+    //active?: boolean;
 }
