@@ -8,21 +8,28 @@ const AllStudentsColumn = () => {
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IStudentDetails) => row?.studentID ?? "N/A",
+            selector: (row: IStudentDetails) => row?.studentID ?? "N/A",
         },
         {
             name: "Name",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IStudentDetails) => row?.name ?? "N/A",
+            selector: (row: IStudentDetails) => row?.name ?? "N/A",
+        },
+        {
+            name: "Email",
+            wrap: true,
+            minWidth: "50px",
+            sortable: true,
+            selector: (row: IStudentDetails) => row?.email ?? "N/A",
         },
         {
             name: "Date of Birth",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IStudentDetails) => row?.DateOfBirth ? new Date(row?.DateOfBirth).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
+            selector: (row: IStudentDetails) => row?.DateOfBirth ? new Date(row?.DateOfBirth).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
                 : "N/A",
         },
         {
@@ -30,28 +37,28 @@ const AllStudentsColumn = () => {
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IStudentDetails) => row?.fatherName ?? "N/A",
+            selector: (row: IStudentDetails) => row?.fatherName ?? "N/A",
         },
         {
             name: "CNIC",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IStudentDetails) => row?.CNIC ?? "N/A",
+            selector: (row: IStudentDetails) => row?.CNIC ?? "N/A",
         },
         {
             name: "Program",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IStudentDetails) => row?.Program ?? "N/A",
+            selector: (row: IStudentDetails) => row?.Program ?? "N/A",
         },
         {
             name: "Date of Admission",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IStudentDetails) => row?.DateOfAdmission ? new Date(row?.DateOfAdmission).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
+            selector: (row: IStudentDetails) => row?.DateOfAdmission ? new Date(row?.DateOfAdmission).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
                 : "N/A",
         },
         {
@@ -59,7 +66,7 @@ const AllStudentsColumn = () => {
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IStudentDetails) => row?.DateOfompletion ? new Date(row?.DateOfompletion).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
+            selector: (row: IStudentDetails) => row?.DateOfompletion ? new Date(row?.DateOfompletion).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
                 : "N/A",
         },
         {
@@ -67,7 +74,7 @@ const AllStudentsColumn = () => {
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            cell: (row: IStudentDetails) => row?.GraduatingYear ?? "N/A",
+            selector: (row: IStudentDetails) => row?.GraduatingYear ?? "N/A",
         },
         // {
         //     name: "Status",
