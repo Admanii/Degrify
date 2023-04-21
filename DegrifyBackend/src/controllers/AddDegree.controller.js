@@ -9,9 +9,6 @@ export const AddDegree = async (req, res) => {
       {
         studentID: req.query.student_id,
       },
-      {
-        organisationID: req.query.organisation_id,
-      },
     ],
   });
 

@@ -154,6 +154,8 @@ export const updateStudent = async (req, res) => {
 
 export const getAllStudent = async (req, res) => {
   try {
+    var appendedList = {};
+    var array = new Array();
     const allStudents = await Student.find({
       organisationID: req.query.organisation_id,
       active: true,
@@ -170,9 +172,28 @@ export const getAllStudent = async (req, res) => {
       "GraduatingYear",
       "organisationID",
     ]);
-    return res.json(
-      jsonGenerate(statusCode.SUCCESS, "All Students", allStudents)
-    );
+    for (var i = 0; i < allStudents.length; i++) {
+      var org = await Student.findById(allStudents[i]._id)
+        .select("")
+        .populate(["organisationID"])
+        .exec();
+      var user = await User.findOne({
+        studentID: allStudents[i]._id,
+      })
+        .select("email")
+        .exec();
+
+      let orgName = org?.organisationID?.name ?? "";
+      let email = user?.email ?? "";
+      appendedList = {
+        ...allStudents[i]._doc,
+        orgName,
+        email,
+      };
+      array.push(appendedList);
+    }
+
+    return res.json(jsonGenerate(statusCode.SUCCESS, "All Students", array));
   } catch (err) {
     return res.json(
       jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Some Error is found", err)
@@ -184,12 +205,10 @@ export const getStudent = async (req, res) => {
   try {
     var org = await Student.findById(req.query.student_id)
       .select("")
-      .populate([
-        "organisationID",
-      ])
+      .populate(["organisationID"])
       .exec();
     var user = await User.findOne({
-      studentID: req.query.student_id
+      studentID: req.query.student_id,
     })
       .select("email")
       .exec();
@@ -208,15 +227,15 @@ export const getStudent = async (req, res) => {
       "organisationID",
     ]);
 
-    let orgName = org?.organisationID?.name ?? '';
-    let email = user?.email ?? '';
+    let orgName = org?.organisationID?.name ?? "";
+    let email = user?.email ?? "";
     console.log(orgName + "here");
     const appendedList = {
       ...list._doc,
       orgName,
-      email
+      email,
     };
-    console.log(appendedList)
+    console.log(appendedList);
     return res.json(
       jsonGenerate(statusCode.SUCCESS, "Profile of the Student", appendedList)
     );

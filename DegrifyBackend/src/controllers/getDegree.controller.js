@@ -3,6 +3,7 @@ import Degree from "../models/Degree.js";
 import { statusCode } from "../utils/constant.js";
 import { jsonGenerate } from "../utils/helper.js";
 import Student from "../models/Student.js";
+import User from "../models/User.js";
 
 export const getAllDegrees = async (req, res) => {
   try {
@@ -66,7 +67,7 @@ export const getAllDegrees = async (req, res) => {
 
 export const getDegreeByID = async (req, res) => {
   try {
-    const list = await Degree.findById(req.query.degree_id).select([
+    const degree = await Degree.findById(req.query.degree_id).select([
       "_id",
       "studentID",
       "studentVerified",
@@ -76,13 +77,50 @@ export const getDegreeByID = async (req, res) => {
       "dateCreated",
     ]);
 
-    if (!list) {
+    var StudentDetails1 = await Student.findById(degree.studentID).select([
+      "name",
+      "enrollmentNumber",
+      "fatherName",
+      "studentID",
+      "DateOfBirth",
+      "CNIC",
+      "DateOfAdmission",
+      "DateOfompletion",
+      "Program",
+      "GraduatingYear",
+      "organisationID",
+    ]);
+    console.log(StudentDetails1._id);
+    var org = await Student.findById(StudentDetails1._id)
+      .select("")
+      .populate(["organisationID"])
+      .exec();
+    console.log(org);
+    var user = await User.findOne({
+      studentID: StudentDetails1._id,
+    })
+      .select("email")
+      .exec();
+
+    let orgName = org?.organisationID?.name ?? "";
+    let email = user?.email ?? "";
+    console.log(orgName + " " + email);
+    if (!degree) {
       return res.json(
         jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
       );
     }
+    var studentDetails = {
+      ...StudentDetails1._doc,
+      orgName,
+      email,
+    };
+    const appendlist = {
+      degree,
+      studentDetails,
+    };
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Degree Information", list)
+      jsonGenerate(statusCode.SUCCESS, "Degree Information", appendlist)
     );
   } catch (err) {
     return res.json(
