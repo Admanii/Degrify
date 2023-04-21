@@ -654,7 +654,36 @@ export const getHECAllDegree = async (req, res) => {
           "organisationID",
         ])
         .exec();
+      var list1 = await Student.findById(studentDetail._id).select([
+        "name",
+        "enrollmentNumber",
+        "fatherName",
+        "studentID",
+        "DateOfBirth",
+        "CNIC",
+        "DateOfAdmission",
+        "DateOfompletion",
+        "Program",
+        "GraduatingYear",
+        "organisationID",
+      ]);
+      var org = await Student.findById(studentDetail._id)
+        .select("")
+        .populate(["organisationID"])
+        .exec();
+      var user = await User.findOne({
+        studentID: studentDetail._id,
+      })
+        .select("email")
+        .exec();
 
+      let orgName = org?.organisationID?.name ?? "";
+      let email = user?.email ?? "";
+      const studentDetails = {
+        ...list1._doc,
+        orgName,
+        email,
+      };
       const degree1 = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
@@ -668,7 +697,7 @@ export const getHECAllDegree = async (req, res) => {
       // console.log(student);
 
       const particular = {
-        studentDetail,
+        studentDetails,
         degree,
       };
       // console.log(particular);
@@ -725,7 +754,36 @@ export const getVerifiedHECDegree = async (req, res) => {
           "organisationID",
         ])
         .exec();
+      var list1 = await Student.findById(studentDetail._id).select([
+        "name",
+        "enrollmentNumber",
+        "fatherName",
+        "studentID",
+        "DateOfBirth",
+        "CNIC",
+        "DateOfAdmission",
+        "DateOfompletion",
+        "Program",
+        "GraduatingYear",
+        "organisationID",
+      ]);
+      var org = await Student.findById(studentDetail._id)
+        .select("")
+        .populate(["organisationID"])
+        .exec();
+      var user = await User.findOne({
+        studentID: studentDetail._id,
+      })
+        .select("email")
+        .exec();
 
+      let orgName = org?.organisationID?.name ?? "";
+      let email = user?.email ?? "";
+      const studentDetails = {
+        ...list1._doc,
+        orgName,
+        email,
+      };
       const degree1 = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
@@ -739,7 +797,7 @@ export const getVerifiedHECDegree = async (req, res) => {
       // console.log(student);
 
       const particular = {
-        studentDetail,
+        studentDetails,
         degree,
       };
       // console.log(particular);
@@ -794,7 +852,36 @@ export const getUnvserifiedHECDegree = async (req, res) => {
           "organisationID",
         ])
         .exec();
+      var list1 = await Student.findById(studentDetail._id).select([
+        "name",
+        "enrollmentNumber",
+        "fatherName",
+        "studentID",
+        "DateOfBirth",
+        "CNIC",
+        "DateOfAdmission",
+        "DateOfompletion",
+        "Program",
+        "GraduatingYear",
+        "organisationID",
+      ]);
+      var org = await Student.findById(studentDetail._id)
+        .select("")
+        .populate(["organisationID"])
+        .exec();
+      var user = await User.findOne({
+        studentID: studentDetail._id,
+      })
+        .select("email")
+        .exec();
 
+      let orgName = org?.organisationID?.name ?? "";
+      let email = user?.email ?? "";
+      const studentDetails = {
+        ...list1._doc,
+        orgName,
+        email,
+      };
       const degree1 = await Degree.find({ studentID: student }).select([
         "_id",
         "studentID",
@@ -808,7 +895,7 @@ export const getUnvserifiedHECDegree = async (req, res) => {
       // console.log(student);
 
       const particular = {
-        studentDetail,
+        studentDetails,
         degree,
       };
       // console.log(particular);
