@@ -181,39 +181,15 @@ export const getAllStudent = async (req, res) => {
 };
 
 export const getStudent = async (req, res) => {
-  const username = req.body.userId;
-
   try {
-    let list = await Student.findById(req.query.student_id)
-      .select([
-        // "name",
-        // "enrollmentNumber",
-        // "fatherName",
-        // "studentID",
-        // "DateOfBirth",
-        // "CNIC",
-        // "DateOfAdmission",
-        // "DateOfompletion",
-        // "Program",
-        // "GraduatingYear",
-        // "organisationID",
-      ])
+    var org = await Student.findById(req.query.student_id)
+      .select("")
       .populate([
-        "name",
-        "enrollmentNumber",
-        "fatherName",
-        "studentID",
-        "DateOfBirth",
-        "CNIC",
-        "DateOfAdmission",
-        "DateOfompletion",
-        "Program",
-        "GraduatingYear",
         "organisationID",
       ])
       .exec();
 
-    let list1 = await Student.findById(req.query.student_id).select([
+    var list = await Student.findById(req.query.student_id).select([
       "name",
       "enrollmentNumber",
       "fatherName",
@@ -226,17 +202,16 @@ export const getStudent = async (req, res) => {
       "GraduatingYear",
       "organisationID",
     ]);
-    var array = new Array();
-    array.push(list1);
-    let name1 = list.organisationID.name;
-    console.log(name1);
-    array.push({
-      OrgName: name1,
-    });
-    list1.Orgname = name1;
-    list1["OrgName"] = name1;
+
+    let orgName = org?.organisationID?.name ?? '';
+    console.log(orgName + "here");
+    const appendedList = {
+      ...list._doc,
+      orgName,
+    };
+    console.log(appendedList)
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Profile of the Student", list1)
+      jsonGenerate(statusCode.SUCCESS, "Profile of the Student", appendedList)
     );
   } catch (error) {
     return res.json(
