@@ -184,8 +184,20 @@ export const getStudent = async (req, res) => {
   const username = req.body.userId;
 
   try {
-    const list = await Student.findById(req.query.student_id)
-      .select("")
+    let list = await Student.findById(req.query.student_id)
+      .select([
+        // "name",
+        // "enrollmentNumber",
+        // "fatherName",
+        // "studentID",
+        // "DateOfBirth",
+        // "CNIC",
+        // "DateOfAdmission",
+        // "DateOfompletion",
+        // "Program",
+        // "GraduatingYear",
+        // "organisationID",
+      ])
       .populate([
         "name",
         "enrollmentNumber",
@@ -201,8 +213,30 @@ export const getStudent = async (req, res) => {
       ])
       .exec();
 
+    let list1 = await Student.findById(req.query.student_id).select([
+      "name",
+      "enrollmentNumber",
+      "fatherName",
+      "studentID",
+      "DateOfBirth",
+      "CNIC",
+      "DateOfAdmission",
+      "DateOfompletion",
+      "Program",
+      "GraduatingYear",
+      "organisationID",
+    ]);
+    var array = new Array();
+    array.push(list1);
+    let name1 = list.organisationID.name;
+    console.log(name1);
+    array.push({
+      OrgName: name1,
+    });
+    list1.Orgname = name1;
+    list1["OrgName"] = name1;
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Profile of the Student", list)
+      jsonGenerate(statusCode.SUCCESS, "Profile of the Student", list1)
     );
   } catch (error) {
     return res.json(
