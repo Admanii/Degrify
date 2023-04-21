@@ -13,7 +13,16 @@ import {
   registerOrganisation,
   registerStudent,
 } from "../controllers/usercontroller.js";
-import { AddCourse, deleteCourse } from "../controllers/course.controller.js";
+import { 
+  AddCourse,
+  deleteCourse,
+  updateCourse,
+  getCourse,
+  getAllCourse,
+  getCoursebyProg,
+  getCoursebyProgAndUni,
+  getCoursebyUni
+  } from "../controllers/course.controller.js";
 
 import {
   getAllDegrees,
@@ -61,8 +70,15 @@ apiRoute.post("/login", Login); // done
 
 apiProtected.post("/addrecruiter", AddRecruiter);
 apiProtected.post("/deleterecruiter", deleteRecruiter);
+
 apiProtected.post("/addcourse", AddCourse);
 apiProtected.post("/deletecourse", deleteCourse);
+apiProtected.post("/updatecourse", updateCourse);
+apiProtected.get("/getcourse", getCourse);
+apiProtected.get("/getallcourse", getAllCourse);
+apiProtected.get("/getcoursebyuni", getCoursebyUni);
+apiProtected.get("/getcoursebyprog", getCoursebyProg);
+apiProtected.get("/getcoursebyproganduni", getCoursebyProgAndUni);
 
 // post approved degrees
 apiProtected.post("/adddegree", AddDegree);

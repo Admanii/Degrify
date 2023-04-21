@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const courseSchema = mongoose.Schema({
-  courseID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Course",
-  },
   courseNum: {
     type: String,
     default: false,
@@ -36,6 +32,11 @@ const courseSchema = mongoose.Schema({
   dateCreated: {
     type: Date,
     default: Date.now,
+  },
+  organisationID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Organisation",
+    required: true,
   },
 });
 
