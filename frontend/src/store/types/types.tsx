@@ -12,11 +12,13 @@ export interface IStudentDetails {
     studentID: string;
     DateOfBirth: string;
     CNIC: string;
+    DateOfAdmission: string;
+    DateOfompletion: string;
     Program: string;
     GraduatingYear: string;
     organisationID: string;
-    DateOfAdmission: string;
-    DateOfompletion: string;
+    orgName: string;
+    email: string;
     active: boolean;
 }
 
@@ -56,9 +58,10 @@ export interface IDegreeDetails {
         organisationVerified: boolean,
         HECVerified: boolean,
         completeVerified: boolean,
+
         dateCreated: string,
     }
-    studentDetail: IStudentDetails
+    studentDetails: IStudentDetails
 }
 
 export interface IDegreeDetailsTemp {

@@ -49,24 +49,24 @@ export const UnverifiedDegreesComp = () => {
                         <div className="text-gray-700">{degree?.degree?._id?.substring(1, 10)}</div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        <div className="text-gray-700">{degree?.studentDetail?.studentID}</div>
+                        <div className="text-gray-700">{degree?.studentDetails?.studentID}</div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        <div className="text-gray-700">{degree?.studentDetail?.name}</div>
+                        <div className="text-gray-700">{degree?.studentDetails?.name}</div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        <div className="text-gray-700">{degree?.studentDetail?.CNIC}</div>
+                        <div className="text-gray-700">{degree?.studentDetails?.CNIC}</div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        <div className="text-gray-700">{degree?.studentDetail?.enrollmentNumber}</div>
+                        <div className="text-gray-700">{degree?.studentDetails?.enrollmentNumber}</div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        <div className="text-gray-700">{degree?.studentDetail?.DateOfompletion ? new Date(degree?.studentDetail?.DateOfompletion).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
+                        <div className="text-gray-700">{degree?.studentDetails?.DateOfompletion ? new Date(degree?.studentDetails?.DateOfompletion).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
                           : "N/A"}
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        <div className="text-gray-700">{degree?.studentDetail?.DateOfompletion ? new Date(degree?.studentDetail?.DateOfompletion).toLocaleDateString('en-GB', { year: 'numeric' }).replaceAll('\/', '-')
+                        <div className="text-gray-700">{degree?.studentDetails?.DateOfompletion ? new Date(degree?.studentDetails?.DateOfompletion).toLocaleDateString('en-GB', { year: 'numeric' }).replaceAll('\/', '-')
                           : "N/A"}
                         </div>
                       </td>
