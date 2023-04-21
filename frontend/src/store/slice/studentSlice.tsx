@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
 import { IStudentDetails, IUserDetails } from '../types/types';
-import { GetAllStudentsbyUniId } from '../actions/studentActions';
+import { GetAllStudentsbyUniId, GetStudentbyId } from '../actions/studentActions';
 
 
 const initialState: IState = {
@@ -40,8 +40,23 @@ const studentSlice = createSlice({
                 state.error = payload.payload ?? ''
                 state.success = false
             })
+            .addCase(GetStudentbyId.pending, (state) => {
+                state.loading = true
+                state.error = {}
+            })
+            .addCase(GetStudentbyId.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.student = payload
+                state.success = true
+            })
+            .addCase(GetStudentbyId.rejected, (state, payload) => {
+                state.loading = false
+                state.error = payload.payload ?? ''
+                state.success = false
+            })
     },
 })
 
 export default studentSlice.reducer
 export const AllStudents = (state: RootState) => state.student.allStudents;
+export const Student = (state: RootState) => state.student.student;

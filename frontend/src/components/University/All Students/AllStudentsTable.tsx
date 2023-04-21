@@ -18,7 +18,7 @@ export const AllStudentsTable = ({ search }: Props) => {
     const dispatch = useDispatch();
 
     const handleRowClick = async (student: IStudentDetails) => {
-        const studentId = student?.studentID ?? '';
+        const studentId = student?._id ?? '';
         setIsLoading(true);
         navigate(`/view/studentprofile?studentId=${studentId}`);
         setIsLoading(false);

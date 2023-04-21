@@ -40,3 +40,8 @@ export const getAllStudentsbyUniId = async (organisation_id: string) => {
     await getConfig();
     return api.get(`/getallStudents?organisation_id=${organisation_id}`, config);
 };
+
+export const getStudentbyId = async (studentId: string) => {
+    await getConfig();
+    return api.get(`/getstudentbyid?student_id=${studentId}`, config);
+};

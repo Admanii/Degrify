@@ -8,6 +8,8 @@ import { Heading } from '../../general/Heading'
 import Button from '../../general/Button'
 import UnderlineRow from './UnderlineRow'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Student } from '../../../store/slice/studentSlice'
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
@@ -38,6 +40,9 @@ interface Props{
 
 function View({headingText}:Props) {
   const navigate = useNavigate()
+  const student = useSelector(Student);
+  //student called here, set in UI now
+  console.log(student);
 
   return (
     // <div>
@@ -101,8 +106,8 @@ function View({headingText}:Props) {
               <div className="w-40 h-40 rounded-full bg-gray-500">
                 <img src={IMAGES.man_avatar}></img>
               </div>
-              <DetailsHeading text={name} size='2xl' />
-              <DetailsHeading spanText={`${getCaseClass(programDeg)}`} />
+              <DetailsHeading text={student?.name} size='2xl' />
+              <DetailsHeading spanText={`${getCaseClass(student?.Program)}`} />
             </div>
           </div>
           {/* SECOND BOX BOTTOM LEFT */}
