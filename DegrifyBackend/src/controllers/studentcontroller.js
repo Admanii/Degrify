@@ -188,6 +188,11 @@ export const getStudent = async (req, res) => {
         "organisationID",
       ])
       .exec();
+    var user = await User.findOne({
+      studentID: req.query.student_id
+    })
+      .select("email")
+      .exec();
 
     var list = await Student.findById(req.query.student_id).select([
       "name",
@@ -204,10 +209,12 @@ export const getStudent = async (req, res) => {
     ]);
 
     let orgName = org?.organisationID?.name ?? '';
+    let email = user?.email ?? '';
     console.log(orgName + "here");
     const appendedList = {
       ...list._doc,
       orgName,
+      email
     };
     console.log(appendedList)
     return res.json(
