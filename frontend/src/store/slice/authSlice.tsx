@@ -66,3 +66,4 @@ export const { logout, setCredentials } = authSlice.actions
 
 export default authSlice.reducer
 export const IsLoggedIn = (state: RootState) => state.auth.success;
+export const UserInfo = (state: RootState) => state.auth.userInfo;

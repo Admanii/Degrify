@@ -6,12 +6,13 @@ import { useEffect } from "react";
 import { GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId } from '../../store/actions/degreeActions';
 import { GetAllStudentsbyUniId, RegisterStudent } from '../../store/actions/studentActions';
 import { IRegisterStudent } from '../../store/types/types';
+import { UserInfo } from '../../store/slice/authSlice';
 
 
 const MainPageUni = () => {
 
   const dispatch = useDispatch<AppDispatch>();
-  const { userInfo } = useSelector((state: any) => state.auth)
+  const userInfo = useSelector(UserInfo)
 
   const organisation_id = userInfo?.user?.organisationID ?? '';
 
@@ -24,21 +25,14 @@ const MainPageUni = () => {
 
   useEffect(() => {
     getDegrees();
-    getStudents();
-    registerStudent(student);
+    //registerStudent(student);
   }, [])
 
   const registerStudent = async (student: IRegisterStudent) => {
     await dispatch(RegisterStudent(student))
   }
 
-  const getStudents = async () => {
-    await dispatch(GetAllStudentsbyUniId({ organisation_id: organisation_id }))
-  }
-
   const getDegrees = async () => {
-    await dispatch(GetAllDegreesbyUniId({ organisation_id: organisation_id }))
-    await dispatch(GetVerifiedDegreesbyUniId({ organisation_id: organisation_id }))
     await dispatch(GetUnverifiedDegreesbyUniId({ organisation_id: organisation_id }))
     await dispatch(GetCountDegreeByYears({}))
     await dispatch(GetCountDegreeByProgram({}))
