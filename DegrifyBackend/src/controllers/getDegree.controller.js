@@ -361,8 +361,8 @@ export const getUniversityAllDegree = async (req, res) => {
     const array = Object.values(list);
 
     for (let i = 0; i < array.length; i++) {
-      const student = array[i].studentID;
-      const studentDetail = await Student.findById(student)
+      const studentId = array[i].studentID;
+      const studentDetail = await Student.findById(studentId)
         .select("")
         .populate([
           "name",
@@ -378,8 +378,37 @@ export const getUniversityAllDegree = async (req, res) => {
           "organisationID",
         ])
         .exec();
+      var list1 = await Student.findById(studentDetail._id).select([
+        "name",
+        "enrollmentNumber",
+        "fatherName",
+        "studentID",
+        "DateOfBirth",
+        "CNIC",
+        "DateOfAdmission",
+        "DateOfompletion",
+        "Program",
+        "GraduatingYear",
+        "organisationID",
+      ]);
+      var org = await Student.findById(studentDetail._id)
+        .select("")
+        .populate(["organisationID"])
+        .exec();
+      var user = await User.findOne({
+        studentID: studentDetail._id,
+      })
+        .select("email")
+        .exec();
 
-      const degree1 = await Degree.find({ studentID: student }).select([
+      let orgName = org?.organisationID?.name ?? "";
+      let email = user?.email ?? "";
+      const studentDetails = {
+        ...list1._doc,
+        orgName,
+        email,
+      };
+      const degree = await Degree.findOne({ studentID: studentId }).select([
         "_id",
         "studentID",
         "studentVerified",
@@ -388,18 +417,18 @@ export const getUniversityAllDegree = async (req, res) => {
         "completeVerified",
         "dateCreated",
       ]);
-      const degree = degree1[0];
-      // console.log(student);
 
       const particular = {
-        studentDetail,
+        studentDetails,
         degree,
       };
       // console.log(particular);
       result.push(particular);
     }
 
-    return res.json(jsonGenerate(statusCode.SUCCESS, "All Degrees", result));
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "All Degrees University", result)
+    );
   } catch (error) {
     return res.json(
       jsonGenerate(
@@ -431,8 +460,8 @@ export const getVerifiedUniversityDegree = async (req, res) => {
     const array = Object.values(list);
 
     for (let i = 0; i < array.length; i++) {
-      const student = array[i].studentID;
-      const studentDetail = await Student.findById(student)
+      const studentId = array[i].studentID;
+      const studentDetail = await Student.findById(studentId)
         .select("")
         .populate([
           "name",
@@ -448,8 +477,37 @@ export const getVerifiedUniversityDegree = async (req, res) => {
           "organisationID",
         ])
         .exec();
+      var list1 = await Student.findById(studentDetail._id).select([
+        "name",
+        "enrollmentNumber",
+        "fatherName",
+        "studentID",
+        "DateOfBirth",
+        "CNIC",
+        "DateOfAdmission",
+        "DateOfompletion",
+        "Program",
+        "GraduatingYear",
+        "organisationID",
+      ]);
+      var org = await Student.findById(studentDetail._id)
+        .select("")
+        .populate(["organisationID"])
+        .exec();
+      var user = await User.findOne({
+        studentID: studentDetail._id,
+      })
+        .select("email")
+        .exec();
 
-      const degree1 = await Degree.find({ studentID: student }).select([
+      let orgName = org?.organisationID?.name ?? "";
+      let email = user?.email ?? "";
+      const studentDetails = {
+        ...list1._doc,
+        orgName,
+        email,
+      };
+      const degree = await Degree.findOne({ studentID: studentId }).select([
         "_id",
         "studentID",
         "studentVerified",
@@ -458,18 +516,18 @@ export const getVerifiedUniversityDegree = async (req, res) => {
         "completeVerified",
         "dateCreated",
       ]);
-      const degree = degree1[0];
-      // console.log(student);
 
       const particular = {
-        studentDetail,
+        studentDetails,
         degree,
       };
       // console.log(particular);
       result.push(particular);
     }
 
-    return res.json(jsonGenerate(statusCode.SUCCESS, "All Degrees", result));
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "Verified Degrees University", result)
+    );
   } catch (error) {
     return res.json(
       jsonGenerate(
@@ -487,7 +545,7 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
       $and: [
         {
           organisationID: req.query.organisation_id,
-          organisationVerified: false,
+          completeVerified: false,
         },
         {
           active: true,
@@ -499,8 +557,8 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
     const array = Object.values(list);
 
     for (let i = 0; i < array.length; i++) {
-      const student = array[i].studentID;
-      const studentDetail = await Student.findById(student)
+      const studentId = array[i].studentID;
+      const studentDetail = await Student.findById(studentId)
         .select("")
         .populate([
           "name",
@@ -516,8 +574,37 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
           "organisationID",
         ])
         .exec();
+      var list1 = await Student.findById(studentDetail._id).select([
+        "name",
+        "enrollmentNumber",
+        "fatherName",
+        "studentID",
+        "DateOfBirth",
+        "CNIC",
+        "DateOfAdmission",
+        "DateOfompletion",
+        "Program",
+        "GraduatingYear",
+        "organisationID",
+      ]);
+      var org = await Student.findById(studentDetail._id)
+        .select("")
+        .populate(["organisationID"])
+        .exec();
+      var user = await User.findOne({
+        studentID: studentDetail._id,
+      })
+        .select("email")
+        .exec();
 
-      const degree1 = await Degree.find({ studentID: student }).select([
+      let orgName = org?.organisationID?.name ?? "";
+      let email = user?.email ?? "";
+      const studentDetails = {
+        ...list1._doc,
+        orgName,
+        email,
+      };
+      const degree = await Degree.findOne({ studentID: studentId }).select([
         "_id",
         "studentID",
         "studentVerified",
@@ -526,18 +613,18 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
         "completeVerified",
         "dateCreated",
       ]);
-      const degree = degree1[0];
-      // console.log(student);
 
       const particular = {
-        studentDetail,
+        studentDetails,
         degree,
       };
       // console.log(particular);
       result.push(particular);
     }
 
-    return res.json(jsonGenerate(statusCode.SUCCESS, "All Degrees", result));
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "Unverified Degrees University", result)
+    );
   } catch (error) {
     return res.json(
       jsonGenerate(
