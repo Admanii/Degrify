@@ -16,17 +16,15 @@ const MainPageHec = () => {
   const organisation: IRegisterOrganisation = { "name": "IBA", "phoneNumber": "034532455433", "address": "University Road", "email": "iba@gmail.com", "password": "iba123456", "userRole": "UNIVERSITY" }
 
   useEffect(() => {
-    getDegrees();
+    getUnverifiedDegrees();
     getUniversities();
     registerOrganisation(organisation);
   }, [])
 
-  const getDegrees = async () => {
-    await dispatch(GetAllDegreesHec({}))
-    await dispatch(GetVerifiedDegreesHec({}))
+  const getUnverifiedDegrees = async () => {
     await dispatch(GetUnverifiedDegreesHec({}))
   }
-
+  
   const getUniversities = async () => {
     await dispatch(GetAllUniversities({}))
   }
