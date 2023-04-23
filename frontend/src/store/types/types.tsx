@@ -32,14 +32,16 @@ export interface IOrganisationDetails {
 }
 
 export interface IUserDetails {
-    _id: string;
-    name: string;
-    email: string;
-    password: string;
-    userRole: string;
-    studentID?: string;
-    organisationID?: string;
-    date: string;
+    user: {
+        _id: string;
+        name: string;
+        email: string;
+        password: string;
+        userRole: string;
+        studentID?: string;
+        organisationID?: string;
+        date: string;
+    }
     studentDetails?: IStudentDetails;
     organistionDetails?: IOrganisationDetails;
 }

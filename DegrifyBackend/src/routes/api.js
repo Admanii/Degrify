@@ -120,7 +120,7 @@ apiProtected.get("/studentsbyprogramanduni", getStudentbyProgramAndUni);
 apiProtected.get("/studentsbyyearanduni", getStudentbyYearAndUni);
 
 // get details by ID 
-apiProtected.get("/getstudentbyid", getStudent);
+apiProtected.get("/getstudentbyid", getStudent); // done
 apiProtected.get("/getdegreebyid", getDegreeByID);
 apiProtected.get("/getorganisationbyid", getOrganisationByID);
 
