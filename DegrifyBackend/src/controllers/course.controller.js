@@ -11,12 +11,13 @@ export const AddCourse = async (req, res) => {
     creditHours,
     HECVerified,
     LinkToDegree,
+    organisationID
   } = req.body;
 
   const courseExist = await Course.findOne({
     $or: [
       {
-        courseID: req.query.course_id,
+        courseNum:courseNum ,
       },
     ],
   });
@@ -35,6 +36,7 @@ export const AddCourse = async (req, res) => {
     creditHours:creditHours,
     HECVerified:HECVerified,
     LinkToDegree:LinkToDegree,
+    organisationID:organisationID,
     });
 
     res.json(
@@ -56,6 +58,7 @@ export const deleteCourse = async (req, res) => {
     creditHours: req.body.creditHours,
     HECVerified: req.body.HECVerified,
     LinkToDegree: req.body.LinkToDegree,
+    organisationID: req.body.organisationID,
   };
 
   const isLinked = await Course.findById(req.userId).select("LinkToDegree");
@@ -104,6 +107,7 @@ export const updateCourse = async (req, res) => {
     creditHours: req.body.creditHours,
     HECVerified: req.body.HECVerified,
     LinkToDegree: req.body.LinkToDegree,
+    organisationID: req.body.organisationID,
     };
 
     const updated = await Course.findByIdAndUpdate(

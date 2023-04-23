@@ -36,7 +36,7 @@ const courseSchema = mongoose.Schema({
   organisationID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Organisation",
-    required: true,
+    require: true,
   },
 });
 
