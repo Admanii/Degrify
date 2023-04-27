@@ -9,6 +9,7 @@ import fileUpload from "express-fileupload";
 import cors from "cors";
 import { apiProtected, apiRoute } from "./src/routes/api.js";
 import AuthMiddleware from "./src/middleware/Authentication.js";
+import { ipfs } from "./src/middleware/HashCalculate.js";
 //import "dotenv".config();
 
 // connecting to mongodb
@@ -55,7 +56,7 @@ app.use("/api/", apiRoute);
 app.use("/api/", AuthMiddleware, apiProtected);
 
 const port = process.env.PORT || 8000;
-
+//ipfs("this is fyp");
 // starting the server
 app.listen(port, () => {
   console.log(`Application is running at ${port}`);
