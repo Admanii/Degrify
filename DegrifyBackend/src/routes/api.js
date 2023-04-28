@@ -121,8 +121,8 @@ apiProtected.get("/studentsbyyearanduni", getStudentbyYearAndUni);
 
 // get details by ID 
 apiProtected.get("/getstudentbyid", getStudent); // done
-apiProtected.get("/getdegreebyid", getDegreeByID);
-apiProtected.get("/getorganisationbyid", getOrganisationByID);
+apiProtected.get("/getdegreebyid", getDegreeByID); // done
+apiProtected.get("/getorganisationbyid", getOrganisationByID); // done
 
 // will do this if required
 apiProtected.get("/getstudentverifieddegrees", getStudentVerifiedDegrees);
