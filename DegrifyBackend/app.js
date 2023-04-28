@@ -10,22 +10,11 @@ import cors from "cors";
 import { apiProtected, apiRoute } from "./src/routes/api.js";
 import AuthMiddleware from "./src/middleware/Authentication.js";
 import { ipfs } from "./src/middleware/HashCalculate.js";
+import { uploadJSONToIPFS } from "./src/pinata.js";
 //import "dotenv".config();
 
 // connecting to mongodb
 mongoose.set("strictQuery", false);
-// mongoose
-//   .connect(process.env.mongoURL, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//   })
-//   .then(() => {
-//     console.log("Database Connected!!");
-//   })
-//   .catch(() => {
-//     console.log("Unable to connect to the database.");
-//   });
 mongoose.connect(
   "mongodb+srv://osama:osama123@degrify.2zpqfy2.mongodb.net/degrify?retryWrites=true&w=majority",
   { useNewUrlParser: true },
@@ -56,8 +45,11 @@ app.use("/api/", apiRoute);
 app.use("/api/", AuthMiddleware, apiProtected);
 
 const port = process.env.PORT || 8000;
-//ipfs("this is fyp");
+
 // starting the server
 app.listen(port, () => {
   console.log(`Application is running at ${port}`);
 });
+
+// const response = uploadJSONToIPFS({ name: "saad" });
+// console.log(response);

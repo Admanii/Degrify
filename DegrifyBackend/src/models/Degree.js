@@ -25,6 +25,9 @@ const degreeSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  ipfsLink: {
+    type: String,
+  },
   active: {
     type: Boolean,
     default: true,
