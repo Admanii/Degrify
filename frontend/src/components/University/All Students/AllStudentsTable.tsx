@@ -33,7 +33,6 @@ export const AllStudentsTable = ({ search }: Props) => {
         fetchVerifiedDegrees();
     }, [currentPage, search]);
 
-    //remove custom pagincation
     return (
         <DataTable
             noHeader

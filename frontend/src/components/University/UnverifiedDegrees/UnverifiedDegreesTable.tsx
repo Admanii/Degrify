@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { IDegreeDetailsTemp } from "../../../store/types/types";
+import { IDegreeDetails, IDegreeDetailsTemp } from "../../../store/types/types";
 import UnverifiedDegreesColumn from "./UnverifiedDegreesColumn";
 import { UnverifiedDegrees } from "../../../store/slice/degreeSlice";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     search: string;
@@ -12,6 +13,7 @@ interface Props {
 export const UnverifiedDegreesTable = ({ search }: Props) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
     const unverifiedDegrees = useSelector(UnverifiedDegrees);
     
     const fetchVerifiedDegrees = async () => {
@@ -19,11 +21,17 @@ export const UnverifiedDegreesTable = ({ search }: Props) => {
         setIsLoading(false);
     };
 
+    const handleRowClick = async (degree: IDegreeDetails) => {
+        const degreeId = degree?.degree?._id ?? '';
+        setIsLoading(true);
+        navigate(`/view/degreedetails?degreeId=${degreeId}`);
+        setIsLoading(false);
+    };
+
     useEffect(() => {
         fetchVerifiedDegrees();
     }, [currentPage, search]);
 
-    //remove custom pagincation
     return (
         <DataTable
             noHeader
@@ -33,6 +41,7 @@ export const UnverifiedDegreesTable = ({ search }: Props) => {
             //   progressComponent={<Loader text="Loading" />}
             highlightOnHover
             pointerOnHover
+            onRowClicked={handleRowClick}
             columns={UnverifiedDegreesColumn()}
             className="react-dataTable"
         />

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import UnverifiedDegreesColumn from "./UnverifiedDegreesColumn";
 import { useSelector } from "react-redux";
-import { AllDegrees, UnverifiedDegrees } from "../../../store/slice/degreeSlice";
+import { UnverifiedDegrees } from "../../../store/slice/degreeSlice";
 
 interface Props {
     search: string;
@@ -22,7 +22,6 @@ export const UnverifiedDegreesTable = ({ search }: Props) => {
         fetchVerifiedDegrees();
     }, [currentPage, search]);
 
-    //remove custom pagincation
     return (
         <DataTable
             noHeader

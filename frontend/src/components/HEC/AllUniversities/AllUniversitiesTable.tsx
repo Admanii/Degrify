@@ -22,7 +22,6 @@ export const AllUniversitiesTable = ({ search }: Props) => {
         fetchVerifiedDegrees();
     }, [currentPage, search]);
 
-    //remove custom pagincation
     return (
         <DataTable
             noHeader
