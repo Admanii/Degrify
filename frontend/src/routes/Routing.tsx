@@ -23,6 +23,7 @@ import DegreeStudent from "../pages/DegreeStudent";
 import ApproveDegree from "../pages/University/ApproveDegree";
 import AllStudentPage from "../pages/University/AllStudentPage";
 import AllUniversitiesPage from "../pages/HEC/AllUniversitiesPage";
+import OrganisationProfileView from "../pages/OrganisationProfileView";
 
 interface RouteType {
   path: string;
@@ -217,6 +218,12 @@ export const routeList: RouteType[] = [
     isPrivate: true,
     isStudent: true,
     component: <MainPageStudent />,
+  },
+  {
+    path: "/view/organisationprofile",
+    isPrivate: true,
+    isHec: true,
+    component: <OrganisationProfileView />,
   },
 ];
 
