@@ -3,9 +3,10 @@ import DegreeCertificate from '../components/University/DegreeViewPage/DegreeCer
 import Layout from '../components/general/Layout'
 import View from '../components/University/StudentProfile/View'
 import { AppDispatch } from '../store/store'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from "react";
 import { GetStudentbyId } from '../store/actions/studentActions'
+import { Student } from '../store/slice/studentSlice'
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
@@ -28,6 +29,7 @@ const StudentProfileView = () => {
     const dispatch = useDispatch<AppDispatch>();
     const query = new URLSearchParams(window.location.search);
     const studentId = query.get('studentId') ?? '';
+    const student = useSelector(Student);
 
     useEffect(() => {
         getStudent();
@@ -39,7 +41,7 @@ const StudentProfileView = () => {
 
     return (
         <Layout>
-            <View headingText={'STUDENT PROFILE'} />
+            <View student={student} headingText={'STUDENT PROFILE'} />
         </Layout>
     )
 }

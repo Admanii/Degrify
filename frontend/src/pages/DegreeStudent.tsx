@@ -1,8 +1,12 @@
-import React from 'react'
 import DetailsHeading from '../components/University/DegreeViewPage/DetailsHeading'
 import Layout from '../components/general/Layout'
 import View from '../components/University/StudentProfile/View'
 import HeadingWithSpan from '../components/general/HeadingWithSpan'
+import { useEffect } from 'react'
+import { GetDegreebyId } from '../store/actions/degreeActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch } from '../store/store'
+import { Degree } from '../store/slice/degreeSlice'
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
@@ -26,19 +30,33 @@ function getCaseClass(programDeg: string) {
 }
 
 function DegreeStudent() {
+
+  const dispatch = useDispatch<AppDispatch>();
+  const query = new URLSearchParams(window.location.search);
+  const degreeId = query.get('degreeId') ?? '';
+  const degree = useSelector(Degree);
+
+  useEffect(() => {
+    getDegreebyId();
+  }, [])
+
+  const getDegreebyId = async () => {
+    await dispatch(GetDegreebyId({ degreeId: degreeId }))
+  }
+
   return (
     <Layout>
       <div>
-        <View headingText={'STUDENT DETAILS'} />
+        <View student={degree?.studentDetails} headingText={'STUDENT DETAILS'} />
         <HeadingWithSpan marginTop='1' Text={'DEGREE DETAILS'} />
         <div className="flex">
 
           <div className="w-1/2 p-4">
             <div className="bg-white p-3 border-t-4 border-green-400 text-left">
               <div className="grid grid-cols-2 gap-4 my-6">
-                <DetailsHeading text={'Name:'} spanText={`${name}`} />
+                <DetailsHeading text={'Name:'} spanText={degree?.studentDetails?.name} />
                 <DetailsHeading text={'Serial Number:'} spanText={`${erp}`} />
-                <DetailsHeading text={'ERP ID:'} spanText={`${erp}`} />
+                <DetailsHeading text={'ERP ID:'} spanText={degree?.studentDetails?.studentID} />
                 <DetailsHeading text={'Program: '} spanText={`${getCaseClass(programDeg)}`} />
                 <DetailsHeading text={'Graduating Year: '} spanText={`${graduatingYear}`} />
                 <DetailsHeading text={'Father\'s Name:'} spanText={`${fatherName}`} />

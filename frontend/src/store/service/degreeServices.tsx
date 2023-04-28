@@ -74,3 +74,8 @@ export const getCountDegreeByProgram = async () => {
     await getConfig();
     return api.get("/studentsbyyear", config);
 }
+
+export const getDegreebyId = async (degree_id: string) => {
+    await getConfig();
+    return api.get(`/getdegreebyid?degree_id=${degree_id}`, config);
+};

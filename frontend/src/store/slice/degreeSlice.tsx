@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
-import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYears, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId } from '../actions/degreeActions';
+import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYears, GetDegreebyId, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId } from '../actions/degreeActions';
 import { IDegreeCountByProgram, IDegreeCountByYear, IDegreeDetails } from '../types/types';
 
 const initialState: IState = {
@@ -10,6 +10,7 @@ const initialState: IState = {
     unverifiedDegrees: [],
     degreesByYear: [],
     degreesByProgram: [],
+    degree: {} as IDegreeDetails,
     error: {},
     success: false,
 }
@@ -21,6 +22,7 @@ interface IState {
     unverifiedDegrees: Array<IDegreeDetails>;
     degreesByYear: Array<IDegreeCountByYear>;
     degreesByProgram: Array<IDegreeCountByProgram>
+    degree: IDegreeDetails
     error: {};
     success: boolean;
 }
@@ -143,6 +145,20 @@ const degreeSlice = createSlice({
                 state.error = payload.payload ?? ''
                 state.success = false
             })
+            .addCase(GetDegreebyId.pending, (state) => {
+                state.loading = true
+                state.error = {}
+            })
+            .addCase(GetDegreebyId.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.degree = payload
+                state.success = true
+            })
+            .addCase(GetDegreebyId.rejected, (state, payload) => {
+                state.loading = false
+                state.error = payload.payload ?? ''
+                state.success = false
+            })
     },
 })
 
@@ -152,3 +168,4 @@ export const VerifiedDegrees = (state: RootState) => state.degree.verifiedDegree
 export const UnverifiedDegrees = (state: RootState) => state.degree.unverifiedDegrees;
 export const DegreesByYear = (state: RootState) => state.degree.degreesByYear;
 export const DegreesByProgram = (state: RootState) => state.degree.degreesByProgram;
+export const Degree = (state: RootState) => state.degree.degree;

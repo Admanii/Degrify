@@ -10,6 +10,7 @@ import UnderlineRow from './UnderlineRow'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Student } from '../../../store/slice/studentSlice'
+import { IStudentDetails } from '../../../store/types/types'
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
@@ -36,11 +37,12 @@ function getCaseClass(programDeg: string) {
 
 interface Props{
   headingText: string,
+  student: IStudentDetails
 }
 
-function View({headingText}:Props) {
+function View({headingText, student}:Props) {
   const navigate = useNavigate()
-  const student = useSelector(Student);
+  //const student = useSelector(Student);
   //student called here, set in UI now
   console.log(student);
 

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByYears, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId } from '../service/degreeServices';
+import { getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByYears, getDegreebyId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId } from '../service/degreeServices';
 import { IDegreeCountByProgram, IDegreeCountByYear, IDegreeDetails } from '../types/types';
 
 export const GetAllDegreesHec = createAsyncThunk<
@@ -207,6 +207,34 @@ export const GetCountDegreeByProgram = createAsyncThunk<
         try {
             response = await getCountDegreeByYears();
             //console.log(response.data)
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data.data
+        } catch (error) {
+            //@ts-ignore
+            if (error.response && error.response.data.message) {
+                //@ts-ignore
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(response.message)
+            }
+        }
+    }
+)
+
+export const GetDegreebyId = createAsyncThunk<
+    IDegreeDetails,
+    {
+        degreeId: string;
+    },
+    any
+>(
+    'degreebyid',
+    async ({ degreeId }, { rejectWithValue }) => {
+        var response: any = {};
+        try {
+            response = await getDegreebyId(degreeId);
             if (response.data.statusCode === 401) {
                 return rejectWithValue(response.data.message)
             }
