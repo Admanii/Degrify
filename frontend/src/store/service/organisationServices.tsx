@@ -37,3 +37,8 @@ export const getAllUniversities = async () => {
     await getConfig();
     return api.get("/getuniversities", config);
 };
+
+export const getOrganisationbyId = async (organisationId: string) => {
+    await getConfig();
+    return api.get(`/getorganisationbyid?organisation_id=${organisationId}`, config);
+};

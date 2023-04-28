@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
 import { IOrganisationDetails } from '../types/types';
-import { GetAllUniversities } from '../actions/organisationActions';
+import { GetAllUniversities, GetOrganisationbyId } from '../actions/organisationActions';
 
 
 const initialState: IState = {
@@ -40,8 +40,23 @@ const organisationSlice = createSlice({
                 state.error = payload.payload ?? ''
                 state.success = false
             })
+            .addCase(GetOrganisationbyId.pending, (state) => {
+                state.loading = true
+                state.error = {}
+            })
+            .addCase(GetOrganisationbyId.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.organisation = payload
+                state.success = true
+            })
+            .addCase(GetOrganisationbyId.rejected, (state, payload) => {
+                state.loading = false
+                state.error = payload.payload ?? ''
+                state.success = false
+            })
     },
 })
 
 export default organisationSlice.reducer
 export const AllUniversities = (state: RootState) => state.organisation.allUniversities;
+export const Organisation = (state: RootState) => state.organisation.organisation;
