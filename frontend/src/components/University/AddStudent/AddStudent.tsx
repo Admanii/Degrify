@@ -7,6 +7,7 @@ import Navbar from "../../general/Navbar";
 const AddStudent = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     return (
+        <div className='bg-zinc-100'>
         <div className="grid min-h-screen grid-rows-header bg-zinc-100">
 
             <div>
@@ -17,156 +18,243 @@ const AddStudent = () => {
 
             <div className="grid min-h-full grid-cols-2">
 
-                <div className='p-16 flex flex-col items-center justify-center'>
+                <div className='p-16 flex flex-col items-center justify-start'>
 
-                    <div className="mt-3">
+                    <div>
+                        <label htmlFor="Name" className=" flex justify-left mt-2 text-gray-700 font-bold">Name</label>
                         <input
                             type="text"
-                            name="name"
                             id="name"
-                            autoComplete="name"
-                            placeholder="Name"
-                            value=""
+                            //value=""
                             //   onChange={}
                             required
-                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
                         />
                     </div>
-                    <div className="mt-3">
+                    <div>
+                        <label htmlFor="en" className="flex justify-left mt-2 text-gray-700 font-bold">Enrolment Number</label>
                         <input
                             type="string"
-                            name="enrolment number"
                             id="enrolment_number"
-                            autoComplete="enrolment number"
-                            placeholder="Enrolment Number"
-                            value=""
+                            //value=""
                             //   onChange={}
                             required
-                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
                         />
                     </div>
-                    <div className="mt-3">
+                    <div>
+                        <label htmlFor="cnic" className="flex justify-left mt-2 text-gray-700 font-bold">CNIC</label>
                         <input
                             type="string"
-                            name="cnic"
                             id="cnic"
-                            autoComplete="cnic"
-                            placeholder="CNIC Number"
-                            value=""
+                            //value=""
                             //   onChange={}
                             required
-                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
                         />
                     </div>
                     <div
                         //className="relative mb-3 xl:w-96" 
-                        className="mt-3"
                         data-te-datepicker-init
                         data-te-input-wrapper-init>
-                        
+                        <label htmlFor="DoA" className="flex justify-left mt-2 text-gray-700 font-bold">Date of Admission</label>
                         <input
                             type="date"
-                            name="DoA"
                             id="DoA"
-                            autoComplete="DoA"
-                            placeholder="Date of Admission"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="semester" className="flex justify-left mt-2 text-gray-700 font-bold">Semester</label>
+                        <input
+                            type="string"
+                            id="semester"
                             value=""
                             //   onChange={}
                             required
-                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="cd" className="flex justify-left mt-2 text-gray-700 font-bold">Course Description</label>
+                        <input
+                            type="string"
+                            id="cd"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"/>
+                    </div>
+                    <div>
+                        <label htmlFor="gpa" className="flex justify-left mt-2 text-gray-700 font-bold">GPA</label>
+                        <input
+                            type="string"
+                            id="gpa"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="marks" className="flex justify-left mt-2 text-gray-700 font-bold">Marks</label>
+                        <input
+                            type="string"
+                            id="marks"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="CGPA" className="flex justify-left mt-2 text-gray-700 font-bold">CGPA</label>
+                        <input
+                            type="string"
+                            id="cgpa"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="tch" className="flex justify-left mt-2 text-gray-700 font-bold">Total Credit Hours</label>
+                        <input
+                            type="string"
+                            id="tch"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
                         />
                     </div>
                     
                 </div>
 
-                <div className='p-16 flex flex-col items-center justify-center'>
+                <div className='p-16 flex flex-col justify-start'>
 
-                    <div className="mt-3">
+                    <div>
+                        <label htmlFor="fname" className="flex justify-left mt-2 text-gray-700 font-bold">Father Name</label>
                         <input
                             type="text"
-                            name="fname"
                             id="fname"
-                            autoComplete="fname"
-                            placeholder="Father Name"
-                            value=""
+                            //value=""
                             //   onChange={}
                             required
-                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
                         />
                     </div>
-                    <div className="mt-3">
+                    <div>
+                        <label htmlFor="erp" className="flex justify-left mt-2 text-gray-700 font-bold">ERP</label>
                         <input
                             type="string"
-                            name="erp"
                             id="erp"
-                            autoComplete="erp"
-                            placeholder="ERP"
-                            value=""
+                            //value=""
                             //   onChange={}
                             required
-                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
                         />
                     </div>
                     <div
                         //className="relative mb-3 xl:w-96" 
-                        className="mt-3"
                         data-te-datepicker-init
                         data-te-input-wrapper-init>
-                        <label htmlFor="DoB" className="block mt-2 mb-1 text-gray-700 font-bold">Date of Birth</label>
+
+                        <label htmlFor="DoB" className="flex justify-left mt-2 text-gray-700 font-bold">Date of Birth</label>
 
                         <input
                             type="date"
-                            name="DoB"
                             id="DoB"
-                            autoComplete="DoB"
-                            placeholder="Date of Birth"
-                            value=""
+                            //value=""
                             //   onChange={}
                             required
-                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
                         />
-                        <div className="relative mt-2">
-                            <input
-                                type="date"
-                                name="DoB"
-                                id="DoB"
-                                autoComplete="DoB"
-                                value=""
-                                //   onChange={}
-                                required
-                                className="appearance-none block w-96 px-3 py-3 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-[#E6EDF0]"
-                            />
-                            <label htmlFor="DoB" className="absolute left-3 top-2 text-gray-400 text-sm pointer-events-none">
-                                Date of Birth
-                            </label>
-                        </div>
                     </div>
                     <div
                         //className="relative mb-3 xl:w-96" 
-                        className="mt-3"
                         data-te-datepicker-init
                         data-te-input-wrapper-init>
-
+                        <label htmlFor="DoC" className="flex justify-left mt-2 text-gray-700 font-bold">Date of Completion</label>
                         <input
                             type="date"
-                            name="DoC"
                             id="DoC"
-                            autoComplete="DoC"
-                            placeholder="Date of Completion"
-                            value=""
+                            //value=""
                             //   onChange={}
                             required
-                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="cno" className="flex justify-left mt-2 text-gray-700 font-bold">Course Number</label>
+                        <input
+                            type="string"
+                            id="cno"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="ch" className="flex justify-left mt-2 text-gray-700 font-bold">Credit Hours</label>
+                        <input
+                            type="string"
+                            id="ch"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="cg" className="flex justify-left mt-2 text-gray-700 font-bold">CNIC Grade</label>
+                        <input
+                            type="string"
+                            id="cg"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="rg" className="flex justify-left mt-2 text-gray-700 font-bold">Relative Grading</label>
+                        <input
+                            type="string"
+                            id="rg"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="cp" className="flex justify-left mt-2 text-gray-700 font-bold">Cumulative Percentage</label>
+                        <input
+                            type="string"
+                            id="cp"
+                            //value=""
+                            //   onChange={}
+                            required
+                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm rounded-md border-none"
                         />
                     </div>
 
                 </div>
 
-                
-
-            </div >
-            <Button className='mt-8' buttonText="Add" width={384} onClick={() => { }} />
+            </div>
+   
         </div>
+
+            <Button className=' mb-8 text-lg' buttonText="Add" width={384} onClick={() => { }} />
+
+        </div>
+        
     )
 }
 
