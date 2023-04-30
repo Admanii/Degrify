@@ -26,7 +26,7 @@ const MainPageUni = () => {
   useEffect(() => {
     getDegrees();
     //registerStudent(student);
-    updateDegreeUni("6442740ba9fd0ee7fdbd856a");
+    //updateDegreeUni("6442740ba9fd0ee7fdbd856a");
   }, [])
 
   const registerStudent = async (student: IRegisterStudent) => {
