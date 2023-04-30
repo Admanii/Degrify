@@ -28,7 +28,8 @@ export interface IOrganisationDetails {
     phoneNumber: string;
     address: string;
     userRole: string;
-    active: string;
+    email: string;
+    active: boolean;
 }
 
 export interface IUserDetails {
