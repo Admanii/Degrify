@@ -118,3 +118,8 @@ export interface IRegisterOrganisation {
     userRole: string;
     //active?: boolean;
 }
+
+export interface IUpdatePaper {
+    degreeId: string;
+    degree: IDegreeDetails;
+}
