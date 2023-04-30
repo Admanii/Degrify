@@ -3,7 +3,7 @@ import HeyUni from '../../components/University/Dashboard/HeyUni'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../store/store';
 import { useEffect } from "react";
-import { GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId, UpdateDegreeUniversity } from '../../store/actions/degreeActions';
+import { AddDegree, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId, UpdateDegreeUniversity } from '../../store/actions/degreeActions';
 import { GetAllStudentsbyUniId, RegisterStudent } from '../../store/actions/studentActions';
 import { IRegisterStudent } from '../../store/types/types';
 import { UserInfo } from '../../store/slice/authSlice';
@@ -27,6 +27,7 @@ const MainPageUni = () => {
     getDegrees();
     //registerStudent(student);
     //updateDegreeUni("6442740ba9fd0ee7fdbd856a");
+    //addDegree("64405d954f12eb788e6621d6", organisation_id, {})
   }, [])
 
   const registerStudent = async (student: IRegisterStudent) => {
@@ -34,7 +35,11 @@ const MainPageUni = () => {
   }
 
   const updateDegreeUni = async (degreeId: string) => {
-    await dispatch(UpdateDegreeUniversity({degreeId}))
+    await dispatch(UpdateDegreeUniversity({ degreeId }))
+  }
+
+  const addDegree = async (studentID: string, organisationId: string, payload: any) => {
+    await dispatch(AddDegree({ studentId: studentID, organisationId: organisationId, payload: payload }))
   }
 
   const getDegrees = async () => {

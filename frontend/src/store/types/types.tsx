@@ -119,7 +119,13 @@ export interface IRegisterOrganisation {
     //active?: boolean;
 }
 
-export interface IUpdatePaper {
-    degreeId: string;
-    degree: IDegreeDetails;
+// export interface IUpdateDegree {
+//     degreeId: string;
+//     degree: IDegreeDetails;
+// }
+
+export interface IAddDegree {
+    studentId: string,
+    organisationId: string,
+    payload: any
 }
