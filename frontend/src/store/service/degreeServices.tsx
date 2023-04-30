@@ -79,3 +79,16 @@ export const getDegreebyId = async (degree_id: string) => {
     await getConfig();
     return api.get(`/getdegreebyid?degree_id=${degree_id}`, config);
 };
+
+export const updateDegreeUniversity = async (degreeId: string) => {
+    // const token = await getAccessToken();
+    // accessToken = token.substring(1, token.length - 1)
+    // const config = {
+    //     headers: {
+    //         'Authorization': `Bearer ${accessToken}`,
+    //         'Content-Type': 'application/json'
+    //     },
+    // }
+    await getConfig();
+    return api.post(`/organisationapproveddegree?degree_id=${degreeId}`, {}, config);
+};

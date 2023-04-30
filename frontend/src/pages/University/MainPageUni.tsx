@@ -3,7 +3,7 @@ import HeyUni from '../../components/University/Dashboard/HeyUni'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../store/store';
 import { useEffect } from "react";
-import { GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId } from '../../store/actions/degreeActions';
+import { GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId, UpdateDegreeUniversity } from '../../store/actions/degreeActions';
 import { GetAllStudentsbyUniId, RegisterStudent } from '../../store/actions/studentActions';
 import { IRegisterStudent } from '../../store/types/types';
 import { UserInfo } from '../../store/slice/authSlice';
@@ -26,10 +26,15 @@ const MainPageUni = () => {
   useEffect(() => {
     getDegrees();
     //registerStudent(student);
+    updateDegreeUni("6442740ba9fd0ee7fdbd856a");
   }, [])
 
   const registerStudent = async (student: IRegisterStudent) => {
     await dispatch(RegisterStudent(student))
+  }
+
+  const updateDegreeUni = async (degreeId: string) => {
+    await dispatch(UpdateDegreeUniversity({degreeId}))
   }
 
   const getDegrees = async () => {
@@ -37,6 +42,7 @@ const MainPageUni = () => {
     await dispatch(GetCountDegreeByYears({}))
     await dispatch(GetCountDegreeByProgram({}))
   }
+
 
   return (
 
