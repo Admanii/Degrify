@@ -82,9 +82,9 @@ apiProtected.get("/getcoursebyproganduni", getCoursebyProgAndUni);
 
 // post approved degrees
 apiProtected.post("/adddegree", AddDegree);
-apiProtected.post("/hecapproveddegree", HECAppovedDegree);
-apiProtected.post("/studentapproveddegree", StudentAppovedDegree);
-apiProtected.post("/organisationapproveddegree", OrganisationAppovedDegree);
+apiProtected.post("/hecapproveddegree", HECAppovedDegree); // done
+apiProtected.post("/studentapproveddegree", StudentAppovedDegree); // done
+apiProtected.post("/organisationapproveddegree", OrganisationAppovedDegree); // done
 
 apiProtected.post("/completeapproveddegree", CompleteAppovedDegree);  // ?? 
 apiProtected.get("/getcompleteverifieddegree", getCompleteVerifiedDegrees); // ??

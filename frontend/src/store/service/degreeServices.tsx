@@ -1,4 +1,5 @@
 import api from "../api";
+import { IDegreeDetails } from "../types/types";
 
 var accessToken = '';
 var config = {}
@@ -78,4 +79,24 @@ export const getCountDegreeByProgram = async () => {
 export const getDegreebyId = async (degree_id: string) => {
     await getConfig();
     return api.get(`/getdegreebyid?degree_id=${degree_id}`, config);
+};
+
+export const updateDegreeUniversity = async (degreeId: string) => {
+    await getConfig();
+    return api.post(`/organisationapproveddegree?degree_id=${degreeId}`, {}, config);
+};
+
+export const updateDegreeHec = async (degreeId: string) => {
+    await getConfig();
+    return api.post(`/hecapproveddegree?degree_id=${degreeId}`, {}, config);
+};
+
+export const updateDegreeStudent = async (degreeId: string) => {
+    await getConfig();
+    return api.post(`/studentapproveddegree?degree_id=${degreeId}`, {}, config);
+};
+
+export const addDegree = async (studentId: string, organisationId: string, payload: any) => {
+    await getConfig();
+    return api.post(`/adddegree?student_id=${studentId}&organisation_id=${organisationId}`, payload, config);
 };

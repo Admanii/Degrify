@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByYears, getDegreebyId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId } from '../service/degreeServices';
-import { IDegreeCountByProgram, IDegreeCountByYear, IDegreeDetails } from '../types/types';
+import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByYears, getDegreebyId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
+import { IAddDegree, IDegreeCountByProgram, IDegreeCountByYear, IDegreeDetails, IResponse } from '../types/types';
 
 export const GetAllDegreesHec = createAsyncThunk<
     Array<IDegreeDetails>,
@@ -250,3 +250,91 @@ export const GetDegreebyId = createAsyncThunk<
         }
     }
 )
+
+export const UpdateDegreeUniversity = createAsyncThunk<
+    IResponse,
+    { degreeId: string; },
+    any
+>(
+    "uni/update/degree",
+    async ({ degreeId }, { rejectWithValue }) => {
+        try {
+            const response = await updateDegreeUniversity(degreeId);
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data;
+        } catch (err) {
+            //@ts-ignore
+            let error: AxiosError<IRejectValue> = err;
+            if (!error.response) throw err;
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const UpdateDegreeHec = createAsyncThunk<
+    IResponse,
+    { degreeId: string; },
+    any
+>(
+    "hec/update/degree",
+    async ({ degreeId }, { rejectWithValue }) => {
+        try {
+            const response = await updateDegreeHec(degreeId);
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data;
+        } catch (err) {
+            //@ts-ignore
+            let error: AxiosError<IRejectValue> = err;
+            if (!error.response) throw err;
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const UpdateDegreeStudent = createAsyncThunk<
+    IResponse,
+    { degreeId: string; },
+    any
+>(
+    "student/update/degree",
+    async ({ degreeId }, { rejectWithValue }) => {
+        try {
+            const response = await updateDegreeStudent(degreeId);
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data;
+        } catch (err) {
+            //@ts-ignore
+            let error: AxiosError<IRejectValue> = err;
+            if (!error.response) throw err;
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const AddDegree = createAsyncThunk<
+    IResponse,
+    IAddDegree,
+    any
+>(
+    "uni/add/degree",
+    async ({ studentId, organisationId, payload }: IAddDegree, { rejectWithValue }) => {
+        try {
+            const response = await addDegree(studentId, organisationId, payload);
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data;
+        } catch (err) {
+            //@ts-ignore
+            let error: AxiosError<IRejectValue> = err;
+            if (!error.response) throw err;
+            return rejectWithValue(error.response.data);
+        }
+    }
+);

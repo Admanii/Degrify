@@ -28,7 +28,8 @@ export interface IOrganisationDetails {
     phoneNumber: string;
     address: string;
     userRole: string;
-    active: string;
+    email: string;
+    active: boolean;
 }
 
 export interface IUserDetails {
@@ -116,4 +117,15 @@ export interface IRegisterOrganisation {
     password: string;
     userRole: string;
     //active?: boolean;
+}
+
+// export interface IUpdateDegree {
+//     degreeId: string;
+//     degree: IDegreeDetails;
+// }
+
+export interface IAddDegree {
+    studentId: string,
+    organisationId: string,
+    payload: any
 }

@@ -5,11 +5,12 @@ import { jsonGenerate } from "../utils/helper.js";
 
 export const HECAppovedDegree = async (req, res) => {
   try {
-    const deleted = await Degree.findByIdAndUpdate(
+    const updatedDegree = await Degree.findByIdAndUpdate(
       req.query.degree_id,
       {
         HECVerified: true,
-        dateCreated: Date.now,
+        completeVerified: true,
+        //dateCreated: Date.now,
       },
       {
         new: true,
@@ -17,9 +18,16 @@ export const HECAppovedDegree = async (req, res) => {
         useFindAndModify: false,
       }
     );
+    if (!updatedDegree) {
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "Degree Not Found", null)
+      );
+    }
+
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Degree Updated", deleted)
+      jsonGenerate(statusCode.SUCCESS, "Degree Updated by HEC", updatedDegree)
     );
+
   } catch (error) {
     return res.json(
       jsonGenerate(
@@ -33,7 +41,7 @@ export const HECAppovedDegree = async (req, res) => {
 
 export const OrganisationAppovedDegree = async (req, res) => {
   try {
-    const updated = await Degree.findByIdAndUpdate(
+    const updatedDegree = await Degree.findByIdAndUpdate(
       req.query.degree_id,
       {
         organisationVerified: true,
@@ -44,11 +52,17 @@ export const OrganisationAppovedDegree = async (req, res) => {
         useFindAndModify: false,
       }
     );
+    if (!updatedDegree) {
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "Degree Not Found", null)
+      );
+    }
+
     return res.json(
       jsonGenerate(
         statusCode.SUCCESS,
-        "Degree Updated by Organisation",
-        updated
+        "Degree Updated by University",
+        updatedDegree
       )
     );
   } catch (error) {
@@ -64,7 +78,7 @@ export const OrganisationAppovedDegree = async (req, res) => {
 
 export const StudentAppovedDegree = async (req, res) => {
   try {
-    const updated = await Degree.findByIdAndUpdate(
+    const updatedDegree = await Degree.findByIdAndUpdate(
       req.query.degree_id,
       {
         studentVerified: true,
@@ -75,8 +89,14 @@ export const StudentAppovedDegree = async (req, res) => {
         useFindAndModify: false,
       }
     );
+    if (!updatedDegree) {
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "Degree Not Found", null)
+      );
+    }
+
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Degree Updated by Student", updated)
+      jsonGenerate(statusCode.SUCCESS, "Degree Updated by Student", updatedDegree)
     );
   } catch (error) {
     return res.json(
@@ -91,7 +111,7 @@ export const StudentAppovedDegree = async (req, res) => {
 
 export const CompleteAppovedDegree = async (req, res) => {
   try {
-    const updated = await Degree.findByIdAndUpdate(
+    const updatedDegree = await Degree.findByIdAndUpdate(
       req.query.degree_id,
       {
         completeVerified: true,
@@ -102,8 +122,14 @@ export const CompleteAppovedDegree = async (req, res) => {
         useFindAndModify: false,
       }
     );
+    if (!updatedDegree) {
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "Degree Not Found", null)
+      );
+    }
+
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Degree Updated Completed", updated)
+      jsonGenerate(statusCode.SUCCESS, "Degree Updated Completely", updatedDegree)
     );
   } catch (error) {
     return res.json(
