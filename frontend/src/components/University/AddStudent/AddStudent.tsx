@@ -40,7 +40,7 @@ const AddStudent = () => {
 
                         <div className="grid min-h-full grid-cols-2">
 
-                            <div className='p-16 flex flex-col items-center justify-start'>
+                            <div className='p-16 flex flex-col items-end justify-start'>
 
                                 <div>
                                     <label htmlFor="Name" className=" flex justify-left mt-2 text-gray-700 font-bold">Name</label>
@@ -125,7 +125,7 @@ const AddStudent = () => {
 
                             </div>
 
-                            <div className='p-16 flex flex-col items-center justify-start'>
+                            <div className='p-16 flex flex-col items-start justify-start'>
 
                                 <div>
                                     <label htmlFor="fname" className="flex justify-left mt-2 text-gray-700 font-bold">Father Name</label>
