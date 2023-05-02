@@ -3,7 +3,7 @@ import HeyUni from '../../components/University/Dashboard/HeyUni'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../store/store';
 import { useEffect } from "react";
-import { AddDegree, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId, UpdateDegreeUniversity } from '../../store/actions/degreeActions';
+import { AddDegree, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId, UpdateDegreeUniversity } from '../../store/actions/degreeActions';
 import { GetAllStudentsbyUniId, RegisterStudent } from '../../store/actions/studentActions';
 import { IRegisterStudent } from '../../store/types/types';
 import { UserInfo } from '../../store/slice/authSlice';
@@ -46,6 +46,7 @@ const MainPageUni = () => {
     await dispatch(GetUnverifiedDegreesbyUniId({ organisation_id: organisation_id }))
     await dispatch(GetCountDegreeByYears({}))
     await dispatch(GetCountDegreeByProgram({}))
+    await dispatch(GetCountDegreeByYearAndUni({}))
   }
 
 
