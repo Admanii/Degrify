@@ -228,7 +228,7 @@ export const routeList: RouteType[] = [
   {
     path: "/view/organisationprofile",
     isPrivate: true,
-    isHec: true,
+    //isHec: true,
     component: <OrganisationProfileView />,
   },
 ];
