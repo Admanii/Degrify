@@ -127,6 +127,7 @@ export const registerStudent = async (req, res) => {
       },
     ],
   });
+  
   if (studentExist) {
     return res.json(
       jsonGenerate(statusCode.CLIENT_ERROR, "Student already Exists")
@@ -146,9 +147,10 @@ export const registerStudent = async (req, res) => {
     });
     if (userExist) {
       return res.json(
-        jsonGenerate(statusCode.CLIENT_ERROR, "Users already Exists")
+        jsonGenerate(statusCode.CLIENT_ERROR, "User Email already Exists")
       );
     }
+    
     const student = await Student.create({
       name: name,
       enrollmentNumber: enrollmentNumber,
@@ -169,13 +171,13 @@ export const registerStudent = async (req, res) => {
       userRole: userRole,
       studentID: student._id,
     });
-    res.json(
+    return res.json(
       jsonGenerate(statusCode.SUCCESS, "Registration successfull", {
-        userId: result._id,
+        studentDetails: result,
       })
     );
   } catch (err) {
-    res.json(
+    return res.json(
       jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error Found", {
         error: err,
       })
@@ -201,15 +203,6 @@ export const registerOrganisation = async (req, res) => {
   }
 
   try {
-    const organisation = await Organistation.create({
-      name: name,
-      phoneNumber: phoneNumber,
-      address: address,
-      userRole: userRole,
-    });
-    const salt = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(password, salt);
-
     const userExist = await User.findOne({
       $or: [
         {
@@ -219,9 +212,19 @@ export const registerOrganisation = async (req, res) => {
     });
     if (userExist) {
       return res.json(
-        jsonGenerate(statusCode.CLIENT_ERROR, "Users already Exists")
+        jsonGenerate(statusCode.CLIENT_ERROR, "User Email already Exists", null)
       );
     }
+    
+    const organisation = await Organistation.create({
+      name: name,
+      phoneNumber: phoneNumber,
+      address: address,
+      userRole: userRole,
+    });
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(password, salt);
+
     const result = await User.create({
       name: name,
       email: email,
@@ -229,13 +232,13 @@ export const registerOrganisation = async (req, res) => {
       userRole: userRole,
       organisationID: organisation._id,
     });
-    res.json(
+    return res.json(
       jsonGenerate(statusCode.SUCCESS, "Registration successfull", {
-        userId: result._id,
+        organistionDetails: result,
       })
     );
   } catch (err) {
-    res.json(
+    return res.json(
       jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error Found", {
         error: err,
       })
