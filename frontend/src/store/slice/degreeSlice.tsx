@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
-import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetDegreebyId, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId } from '../actions/degreeActions';
+import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetDegreebyId, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId, UpdateDegreeUniversity } from '../actions/degreeActions';
 import { IDegreeCountByProgram, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails } from '../types/types';
 
 const initialState: IState = {
@@ -176,6 +176,11 @@ const degreeSlice = createSlice({
                 state.error = payload.payload ?? ''
                 state.success = false
             })
+            // .addCase(UpdateDegreeUniversity.fulfilled, (state, { payload }) => {
+            //     state.loading = false
+            //     state.degree = payload
+            //     state.success = true
+            // })
     },
 })
 

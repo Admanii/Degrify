@@ -3,7 +3,7 @@ import Layout from '../components/general/Layout'
 import View from '../components/University/StudentProfile/View'
 import HeadingWithSpan from '../components/general/HeadingWithSpan'
 import { useEffect, useState } from 'react'
-import { GetDegreebyId } from '../store/actions/degreeActions'
+import { GetDegreebyId, UpdateDegreeUniversity } from '../store/actions/degreeActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store/store'
 import { Degree } from '../store/slice/degreeSlice'
@@ -13,6 +13,9 @@ import { IMAGES } from '../constants/images'
 import { SubTitle } from '../components/general/Modal/SubTitle'
 import { Title } from '../components/general/Modal/Title'
 import { useNavigate } from 'react-router-dom'
+import { IDegreeDetails, IUpdatedDegree } from '../store/types/types'
+import { unwrapResult } from '@reduxjs/toolkit'
+import { UserInfo } from '../store/slice/authSlice'
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
@@ -40,16 +43,31 @@ function DegreeStudent() {
   const dispatch = useDispatch<AppDispatch>();
   const query = new URLSearchParams(window.location.search);
   const degreeId = query.get('degreeId') ?? '';
-  const degree = useSelector(Degree);
+  const [updatedDegree, setUpdatedDegree] = useState<IUpdatedDegree>();
   const [modal, setModal] = useState(false);
   const navigate = useNavigate();
+  const degree = useSelector(Degree);
+  const userInfo = useSelector(UserInfo);
+  const [isStudentApproved, setIsStudentApproved] = useState(false);
+  const [isUniApproved, setIsUniApproved] = useState(false);
+  const [isHecApproved, setIsHecApproved] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     getDegreebyId();
-  }, [])
+    //console.log(updatedDegree?.data?.organisationVerified)
+    console.log(isStudentApproved)
+    console.log(isUniApproved)
+    console.log(isHecApproved)
+    setDisabled(!isStudentApproved || isUniApproved || isHecApproved)
+  }, [updatedDegree, isStudentApproved, isUniApproved, isHecApproved, disabled])
 
   const getDegreebyId = async () => {
     await dispatch(GetDegreebyId({ degreeId: degreeId }))
+    setIsStudentApproved(degree?.degree?.studentVerified)
+    setIsUniApproved(degree?.degree?.organisationVerified)
+    setIsHecApproved(degree?.degree?.HECVerified)
+    console.log(degree)
   }
 
   const openModal = () => {
@@ -60,6 +78,19 @@ function DegreeStudent() {
     setModal(false);
   };
 
+  const approveDegree = async () => {
+    const response = await dispatch(UpdateDegreeUniversity({ degreeId: degreeId }))
+    //console.log(response)
+    const result = unwrapResult(response);
+    console.log("--------------------------")
+    console.log(result)
+    setUpdatedDegree(result)
+    setIsStudentApproved(result?.data?.studentVerified)
+    setIsUniApproved(result?.data?.organisationVerified)
+    setIsHecApproved(result?.data?.HECVerified)
+    navigate(`/view/degreecertificate?degreeId=${degreeId}`);
+    // console.log(updatedDegree?.data?.organisationVerified)
+  };
 
   return (
     <Layout>
@@ -74,7 +105,7 @@ function DegreeStudent() {
                 <DetailsHeading text={'Name:'} spanText={degree?.studentDetails?.name} />
                 <DetailsHeading text={'Serial Number:'} spanText={degree?.studentDetails?.studentID} />
                 <DetailsHeading text={'ERP ID:'} spanText={degree?.studentDetails?.studentID} />
-                <DetailsHeading text={'Program: '} spanText={`${getCaseClass(degree?.studentDetails?.orgName)}`} />
+                <DetailsHeading text={'Program: '} spanText={`${getCaseClass(degree?.studentDetails?.orgName ?? '')}`} />
                 <DetailsHeading text={'Graduating Year: '} spanText={degree?.studentDetails?.GraduatingYear} />
                 <DetailsHeading text={'Father\'s Name:'} spanText={degree?.studentDetails?.fatherName} />
                 <DetailsHeading text={'Date of Birth:'} spanText={`${dateOfBirth}`} />
@@ -85,7 +116,7 @@ function DegreeStudent() {
                 <DetailsHeading text={'Password:'} spanText="*********" />
               </div>
               <div className="flex justify-around">
-                <Button inverted={true} buttonText={'View Certificate'} onClick={() => navigate("/view/degreecertificate")}></Button>
+                <Button height={44} inverted={true} buttonText={'View Certificate'} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)}></Button>
 
                 <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
                   <div className='flex justify-center'>
@@ -107,16 +138,33 @@ function DegreeStudent() {
                       <button
                         type="submit"
                         className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700"
-                        onClick={closeModal}
+                        onClick={approveDegree}
                       >
                         Approve
                       </button>
                     </div>
                   </div>
                 </Modal>
-                <Button buttonText={'Approve Degree'} onClick={openModal}></Button>
-
-
+                <div className='flex flex-col'>
+                  <Button height={44} buttonText={'Approve Degree'} disabled={disabled} onClick={openModal} className={disabled ? "bg-gray-600 opacity-40 cursor-not-allowed" : ""}></Button>
+                  <div className='block'>
+                    {!isStudentApproved && (
+                      <span className="text-sm text-red-500 font-medium">
+                        *This degree is not approved by student
+                      </span>
+                    )}
+                    {(isUniApproved && isStudentApproved && userInfo.user.userRole == "UNIVERSITY") && (
+                      <span className="text-sm text-green-500 font-medium">
+                        *This degree is already approved by university
+                      </span>
+                    )}
+                    {(isHecApproved && userInfo.user.userRole == "HEC") && (
+                      <span className="text-sm text-green-500 font-medium">
+                        *This degree is already approved by hec
+                      </span>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
