@@ -448,7 +448,6 @@ export const getVerifiedUniversityDegree = async (req, res) => {
           organisationID: req.query.organisation_id,
           studentVerified: true,
           organisationVerified: true,
-          HECVerified: true,
         },
         {
           active: true,
@@ -545,7 +544,7 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
       $and: [
         {
           organisationID: req.query.organisation_id,
-          completeVerified: false,
+          organisationVerified: false,
         },
         {
           active: true,

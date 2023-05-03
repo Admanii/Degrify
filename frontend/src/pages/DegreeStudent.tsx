@@ -3,7 +3,7 @@ import Layout from '../components/general/Layout'
 import View from '../components/University/StudentProfile/View'
 import HeadingWithSpan from '../components/general/HeadingWithSpan'
 import { useEffect, useState } from 'react'
-import { GetDegreebyId, UpdateDegreeUniversity } from '../store/actions/degreeActions'
+import { GetDegreebyId, UpdateDegreeHec, UpdateDegreeUniversity } from '../store/actions/degreeActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store/store'
 import { Degree } from '../store/slice/degreeSlice'
@@ -55,11 +55,20 @@ function DegreeStudent() {
 
   useEffect(() => {
     getDegreebyId();
-    //console.log(updatedDegree?.data?.organisationVerified)
     console.log(isStudentApproved)
     console.log(isUniApproved)
     console.log(isHecApproved)
-    setDisabled(!isStudentApproved || isUniApproved || isHecApproved)
+    if (userInfo?.user?.userRole == "UNIVERSITY") {
+      if (!isStudentApproved) {
+        setDisabled(!isStudentApproved)
+      }
+      else {
+        setDisabled(isUniApproved)
+      }
+    }
+    if (isHecApproved && userInfo?.user?.userRole == "HEC") {
+      setDisabled(isUniApproved)
+    }
   }, [updatedDegree, isStudentApproved, isUniApproved, isHecApproved, disabled])
 
   const getDegreebyId = async () => {
@@ -79,17 +88,20 @@ function DegreeStudent() {
   };
 
   const approveDegree = async () => {
-    const response = await dispatch(UpdateDegreeUniversity({ degreeId: degreeId }))
-    //console.log(response)
-    const result = unwrapResult(response);
-    console.log("--------------------------")
-    console.log(result)
+    var result;
+    if (userInfo?.user?.userRole == "UNIVERSITY") {
+      const response = await dispatch(UpdateDegreeUniversity({ degreeId: degreeId }))
+      result = unwrapResult(response);
+    }
+    if (userInfo?.user?.userRole == "HEC") {
+      const response = await dispatch(UpdateDegreeHec({ degreeId: degreeId }))
+      result = unwrapResult(response);
+    }
     setUpdatedDegree(result)
     setIsStudentApproved(result?.data?.studentVerified)
     setIsUniApproved(result?.data?.organisationVerified)
     setIsHecApproved(result?.data?.HECVerified)
     navigate(`/view/degreecertificate?degreeId=${degreeId}`);
-    // console.log(updatedDegree?.data?.organisationVerified)
   };
 
   return (
