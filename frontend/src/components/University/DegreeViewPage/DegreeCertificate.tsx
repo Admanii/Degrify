@@ -1,6 +1,7 @@
 import React from 'react';
 import VerifiedTickIcon from './VerifiedTickIcon';
 import { IMAGES } from '../../../constants/images';
+import { IDegreeDetails } from '../../../store/types/types';
 
 
 // import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
@@ -10,12 +11,13 @@ interface Props {
   program: string,
   // date: "string",
   graduatingYear: string,
+  degree : IDegreeDetails,
 
 }
 function goBack() {
   window.history.back();
 }
-function DegreeCertificate({ name, program, graduatingYear }: Props) {
+function DegreeCertificate({ name, program, graduatingYear, degree }: Props) {
   return (
     <div className='relative'>
       <button onClick={goBack} className='absolute top-0 right-0 mt-2 mr-2 p-2 rounded-full border-2 border-black focus:outline-none'>
@@ -33,11 +35,11 @@ function DegreeCertificate({ name, program, graduatingYear }: Props) {
               </div>
               <h1 className="text-5xl font-bold mb-4 font-certificate">Certificate of Completion</h1>
               <p className="text-xl mb-4">This certifies that</p>
-              <h2 className="text-3xl font-bold mb-4">{name}</h2>
+              <h2 className="text-3xl font-bold mb-4">{degree.studentDetails?.name}</h2>
               <p className="text-xl mb-4">has successfully completed the</p>
-              <h2 className="text-xl font-bold mb-4">{program}</h2>
-              <p className="text-xl mb-4">from IBA</p>
-              <h2 className="text-xl font-bold mb-4">Class of 2023</h2>
+              <h2 className="text-xl font-bold mb-4">{degree.studentDetails?.Program}</h2>
+              <p className="text-xl mb-4">from {degree.studentDetails?.orgName}</p>
+              <h2 className="text-xl font-bold mb-4">Class of {degree.studentDetails?.GraduatingYear}</h2>
             </div>
           </div>
         </div>

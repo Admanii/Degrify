@@ -2,11 +2,17 @@ import DetailsHeading from '../components/University/DegreeViewPage/DetailsHeadi
 import Layout from '../components/general/Layout'
 import View from '../components/University/StudentProfile/View'
 import HeadingWithSpan from '../components/general/HeadingWithSpan'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { GetDegreebyId } from '../store/actions/degreeActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store/store'
 import { Degree } from '../store/slice/degreeSlice'
+import Button from '../components/general/Button'
+import Modal from '../components/general/Modal/Modal'
+import { IMAGES } from '../constants/images'
+import { SubTitle } from '../components/general/Modal/SubTitle'
+import { Title } from '../components/general/Modal/Title'
+import { useNavigate } from 'react-router-dom'
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
@@ -35,6 +41,8 @@ function DegreeStudent() {
   const query = new URLSearchParams(window.location.search);
   const degreeId = query.get('degreeId') ?? '';
   const degree = useSelector(Degree);
+  const [modal, setModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getDegreebyId();
@@ -44,10 +52,19 @@ function DegreeStudent() {
     await dispatch(GetDegreebyId({ degreeId: degreeId }))
   }
 
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
+
   return (
     <Layout>
       <div>
-        <View student={degree?.studentDetails} headingText={'STUDENT DETAILS'} />
+        {/* <View student={degree?.studentDetails} headingText={'STUDENT DETAILS'} /> */}
         <HeadingWithSpan marginTop='1' Text={'DEGREE DETAILS'} />
         <div className="flex">
 
@@ -55,11 +72,11 @@ function DegreeStudent() {
             <div className="bg-white p-3 border-t-4 border-green-400 text-left">
               <div className="grid grid-cols-2 gap-4 my-6">
                 <DetailsHeading text={'Name:'} spanText={degree?.studentDetails?.name} />
-                <DetailsHeading text={'Serial Number:'} spanText={`${erp}`} />
+                <DetailsHeading text={'Serial Number:'} spanText={degree?.studentDetails?.studentID} />
                 <DetailsHeading text={'ERP ID:'} spanText={degree?.studentDetails?.studentID} />
-                <DetailsHeading text={'Program: '} spanText={`${getCaseClass(programDeg)}`} />
-                <DetailsHeading text={'Graduating Year: '} spanText={`${graduatingYear}`} />
-                <DetailsHeading text={'Father\'s Name:'} spanText={`${fatherName}`} />
+                <DetailsHeading text={'Program: '} spanText={`${getCaseClass(degree?.studentDetails?.orgName)}`} />
+                <DetailsHeading text={'Graduating Year: '} spanText={degree?.studentDetails?.GraduatingYear} />
+                <DetailsHeading text={'Father\'s Name:'} spanText={degree?.studentDetails?.fatherName} />
                 <DetailsHeading text={'Date of Birth:'} spanText={`${dateOfBirth}`} />
                 <DetailsHeading text={'CNIC:'} spanText={`${cnic}`} />
                 <DetailsHeading text={'Date of Admission:'} spanText={`${dateOfAdmission}`} />
@@ -67,13 +84,39 @@ function DegreeStudent() {
                 <DetailsHeading text={'Email ID:'} spanText={`${email}`} />
                 <DetailsHeading text={'Password:'} spanText="*********" />
               </div>
-              <div className="flex justify-start">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-4">
-                  Add Degree
-                </button>
-                <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">
-                  Edit Profile
-                </button>
+              <div className="flex justify-around">
+                <Button inverted={true} buttonText={'View Certificate'} onClick={() => navigate("/view/degreecertificate")}></Button>
+
+                <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
+                  <div className='flex justify-center'>
+                    <img src={IMAGES.info_icon}></img>
+                  </div>
+                  <Title text="Approve this degree?" />
+                  <SubTitle text='Are you sure you want to approve? This action cannot be undone. Degrees uploaded to blockchain can not be altered!' />
+                  <div className='flex my-2'>
+                    <div className='flex px-2 w-1/2 justify-center'>
+                      <button
+                        type="submit"
+                        className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
+                        onClick={closeModal}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                    <div className='flex px-2 w-1/2 justify-center'>
+                      <button
+                        type="submit"
+                        className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700"
+                        onClick={closeModal}
+                      >
+                        Approve
+                      </button>
+                    </div>
+                  </div>
+                </Modal>
+                <Button buttonText={'Approve Degree'} onClick={openModal}></Button>
+
+
               </div>
             </div>
           </div>

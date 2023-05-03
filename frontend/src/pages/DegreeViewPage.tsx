@@ -7,15 +7,19 @@ import DetailsHeading from '../components/University/DegreeViewPage/DetailsHeadi
 import DegreeCertificate from '../components/University/DegreeViewPage/DegreeCertificate'
 import VerifiedTickIcon from '../components/University/DegreeViewPage/VerifiedTickIcon'
 import View from '../components/University/StudentProfile/View'
-import Degree from '../components/general/Modal/Degree'
 import Modal from '../components/general/Modal/Modal'
+import { useSelector } from 'react-redux';
+import { Degree } from '../store/slice/degreeSlice';
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
 const programDeg = "BSCS"
 const graduatingYear = "2023"
 
+
+
 function getCaseClass(programDeg: string) {
+  
   switch (programDeg) {
     case 'BSCS':
       return programDeg = "Bachelor of Science in Computer Science (BSCS)";
@@ -27,6 +31,9 @@ function getCaseClass(programDeg: string) {
 }
 
 function DegreeViewPage() {
+
+  const degree = useSelector(Degree);
+  
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
@@ -62,7 +69,7 @@ function DegreeViewPage() {
 
   return (
     <div className='flex justify-center items-center w-screen h-screen'>
-      <DegreeCertificate name={name} program={getCaseClass(programDeg)} graduatingYear={graduatingYear} />
+      <DegreeCertificate name={name} program={getCaseClass(programDeg)} graduatingYear={graduatingYear} degree={degree} />
     </div>
 
     // {/* <HeadingWithSpan Text="STUDENT DEGREE" SpanText={NameErp} /> */}

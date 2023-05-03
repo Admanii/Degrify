@@ -25,7 +25,7 @@ interface Props {
       <div>
         <button onClick={openModal}>Open Modal</button>
         <Modal modalState={modalIsOpen} closeButton={true} onClick={()=> closeModal()}>
-          <DegreeCertificate name={name} program={program} graduatingYear={graduatingYear} />
+          {/* <DegreeCertificate name={name} program={program} graduatingYear={graduatingYear} /> */}
         </Modal>
       </div>
     );
