@@ -15,6 +15,7 @@ import { Title } from '../components/general/Modal/Title'
 import { useNavigate } from 'react-router-dom'
 import { IDegreeDetails, IUpdatedDegree } from '../store/types/types'
 import { unwrapResult } from '@reduxjs/toolkit'
+import { UserInfo } from '../store/slice/authSlice'
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
@@ -46,17 +47,27 @@ function DegreeStudent() {
   const [modal, setModal] = useState(false);
   const navigate = useNavigate();
   const degree = useSelector(Degree);
+  const userInfo = useSelector(UserInfo);
   const [isStudentApproved, setIsStudentApproved] = useState(false);
+  const [isUniApproved, setIsUniApproved] = useState(false);
+  const [isHecApproved, setIsHecApproved] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     getDegreebyId();
     //console.log(updatedDegree?.data?.organisationVerified)
+    console.log("in use effetc")
     console.log(isStudentApproved)
-  }, [updatedDegree, isStudentApproved])
+    console.log(isUniApproved)
+    console.log(isHecApproved)
+    setDisabled(!isStudentApproved || isUniApproved || isHecApproved)
+  }, [updatedDegree, isStudentApproved, isUniApproved])
 
   const getDegreebyId = async () => {
     await dispatch(GetDegreebyId({ degreeId: degreeId }))
     setIsStudentApproved(degree?.degree?.studentVerified)
+    setIsUniApproved(degree?.degree?.organisationVerified)
+    setIsHecApproved(degree?.degree?.HECVerified)
     console.log(degree)
   }
 
@@ -76,6 +87,8 @@ function DegreeStudent() {
     console.log(result)
     setUpdatedDegree(result)
     setIsStudentApproved(result?.data?.studentVerified)
+    setIsUniApproved(result?.data?.organisationVerified)
+    setIsHecApproved(result?.data?.HECVerified)
     navigate(`/view/degreecertificate?degreeId=${degreeId}`);
     // console.log(updatedDegree?.data?.organisationVerified)
   };
@@ -134,11 +147,21 @@ function DegreeStudent() {
                   </div>
                 </Modal>
                 <div className='flex flex-col'>
-                  <Button height={44} buttonText={'Approve Degree'} disabled={!isStudentApproved} onClick={openModal} className={!isStudentApproved ? "bg-gray-600 opacity-40 cursor-not-allowed" : ""}></Button>
+                  <Button height={44} buttonText={'Approve Degree'} disabled={disabled} onClick={openModal} className={disabled ? "bg-gray-600 opacity-40 cursor-not-allowed" : ""}></Button>
                   <div className='block'>
                     {!isStudentApproved && (
                       <span className="text-sm text-red-500 font-medium">
                         *This degree is not approved by student
+                      </span>
+                    )}
+                    {(isUniApproved && isStudentApproved && userInfo.user.userRole == "UNIVERSITY") && (
+                      <span className="text-sm text-green-500 font-medium">
+                        *This degree is already approved by university
+                      </span>
+                    )}
+                    {(isHecApproved && userInfo.user.userRole == "HEC") && (
+                      <span className="text-sm text-green-500 font-medium">
+                        *This degree is already approved by hec
                       </span>
                     )}
                   </div>
