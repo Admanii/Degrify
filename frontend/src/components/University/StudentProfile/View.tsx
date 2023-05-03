@@ -180,8 +180,8 @@ function View({headingText, student, buttonHidden}:Props) {
             <div className="w-40 h-40 rounded-full bg-gray-500">
               <img src={IMAGES.man_avatar}></img>
             </div>
-            <DetailsHeading text={student.name} size='2xl' />
-            <DetailsHeading spanText={`${getCaseClass(student.Program)}`} />
+            <DetailsHeading text={student?.name} size='2xl' />
+            <DetailsHeading spanText={`${getCaseClass(student?.Program)}`} />
           </div>
         </div>
         {/* SECOND BOX BOTTOM LEFT */}
@@ -198,7 +198,7 @@ function View({headingText, student, buttonHidden}:Props) {
               </li>
               <li className="flex items-center py-3">
                 <span>Date of Issue</span>
-                <span className="ml-auto">{student.DateOfompletion.slice(0,10)}</span>
+                <span className="ml-auto">{student?.DateOfompletion?.slice(0,10)}</span>
               </li>
             </ul>
           </div>
@@ -212,16 +212,16 @@ function View({headingText, student, buttonHidden}:Props) {
           <div className="h-130 bg-white shadow-md flex flex-col items-start px-8 py-4">
 
             {/* NAME ROW */}
-            <UnderlineRow text={'Full Name '} spanText={student.name +" "+ student.fatherName} showBorder={true} />
-            <UnderlineRow text={'Father\'s Name '} spanText={student.fatherName} showBorder={true} />
-            <UnderlineRow text={"Email ID:"} spanText={student.email} showBorder={true} />
-            <UnderlineRow text={'CNIC'} spanText={student.CNIC} showBorder={true} />
-            <UnderlineRow text={"Date of Birth:"} spanText={student.DateOfBirth} showBorder={true} />
-            <UnderlineRow text={"University"} spanText={student.orgName} showBorder={true} />
-            <UnderlineRow text={"Serial Number:"} spanText={student.enrollmentNumber} showBorder={true} />
-            <UnderlineRow text={"ERP ID:"} spanText={student.studentID} showBorder={true} />
-            <UnderlineRow text={"Graduating Year: "} spanText={student.GraduatingYear} showBorder={true} />
-            <UnderlineRow text={"Date of Admission:"} spanText={student.DateOfAdmission.slice(0,10)} showBorder={false} />
+            <UnderlineRow text={'Full Name '} spanText={student?.name +" "+ student?.fatherName} showBorder={true} />
+            <UnderlineRow text={'Father\'s Name '} spanText={student?.fatherName} showBorder={true} />
+            <UnderlineRow text={"Email ID:"} spanText={student?.email} showBorder={true} />
+            <UnderlineRow text={'CNIC'} spanText={student?.CNIC} showBorder={true} />
+            <UnderlineRow text={"Date of Birth:"} spanText={student?.DateOfBirth} showBorder={true} />
+            <UnderlineRow text={"University"} spanText={student?.orgName} showBorder={true} />
+            <UnderlineRow text={"Serial Number:"} spanText={student?.enrollmentNumber} showBorder={true} />
+            <UnderlineRow text={"ERP ID:"} spanText={student?.studentID} showBorder={true} />
+            <UnderlineRow text={"Graduating Year: "} spanText={student?.GraduatingYear} showBorder={true} />
+            <UnderlineRow text={"Date of Admission:"} spanText={student?.DateOfAdmission?.slice(0,10)} showBorder={false} />
             {/* <UnderlineRow text={"Date of Completion:"} spanText={`${dateOfCompletion}`} showBorder={false} /> */}
             <div className='h-5'></div>
             <div className="flex flex-row justify-between items-start w-2/3 pr-5">

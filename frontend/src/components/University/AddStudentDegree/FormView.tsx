@@ -49,10 +49,10 @@ function FormView() {
                     <div className="grid min-h-full grid-cols-2">
 
                         <div className='p-16 flex flex-col items-end justify-start'>
-                            <TextField defaultText={`${student.name}`} label={'Name'}></TextField>
-                            <TextField defaultText={`${student.CNIC}`} label={'CNIC'}></TextField>
-                            <TextField defaultText={student.enrollmentNumber} label={'Enrolment Number'}></TextField>
-                            <TextField defaultText={student.Program} label={'Program'}></TextField>
+                            <TextField defaultText={`${student?.name}`} label={'Name'}></TextField>
+                            <TextField defaultText={`${student?.CNIC}`} label={'CNIC'}></TextField>
+                            <TextField defaultText={student?.enrollmentNumber} label={'Enrolment Number'}></TextField>
+                            <TextField defaultText={student?.Program} label={'Program'}></TextField>
 
 
                             <div
@@ -71,13 +71,13 @@ function FormView() {
                                 />
                             </div>
 
-                            <TextField defaultText={student.email} label={'Email'}></TextField>
+                            <TextField defaultText={student?.email} label={'Email'}></TextField>
 
                         </div>
 
                         <div className='p-16 flex flex-col items-start justify-start'>
 
-                            <TextField defaultText={student.fatherName} label={'Father\'s Name'}></TextField>
+                            <TextField defaultText={student?.fatherName} label={'Father\'s Name'}></TextField>
 
                             <div
                                 //className="relative mb-3 xl:w-96" 
@@ -97,9 +97,9 @@ function FormView() {
                                 />
                             </div>
 
-                            <TextField defaultText={student.studentID} label={'Student ID'}></TextField>
+                            <TextField defaultText={student?.studentID} label={'Student ID'}></TextField>
 
-                            <TextField defaultText={student.GraduatingYear} label={'Graduating Year'}></TextField>
+                            <TextField defaultText={student?.GraduatingYear} label={'Graduating Year'}></TextField>
 
                             <div
                                 //className="relative mb-3 xl:w-96" 
@@ -162,11 +162,8 @@ function FormView() {
                         </div>
                     </Modal>
                     <Button className=' mb-8 text-lg' buttonText="Upload" width={384} onClick={() => openModal()} />
-
                 </div>
-
             </form>
-
         </div>
     )
 }

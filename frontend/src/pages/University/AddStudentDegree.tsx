@@ -16,23 +16,19 @@ function AddStudentDegree() {
     const { register, handleSubmit } = useForm<IRegisterStudent>()
     const userInfo = useSelector(UserInfo)
     const organisationID = userInfo?.user?.organisationID ?? '';
-  
 
     const submitForm = async (data: IRegisterStudent) => {
         // console.log(data);
-        data.organisationID=organisationID
+        data.organisationID = organisationID
         await dispatch(RegisterStudent(data))
     }
-  return (
-    <Layout>
-    
-    <FormView/>
-</Layout>
 
-            
-    
-        )
-    }
+    return (
+        <Layout>
+            <FormView />
+        </Layout>
+    )
+}
 
 
 export default AddStudentDegree
