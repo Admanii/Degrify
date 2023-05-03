@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Organisation } from '../store/slice/organisationSlice';
 import { useEffect } from 'react';
 import { GetOrganisationbyId } from '../store/actions/organisationActions';
+import OrganisationView from '../components/University/OrganisationProfile/OrganisationView';
 
 const OrganisationProfileView = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -21,11 +22,7 @@ const OrganisationProfileView = () => {
 
     return (
         <Layout>
-            <div className='text-2xl font-bold mt-4'>MAKE ORGANISATION DETAILS UI HERE -- FEROZE/RIAZ
-            
-                {/* <div className='mt-4'>{organisation?.name}</div> */}
-                
-            </div>
+            <OrganisationView organisation={organisation} headingText={'UNIVERSITY PROFILE'} />
         </Layout>
     )
 }

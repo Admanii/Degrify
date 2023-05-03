@@ -129,3 +129,9 @@ export interface IAddDegree {
     organisationId: string,
     payload: any
 }
+
+
+export interface IDegreeCountByYearAndUni {
+    _id: string,
+    count: number
+}

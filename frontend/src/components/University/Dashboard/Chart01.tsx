@@ -1,15 +1,17 @@
 import React, { useRef, useEffect } from "react";
 import ApexCharts, { ApexOptions } from "apexcharts";
-import { DegreesByProgram, DegreesByYear } from "../../../store/slice/degreeSlice";
+import { DegreesByProgram, DegreesByYear, DegreesByYearAndUni } from "../../../store/slice/degreeSlice";
 import { useSelector } from "react-redux";
 
 const Chart01: React.FC = (): JSX.Element => {
   const chartRef = useRef<HTMLDivElement>(null);
   const degreesByYear = useSelector(DegreesByYear);
   const degreesByProgram = useSelector(DegreesByProgram);
+  const degreesByYearAndUni = useSelector(DegreesByYearAndUni);
 
   // console.log(degreesByYear)
   console.log("degreesByProgram: "+ degreesByProgram)
+  console.log("degreesByYearAndUni: "+ degreesByYearAndUni)
   //console.log("degreesByProgram: "+ degreesByProgram[0].count)
 
   function searchYearCount(year: { toString: () => string; }) {
