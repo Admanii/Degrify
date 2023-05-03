@@ -8,6 +8,11 @@ import { RegisterStudent } from '../../../store/actions/studentActions';
 import { IRegisterStudent } from '../../../store/types/types';
 import { UserInfo } from '../../../store/slice/authSlice';
 import InputField from '../../general/InputField';
+import Modal from '../../general/Modal/Modal';
+import { IMAGES } from '../../../constants/images';
+import { Title } from '../../general/Modal/Title';
+import { SubTitle } from '../../general/Modal/SubTitle';
+import Layout from '../../general/Layout';
 
 const AddStudent = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -22,12 +27,22 @@ const AddStudent = () => {
         await dispatch(RegisterStudent(data))
     }
 
+    const [modal, setModal] = useState(false);
+
+    const openModal = () => {
+        setModal(true);
+    };
+
+    const closeModal = () => {
+        setModal(false);
+    };
+
     return (
+        <Layout>
+        <div>
         <div className='bg-zinc-100'>
             <div className="grid min-h-screen grid-rows-header bg-zinc-100">
-                <div>
-                    <Navbar onMenuButtonClick={() => { }} />
-                </div>
+                
                 <div className='font-semibold text-black text-3xl mb-4 mt-10'>Add Student Details</div>
                 <form onSubmit={handleSubmit(submitForm)}>
                     <div>
@@ -79,11 +94,45 @@ const AddStudent = () => {
                                 </div>
                             </div>
                         </div>
-                        <Button className=' mb-8 text-lg' buttonText="Add" width={384} onClick={() => { }} />
+                            <Button className=' mb-8 text-lg' buttonText="Add" width={384} onClick={() => openModal()} />
                     </div>
                 </form>
             </div>
         </div>
+
+         <div>
+                <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
+                    <div className='flex justify-center'>
+                        <img src={IMAGES.verified_tick_icon}></img>
+                    </div>
+                    <Title text="Student Added" />
+                    
+                    <div className='flex my-2'>
+                        <div className='flex px-2 w-1/2 justify-center'>
+                            <button
+                                type="submit"
+                                className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
+                                onClick={closeModal}
+                            >
+                                Home
+                            </button>
+                        </div>
+                        <div className='flex px-2 w-1/2 justify-center'>
+                            <button
+                                type="submit"
+                                className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700"
+                                onClick={closeModal}
+                            >
+                                Add New
+                            </button>
+                        </div>
+                    </div>
+                </Modal>
+        </div>
+
+    </div >
+        </Layout>
+
     )
 }
 

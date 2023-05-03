@@ -58,7 +58,7 @@ const AllDegreesColumn = () => {
             minWidth: "100px",
             sortable: true,
             cell: (row: IDegreeDetails) => {
-                if (row?.degree?.completeVerified) {
+                if (row?.degree?.organisationVerified) {
                     return (
                         <div
                             className={`h-6 w-22 flex bg-green-600 items-center justify-center rounded-full px-3 py-0.5 text-sm font-medium text-gray-900">`}

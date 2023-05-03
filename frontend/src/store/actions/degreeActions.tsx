@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByYearAndUni, getCountDegreeByYears, getDegreebyId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
-import { IAddDegree, IDegreeCountByProgram, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails, IResponse } from '../types/types';
+import { IAddDegree, IDegreeCountByProgram, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails, IResponse, IUpdatedDegree } from '../types/types';
 
 export const GetAllDegreesHec = createAsyncThunk<
     Array<IDegreeDetails>,
@@ -252,7 +252,7 @@ export const GetDegreebyId = createAsyncThunk<
 )
 
 export const UpdateDegreeUniversity = createAsyncThunk<
-    IResponse,
+    IUpdatedDegree,
     { degreeId: string; },
     any
 >(

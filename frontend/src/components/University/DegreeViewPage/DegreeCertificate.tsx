@@ -8,14 +8,13 @@ import { getCaseClass, getOrgFullName } from '../../../utility/util';
 // import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
 interface Props {
-
-  degree : IDegreeDetails,
-
+  degree: IDegreeDetails,
 }
+
 function goBack() {
   window.history.back();
 }
-function DegreeCertificate({degree }: Props) {
+function DegreeCertificate({ degree }: Props) {
   return (
     <div className='relative'>
       <button onClick={goBack} className='absolute top-0 right-0 mt-2 mr-2 p-2 rounded-full border-2 border-black focus:outline-none'>
@@ -29,7 +28,11 @@ function DegreeCertificate({degree }: Props) {
               <div className="flex justify-between px-2 py-2 absolute top-0 left-0 w-full">
                 {/* ADD RELEVANT UNI LOGO */}
                 <img className='w-10 sm:w-20' src={IMAGES.iba_logo} alt="IBA logo"></img>
-                <img className="h-10 sm:h-16" src={IMAGES.unverified_icon} alt="Unverified icon" title="This degrees is pending approval from the Higher Education Commission" />
+                {degree?.degree?.HECVerified ? (
+                  <img className="h-10 sm:h-16" src={IMAGES.verified_tick_icon} alt="verified icon" title="This degrees is approved by all entities" />
+                ) : (
+                  <img className="h-10 sm:h-16" src={IMAGES.unverified_icon} alt="Unverified icon" title="This degrees is pending approval from the Higher Education Commission" />
+                )}
               </div>
               <h1 className="text-5xl font-bold mb-4 font-certificate">Certificate of Completion</h1>
               <p className="text-xl mb-4">This certifies that</p>

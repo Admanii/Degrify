@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import ReactDOMServer from 'react-dom/server';
 import Layout from '../components/general/Layout'
@@ -8,8 +8,10 @@ import DegreeCertificate from '../components/University/DegreeViewPage/DegreeCer
 import VerifiedTickIcon from '../components/University/DegreeViewPage/VerifiedTickIcon'
 import View from '../components/University/StudentProfile/View'
 import Modal from '../components/general/Modal/Modal'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Degree } from '../store/slice/degreeSlice';
+import { AppDispatch } from '../store/store';
+import { GetDegreebyId } from '../store/actions/degreeActions';
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
@@ -19,7 +21,7 @@ const graduatingYear = "2023"
 
 
 // function getCaseClass(programDeg: string) {
-  
+
 //   switch (programDeg) {
 //     case 'BSCS':
 //       return programDeg = "Bachelor of Science in Computer Science (BSCS)";
@@ -33,12 +35,23 @@ const graduatingYear = "2023"
 function DegreeViewPage() {
 
   const degree = useSelector(Degree);
-  
+  const query = new URLSearchParams(window.location.search);
+  const degreeId = query.get('degreeId') ?? '';
+  const dispatch = useDispatch<AppDispatch>();
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
     setModalIsOpen(true);
   };
+
+  useEffect(() => {
+    getDegreebyId();
+  }, [])
+
+  const getDegreebyId = async () => {
+    await dispatch(GetDegreebyId({ degreeId: degreeId }))
+  }
 
   // const openDegree = () => {
   //   const newWindow = window.open(
