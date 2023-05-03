@@ -56,12 +56,11 @@ function DegreeStudent() {
   useEffect(() => {
     getDegreebyId();
     //console.log(updatedDegree?.data?.organisationVerified)
-    console.log("in use effetc")
     console.log(isStudentApproved)
     console.log(isUniApproved)
     console.log(isHecApproved)
     setDisabled(!isStudentApproved || isUniApproved || isHecApproved)
-  }, [updatedDegree, isStudentApproved, isUniApproved])
+  }, [updatedDegree, isStudentApproved, isUniApproved, isHecApproved, disabled])
 
   const getDegreebyId = async () => {
     await dispatch(GetDegreebyId({ degreeId: degreeId }))
