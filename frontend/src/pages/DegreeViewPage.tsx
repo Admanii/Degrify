@@ -18,17 +18,17 @@ const graduatingYear = "2023"
 
 
 
-function getCaseClass(programDeg: string) {
+// function getCaseClass(programDeg: string) {
   
-  switch (programDeg) {
-    case 'BSCS':
-      return programDeg = "Bachelor of Science in Computer Science (BSCS)";
-    case 'BBA':
-      return 'Bachelor of Business Administration (BBA)';
-    default:
-      return '';
-  }
-}
+//   switch (programDeg) {
+//     case 'BSCS':
+//       return programDeg = "Bachelor of Science in Computer Science (BSCS)";
+//     case 'BBA':
+//       return 'Bachelor of Business Administration (BBA)';
+//     default:
+//       return '';
+//   }
+// }
 
 function DegreeViewPage() {
 
@@ -69,7 +69,7 @@ function DegreeViewPage() {
 
   return (
     <div className='flex justify-center items-center w-screen h-screen'>
-      <DegreeCertificate name={name} program={getCaseClass(programDeg)} graduatingYear={graduatingYear} degree={degree} />
+      <DegreeCertificate degree={degree} />
     </div>
 
     // {/* <HeadingWithSpan Text="STUDENT DEGREE" SpanText={NameErp} /> */}
