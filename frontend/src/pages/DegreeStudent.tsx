@@ -43,11 +43,12 @@ function DegreeStudent() {
   const dispatch = useDispatch<AppDispatch>();
   const query = new URLSearchParams(window.location.search);
   const degreeId = query.get('degreeId') ?? '';
-  const [updatedDegree, setUpdatedDegree] = useState<IUpdatedDegree>();
+  const [degree, setDegree] = useState<IDegreeDetails>();
   const [modal, setModal] = useState(false);
   const navigate = useNavigate();
-  const degree = useSelector(Degree);
   const userInfo = useSelector(UserInfo);
+  var userRole = userInfo?.user?.userRole ?? '';
+  console.log(userRole)
   const [isStudentApproved, setIsStudentApproved] = useState(false);
   const [isUniApproved, setIsUniApproved] = useState(false);
   const [isHecApproved, setIsHecApproved] = useState(false);
@@ -58,7 +59,7 @@ function DegreeStudent() {
     console.log(isStudentApproved)
     console.log(isUniApproved)
     console.log(isHecApproved)
-    if (userInfo?.user?.userRole == "UNIVERSITY") {
+    if (userRole == "UNIVERSITY") {
       if (!isStudentApproved) {
         setDisabled(!isStudentApproved)
       }
@@ -66,16 +67,18 @@ function DegreeStudent() {
         setDisabled(isUniApproved)
       }
     }
-    if (isHecApproved && userInfo?.user?.userRole == "HEC") {
+    if (isHecApproved && userRole == "HEC") {
       setDisabled(isUniApproved)
     }
-  }, [updatedDegree, isStudentApproved, isUniApproved, isHecApproved, disabled])
+  }, [isStudentApproved, isUniApproved, isHecApproved, disabled])
 
   const getDegreebyId = async () => {
-    await dispatch(GetDegreebyId({ degreeId: degreeId }))
-    setIsStudentApproved(degree?.degree?.studentVerified)
-    setIsUniApproved(degree?.degree?.organisationVerified)
-    setIsHecApproved(degree?.degree?.HECVerified)
+    const response = await dispatch(GetDegreebyId({ degreeId: degreeId }))
+    const result = unwrapResult(response);
+    setDegree(result);
+    setIsStudentApproved(result?.degree?.studentVerified)
+    setIsUniApproved(result?.degree?.organisationVerified)
+    setIsHecApproved(result?.degree?.HECVerified)
     console.log(degree)
   }
 
@@ -89,15 +92,14 @@ function DegreeStudent() {
 
   const approveDegree = async () => {
     var result;
-    if (userInfo?.user?.userRole == "UNIVERSITY") {
+    if (userRole == "UNIVERSITY") {
       const response = await dispatch(UpdateDegreeUniversity({ degreeId: degreeId }))
       result = unwrapResult(response);
     }
-    if (userInfo?.user?.userRole == "HEC") {
+    if (userRole == "HEC") {
       const response = await dispatch(UpdateDegreeHec({ degreeId: degreeId }))
       result = unwrapResult(response);
     }
-    setUpdatedDegree(result)
     setIsStudentApproved(result?.data?.studentVerified)
     setIsUniApproved(result?.data?.organisationVerified)
     setIsHecApproved(result?.data?.HECVerified)
@@ -159,18 +161,22 @@ function DegreeStudent() {
                 </Modal>
                 <div className='flex flex-col'>
                   <Button height={44} buttonText={'Approve Degree'} disabled={disabled} onClick={openModal} className={disabled ? "bg-gray-600 opacity-40 cursor-not-allowed" : ""}></Button>
-                  <div className='block'>
+                  <div>
                     {!isStudentApproved && (
                       <span className="text-sm text-red-500 font-medium">
                         *This degree is not approved by student
                       </span>
                     )}
-                    {(isUniApproved && isStudentApproved && userInfo.user.userRole == "UNIVERSITY") && (
+                    {(isUniApproved && isHecApproved && userRole == "UNIVERSITY") ? (
+                      <span className="text-sm text-green-500 font-medium">
+                        *This degree is approved by university and hec
+                      </span>
+                    ) : (isUniApproved && isStudentApproved && userRole == "UNIVERSITY") && (
                       <span className="text-sm text-green-500 font-medium">
                         *This degree is already approved by university
                       </span>
                     )}
-                    {(isHecApproved && userInfo.user.userRole == "HEC") && (
+                    {(isHecApproved && userRole == "HEC") && (
                       <span className="text-sm text-green-500 font-medium">
                         *This degree is already approved by hec
                       </span>

@@ -27,6 +27,12 @@ export const navItemsUni: NavItem[] = [
     inactiveIcon: IMAGES.user_icon,
   },
   {
+    label: "HEC Verified Degrees",
+    href: "/hec/verified/degrees",
+    activeIcon: IMAGES.verified_icon_active,
+    inactiveIcon: IMAGES.verified_icon,
+  },
+  {
     label: "Edit Requests",
     href: "/uni/edit/requests",
     activeIcon: IMAGES.user_icon_active,
