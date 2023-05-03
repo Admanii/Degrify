@@ -61,7 +61,6 @@ export interface IDegreeDetails {
         organisationVerified: boolean,
         HECVerified: boolean,
         completeVerified: boolean,
-
         dateCreated: string,
     }
     studentDetails: IStudentDetails
@@ -130,8 +129,23 @@ export interface IAddDegree {
     payload: any
 }
 
-
 export interface IDegreeCountByYearAndUni {
     _id: string,
     count: number
+}
+
+export interface IUpdatedDegree {
+    statusCode: string;
+    message: string;
+    data: {
+        _id: string,
+        studentID: string,
+        organisationID: string,
+        studentVerified: boolean,
+        organisationVerified: boolean,
+        HECVerified: boolean,
+        completeVerified: boolean,
+        active: boolean,
+        dateCreated: string,
+    }
 }
