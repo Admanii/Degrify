@@ -113,9 +113,10 @@ export const registerStudent = async (req, res) => {
     GraduatingYear,
     email,
     password,
-    userRole,
     organisationID,
   } = req.body;
+
+  const userRole = 'UNIVERSITY';
 
   const studentExist = await Student.findOne({
     $or: [
@@ -127,7 +128,7 @@ export const registerStudent = async (req, res) => {
       },
     ],
   });
-  
+
   if (studentExist) {
     return res.json(
       jsonGenerate(statusCode.CLIENT_ERROR, "Student already Exists")
@@ -150,7 +151,7 @@ export const registerStudent = async (req, res) => {
         jsonGenerate(statusCode.CLIENT_ERROR, "User Email already Exists")
       );
     }
-    
+
     const student = await Student.create({
       name: name,
       enrollmentNumber: enrollmentNumber,
@@ -215,7 +216,7 @@ export const registerOrganisation = async (req, res) => {
         jsonGenerate(statusCode.CLIENT_ERROR, "User Email already Exists", null)
       );
     }
-    
+
     const organisation = await Organistation.create({
       name: name,
       phoneNumber: phoneNumber,
