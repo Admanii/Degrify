@@ -221,6 +221,7 @@
 
 //TRY 3
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface ItemProps {
     imgSrc: string;
@@ -319,9 +320,9 @@ function EditShortcut() {
                     <h3 className="text-lg font-bold leading-none text-gray-900 dark:text-white">
                         Latest Edit Requests
                     </h3>
-                    <a href="/edit/requests" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                    <Link to="/uni/edit/requests" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
                         View all
-                    </a>
+                    </Link>
                 </div>
                 <div className="flow-root">
                     <EditShortcutList items={latestEditRequests} />

@@ -37,6 +37,10 @@ const AddStudent = () => {
         setModal(false);
     };
 
+    const toHome = () => {
+        setModal(false);
+    };
+
     return (
         <Layout>
         <div>
@@ -63,7 +67,7 @@ const AddStudent = () => {
                                 <div
                                     data-te-datepicker-init
                                     data-te-input-wrapper-init>
-                                    <InputField type={'text'} {...register('DateOfAdmission')} id={'DateOfAdmission'} label={'Date Of Admission'} hintText={'dd/mm/yyyy'} required={false} register={register} />
+                                    <InputField type={'date'} {...register('DateOfAdmission')} id={'DateOfAdmission'} label={'Date Of Admission'} hintText={'dd/mm/yyyy'} required={false} register={register} />
                                 </div>
                                 <div>
                                     <InputField type={'text'} {...register('email')} id={'email'} label={'Email'} hintText={'abc@xyz.com'} required={false} register={register} />
@@ -76,7 +80,7 @@ const AddStudent = () => {
                                 <div
                                     data-te-datepicker-init
                                     data-te-input-wrapper-init>
-                                    <InputField type={'text'} {...register('DateOfBirth')} id={'DateOfBirth'} label={'Date of Birth'} hintText={'dd/mm/yyyy'} required={false} register={register} />
+                                    <InputField type={'date'} {...register('DateOfBirth')} id={'DateOfBirth'} label={'Date of Birth'} hintText={'dd/mm/yyyy'} required={false} register={register} />
                                 </div>
                                 <div>
                                     <InputField type={'text'} {...register('studentID')} id={'studentID'} label={'Student ID'} hintText={'123'} required={false} register={register} />
@@ -87,7 +91,7 @@ const AddStudent = () => {
                                 <div
                                     data-te-datepicker-init
                                     data-te-input-wrapper-init>
-                                    <InputField type={'text'} {...register('DateOfompletion')} id={'DateOfCompletion'} label={'Date of Completion'} hintText={'dd/mm/yyyy'} required={false} register={register} />
+                                    <InputField type={'date'} {...register('DateOfompletion')} id={'DateOfCompletion'} label={'Date of Completion'} hintText={'dd/mm/yyyy'} required={false} register={register} />
                                 </div>
                                 <div>
                                     <InputField type={'password'} {...register('password')} id={'password'} label={'Password'} hintText={'*******'} required={false} register={register} />

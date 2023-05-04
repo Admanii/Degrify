@@ -37,9 +37,9 @@ const HeyUni = () => {
         <div className="w-2/3 h-96 bg-white m-4 shadow-md border overflow-hidden hover:overflow-y-auto">
           <div className="flex justify-between items-center sm:py-8 sm:px-4">
             <h3 className="text-lg font-bold leading-none text-gray-900 dark:text-white">
-              Verify Degrees
+              Approve Degrees
             </h3>
-            <a href="/unverified/degrees" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+            <a href="/uni/unverified/degrees" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
               View all
             </a>
           </div>

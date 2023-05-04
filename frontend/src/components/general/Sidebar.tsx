@@ -90,15 +90,15 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec, studen
                             <div><img src={IMAGES.plus_icon} alt="plus" /></div>
                             <div className="font-">Register New Student</div>
                         </button>
-                        <button className="p-2 mx-3 mt-4 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
+                        {/* <button className="p-2 mx-3 mt-4 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
                             <div><img src={IMAGES.plus_icon} alt="plus" /></div>
                             <div className="font-">Add New Degree</div>
-                        </button>
+                        </button> */}
                     </div>
                 )}
 
                 {userRole === 'HEC' && (
-                    <button onClick={() => {}} className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
+                    <button onClick={() => { navigate('/AddUniversity') }}className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
                         <div><img src={IMAGES.plus_icon} alt="plus" /></div>
                         <div className="font-">Add New University</div>
                     </button>
