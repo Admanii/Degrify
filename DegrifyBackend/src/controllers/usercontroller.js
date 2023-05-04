@@ -116,7 +116,7 @@ export const registerStudent = async (req, res) => {
     organisationID,
   } = req.body;
 
-  const userRole = 'UNIVERSITY';
+  const userRole = 'STUDENT';
 
   const studentExist = await Student.findOne({
     $or: [
@@ -187,7 +187,9 @@ export const registerStudent = async (req, res) => {
 };
 
 export const registerOrganisation = async (req, res) => {
-  const { name, phoneNumber, address, email, password, userRole } = req.body;
+  const { name, phoneNumber, address, email, password } = req.body;
+
+  const userRole = 'STUDENT';
 
   const organisationExist = await Organistation.findOne({
     $or: [

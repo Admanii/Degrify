@@ -30,7 +30,8 @@ const AddStudent = () => {
         data.organisationID = organisationID
         const response = await dispatch(RegisterStudent(data))
         const result = unwrapResult(response)
-        if (result?.data && (result?.statusCode === "400")) {
+        console.log(result?.statusCode)
+        if (result?.data != null && (result?.statusCode === 200)) {
             setModal(true);
         }
         else {
