@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import Degree from "../models/Degree.js";
 import { statusCode } from "../utils/constant.js";
 import { jsonGenerate } from "../utils/helper.js";
+import { uploadJSONToIPFS } from "../pinata.js";
 
 export const HECAppovedDegree = async (req, res) => {
   try {
@@ -23,11 +24,23 @@ export const HECAppovedDegree = async (req, res) => {
         jsonGenerate(statusCode.SUCCESS, "Degree Not Found", null)
       );
     }
-
+    const response = await uploadJSONToIPFS(updatedDegree);
+    console.log(response.pinataURL);
+    const updateDegree = await Degree.findByIdAndUpdate(
+      req.query.degree_id,
+      {
+        ipfsLink: response.pinataURL,
+        //dateCreated: Date.now,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
     return res.json(
       jsonGenerate(statusCode.SUCCESS, "Degree Updated by HEC", updatedDegree)
     );
-
   } catch (error) {
     return res.json(
       jsonGenerate(
@@ -96,7 +109,11 @@ export const StudentAppovedDegree = async (req, res) => {
     }
 
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Degree Updated by Student", updatedDegree)
+      jsonGenerate(
+        statusCode.SUCCESS,
+        "Degree Updated by Student",
+        updatedDegree
+      )
     );
   } catch (error) {
     return res.json(
@@ -129,7 +146,11 @@ export const CompleteAppovedDegree = async (req, res) => {
     }
 
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Degree Updated Completely", updatedDegree)
+      jsonGenerate(
+        statusCode.SUCCESS,
+        "Degree Updated Completely",
+        updatedDegree
+      )
     );
   } catch (error) {
     return res.json(

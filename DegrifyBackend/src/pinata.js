@@ -16,8 +16,6 @@ export const uploadJSONToIPFS = async (JSONBody) => {
       },
     })
     .then(function (response) {
-      console.log(response.data);
-
       return {
         success: true,
         pinataURL:

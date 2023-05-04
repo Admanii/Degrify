@@ -50,6 +50,3 @@ const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`Application is running at ${port}`);
 });
-
-// const response = uploadJSONToIPFS({ name: "saad" });
-// console.log(response);
