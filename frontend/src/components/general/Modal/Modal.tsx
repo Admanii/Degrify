@@ -49,7 +49,7 @@ const Modal: FC<ModalProps> = ({
             >
               <Dialog.Panel className="inline-block align-bottom bg-white border border-black rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-1/3 sm:p-6 opacity-100 translate-y-0 sm:scale-100">
                 <>{children}</>
-                {closeButton && (
+                {/* {closeButton && (
                   <button
                     type="button"
                     className="absolute top-6 right-6 bg-[#E6EDF0] h-7 w-7 flex justify-center align-middle cursor-pointer hover:bg-gray-200 rounded-full p-1 items-center border-none outline-none"
@@ -58,7 +58,7 @@ const Modal: FC<ModalProps> = ({
                     <span className="sr-only">Close</span>
                     <XMarkIcon fontSize="small" className="text-[#2C3545]" />
                   </button>
-                )}
+                )} */}
               </Dialog.Panel>
             </Transition.Child>
           </div>

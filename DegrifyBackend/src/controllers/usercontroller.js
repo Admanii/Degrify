@@ -187,9 +187,7 @@ export const registerStudent = async (req, res) => {
 };
 
 export const registerOrganisation = async (req, res) => {
-  const { name, phoneNumber, address, email, password } = req.body;
-
-  const userRole = 'STUDENT';
+  const { name, phoneNumber, address, email, password, userRole } = req.body;
 
   const organisationExist = await Organistation.findOne({
     $or: [

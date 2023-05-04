@@ -18,7 +18,6 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 const AddStudent = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const { register, handleSubmit, reset } = useForm<IRegisterStudent>()
@@ -30,7 +29,7 @@ const AddStudent = () => {
         data.organisationID = organisationID
         const response = await dispatch(RegisterStudent(data))
         const result = unwrapResult(response)
-        console.log(result?.statusCode)
+        //console.log(result?.statusCode)
         if (result?.data != null && (result?.statusCode === 200)) {
             setModal(true);
         }
@@ -43,20 +42,12 @@ const AddStudent = () => {
 
     const [modal, setModal] = useState(false);
 
-    // const openModal = () => {
-    //     setModal(true);
-    // };
-
     const closeModal = () => {
         setModal(false);
     };
 
     const clearForm = () => {
         reset();
-        setModal(false);
-    };
-
-    const redirectToHome = () => {
         setModal(false);
     };
 
