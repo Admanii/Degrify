@@ -7,6 +7,7 @@ import { GetAllDegreesHec, GetUnverifiedDegreesHec, GetVerifiedDegreesHec, Updat
 import { GetAllUniversities, RegisterOrganisation } from '../../store/actions/organisationActions'
 import { IRegisterOrganisation } from '../../store/types/types'
 import { UserInfo } from '../../store/slice/authSlice'
+import HeyHec from '../../components/HEC/Dashboard/HeyHec'
 
 
 const MainPageHec = () => {
@@ -36,7 +37,8 @@ const MainPageHec = () => {
 
   return (
     <Layout>
-      <HeadingWithSpan Text={userInfo?.user?.name} SpanText={"Here's what is happening today"} marginTop={'6'} />
+      <HeyHec></HeyHec>
+      {/* <HeadingWithSpan Text={userInfo?.user?.name} SpanText={"Here's what is happening today"} marginTop={'6'} /> */}
     </Layout>
   )
 }
