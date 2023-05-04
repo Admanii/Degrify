@@ -15,6 +15,7 @@ import { SubTitle } from '../../general/Modal/SubTitle';
 import Layout from '../../general/Layout';
 import { useNavigate } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 const AddStudent = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -31,6 +32,11 @@ const AddStudent = () => {
         const result = unwrapResult(response)
         if (result?.data && (result?.statusCode === "400")) {
             setModal(true);
+        }
+        else {
+            toast.error(result?.message, {
+                position: toast.POSITION.TOP_RIGHT
+            },);
         }
     }
 

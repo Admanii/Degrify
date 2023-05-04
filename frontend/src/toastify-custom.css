@@ -1,0 +1,19 @@
+/* Customize the background color of the toast */
+/* .Toastify__toast {
+    background-color: #000000;
+} */
+
+/* Customize the color of the text in the toast */
+/* .Toastify__toast-body {
+    color: #ffffff;
+} */
+
+/* Customize the color of the tick icon */
+/* .Toastify__toast--success svg path {
+    stroke: #000000 !important;
+  } */
+
+/* Customize the color of the progress bar */
+.Toastify__progress-bar {
+    background-color: #000000;
+}
