@@ -8,7 +8,7 @@ function ApproveDegree() {
   return (
     <Layout>
       <div>
-        <View student={{} as IStudentDetails} headingText={'APPROVE DEGREE'} />
+        <View student={{} as IStudentDetails} degreeId='' isDegreeExist={false} headingText={'APPROVE DEGREE'} />
         <div className=' items-end'>
           <Button buttonText="Approve" width={200} />
           <Button className='bg-white text-black' buttonText="Cancel" width={200} />

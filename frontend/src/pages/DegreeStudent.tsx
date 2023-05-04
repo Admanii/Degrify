@@ -100,9 +100,9 @@ function DegreeStudent() {
       const response = await dispatch(UpdateDegreeHec({ degreeId: degreeId }))
       result = unwrapResult(response);
     }
-    setIsStudentApproved(result?.data?.studentVerified)
-    setIsUniApproved(result?.data?.organisationVerified)
-    setIsHecApproved(result?.data?.HECVerified)
+    setIsStudentApproved(result?.data?.studentVerified ?? false)
+    setIsUniApproved(result?.data?.organisationVerified ?? false)
+    setIsHecApproved(result?.data?.HECVerified ?? false)
     navigate(`/view/degreecertificate?degreeId=${degreeId}`);
   };
 

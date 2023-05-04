@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByYearAndUni, getCountDegreeByYears, getDegreebyId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
+import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByYearAndUni, getCountDegreeByYears, getDegreebyId, getDegreebyStudentId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
 import { IAddDegree, IDegreeCountByProgram, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails, IResponse, IUpdatedDegree } from '../types/types';
 
 export const GetAllDegreesHec = createAsyncThunk<
@@ -274,7 +274,7 @@ export const UpdateDegreeUniversity = createAsyncThunk<
 );
 
 export const UpdateDegreeHec = createAsyncThunk<
-    IResponse,
+    IUpdatedDegree,
     { degreeId: string; },
     any
 >(
@@ -296,7 +296,7 @@ export const UpdateDegreeHec = createAsyncThunk<
 );
 
 export const UpdateDegreeStudent = createAsyncThunk<
-    IResponse,
+    IUpdatedDegree,
     { degreeId: string; },
     any
 >(
@@ -354,6 +354,34 @@ export const GetCountDegreeByYearAndUni = createAsyncThunk<
                 return rejectWithValue(response.data.message)
             }
             return response.data.data
+        } catch (error) {
+            //@ts-ignore
+            if (error.response && error.response.data.message) {
+                //@ts-ignore
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(response.message)
+            }
+        }
+    }
+)
+
+export const GetDegreebyStudentId = createAsyncThunk<
+    IResponse,
+    {
+        studentId: string;
+    },
+    any
+>(
+    'degreebystudentid',
+    async ({ studentId }, { rejectWithValue }) => {
+        var response: any = {};
+        try {
+            response = await getDegreebyStudentId(studentId);
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data
         } catch (error) {
             //@ts-ignore
             if (error.response && error.response.data.message) {
