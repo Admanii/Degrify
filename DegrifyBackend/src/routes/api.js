@@ -82,7 +82,7 @@ apiProtected.get("/getcoursebyprog", getCoursebyProg);
 apiProtected.get("/getcoursebyproganduni", getCoursebyProgAndUni);
 
 // post approved degrees
-apiProtected.post("/adddegree", AddDegree);
+apiProtected.post("/adddegree", AddDegree); // done
 apiProtected.post("/hecapproveddegree", HECAppovedDegree); // done
 apiProtected.post("/studentapproveddegree", StudentAppovedDegree); // done
 apiProtected.post("/organisationapproveddegree", OrganisationAppovedDegree); // done
@@ -116,7 +116,7 @@ apiProtected.get(
 
 // get all students
 apiProtected.get("/getallStudents", getAllStudent); // done
-apiProtected.get("/studentsbyyear", getStudentbyYear);
+apiProtected.get("/studentsbyyear", getStudentbyYear); 
 apiProtected.get("/studentsbyuni", getStudentbyUni);
 apiProtected.get("/studentsbyprogram", getStudentbyProgram);
 apiProtected.get("/studentsbyprogramanduni", getStudentbyProgramAndUni);
@@ -125,7 +125,7 @@ apiProtected.get("/studentsbyyearanduni", getStudentbyYearAndUni);
 // get details by ID
 apiProtected.get("/getstudentbyid", getStudent); // done
 apiProtected.get("/getdegreebyid", getDegreeByID); // done
-apiProtected.get("/getdegreebystudentid", getDegreeByStudentID); // ??
+apiProtected.get("/getdegreebystudentid", getDegreeByStudentID); // done
 apiProtected.get("/getorganisationbyid", getOrganisationByID); // done
 
 // will do this if required
