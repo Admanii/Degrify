@@ -101,7 +101,7 @@ export const addDegree = async (studentId: string, organisationId: string, paylo
     return api.post(`/adddegree?student_id=${studentId}&organisation_id=${organisationId}`, payload, config);
 };
 
-export const getCountDegreeByYearAndUni = async () => {
+export const getCountDegreeByYearAndUni = async (organisationId: string,) => {
     await getConfig();
-    return api.get("/studentsbyyearanduni", config);
+    return api.get(`/studentsbyyearanduni?organisation_id=${organisationId}`, config);
 }

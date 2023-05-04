@@ -3,10 +3,8 @@ import HeyUni from '../../components/University/Dashboard/HeyUni'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../store/store';
 import { useEffect } from "react";
-import { AddDegree, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesbyUniId, UpdateDegreeUniversity } from '../../store/actions/degreeActions';
-import { GetAllStudentsbyUniId, RegisterStudent } from '../../store/actions/studentActions';
-import { IRegisterStudent } from '../../store/types/types';
 import { UserInfo } from '../../store/slice/authSlice';
+import { GetCountDegreeByProgram, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId } from '../../store/actions/degreeActions';
 
 
 const MainPageUni = () => {
@@ -16,39 +14,16 @@ const MainPageUni = () => {
 
   const organisation_id = userInfo?.user?.organisationID ?? '';
 
-  const student: IRegisterStudent = {
-    "name": "Ahmed", "enrollmentNumber": "2023-BSCS", "fatherName": "Riaz", "studentID": "18638",
-    "DateOfBirth": "1999-04-18", "CNIC": "4220195724309", "DateOfAdmission": "2017-04-03", "DateOfompletion": "2021-04-03", "Program": "BSCS",
-    "GraduatingYear": "2023", "organisationID": "64389305e39fc28b20e5646d",
-    "email": "ahmed@gmail.com", "password": "ahmed123456", "userRole": "STUDENT"
-  }
-
   useEffect(() => {
     getDegrees();
-    //registerStudent(student);
-    //updateDegreeUni("6442740ba9fd0ee7fdbd856a");
-    //addDegree("64405d954f12eb788e6621d6", organisation_id, {})
   }, [])
-
-  const registerStudent = async (student: IRegisterStudent) => {
-    await dispatch(RegisterStudent(student))
-  }
-
-  const updateDegreeUni = async (degreeId: string) => {
-    await dispatch(UpdateDegreeUniversity({ degreeId }))
-  }
-
-  const addDegree = async (studentID: string, organisationId: string, payload: any) => {
-    await dispatch(AddDegree({ studentId: studentID, organisationId: organisationId, payload: payload }))
-  }
 
   const getDegrees = async () => {
     await dispatch(GetUnverifiedDegreesbyUniId({ organisation_id: organisation_id }))
     await dispatch(GetCountDegreeByYears({}))
     await dispatch(GetCountDegreeByProgram({}))
-    await dispatch(GetCountDegreeByYearAndUni({}))
+    await dispatch(GetCountDegreeByYearAndUni({ organisationId: organisation_id }))
   }
-
 
   return (
 

@@ -341,14 +341,14 @@ export const AddDegree = createAsyncThunk<
 
 export const GetCountDegreeByYearAndUni = createAsyncThunk<
     Array<IDegreeCountByYearAndUni>,
-    {},
+    { organisationId: string; },
     any
 >(
     'uni/each/year/count',
-    async ({ }, { rejectWithValue }) => {
+    async ({ organisationId }, { rejectWithValue }) => {
         var response: any = {};
         try {
-            response = await getCountDegreeByYearAndUni();
+            response = await getCountDegreeByYearAndUni(organisationId);
             //console.log(response.data)
             if (response.data.statusCode === 401) {
                 return rejectWithValue(response.data.message)
