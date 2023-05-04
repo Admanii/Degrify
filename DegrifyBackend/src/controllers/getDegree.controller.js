@@ -129,6 +129,30 @@ export const getDegreeByID = async (req, res) => {
   }
 };
 
+export const getDegreeByStudentID = async (req, res) => {
+  try {
+    const degree = await Degree.findOne({
+      studentID: req.query.student_id,
+    }).select([
+      "_id",
+      "studentID",
+      "studentVerified",
+      "organisationVerified",
+      "HECVerified",
+      "completeVerified",
+      "dateCreated",
+    ]);
+    if (!degree) {
+      return res.json(jsonGenerate(statusCode.CLIENT_ERROR, "Not Exists"));
+    }
+    return res.json(jsonGenerate(statusCode.SUCCESS, "Exists", degree));
+  } catch (err) {
+    console.log(err);
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed to disply", err)
+    );
+  }
+};
 export const getStudentVerifiedDegrees = async (req, res) => {
   try {
     const list = await Degree.find({ studentVerified: true }).select([

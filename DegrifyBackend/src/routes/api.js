@@ -13,7 +13,7 @@ import {
   registerOrganisation,
   registerStudent,
 } from "../controllers/usercontroller.js";
-import { 
+import {
   AddCourse,
   deleteCourse,
   updateCourse,
@@ -21,13 +21,14 @@ import {
   getAllCourse,
   getCoursebyProg,
   getCoursebyProgAndUni,
-  getCoursebyUni
-  } from "../controllers/course.controller.js";
+  getCoursebyUni,
+} from "../controllers/course.controller.js";
 
 import {
   getAllDegrees,
   getCompleteVerifiedDegrees,
   getDegreeByID,
+  getDegreeByStudentID,
   getHECAllDegree,
   getHECVerifiedDegrees,
   getOrganisationVerifiedDegrees,
@@ -61,7 +62,7 @@ export const apiRoute = express.Router();
 export const apiProtected = express.Router();
 
 // Register and SignUp
-apiRoute.post("/signupstudent", registerStudent);  // done
+apiRoute.post("/signupstudent", registerStudent); // done
 apiRoute.post("/signuporganisation", registerOrganisation); // done
 apiRoute.post("/login", Login); // done
 
@@ -86,13 +87,12 @@ apiProtected.post("/hecapproveddegree", HECAppovedDegree); // done
 apiProtected.post("/studentapproveddegree", StudentAppovedDegree); // done
 apiProtected.post("/organisationapproveddegree", OrganisationAppovedDegree); // done
 
-apiProtected.post("/completeapproveddegree", CompleteAppovedDegree);  // ?? 
+apiProtected.post("/completeapproveddegree", CompleteAppovedDegree); // ??
 apiProtected.get("/getcompleteverifieddegree", getCompleteVerifiedDegrees); // ??
 
 // get degrees
 // apiProtected.get("/getalldegree", getAllDegrees);
 // apiProtected.get("/getorganisationverifieddegree", getOrganisationVerifiedDegrees);
-
 
 // get organisation and university
 apiProtected.get("/getuniversities", getUniversities); // done
@@ -109,7 +109,10 @@ apiProtected.get("/getalldegreesuniversity", getUniversityAllDegree); // done
 // verified Degree by UniID
 apiProtected.get("/getverifieddegreesuniversity", getVerifiedUniversityDegree); // done
 // Unverified Degree by UniID
-apiProtected.get("/getunverifieddegreesuniversity", getUnverifiedUniversityDegree); // done
+apiProtected.get(
+  "/getunverifieddegreesuniversity",
+  getUnverifiedUniversityDegree
+); // done
 
 // get all students
 apiProtected.get("/getallStudents", getAllStudent); // done
@@ -119,9 +122,10 @@ apiProtected.get("/studentsbyprogram", getStudentbyProgram);
 apiProtected.get("/studentsbyprogramanduni", getStudentbyProgramAndUni);
 apiProtected.get("/studentsbyyearanduni", getStudentbyYearAndUni);
 
-// get details by ID 
+// get details by ID
 apiProtected.get("/getstudentbyid", getStudent); // done
 apiProtected.get("/getdegreebyid", getDegreeByID); // done
+apiProtected.get("/getdegreebystudentid", getDegreeByStudentID); // ??
 apiProtected.get("/getorganisationbyid", getOrganisationByID); // done
 
 // will do this if required
