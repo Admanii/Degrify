@@ -140,7 +140,7 @@ export const registerStudent = async (req, res) => {
     return res.json(
       jsonGenerate(
         statusCode.CLIENT_ERROR,
-        "4 years difference between Admissionyear and Completionyear"
+        "4 years difference between Admissionyear and birthYear"
       )
     );
   }
