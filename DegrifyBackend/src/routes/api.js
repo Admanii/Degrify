@@ -57,13 +57,28 @@ import {
   getOrganisationByID,
   getUniversities,
 } from "../controllers/organisation.controller.js";
+import {
+  organisationRegister,
+  studentRegister,
+} from "../middleware/validator.js";
+import { validateResult } from "../middleware/validationResult.js";
 
 export const apiRoute = express.Router();
 export const apiProtected = express.Router();
 
 // Register and SignUp
-apiRoute.post("/signupstudent", registerStudent); // done
-apiRoute.post("/signuporganisation", registerOrganisation); // done
+apiRoute.post(
+  "/signupstudent",
+  studentRegister,
+  validateResult,
+  registerStudent
+); // done
+apiRoute.post(
+  "/signuporganisation",
+  organisationRegister,
+  validateResult,
+  registerOrganisation
+); // done
 apiRoute.post("/login", Login); // done
 
 //apiProtected.post("/addstudent", AddStudent);
@@ -116,7 +131,7 @@ apiProtected.get(
 
 // get all students
 apiProtected.get("/getallStudents", getAllStudent); // done
-apiProtected.get("/studentsbyyear", getStudentbyYear); 
+apiProtected.get("/studentsbyyear", getStudentbyYear);
 apiProtected.get("/studentsbyuni", getStudentbyUni);
 apiProtected.get("/studentsbyprogram", getStudentbyProgram);
 apiProtected.get("/studentsbyprogramanduni", getStudentbyProgramAndUni);

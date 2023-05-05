@@ -116,7 +116,34 @@ export const registerStudent = async (req, res) => {
     organisationID,
   } = req.body;
 
-  const userRole = 'STUDENT';
+  const userRole = "STUDENT";
+
+  const date1 = new Date(DateOfAdmission);
+  const Admissionyear = date1.getFullYear();
+  const date2 = new Date(DateOfBirth);
+  const birthYear = date2.getFullYear();
+  const date = new Date(DateOfompletion);
+  const Completionyear = date.getFullYear();
+  console.log(birthYear);
+  console.log(Completionyear);
+  console.log(Completionyear - Admissionyear);
+
+  if (Completionyear - Admissionyear < 4) {
+    return res.json(
+      jsonGenerate(
+        statusCode.CLIENT_ERROR,
+        "4 years difference between Admissionyear and Completionyear"
+      )
+    );
+  }
+  if (Admissionyear - birthYear < 16) {
+    return res.json(
+      jsonGenerate(
+        statusCode.CLIENT_ERROR,
+        "4 years difference between Admissionyear and Completionyear"
+      )
+    );
+  }
 
   const studentExist = await Student.findOne({
     $or: [
@@ -188,6 +215,9 @@ export const registerStudent = async (req, res) => {
 
 export const registerOrganisation = async (req, res) => {
   const { name, phoneNumber, address, email, password, userRole } = req.body;
+
+  if (phoneNumber.length > 11) {
+  }
 
   const organisationExist = await Organistation.findOne({
     $or: [
