@@ -14,8 +14,8 @@ export const Login = async (req, res) => {
   if (!user) {
     return res.json(
       jsonGenerate(
-        statusCode.UNPROCESSABLE_ENTITY,
-        "Username or password not exists"
+        statusCode.CLIENT_ERROR,
+        "User email does not exists"
       )
     );
   }
@@ -25,8 +25,8 @@ export const Login = async (req, res) => {
   if (!verified) {
     return res.json(
       jsonGenerate(
-        statusCode.UNPROCESSABLE_ENTITY,
-        "Username or password not exists"
+        statusCode.CLIENT_ERROR,
+        "Incorrect Password"
       )
     );
   }
@@ -57,7 +57,7 @@ export const Login = async (req, res) => {
       .exec();
 
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
+      jsonGenerate(statusCode.SUCCESS, "Login Successfull", {
         userInfo: {
           user,
           studentDetails,
@@ -74,7 +74,7 @@ export const Login = async (req, res) => {
       .exec();
 
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Login Succesfull", {
+      jsonGenerate(statusCode.SUCCESS, "Login Successfull", {
         userInfo: {
           user,
           organistionDetails,
@@ -92,7 +92,7 @@ export const Login = async (req, res) => {
   }
 
   return res.json(
-    jsonGenerate(statusCode.SUCCESS, "Login Succesfull but must be admin", {
+    jsonGenerate(statusCode.SUCCESS, "Login Successfull but must be admin", {
       token: token,
       hash: hash,
     })
