@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useRef } from 'react';
 import ApexCharts from "apexcharts";
 import { useSelector } from 'react-redux';
-import { DegreesByProgram } from '../../../store/slice/degreeSlice';
+import { DegreesByProgram, DegreesByProgramAndUni } from '../../../store/slice/degreeSlice';
 
 // console.log("DegreesByProgram" + DegreesByProgram)
 
@@ -108,9 +108,13 @@ interface Props {
 const Chart02: React.FC<Props> = ({ id }) => {
   const chartRef = useRef<any>(null);
   const degreesByProgram = useSelector(DegreesByProgram);
+  const degreesByProgramAndUni = useSelector(DegreesByProgramAndUni);
+  
   console.log("degreesByProgram: "+degreesByProgram[0]._id)
+  console.log("degreesByProgramAndUni: "+degreesByProgramAndUni)
+  
 
-  function searchYearCount(program: { toString: () => string; }) {
+  function searchProgramCount(program: { toString: () => string; }) {
     for (let i = 0; i < degreesByProgram.length; i++) {
       if (degreesByProgram[i]._id === program.toString()) {
         return degreesByProgram[i].count;
@@ -124,7 +128,7 @@ const Chart02: React.FC<Props> = ({ id }) => {
       series: [
         {
           name: "Students",
-          data: [44, 55, 41, 67, 22, 43],
+          data: [searchProgramCount("BBA"), searchProgramCount("BSCS"), searchProgramCount("ACF"), searchProgramCount("BSSS"), searchProgramCount("BECO"), searchProgramCount("BSEM")],
         },
       ],
       colors: ["#3056D3", "#80CAEE"],

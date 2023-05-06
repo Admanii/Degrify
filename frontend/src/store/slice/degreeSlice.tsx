@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
-import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetDegreebyId, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId, UpdateDegreeUniversity } from '../actions/degreeActions';
-import { IDegreeCountByProgram, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails } from '../types/types';
+import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByProgramAndUni, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetDegreebyId, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId, UpdateDegreeUniversity } from '../actions/degreeActions';
+import { IDegreeCountByProgram, IDegreeCountByProgramAndUni, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails,} from '../types/types';
 
 const initialState: IState = {
     loading: false,
@@ -11,9 +11,11 @@ const initialState: IState = {
     degreesByYear: [],
     degreesByProgram: [],
     degreesByYearAndUni: [],
+    degreesByProgramAndUni: [],
     degree: {} as IDegreeDetails,
     error: {},
     success: false,
+
 }
 
 interface IState {
@@ -24,6 +26,7 @@ interface IState {
     degreesByYear: Array<IDegreeCountByYear>;
     degreesByProgram: Array<IDegreeCountByProgram>
     degreesByYearAndUni: Array<IDegreeCountByYearAndUni>
+    degreesByProgramAndUni: Array<IDegreeCountByProgramAndUni>
     degree: IDegreeDetails
     error: {};
     success: boolean;
@@ -181,6 +184,20 @@ const degreeSlice = createSlice({
             //     state.degree = payload
             //     state.success = true
             // })
+            .addCase(GetCountDegreeByProgramAndUni.pending, (state) => {
+                state.loading = true
+                state.error = {}
+            })
+            .addCase(GetCountDegreeByProgramAndUni.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.degreesByProgramAndUni = payload
+                state.success = true
+            })
+            .addCase(GetCountDegreeByProgramAndUni.rejected, (state, payload) => {
+                state.loading = false
+                state.error = payload.payload ?? ''
+                state.success = false
+            })
     },
 })
 
@@ -192,3 +209,4 @@ export const DegreesByYear = (state: RootState) => state.degree.degreesByYear;
 export const DegreesByProgram = (state: RootState) => state.degree.degreesByProgram;
 export const Degree = (state: RootState) => state.degree.degree;
 export const DegreesByYearAndUni = (state: RootState) => state.degree.degreesByYearAndUni;
+export const DegreesByProgramAndUni = (state: RootState) => state.degree.degreesByProgramAndUni;

@@ -149,3 +149,8 @@ export interface IUpdatedDegree {
         dateCreated: string,
     }
 }
+
+export interface IDegreeCountByProgramAndUni {
+    _id: string,
+    count: number
+}

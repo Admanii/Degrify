@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import ApexCharts, { ApexOptions } from "apexcharts";
-import { DegreesByProgram, DegreesByYear, DegreesByYearAndUni } from "../../../store/slice/degreeSlice";
+import { DegreesByProgram, DegreesByProgramAndUni, DegreesByYear, DegreesByYearAndUni } from "../../../store/slice/degreeSlice";
 import { useSelector } from "react-redux";
 
 const Chart01: React.FC = (): JSX.Element => {
@@ -8,12 +8,17 @@ const Chart01: React.FC = (): JSX.Element => {
   const degreesByYear = useSelector(DegreesByYear);
   const degreesByProgram = useSelector(DegreesByProgram);
   const degreesByYearAndUni = useSelector(DegreesByYearAndUni);
+  // const degreesByProgramAndUni = useSelector(DegreesByProgramAndUni)
 
   // console.log(degreesByYear)
   console.log("degreesByProgram: "+ degreesByProgram)
   console.log("degreesByYearAndUni: "+ degreesByYearAndUni[0]._id)
+  // console.log("degreesByProgramAndUni01: "+ degreesByProgramAndUni[0]._id)
   //console.log("degreesByProgram: "+ degreesByProgram[0].count)
 
+
+  const years = ["2017",'2018',"2019","2020","2021","2022","2023","2024","2025","2026","2027"]
+  
   function searchYearCount(year: { toString: () => string; }) {
     for (let i = 0; i < degreesByYearAndUni.length; i++) {
       if (degreesByYearAndUni[i]._id === year.toString()) {
@@ -22,7 +27,12 @@ const Chart01: React.FC = (): JSX.Element => {
     }
     return 0;
   }
-  
+  const counts = years.map(year => searchYearCount(year));
+  // const year = years.map(year => ({
+  //   label: year,
+  //   value: year
+  // }));
+  const year = years.map(yearStr => parseInt(yearStr));
   // console.log("Check 2023: "+searchYearCount(2024))
   // const byYear(){
     // degreesByYear
@@ -32,7 +42,20 @@ const Chart01: React.FC = (): JSX.Element => {
     series: [
       {
         name: "Students",
-        data: [searchYearCount(2012), searchYearCount(2013), searchYearCount(2014), searchYearCount(2015), searchYearCount(2016), searchYearCount(2017), searchYearCount(2018), searchYearCount(2019), searchYearCount(2020), searchYearCount(2021), searchYearCount(2022), searchYearCount(2023)],
+        data:
+          // searchYearCount(years[0]),
+          // searchYearCount(years[1]), 
+          // searchYearCount(years[2]), 
+          // searchYearCount(years[3]), 
+          // searchYearCount(years[4]), 
+          // searchYearCount(years[5]), 
+          // searchYearCount(2018), 
+          // searchYearCount(2019), 
+          // searchYearCount(2020), 
+          // searchYearCount(2021), 
+          // searchYearCount(2022), 
+          // searchYearCount(2023)],
+          counts
       },
       // {
       //   name: "Product Two",
@@ -120,8 +143,10 @@ const Chart01: React.FC = (): JSX.Element => {
     },
     xaxis: {
       type: "category",
-      categories: [
-        "2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023",],
+      categories: 
+      year,
+      // ["2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028",'2029'],
+        // `${years[0]}`,`${years[1]}`,"2014","2015","2016","2017","2018","2019","2020","2021","2022","2023",],
       axisBorder: {
         show: false,
       },

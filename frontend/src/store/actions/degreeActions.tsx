@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByYearAndUni, getCountDegreeByYears, getDegreebyId, getDegreebyStudentId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
-import { IAddDegree, IDegreeCountByProgram, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails, IResponse, IUpdatedDegree } from '../types/types';
+import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByProgram, getCountDegreeByProgramAndUni, getCountDegreeByYearAndUni, getCountDegreeByYears, getDegreebyId, getDegreebyStudentId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
+import { IAddDegree, IDegreeCountByProgram, IDegreeCountByProgramAndUni, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails, IResponse, IUpdatedDegree } from '../types/types';
 
 export const GetAllDegreesHec = createAsyncThunk<
     Array<IDegreeDetails>,
@@ -205,7 +205,7 @@ export const GetCountDegreeByProgram = createAsyncThunk<
     async ({ }, { rejectWithValue }) => {
         var response: any = {};
         try {
-            response = await getCountDegreeByYears();
+            response = await getCountDegreeByProgram();
             //console.log(response.data)
             if (response.data.statusCode === 401) {
                 return rejectWithValue(response.data.message)
@@ -382,6 +382,33 @@ export const GetDegreebyStudentId = createAsyncThunk<
                 return rejectWithValue(response.data.message)
             }
             return response.data
+        } catch (error) {
+            //@ts-ignore
+            if (error.response && error.response.data.message) {
+                //@ts-ignore
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(response.message)
+            }
+        }
+    }
+)
+
+export const GetCountDegreeByProgramAndUni = createAsyncThunk<
+    Array<IDegreeCountByProgramAndUni>,
+    { organisationId: string; },
+    any
+>(
+    'uni/each/program/count',
+    async ({ organisationId }, { rejectWithValue }) => {
+        var response: any = {};
+        try {
+            response = await getCountDegreeByProgramAndUni(organisationId);
+            //console.log(response.data)
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data.data
         } catch (error) {
             //@ts-ignore
             if (error.response && error.response.data.message) {
