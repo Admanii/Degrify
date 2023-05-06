@@ -1,7 +1,7 @@
 import { check } from "express-validator";
 export const studentRegister = [
   check("name", "Name is required").notEmpty().trim().escape(),
-  check("email", "Email is required").isEmail(),
+  check("email", "Email with correct syntax is required").isEmail(),
   check("password", "Password should be 6 or more characters").isLength({
     min: 6,
   }),
@@ -15,9 +15,9 @@ export const studentRegister = [
 
 export const organisationRegister = [
   check("name", "Name is required").notEmpty().trim().escape(),
-  check("email", "Email is required").isEmail().normalizeEmail(),
+  check("email", "Email with correct syntax is required").isEmail().normalizeEmail(),
   check("password", "Password should be 6 or more characters").isLength({
     min: 6,
   }),
-  check("phoneNumber", "phoneNumber is required").notEmpty().trim().escape(),
+  check("phoneNumber", "Phone Number is required").notEmpty().trim().escape(),
 ];
