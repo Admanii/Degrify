@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Layout from "../components/general/Layout";
 import SideBar from "../components/general/SideBar-copy";
 import LoginPage from "../pages/LoginPage";
 import MainPageUni from "../pages/University/MainPageUni";
@@ -32,6 +31,7 @@ interface RouteType {
   isPrivate: boolean;
   isUni?: boolean;
   isHec?: boolean;
+  isOrg?: boolean;
   isStudent?: boolean;
   component: any;
 }
@@ -41,6 +41,7 @@ const PrivateRoute = ({
   isAuthenticated,
   isUni,
   isHec,
+  isOrg,
   isStudent,
   userRole
 }: {
@@ -48,21 +49,21 @@ const PrivateRoute = ({
   isAuthenticated: boolean;
   isUni?: boolean;
   isHec?: boolean;
+  isOrg?: boolean;
   isStudent?: boolean;
   userRole: string;
 }) => {
-  console.log(isAuthenticated);
   if (isAuthenticated) {
-    if (isUni === true && userRole !== 'UNIVERSITY') {
-      //console.log("redirected to home")
+    if (isOrg && userRole !== ('HEC' || 'UNIVERSITY')) {
       return <Navigate to='/login' />;
     }
-    else if (isHec === true && userRole !== 'HEC') {
-      //console.log("redirected to home")
+    else if (isUni && userRole !== 'UNIVERSITY') {
       return <Navigate to='/login' />;
     }
-    else if (isStudent === true && userRole !== 'STUDENT') {
-      //console.log("redirected to home")
+    else if (isHec && userRole !== 'HEC') {
+      return <Navigate to='/login' />;
+    }
+    else if (isStudent && userRole !== 'STUDENT') {
       return <Navigate to='/login' />;
     }
     else {
@@ -108,7 +109,7 @@ const GetRoutes = () => {
 export const routeList: RouteType[] = [
   {
     path: "/",
-    isPrivate: true,
+    isPrivate: false,
     component: <LandingPage />,
   },
   {
@@ -229,7 +230,7 @@ export const routeList: RouteType[] = [
   {
     path: "/view/organisationprofile",
     isPrivate: true,
-    //isHec: true,
+    isOrg: true,
     component: <OrganisationProfileView />,
   },
 ];
