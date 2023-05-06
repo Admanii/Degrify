@@ -48,9 +48,13 @@ export interface IUserDetails {
 }
 
 export interface ILoginResponse {
-    userInfo: IUserDetails;
-    token: string;
-    hash: string;
+    statusCode: number;
+    message: string;
+    data: {
+        userInfo: IUserDetails;
+        token: string;
+        hash: string;
+    } 
 }
 
 export interface IDegreeDetails {

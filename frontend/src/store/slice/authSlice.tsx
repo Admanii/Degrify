@@ -44,20 +44,13 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         // login user
         builder
-            .addCase(userLogin.pending, (state) => {
-                state.loading = true
-                state.error = {}
-            })
             .addCase(userLogin.fulfilled, (state, { payload }) => {
                 state.loading = false
-                state.userInfo = payload.userInfo
-                state.token = payload.token
-                state.success = true
-            })
-            .addCase(userLogin.rejected, (state, payload) => {
-                state.loading = false
-                state.error = payload.payload ?? ''
-                state.success = false
+                state.userInfo = payload?.data?.userInfo
+                state.token = payload?.data?.token
+                if (state.userInfo && state.token) {
+                    state.success = true
+                }
             })
     },
 })

@@ -12,7 +12,7 @@ const Chart01: React.FC = (): JSX.Element => {
 
   // console.log(degreesByYear)
   console.log("degreesByProgram: "+ degreesByProgram)
-  console.log("degreesByYearAndUni: "+ degreesByYearAndUni[0]._id)
+  // console.log("degreesByYearAndUni: "+ degreesByYearAndUni[0]._id)
   // console.log("degreesByProgramAndUni01: "+ degreesByProgramAndUni[0]._id)
   //console.log("degreesByProgram: "+ degreesByProgram[0].count)
 

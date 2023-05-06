@@ -110,8 +110,8 @@ const Chart02: React.FC<Props> = ({ id }) => {
   const degreesByProgram = useSelector(DegreesByProgram);
   const degreesByProgramAndUni = useSelector(DegreesByProgramAndUni);
   
-  console.log("degreesByProgram: "+degreesByProgram[0]._id)
-  console.log("degreesByProgramAndUni: "+degreesByProgramAndUni)
+  // console.log("degreesByProgram: "+degreesByProgram[0]._id)
+  // console.log("degreesByProgramAndUni: "+degreesByProgramAndUni)
   
 
   function searchProgramCount(program: { toString: () => string; }) {

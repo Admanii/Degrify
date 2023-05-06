@@ -108,7 +108,7 @@ interface Props {
 const Chart02: React.FC<Props> = ({ id }) => {
   const chartRef = useRef<any>(null);
   const degreesByProgram = useSelector(DegreesByProgram);
-  console.log("degreesByProgram: "+degreesByProgram[0]._id)
+  // console.log("degreesByProgram: "+degreesByProgram[0]._id)
 
   function searchYearCount(program: { toString: () => string; }) {
     for (let i = 0; i < degreesByProgram.length; i++) {
