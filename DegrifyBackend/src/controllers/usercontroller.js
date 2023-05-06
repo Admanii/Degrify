@@ -124,9 +124,6 @@ export const registerStudent = async (req, res) => {
   const birthYear = date2.getFullYear();
   const date = new Date(DateOfompletion);
   const Completionyear = date.getFullYear();
-  console.log(birthYear);
-  console.log(Completionyear);
-  console.log(Completionyear - Admissionyear);
 
   if (Completionyear - Admissionyear < 4) {
     return res.json(
@@ -141,6 +138,14 @@ export const registerStudent = async (req, res) => {
       jsonGenerate(
         statusCode.CLIENT_ERROR,
         "16 years difference required between Admissionyear and birthYear"
+      )
+    );
+  }
+  if (Completionyear.toString() !== GraduatingYear.toString()) {
+    return res.json(
+      jsonGenerate(
+        statusCode.CLIENT_ERROR,
+        "CompletionYear and GraduatingYear must be same"
       )
     );
   }
