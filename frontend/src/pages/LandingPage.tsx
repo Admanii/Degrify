@@ -9,7 +9,7 @@ const LandingPage = () => {
     return (
         <div className="grid min-h-screen grid-rows-header bg-zinc-100">
             <div>
-                <Navbar onMenuButtonClick={() => { }} />
+                <Navbar isButton={true} onMenuButtonClick={() => { }} />
             </div>
 
             <div className="grid min-h-full grid-cols-2">
@@ -40,10 +40,10 @@ const LandingPage = () => {
                     <div className="grid grid-cols-2">
                         <div className="grid grid-cols-2">
                             <div>
-                            test 1
+                                test 1
                             </div>
                             <div>
-                            test 2
+                                test 2
                             </div>
                         </div>
                         <div className="grid grid-cols-2">

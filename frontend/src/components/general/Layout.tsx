@@ -7,7 +7,7 @@ const Layout = (props: PropsWithChildren) => {
   return (
     <div className="grid min-h-full grid-rows-header bg-zinc-100">
       <div>
-        <Navbar onMenuButtonClick={() => setSidebarOpen((prev) => !prev)} />
+        <Navbar onMenuButtonClick={() => setSidebarOpen((prev) => !prev)} isButton={false} />
       </div>
 
       <div className="grid md:grid-cols-sidebar">

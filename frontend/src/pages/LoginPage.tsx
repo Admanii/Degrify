@@ -55,60 +55,18 @@ const LoginPage = () => {
                     },);
                 }
             }
-            // if (response.type === 'user/login/rejected') {
-            //     console.log("rejected")
-            //     const result = unwrapResult(response)
-            //     console.log("after rejected")
-            //     console.log(result)
-            //     toast.error(result?.message, {
-            //         position: toast.POSITION.TOP_RIGHT
-            //     },);
-            // }
-
-            // var result;
-            // console.log("before wrap")
-            // result = unwrapResult(response)
-            // console.log("after wrap")
-            // console.log(result)
-            // if (result?.data != null && (result?.statusCode === 200)) {
-            //     toast.success(result?.message, {
-            //         position: toast.POSITION.TOP_RIGHT
-            //     },);
-            // }
-            // else {
-            //     toast.error(result?.message, {
-            //         position: toast.POSITION.TOP_RIGHT
-            //     },);
-            // }
         } catch (error) {
             console.error('Error submitting form:', error);
             toast.error("", {
                 position: toast.POSITION.TOP_RIGHT
             });
         }
-
-        // console.log("in submittt")
-        // // console.log(data);
-        // const response = await dispatch(userLogin(data))
-        // const result = unwrapResult(response)
-        // console.log("loginnnnnnnnnnnnnn")
-        // console.log(result)
-        // if (result?.data != null && (result?.statusCode === 200)) {
-        //     toast.success(result?.message, {
-        //         position: toast.POSITION.TOP_RIGHT
-        //     },);
-        // }
-        // else {
-        //     toast.error(result?.message, {
-        //         position: toast.POSITION.TOP_RIGHT
-        //     },);
-        // }
     }
 
     return (
         <div className="grid min-h-screen grid-rows-header bg-zinc-100">
             <div>
-                <Navbar onMenuButtonClick={() => { }} />
+                <Navbar isButton={false} onMenuButtonClick={() => { }} />
             </div>
 
             <div className="grid min-h-full grid-cols-2">
