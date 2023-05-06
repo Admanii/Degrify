@@ -11,13 +11,13 @@ const Chart01: React.FC = (): JSX.Element => {
 
   // console.log(degreesByYear)
   console.log("degreesByProgram: "+ degreesByProgram)
-  console.log("degreesByYearAndUni: "+ degreesByYearAndUni)
+  console.log("degreesByYearAndUni: "+ degreesByYearAndUni[0]._id)
   //console.log("degreesByProgram: "+ degreesByProgram[0].count)
 
   function searchYearCount(year: { toString: () => string; }) {
-    for (let i = 0; i < degreesByYear.length; i++) {
-      if (degreesByYear[i]._id === year.toString()) {
-        return degreesByYear[i].count;
+    for (let i = 0; i < degreesByYearAndUni.length; i++) {
+      if (degreesByYearAndUni[i]._id === year.toString()) {
+        return degreesByYearAndUni[i].count;
       }
     }
     return 0;
