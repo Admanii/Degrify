@@ -26,9 +26,9 @@ const Navbar = (props: Props) => {
                 <div><img src={IMAGES.degrify_logo} alt="logo" /> </div>
                 <div className="font-bold text-2xl text-black">DegriFy</div>
             </div>
-            {props.isButton && (
+            {props?.isButton && (
                 <div className="hidden md:block">
-                    <Button className='rounded-lg' buttonText="Sign In" width={130} onClick={() => navigate('/login')} />
+                    <Button className='rounded-lg' buttonText="Login" width={130} onClick={() => navigate('/login')} />
                 </div>
             )}
 
