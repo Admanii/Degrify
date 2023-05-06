@@ -108,18 +108,13 @@ const GetRoutes = () => {
 export const routeList: RouteType[] = [
   {
     path: "/",
-    isPrivate: false,
-    component: <Layout />,
+    isPrivate: true,
+    component: <LandingPage />,
   },
   {
     path: "/login",
     isPrivate: false,
     component: <LoginPage />,
-  },
-  {
-    path: "/landing",
-    isPrivate: true,
-    component: <LandingPage />,
   },
   {
     path: "/home",
@@ -176,7 +171,7 @@ export const routeList: RouteType[] = [
   {
     path: "/approvedegree",
     isPrivate: true,
-    component: <ApproveDegree/>,
+    component: <ApproveDegree />,
   },
   {
     path: "/test",
