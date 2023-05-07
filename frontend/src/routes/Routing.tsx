@@ -156,7 +156,7 @@ export const routeList: RouteType[] = [
   },
   {
     path: "/view/degreecertificate",
-    isPrivate: true,
+    isPrivate: false,
     component: <DegreeViewPage />,
   },
   {

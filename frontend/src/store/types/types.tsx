@@ -54,7 +54,7 @@ export interface ILoginResponse {
         userInfo: IUserDetails;
         token: string;
         hash: string;
-    } 
+    }
 }
 
 export interface IDegreeDetails {
@@ -66,6 +66,8 @@ export interface IDegreeDetails {
         HECVerified: boolean,
         completeVerified: boolean,
         dateCreated: string,
+        ipfsLink: string,
+        hashValue: string,
     }
     studentDetails: IStudentDetails
 }

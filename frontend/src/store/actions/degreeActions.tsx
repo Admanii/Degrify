@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByProgram, getCountDegreeByProgramAndUni, getCountDegreeByYearAndUni, getCountDegreeByYears, getDegreebyId, getDegreebyStudentId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
+import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByProgram, getCountDegreeByProgramAndUni, getCountDegreeByYearAndUni, getCountDegreeByYears, getDegreebyHashValue, getDegreebyId, getDegreebyStudentId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
 import { IAddDegree, IDegreeCountByProgram, IDegreeCountByProgramAndUni, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails, IResponse, IUpdatedDegree } from '../types/types';
 
 export const GetAllDegreesHec = createAsyncThunk<
@@ -409,6 +409,31 @@ export const GetCountDegreeByProgramAndUni = createAsyncThunk<
                 return rejectWithValue(response.data.message)
             }
             return response.data.data
+        } catch (error) {
+            //@ts-ignore
+            if (error.response && error.response.data.message) {
+                //@ts-ignore
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(response.message)
+            }
+        }
+    }
+)
+
+export const GetDegreebyHashValue = createAsyncThunk<
+    IResponse,
+    {
+        hashValue: string;
+    },
+    any
+>(
+    'degreebyhashvalue',
+    async ({ hashValue }, { rejectWithValue }) => {
+        var response: any = {};
+        try {
+            response = await getDegreebyHashValue(hashValue);
+            return response.data
         } catch (error) {
             //@ts-ignore
             if (error.response && error.response.data.message) {

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
-import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByProgramAndUni, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetDegreebyId, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId, UpdateDegreeUniversity } from '../actions/degreeActions';
+import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByProgramAndUni, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetDegreebyHashValue, GetDegreebyId, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId } from '../actions/degreeActions';
 import { IDegreeCountByProgram, IDegreeCountByProgramAndUni, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails,} from '../types/types';
 
 const initialState: IState = {
@@ -164,7 +164,6 @@ const degreeSlice = createSlice({
                 state.error = payload.payload ?? ''
                 state.success = false
             })
-
             .addCase(GetCountDegreeByYearAndUni.pending, (state) => {
                 state.loading = true
                 state.error = {}
@@ -179,11 +178,6 @@ const degreeSlice = createSlice({
                 state.error = payload.payload ?? ''
                 state.success = false
             })
-            // .addCase(UpdateDegreeUniversity.fulfilled, (state, { payload }) => {
-            //     state.loading = false
-            //     state.degree = payload
-            //     state.success = true
-            // })
             .addCase(GetCountDegreeByProgramAndUni.pending, (state) => {
                 state.loading = true
                 state.error = {}
@@ -197,6 +191,11 @@ const degreeSlice = createSlice({
                 state.loading = false
                 state.error = payload.payload ?? ''
                 state.success = false
+            })
+            .addCase(GetDegreebyHashValue.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.degree = payload?.data
+                state.success = true
             })
     },
 })

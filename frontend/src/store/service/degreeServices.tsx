@@ -115,3 +115,7 @@ export const getCountDegreeByProgramAndUni = async (organisationId: string,) => 
     await getConfig();
     return api.get(`/studentsbyprogramanduni?organisation_id=${organisationId}`, config);
 }
+
+export const getDegreebyHashValue = async (hashValue: string,) => {
+    return api.get(`/getdegreebyhash?hashValue=${hashValue}`);
+}

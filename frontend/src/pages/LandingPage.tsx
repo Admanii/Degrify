@@ -1,11 +1,40 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, ChangeEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/general/Button';
 import Navbar from '../components/general/Navbar'
 import { IMAGES } from '../constants/images';
+import { GetDegreebyHashValue } from '../store/actions/degreeActions';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../store/store';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 const LandingPage = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    const dispatch = useDispatch<AppDispatch>();
+    const [hashValue, setHashValue] = useState('');
+    const navigate = useNavigate()
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const response = await dispatch(GetDegreebyHashValue({ hashValue: hashValue }))
+        const result = unwrapResult(response)
+        if (result?.statusCode === 200 && result?.data != null) {
+            toast.success(result?.message, {
+                position: toast.POSITION.TOP_RIGHT
+            },);
+            navigate(`/view/degreecertificate?hashValue=${hashValue}`);
+        } else {
+            toast.error(result?.message, {
+                position: toast.POSITION.TOP_RIGHT
+            },);
+        }
+    }
+
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setHashValue(event.target.value);
+    };
+
     return (
         <div className="grid min-h-screen grid-rows-header bg-zinc-100">
             <div>
@@ -19,22 +48,21 @@ const LandingPage = () => {
                     <div className=' text-gray-600 text-1xl mb-4 mr-28 mt-8 text-left'>
                         Are you a recruiter trying to verify student Degree?
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="relative mt-4">
                             <input
-                                type="search"
-                                id="search"
-                                className="block w-3/4 py-2 pl-4 text-lg  text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                type="text"
+                                className="block w-3/4 py-2 pl-4 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                 placeholder="Enter Hash Value"
+                                value={hashValue}
+                                onChange={handleInputChange}
                                 required
                             />
                             <button
-                                type="submit"
-                                className="text-white absolute right-4.5 bottom-1.5 bg-black hover:bg-gray-800 font-medium rounded-lg text-sm px-9 py-1.5  "
+                                className="text-white absolute bottom-1.5 bg-black hover:bg-gray-800 font-medium rounded-lg text-sm px-9 py-1.5"
                             >
                                 Verify
                             </button>
-                            
                         </div>
                     </form>
 

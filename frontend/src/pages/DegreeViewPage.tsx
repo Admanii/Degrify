@@ -50,7 +50,9 @@ function DegreeViewPage() {
   }, [])
 
   const getDegreebyId = async () => {
-    await dispatch(GetDegreebyId({ degreeId: degreeId }))
+    if (degreeId != '') {
+      await dispatch(GetDegreebyId({ degreeId: degreeId }))
+    }
   }
 
   // const openDegree = () => {
