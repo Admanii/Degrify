@@ -42,7 +42,7 @@ const LandingPage = () => {
             </div>
 
             <div className="grid min-h-full grid-cols-2">
-                <div className='p-16 flex flex-col items-left justify-left ml-24'>
+                <div className='p-16 flex flex-col items-left justify-center ml-24'>
 
                     <div className='font-semibold text-black text-5xl mb-4 text-left'>Verify Degree</div>
                     <div className=' text-gray-600 text-1xl mb-4 mr-28 mt-8 text-left'>
@@ -69,13 +69,13 @@ const LandingPage = () => {
                     <div className="grid grid-cols-2 mt-10 text-left">
 
                         <div className="container w-20">
-                            <div className="grid grid-cols-2">
+                            <div className="grid grid-cols-2 gap-x-2">
 
-                                <div className="text-2xl font-semibold">
+                                <div className="text-3xl font-bold">
                                     29
                                 </div>
 
-                                <div className="text-sm">
+                                <div className="text-sm text-gray-900 font-normal">
                                     Universities On Board
                                 </div>
 
@@ -83,13 +83,13 @@ const LandingPage = () => {
                         </div>
 
                         <div className="container w-28">
-                            <div className="grid grid-cols-2">
+                            <div className="grid grid-cols-2 gap-x-8">
 
-                                <div className="text-2xl font-semibold">
+                                <div className="text-3xl font-bold">
                                     1M+
                                 </div>
 
-                                <div className="text-sm">
+                                <div className="text-sm text-gray-900 font-normal">
                                     Verified Degrees
                                 </div>
 
@@ -105,7 +105,7 @@ const LandingPage = () => {
                 </div>
             </div >
 
-            <div className='py-24 px-64 flex flex-col items-center justify-center'>
+            <div className='py-16 px-64 flex flex-col items-center justify-center'>
 
                 <div className='font-semibold text-black text-3xl mb-4'>About Us</div>
 
@@ -120,7 +120,7 @@ const LandingPage = () => {
 
             </div>
 
-            <div className='py-24 px-64 flex flex-col items-center justify-center'>
+            <div className='py-16 px-64 flex flex-col items-center justify-center'>
 
                 <div className='font-semibold text-black text-3xl mb-4'>Meet Our Team</div>
 
