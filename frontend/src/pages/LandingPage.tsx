@@ -16,7 +16,7 @@ const LandingPage = () => {
                 <div className='p-16 flex flex-col items-left justify-left ml-24'>
 
                     <div className='font-semibold text-black text-5xl mb-4 text-left'>Verify Degree</div>
-                    <div className=' text-gray-600 text-1xl mb-4 mr-28 mt-8'>
+                    <div className=' text-gray-600 text-1xl mb-4 mr-28 mt-8 text-left'>
                         Are you a recruiter trying to verify student Degree?
                     </div>
                     <form>
@@ -37,23 +37,25 @@ const LandingPage = () => {
                         </div>
                     </form>
 
-                    <div className="grid grid-cols-2">
-                        <div className="grid grid-cols-2">
-                            <div>
-                                test 1
+                    <div className="grid grid-cols-2 mt-10 text-left">
+
+                        <div className="grid grid-cols-2 gap-x-0">
+                            <div className="text-xl font-semibold">
+                                29
                             </div>
                             <div>
-                                test 2
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2">
-                            <div>
-                                test 3
-                            </div>
-                            <div>
-                                test 4
+                                Universities On Board
                             </div>
                         </div>
+                        <div className="grid grid-cols-2">
+                            <div className="text-lg font-semibold">
+                                1M+
+                            </div>
+                            <div>
+                                Verified Degrees
+                            </div>
+                        </div>
+                        
                     </div>
 
                 </div>
@@ -63,7 +65,7 @@ const LandingPage = () => {
                 </div>
             </div >
 
-            <div className='p-48 flex flex-col items-center justify-center'>
+            <div className='p-24 flex flex-col items-center justify-center'>
 
                 <div className='font-semibold text-black text-3xl mb-4'>About Us</div>
 
@@ -78,7 +80,7 @@ const LandingPage = () => {
 
             </div>
 
-            <div className='p-48 flex flex-col items-center justify-center'>
+            <div className='p-24 flex flex-col items-center justify-center'>
 
                 <div className='font-semibold text-black text-3xl mb-4'>Meet Our Team</div>
 
