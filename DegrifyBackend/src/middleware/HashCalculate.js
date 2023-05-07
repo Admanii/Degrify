@@ -4,6 +4,7 @@ import IPFS from "ipfs-mini";
 
 export function hashCal(string) {
   return createHash("sha256").update(string).digest("hex");
+  console.log("hash cal");
 }
 
 export function hash2Cal(string) {
