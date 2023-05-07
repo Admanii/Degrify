@@ -79,6 +79,12 @@ export const getDegreeByID = async (req, res) => {
       "hashValue",
     ]);
 
+    if (!degree) {
+      return res.json(
+        jsonGenerate(statusCode.CLIENT_ERROR, "No Degree Found", degree)
+      );
+    }
+
     var StudentDetails1 = await Student.findById(degree.studentID).select([
       "name",
       "enrollmentNumber",
@@ -107,11 +113,6 @@ export const getDegreeByID = async (req, res) => {
     let orgName = org?.organisationID?.name ?? "";
     let email = user?.email ?? "";
     console.log(orgName + " " + email);
-    if (!degree) {
-      return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
-      );
-    }
     var studentDetails = {
       ...StudentDetails1._doc,
       orgName,
@@ -147,7 +148,9 @@ export const getDegreeByStudentID = async (req, res) => {
       "hashValue",
     ]);
     if (!degree) {
-      return res.json(jsonGenerate(statusCode.CLIENT_ERROR, "Not Exists"));
+      return res.json(
+        jsonGenerate(statusCode.CLIENT_ERROR, "No Degree Found", degree)
+      );
     }
     return res.json(jsonGenerate(statusCode.SUCCESS, "Exists", degree));
   } catch (err) {
@@ -166,7 +169,7 @@ export const getStudentVerifiedDegrees = async (req, res) => {
 
     if (!list) {
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
+        jsonGenerate(statusCode.CLIENT_ERROR, "No Degree Found", list)
       );
     }
     const result = [];
@@ -239,7 +242,7 @@ export const getOrganisationVerifiedDegrees = async (req, res) => {
 
     if (!list) {
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
+        jsonGenerate(statusCode.CLIENT_ERROR, "No Degree Found", list)
       );
     }
     const result = [];
@@ -313,7 +316,7 @@ export const getCompleteVerifiedDegrees = async (req, res) => {
 
     if (!list) {
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
+        jsonGenerate(statusCode.CLIENT_ERROR, "No Degree Found", list)
       );
     }
     const result = [];
@@ -785,7 +788,7 @@ export const getHECVerifiedDegrees = async (req, res) => {
 
     if (!list) {
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
+        jsonGenerate(statusCode.CLIENT_ERROR, "No Degree Found", list)
       );
     }
     const result = [];
@@ -990,6 +993,12 @@ export const getDegreebyHash = async (req, res) => {
       "hashValue",
     ]);
 
+    if (!degree) {
+      return res.json(
+        jsonGenerate(statusCode.CLIENT_ERROR, "No Degree Found", degree)
+      );
+    }
+
     var StudentDetails1 = await Student.findById(degree.studentID).select([
       "name",
       "enrollmentNumber",
@@ -1018,11 +1027,6 @@ export const getDegreebyHash = async (req, res) => {
     let orgName = org?.organisationID?.name ?? "";
     let email = user?.email ?? "";
     console.log(orgName + " " + email);
-    if (!degree) {
-      return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
-      );
-    }
     var studentDetails = {
       ...StudentDetails1._doc,
       orgName,
@@ -1037,7 +1041,7 @@ export const getDegreebyHash = async (req, res) => {
     );
   } catch (err) {
     return res.json(
-      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed", err)
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error", err)
     );
   }
 };
