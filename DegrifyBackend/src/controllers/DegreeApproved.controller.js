@@ -49,11 +49,7 @@ export const HECAppovedDegree = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.json(
-      jsonGenerate(
-        statusCode.UNPROCESSABLE_ENTITY,
-        "Error is displaying ",
-        error
-      )
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error is displaying ", err)
     );
   }
 };
