@@ -39,23 +39,34 @@ const LandingPage = () => {
 
                     <div className="grid grid-cols-2 mt-10 text-left">
 
-                        <div className="grid grid-cols-2 gap-x-0">
-                            <div className="text-xl font-semibold">
-                                29
-                            </div>
-                            <div>
-                                Universities On Board
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2">
-                            <div className="text-lg font-semibold">
-                                1M+
-                            </div>
-                            <div>
-                                Verified Degrees
+                        <div className="container w-16">
+                            <div className="grid grid-cols-2">
+
+                                <div className="text-xl font-semibold">
+                                    29
+                                </div>
+
+                                <div>
+                                    Universities On Board
+                                </div>
+
                             </div>
                         </div>
-                        
+
+                        <div className="container w-20">
+                            <div className="grid grid-cols-2">
+
+                                <div className="text-lg font-semibold">
+                                    1M+
+                                </div>
+
+                                <div>
+                                    Verified Degrees
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -94,5 +105,3 @@ const LandingPage = () => {
 }
 
 export default LandingPage
-
-
