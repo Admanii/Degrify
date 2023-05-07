@@ -29,6 +29,7 @@ import {
   getCompleteVerifiedDegrees,
   getDegreeByID,
   getDegreeByStudentID,
+  getDegreebyHash,
   getHECAllDegree,
   getHECVerifiedDegrees,
   getOrganisationVerifiedDegrees,
@@ -139,7 +140,8 @@ apiProtected.get("/studentsbyyearanduni", getStudentbyYearAndUni);
 
 // get details by ID
 apiProtected.get("/getstudentbyid", getStudent); // done
-apiProtected.get("/getdegreebyid", getDegreeByID); // done
+apiProtected.get("/getdegreebyid", getDegreeByID);
+apiProtected.get("/getdegreebyhash", getDegreebyHash);
 apiProtected.get("/getdegreebystudentid", getDegreeByStudentID); // done
 apiProtected.get("/getorganisationbyid", getOrganisationByID); // done
 

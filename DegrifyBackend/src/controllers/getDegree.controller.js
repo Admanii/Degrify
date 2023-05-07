@@ -75,6 +75,8 @@ export const getDegreeByID = async (req, res) => {
       "HECVerified",
       "completeVerified",
       "dateCreated",
+      "ipfsLink",
+      "hashValue",
     ]);
 
     var StudentDetails1 = await Student.findById(degree.studentID).select([
@@ -141,6 +143,8 @@ export const getDegreeByStudentID = async (req, res) => {
       "HECVerified",
       "completeVerified",
       "dateCreated",
+      "ipfsLink",
+      "hashValue",
     ]);
     if (!degree) {
       return res.json(jsonGenerate(statusCode.CLIENT_ERROR, "Not Exists"));
@@ -195,6 +199,8 @@ export const getStudentVerifiedDegrees = async (req, res) => {
         "HECVerified",
         "completeVerified",
         "dateCreated",
+        "ipfsLink",
+        "hashValue",
       ]);
       const degree = degree1[0];
       // console.log(student);
@@ -266,6 +272,8 @@ export const getOrganisationVerifiedDegrees = async (req, res) => {
         "HECVerified",
         "completeVerified",
         "dateCreated",
+        "ipfsLink",
+        "hashValue",
       ]);
       const degree = degree1[0];
       // console.log(student);
@@ -338,6 +346,8 @@ export const getCompleteVerifiedDegrees = async (req, res) => {
         "HECVerified",
         "completeVerified",
         "dateCreated",
+        "ipfsLink",
+        "hashValue",
       ]);
       const degree = degree1[0];
       // console.log(student);
@@ -440,6 +450,8 @@ export const getUniversityAllDegree = async (req, res) => {
         "HECVerified",
         "completeVerified",
         "dateCreated",
+        "ipfsLink",
+        "hashValue",
       ]);
 
       const particular = {
@@ -538,6 +550,8 @@ export const getVerifiedUniversityDegree = async (req, res) => {
         "HECVerified",
         "completeVerified",
         "dateCreated",
+        "ipfsLink",
+        "hashValue",
       ]);
 
       const particular = {
@@ -635,6 +649,8 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
         "HECVerified",
         "completeVerified",
         "dateCreated",
+        "ipfsLink",
+        "hashValue",
       ]);
 
       const particular = {
@@ -732,6 +748,8 @@ export const getHECAllDegree = async (req, res) => {
         "HECVerified",
         "completeVerified",
         "dateCreated",
+        "ipfsLink",
+        "hashValue",
       ]);
 
       const particular = {
@@ -830,6 +848,8 @@ export const getHECVerifiedDegrees = async (req, res) => {
         "HECVerified",
         "completeVerified",
         "dateCreated",
+        "ipfsLink",
+        "hashValue",
       ]);
 
       const particular = {
@@ -928,6 +948,8 @@ export const getUnvserifiedHECDegree = async (req, res) => {
         "HECVerified",
         "completeVerified",
         "dateCreated",
+        "ipfsLink",
+        "hashValue",
       ]);
 
       const particular = {
@@ -948,6 +970,75 @@ export const getUnvserifiedHECDegree = async (req, res) => {
         "Error is displaying Degree",
         error
       )
+    );
+  }
+};
+
+export const getDegreebyHash = async (req, res) => {
+  try {
+    const degree = await Degree.findOne({
+      hashValue: req.query.hashValue,
+    }).select([
+      "_id",
+      "studentID",
+      "studentVerified",
+      "organisationVerified",
+      "HECVerified",
+      "completeVerified",
+      "dateCreated",
+      "ipfsLink",
+      "hashValue",
+    ]);
+
+    console.log(degree);
+    var StudentDetails1 = await Student.findById(degree.studentID).select([
+      "name",
+      "enrollmentNumber",
+      "fatherName",
+      "studentID",
+      "DateOfBirth",
+      "CNIC",
+      "DateOfAdmission",
+      "DateOfompletion",
+      "Program",
+      "GraduatingYear",
+      "organisationID",
+    ]);
+    console.log(StudentDetails1._id);
+    var org = await Student.findById(StudentDetails1._id)
+      .select("")
+      .populate(["organisationID"])
+      .exec();
+    console.log(org);
+    var user = await User.findOne({
+      studentID: StudentDetails1._id,
+    })
+      .select("email")
+      .exec();
+
+    let orgName = org?.organisationID?.name ?? "";
+    let email = user?.email ?? "";
+    console.log(orgName + " " + email);
+    if (!degree) {
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "No Degree Found", list)
+      );
+    }
+    var studentDetails = {
+      ...StudentDetails1._doc,
+      orgName,
+      email,
+    };
+    const appendlist = {
+      degree,
+      studentDetails,
+    };
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "Degree Information", appendlist)
+    );
+  } catch (err) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed", err)
     );
   }
 };
