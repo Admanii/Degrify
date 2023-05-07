@@ -990,7 +990,6 @@ export const getDegreebyHash = async (req, res) => {
       "hashValue",
     ]);
 
-    console.log(degree);
     var StudentDetails1 = await Student.findById(degree.studentID).select([
       "name",
       "enrollmentNumber",
@@ -1004,12 +1003,12 @@ export const getDegreebyHash = async (req, res) => {
       "GraduatingYear",
       "organisationID",
     ]);
-    console.log(StudentDetails1._id);
+
     var org = await Student.findById(StudentDetails1._id)
       .select("")
       .populate(["organisationID"])
       .exec();
-    console.log(org);
+
     var user = await User.findOne({
       studentID: StudentDetails1._id,
     })

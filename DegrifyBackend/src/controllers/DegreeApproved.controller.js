@@ -12,14 +12,14 @@ export const HECAppovedDegree = async (req, res) => {
       {
         HECVerified: true,
         completeVerified: true,
-        //dateCreated: Date.now,
+        dateCreated: Date.now(),
       },
       {
         new: true,
         runValidators: true,
         useFindAndModify: false,
       }
-    ).select(["-ipfsLink", "-hashValue"]);
+    ).select(["-ipfsLink", "-hashValue", "-dateCreated"]);
     console.log(updatedDegree);
     if (!updatedDegree) {
       return res.json(
