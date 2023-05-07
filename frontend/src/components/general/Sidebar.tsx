@@ -86,7 +86,7 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec, studen
 
                 {userRole == 'UNIVERSITY' && (
                     <div>
-                        <button onClick={() => { navigate('/AddStudent') }} className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
+                        <button onClick={() => { navigate('/AddStudent') }} className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg hover:bg-gray-900">
                             <div><img src={IMAGES.plus_icon} alt="plus" /></div>
                             <div className="font-">Register New Student</div>
                         </button>
@@ -98,7 +98,7 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec, studen
                 )}
 
                 {userRole === 'HEC' && (
-                    <button onClick={() => { navigate('/AddUniversity') }}className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
+                    <button onClick={() => { navigate('/AddUniversity') }}className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg hover:bg-gray-900">
                         <div><img src={IMAGES.plus_icon} alt="plus" /></div>
                         <div className="font-">Add New University</div>
                     </button>

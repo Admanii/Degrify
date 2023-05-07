@@ -20,7 +20,6 @@ const LoginPage = () => {
 
     useEffect(() => {
         //console.log(userInfo);
-        console.log("in ecffect")
         var userRole = userInfo?.user?.userRole ?? '';
         if (success) {
             if (userRole === 'UNIVERSITY') {
@@ -89,7 +88,7 @@ const LoginPage = () => {
                             </div>
                             <div className="mt-3">
                                 <input
-                                    type="text"
+                                    type="password"
                                     id="password"
                                     autoComplete="password"
                                     placeholder="Password"
