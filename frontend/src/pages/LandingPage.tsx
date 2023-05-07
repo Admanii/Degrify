@@ -24,43 +24,44 @@ const LandingPage = () => {
                             <input
                                 type="search"
                                 id="search"
-                                className="block w-full pr-16 py-2 pl-4 text-lg  text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                className="block w-3/4 py-2 pl-4 text-lg  text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                 placeholder="Enter Hash Value"
                                 required
                             />
                             <button
                                 type="submit"
-                                className="text-white absolute right-2.5 bottom-1.5 bg-black hover:bg-gray-800 font-medium rounded-lg text-sm px-8 py-1.5 "
+                                className="text-white absolute right-4.5 bottom-1.5 bg-black hover:bg-gray-800 font-medium rounded-lg text-sm px-9 py-1.5  "
                             >
                                 Verify
                             </button>
+                            
                         </div>
                     </form>
 
                     <div className="grid grid-cols-2 mt-10 text-left">
 
-                        <div className="container w-16">
+                        <div className="container w-20">
                             <div className="grid grid-cols-2">
 
-                                <div className="text-xl font-semibold">
+                                <div className="text-2xl font-semibold">
                                     29
                                 </div>
 
-                                <div>
+                                <div className="text-sm">
                                     Universities On Board
                                 </div>
 
                             </div>
                         </div>
 
-                        <div className="container w-20">
+                        <div className="container w-28">
                             <div className="grid grid-cols-2">
 
-                                <div className="text-lg font-semibold">
+                                <div className="text-2xl font-semibold">
                                     1M+
                                 </div>
 
-                                <div>
+                                <div className="text-sm">
                                     Verified Degrees
                                 </div>
 
@@ -76,7 +77,7 @@ const LandingPage = () => {
                 </div>
             </div >
 
-            <div className='p-24 flex flex-col items-center justify-center'>
+            <div className='py-24 px-64 flex flex-col items-center justify-center'>
 
                 <div className='font-semibold text-black text-3xl mb-4'>About Us</div>
 
@@ -91,7 +92,7 @@ const LandingPage = () => {
 
             </div>
 
-            <div className='p-24 flex flex-col items-center justify-center'>
+            <div className='py-24 px-64 flex flex-col items-center justify-center'>
 
                 <div className='font-semibold text-black text-3xl mb-4'>Meet Our Team</div>
 
