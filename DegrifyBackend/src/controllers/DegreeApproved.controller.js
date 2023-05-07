@@ -3,6 +3,7 @@ import Degree from "../models/Degree.js";
 import { statusCode } from "../utils/constant.js";
 import { jsonGenerate } from "../utils/helper.js";
 import { uploadJSONToIPFS } from "../pinata.js";
+import { hash2Cal, hashCal } from "../middleware/HashCalculate.js";
 
 export const HECAppovedDegree = async (req, res) => {
   try {
@@ -11,14 +12,15 @@ export const HECAppovedDegree = async (req, res) => {
       {
         HECVerified: true,
         completeVerified: true,
-        //dateCreated: Date.now,
+        dateCreated: Date.now(),
       },
       {
         new: true,
         runValidators: true,
         useFindAndModify: false,
       }
-    );
+    ).select(["-ipfsLink", "-hashValue", "-dateCreated"]);
+    console.log(updatedDegree);
     if (!updatedDegree) {
       return res.json(
         jsonGenerate(statusCode.SUCCESS, "Degree Not Found", null)
@@ -26,10 +28,13 @@ export const HECAppovedDegree = async (req, res) => {
     }
     const response = await uploadJSONToIPFS(updatedDegree);
     console.log(response.pinataURL);
+    const hash = hashCal(JSON.stringify(updatedDegree));
+    console.log(hash);
     const updateDegree = await Degree.findByIdAndUpdate(
       req.query.degree_id,
       {
         ipfsLink: response.pinataURL,
+        hashValue: hash,
         //dateCreated: Date.now,
       },
       {
@@ -39,15 +44,12 @@ export const HECAppovedDegree = async (req, res) => {
       }
     );
     return res.json(
-      jsonGenerate(statusCode.SUCCESS, "Degree Updated by HEC", updatedDegree)
+      jsonGenerate(statusCode.SUCCESS, "Degree Updated by HEC", updateDegree)
     );
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     return res.json(
-      jsonGenerate(
-        statusCode.UNPROCESSABLE_ENTITY,
-        "Error is displaying ",
-        error
-      )
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error is displaying ", err)
     );
   }
 };
