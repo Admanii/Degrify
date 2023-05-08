@@ -17,6 +17,7 @@ module.exports = {
       },
       fontFamily: {
         certificate: ['CertificateFont', 'sans-serif'],
+        sans: ['"Jakarta Sans"', 'sans-serif'],
       },
     },
   },

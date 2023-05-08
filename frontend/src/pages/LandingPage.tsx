@@ -52,52 +52,42 @@ const LandingPage = () => {
                         <div className="relative mt-4">
                             <input
                                 type="text"
-                                className="block w-3/4 py-2 pl-4 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                className="block w-full h-14 py-2 pl-4 pr-32 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                 placeholder="Enter Hash Value"
                                 value={hashValue}
                                 onChange={handleInputChange}
                                 required
                             />
                             <button
-                                className="text-white absolute bottom-1.5 bg-black hover:bg-gray-800 font-medium rounded-lg text-sm px-9 py-1.5"
+                                className="text-white absolute bottom-1.5 top-1.5 right-1 bg-black hover:bg-gray-800 font-medium rounded-lg text-sm px-12 py-1.5"
                             >
                                 Verify
                             </button>
                         </div>
                     </form>
-
-                    <div className="grid grid-cols-2 mt-10 text-left">
-
-                        <div className="container w-20">
-                            <div className="grid grid-cols-2 gap-x-2">
-
-                                <div className="text-3xl font-bold">
-                                    29
+                    <div className='flex justify-start w-full mt-8 text-left gap-x-20 font-sans'>
+                            <div className="container w-20">
+                                <div className="grid grid-cols-2 gap-x-2">
+                                    <div className="text-3xl font-semibold">
+                                        29
+                                    </div>
+                                    <div className="text-sm text-gray-900 font-medium">
+                                        Universities On Board
+                                    </div>
                                 </div>
-
-                                <div className="text-sm text-gray-900 font-normal">
-                                    Universities On Board
-                                </div>
-
                             </div>
-                        </div>
 
-                        <div className="container w-28">
-                            <div className="grid grid-cols-2 gap-x-8">
-
-                                <div className="text-3xl font-bold">
-                                    1M+
+                            <div className="container w-28">
+                                <div className="grid grid-cols-2 gap-x-8">
+                                    <div className="text-3xl font-semibold">
+                                        1M+
+                                    </div>
+                                    <div className="text-sm text-gray-900 font-medium">
+                                        Verified Degrees
+                                    </div>
                                 </div>
-
-                                <div className="text-sm text-gray-900 font-normal">
-                                    Verified Degrees
-                                </div>
-
                             </div>
-                        </div>
-
                     </div>
-
                 </div>
 
                 <div className='p-2 flex items-center justify-center'>
