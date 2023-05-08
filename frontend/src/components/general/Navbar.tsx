@@ -1,10 +1,10 @@
-// components/layout/Navbar.tsx
 import React, { Children } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import classNames from "classnames";
 import { IMAGES } from "../../constants/images";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 type Props = {
     onMenuButtonClick(): void;
@@ -13,6 +13,25 @@ type Props = {
 };
 const Navbar = (props: Props) => {
     const navigate = useNavigate()
+    const { userInfo, success } = useSelector((state: any) => state.auth)
+
+    const handleNavigation = async () => {
+        var userRole = userInfo?.user?.userRole ?? '';
+        if (success && (userRole != '')) {
+            if (userRole === 'UNIVERSITY') {
+                navigate('/uni/dashboard')
+            }
+            else if (userRole === 'HEC') {
+                navigate('/hec/dashboard')
+            }
+            else if (userRole === 'STUDENT') {
+                navigate('/student/dashboard')
+            }
+        }
+        else {
+            navigate('/')
+        }
+    }
 
     return (
         <nav
@@ -22,7 +41,8 @@ const Navbar = (props: Props) => {
                 "w-full fixed z-10 px-4 shadow-sm h-16": true, //positioning & styling
             })}
         >
-            <div className="flex items-center gap-x-1">
+            <div className="flex items-center gap-x-1 cursor-pointer"
+                onClick={handleNavigation}>
                 <div><img src={IMAGES.degrify_logo} alt="logo" /> </div>
                 <div className="font-bold text-2xl text-black">DegriFy</div>
             </div>
