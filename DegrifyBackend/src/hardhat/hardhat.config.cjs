@@ -7,9 +7,9 @@ const ROPSTEN_PRIVATE_KEY =
 module.exports = {
   solidity: "0.8.18",
   networks: {
-    ropsten: {
-      url: `https://eth-goerli.g.alchemy.com/v2/vntRKR-dsIwpRflYhYnmQS3OsbLSAPhm`,
-      accounts: [`0x${ROPSTEN_PRIVATE_KEY}`],
+    sepolia: {
+      url: `https://eth-sepolia.g.alchemy.com/v2/TK01GJJBiBM2bRx-XjaP9Y8Ct04cWefs`,
+      accounts: [ROPSTEN_PRIVATE_KEY],
     },
   },
 };

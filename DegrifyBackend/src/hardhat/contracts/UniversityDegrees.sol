@@ -3,10 +3,13 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 contract UniversityDegrees {
+    address payable owner;
+
+    uint256 listPrice = 0.0001 ether;
     struct Degree {
+        string tokenURI;
         uint256 degreeId;
         string name;
-        // address studentAddress;
         bool isVerified;
         string ERP;
     }
@@ -16,6 +19,7 @@ contract UniversityDegrees {
 
     // this event is emit when we need to add degree in blockchain
     event DegreeAdded(
+        string tokenURI,
         uint256 indexed degreeId,
         string name,
         address indexed studentAddress,
@@ -24,10 +28,27 @@ contract UniversityDegrees {
     );
     event DegreeVerified(uint256 indexed degreeId);
 
-    function addDegree(string memory _name, string memory _ERP) public {
+    function addDegree(
+        string memory _name,
+        string memory _ERP,
+        string memory _tokenURI
+    ) public {
         totalDegrees++;
-        degrees[totalDegrees] = Degree(totalDegrees, _name, true, _ERP);
-        emit DegreeAdded(totalDegrees, _name, msg.sender, _ERP, true);
+        degrees[totalDegrees] = Degree(
+            _tokenURI,
+            totalDegrees,
+            _name,
+            true,
+            _ERP
+        );
+        emit DegreeAdded(
+            _tokenURI,
+            totalDegrees,
+            _name,
+            msg.sender,
+            _ERP,
+            true
+        );
     }
 
     // function verifyDegree(uint256 _degreeId) public {
@@ -47,9 +68,11 @@ contract UniversityDegrees {
     }
 
     // get a single degree information through erp
-    function getDegreeByERP(
-        string memory _ERP
-    ) public view returns (Degree memory) {
+    function getDegreeByERP(string memory _ERP)
+        public
+        view
+        returns (Degree memory)
+    {
         for (uint256 i = 1; i <= totalDegrees; i++) {
             if (keccak256(bytes(degrees[i].ERP)) == keccak256(bytes(_ERP))) {
                 return degrees[i];
