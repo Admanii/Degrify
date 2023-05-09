@@ -9,19 +9,100 @@ import { userLogin } from '../store/actions/authActions';
 import { AppDispatch } from '../store/store';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { ethers } from "ethers";
+
+declare global {
+    interface Window {
+        ethereum: any;
+    }
+}
 
 const LoginPage = () => {
-    const { loading, userInfo, success } = useSelector((state: any) => state.auth)
+
+    // interface Window {
+    //     ethereum?: {
+    //       request: (args: any) => Promise<any>;
+    //       on: (eventName: string, callback: (...args: any[]) => void) => void;
+    //       removeListener: (eventName: string, callback: (...args: any[]) => void) => void;
+    //       isMetaMask?: boolean;
+    //     };
+    //   }
+
+    const { userInfo, success } = useSelector((state: any) => state.auth)
+    const [errorMessage, setErrorMessage] = useState('');
+    const [defaultAccount, setDefaultAccount] = useState('');
+    const [userBalance, setUserBalance] = useState('');
+    const [connButtonText, setConnButtonText] = useState("Connect Wallet");
     const dispatch = useDispatch<AppDispatch>();
 
     const { register, handleSubmit, reset } = useForm()
+
+    const connectWalletHandler = () => {
+        if ((window.ethereum) && window.ethereum.isMetaMask) {
+            console.log("MetaMask Here!");
+            window.ethereum
+                .request({ method: "eth_requestAccounts" })
+                .then((result: string[]) => {
+                    console.log("result:  " + result)
+                    console.log("result[0]:  " + result[0])
+                    accountChangedHandler(result[0]);
+                    setConnButtonText("Wallet Connected");
+                    getAccountBalance(result[0]);
+                    localStorage.setItem("accountAddress", result[0]);
+                })
+                .catch((error: { message: string }) => {
+                    console.log("jheree")
+                    setErrorMessage(error.message);
+                });
+        } else {
+            console.log("Need to install MetaMask");
+            setErrorMessage("Please install MetaMask browser extension to interact");
+        }
+    };
+
+    const getAccountBalance = (account: string) => {
+        window.ethereum
+            .request({ method: "eth_getBalance", params: [account, "latest"] })
+            .then((balance: string) => {
+                setUserBalance(ethers.formatEther(balance));
+            })
+            .catch((error: { message: string }) => {
+                setErrorMessage(error.message);
+            });
+    };
+
+    const accountChangedHandler = (newAccount: string) => {
+        setDefaultAccount(newAccount);
+        getAccountBalance(newAccount.toString());
+    };
+
+    window.ethereum.on("accountsChanged", accountChangedHandler);
+
+    function getAddressFromLocalStorage(): Promise<string> {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const accessToken = localStorage.getItem('accountAddress');
+                resolve(accessToken ?? '');
+            }, 0);
+        });
+    }
+
+    const getAccountAddress = async () => {
+        const temp = await getAddressFromLocalStorage();
+        const accountAddress = defaultAccount ? defaultAccount : temp;
+        setDefaultAccount(accountAddress);
+    };
 
     const navigate = useNavigate()
 
     useEffect(() => {
         //console.log(userInfo);
+        getAccountAddress();
         var userRole = userInfo?.user?.userRole ?? '';
-        if (success) {
+        console.log("defaultAccount: BEFORE " + defaultAccount)
+        // need to store defaultAccount in redux or local storage -- done in local storage
+        if (success && defaultAccount != '') {
+            console.log("defaultAccount: AFTER " + defaultAccount)
             if (userRole === 'UNIVERSITY') {
                 navigate('/uni/dashboard')
             }
@@ -31,15 +112,13 @@ const LoginPage = () => {
             else if (userRole === 'STUDENT') {
                 navigate('/student/dashboard')
             }
-
         }
-    }, [navigate, success])
+    }, [navigate, success, defaultAccount])
 
     const submitForm = async (data: any) => {
 
         try {
             const response = await dispatch(userLogin(data))
-
             if (response.type === 'user/login/fulfilled') {
                 console.log("fulfilledd")
                 const result = unwrapResult(response)
@@ -48,6 +127,7 @@ const LoginPage = () => {
                     toast.success(result?.message, {
                         position: toast.POSITION.TOP_RIGHT
                     },);
+                    connectWalletHandler();
                 } else {
                     toast.error(result?.message, {
                         position: toast.POSITION.TOP_RIGHT
@@ -67,6 +147,18 @@ const LoginPage = () => {
             <div>
                 <Navbar isButton={false} onMenuButtonClick={() => { }} />
             </div>
+
+            {/* <div className="WalletCard">
+                <h4>{"Connection to MetaMask using window.ethereum methods"}</h4>
+                <button onClick={connectWalletHandler}>{connButtonText}</button>
+                <div className="accountDisplay">
+                    <h3> Address: {defaultAccount}</h3>
+                </div>
+                <div className="balanceDisplay">
+                    <h3>Balance: {userBalance}</h3>
+                </div>
+                {errorMessage}
+            </div> */}
 
             <div className="grid min-h-full grid-cols-2">
                 <div className='p-16 flex flex-col items-center justify-center'>
