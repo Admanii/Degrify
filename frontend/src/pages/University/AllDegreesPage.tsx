@@ -4,12 +4,11 @@ import { Heading } from '../../components/general/Heading'
 import Layout from '../../components/general/Layout'
 import { AppDispatch } from '../../store/store';
 import { UserInfo } from '../../store/slice/authSlice';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 import { GetAllDegreesbyUniId } from '../../store/actions/degreeActions';
 import { Loader } from '../../components/general/Loader';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Search } from '../../components/general/Search';
-import { ChangeEvent } from 'react';
 
 const AllDegreesPage = () => {
 
@@ -35,7 +34,7 @@ const AllDegreesPage = () => {
 
     return (
         <Layout>
-            <div className='mt-6 ml-10 mr-8 '>
+            <div className='mt-6 ml-10 mr-8'>
                 <Heading text='All Degrees' />
                 <div className='mt-6'>
                     <div className="relative rounded-md shadow-sm mb-4 w-full h-full">

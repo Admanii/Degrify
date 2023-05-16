@@ -11,10 +11,10 @@ interface Props {
 }
 
 export const AllStudentsTable = ({ search }: Props) => {
+    const navigate = useNavigate();
     const allStudents = useSelector(AllStudents);
     const [students, setStudents] = useState<Array<IStudentDetails>>([]);
     const [filteredStudents, setFilteredStudents] = useState<Array<IStudentDetails>>([]);
-    const navigate = useNavigate();
 
     const handleRowClick = async (student: IStudentDetails) => {
         const studentId = student?._id ?? '';

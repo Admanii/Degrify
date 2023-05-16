@@ -93,10 +93,10 @@ const degrees: Array<IDegreeDetailsTemp> = [
 ]
 
 export const AllDegreesTable = ({ search }: Props) => {
+    const navigate = useNavigate();
     const allDegrees = useSelector(AllDegrees);
     const [degrees, setDegrees] = useState<Array<IDegreeDetails>>([]);
     const [filteredDegrees, setFilteredDegrees] = useState<Array<IDegreeDetails>>([]);
-    const navigate = useNavigate();
 
     const handleRowClick = async (degree: IDegreeDetails) => {
         const degreeId = degree?.degree?._id ?? '';

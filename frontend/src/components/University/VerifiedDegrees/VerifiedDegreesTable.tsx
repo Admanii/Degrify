@@ -11,39 +11,43 @@ interface Props {
 }
 
 export const VerifiedDegreesTable = ({ search }: Props) => {
-    const [currentPage, setCurrentPage] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const verifiedDegrees = useSelector(VerifiedDegrees);
-
-    const fetchVerifiedDegrees = async () => {
-        setIsLoading(true);
-        setIsLoading(false);
-    };
-
-    useEffect(() => {
-        fetchVerifiedDegrees();
-    }, [currentPage, search]);
+    const [degrees, setDegrees] = useState<Array<IDegreeDetails>>([]);
+    const [filteredDegrees, setFilteredDegrees] = useState<Array<IDegreeDetails>>([]);
 
     const handleRowClick = async (degree: IDegreeDetails) => {
         const degreeId = degree?.degree?._id ?? '';
-        setIsLoading(true);
         navigate(`/view/degreedetails?degreeId=${degreeId}`);
-        setIsLoading(false);
     };
+
+    const handleFilter = () => {
+        const filteredData = degrees.filter(
+            (degree) =>
+                degree?.studentDetails?.studentID.toLowerCase().includes(search.toLowerCase()) ||
+                degree?.studentDetails?.name.toLowerCase().includes(search.toLowerCase())
+        );
+        setFilteredDegrees(filteredData);
+    };
+
+    useEffect(() => {
+        setDegrees(verifiedDegrees);
+        setFilteredDegrees(verifiedDegrees);
+    }, [degrees]);
+
+    useEffect(() => {
+        handleFilter();
+    }, [search]);
 
     return (
         <DataTable
             noHeader
-            data={verifiedDegrees ?? []}
+            data={filteredDegrees ?? []}
             pagination
-            progressPending={isLoading}
-            //   progressComponent={<Loader text="Loading" />}
             highlightOnHover
             pointerOnHover
             onRowClicked={handleRowClick}
             columns={VerifiedDegreesColumn()}
-            className="react-dataTable"
         />
     );
 };

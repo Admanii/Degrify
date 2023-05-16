@@ -34,7 +34,7 @@ const AllStudentPage = () => {
 
     return (
         <Layout>
-            <div className='mt-6 ml-10 mr-8 '>
+            <div className='mt-6 ml-10 mr-8'>
                 <Heading text='All Students' />
                 <div className='mt-6'>
                     <div className="relative rounded-md shadow-sm mb-4 w-full h-full">
