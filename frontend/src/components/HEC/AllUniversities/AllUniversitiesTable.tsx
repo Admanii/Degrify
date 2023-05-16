@@ -11,39 +11,42 @@ interface Props {
 }
 
 export const AllUniversitiesTable = ({ search }: Props) => {
-    const [currentPage, setCurrentPage] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
-    const allUniversities = useSelector(AllUniversities);
     const navigate = useNavigate();
-
-    const fetchVerifiedDegrees = async () => {
-        setIsLoading(true);
-        setIsLoading(false);
-    };
+    const allUniversities = useSelector(AllUniversities);
+    const [universities, setUniversities] = useState<Array<IOrganisationDetails>>([]);
+    const [filteredUniversities, setFilteredUniversities] = useState<Array<IOrganisationDetails>>([]);
 
     const handleRowClick = async (organisation: IOrganisationDetails) => {
         const organisationId = organisation?._id ?? '';
-        setIsLoading(true);
         navigate(`/view/organisationprofile?organisationId=${organisationId}`);
-        setIsLoading(false);
+    };
+
+    const handleFilter = () => {
+        const filteredData = universities.filter(
+            (university) =>
+                university?.name.toLowerCase().includes(search.toLowerCase())
+        );
+        setFilteredUniversities(filteredData);
     };
 
     useEffect(() => {
-        fetchVerifiedDegrees();
-    }, [currentPage, search]);
+        setUniversities(allUniversities);
+        setFilteredUniversities(allUniversities);
+    }, [universities]);
+
+    useEffect(() => {
+        handleFilter();
+    }, [search]);
 
     return (
         <DataTable
             noHeader
-            data={allUniversities ?? []}
+            data={filteredUniversities ?? []}
             pagination
-            progressPending={isLoading}
-            //   progressComponent={<Loader text="Loading" />}
             highlightOnHover
             pointerOnHover
             onRowClicked={handleRowClick}
             columns={AllUniversitiesColumn()}
-            className="react-dataTable"
         />
     );
 };

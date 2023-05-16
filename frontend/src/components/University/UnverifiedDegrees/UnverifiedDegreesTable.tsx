@@ -48,7 +48,6 @@ export const UnverifiedDegreesTable = ({ search }: Props) => {
             pointerOnHover
             onRowClicked={handleRowClick}
             columns={UnverifiedDegreesColumn()}
-            className="react-dataTable"
         />
     );
 };

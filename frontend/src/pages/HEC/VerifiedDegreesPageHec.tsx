@@ -33,7 +33,7 @@ const VerifiedDegreesPageHec = () => {
 
     return (
         <Layout>
-            <div className='mt-6 ml-10 mr-8 '>
+            <div className='mt-6 ml-10 mr-8'>
                 {userInfo?.user?.userRole === 'UNIVERSITY' ? (
                     <Heading text='HEC Verified Degrees' />
                 ) : (

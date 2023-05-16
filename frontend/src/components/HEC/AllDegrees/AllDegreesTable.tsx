@@ -161,39 +161,43 @@ const degrees: Array<any> = [
 ]
 
 export const AllDegreesTable = ({ search }: Props) => {
-    const [currentPage, setCurrentPage] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
-    const allDegrees = useSelector(AllDegrees);
     const navigate = useNavigate();
-
-    const fetchVerifiedDegrees = async () => {
-        setIsLoading(true);
-        setIsLoading(false);
-    };
+    const allDegrees = useSelector(AllDegrees);
+    const [degrees, setDegrees] = useState<Array<IDegreeDetails>>([]);
+    const [filteredDegrees, setFilteredDegrees] = useState<Array<IDegreeDetails>>([]);
 
     const handleRowClick = async (degree: IDegreeDetails) => {
         const degreeId = degree?.degree?._id ?? '';
-        setIsLoading(true);
         navigate(`/view/degreedetails?degreeId=${degreeId}`);
-        setIsLoading(false);
+    };
+
+    const handleFilter = () => {
+        const filteredData = degrees.filter(
+            (degree) =>
+                degree?.studentDetails?.studentID.toLowerCase().includes(search.toLowerCase()) ||
+                degree?.studentDetails?.name.toLowerCase().includes(search.toLowerCase())
+        );
+        setFilteredDegrees(filteredData);
     };
 
     useEffect(() => {
-        fetchVerifiedDegrees();
-    }, [currentPage, search]);
+        setDegrees(allDegrees);
+        setFilteredDegrees(allDegrees);
+    }, [degrees]);
+
+    useEffect(() => {
+        handleFilter();
+    }, [search]);
 
     return (
         <DataTable
             noHeader
-            data={allDegrees ?? []}
+            data={filteredDegrees ?? []}
             pagination
-            progressPending={isLoading}
-            //   progressComponent={<Loader text="Loading" />}
             highlightOnHover
             pointerOnHover
             onRowClicked={handleRowClick}
             columns={AllDegreesColumn()}
-            className="react-dataTable"
         />
     );
 };
