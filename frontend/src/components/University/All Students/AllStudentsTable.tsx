@@ -11,37 +11,29 @@ interface Props {
 }
 
 export const AllStudentsTable = ({ search }: Props) => {
-    const [isLoading, setIsLoading] = useState(false);
     const allStudents = useSelector(AllStudents);
     const [students, setStudents] = useState<Array<IStudentDetails>>([]);
     const [filteredStudents, setFilteredStudents] = useState<Array<IStudentDetails>>([]);
-
     const navigate = useNavigate();
 
     const handleRowClick = async (student: IStudentDetails) => {
         const studentId = student?._id ?? '';
-        setIsLoading(true);
         navigate(`/view/studentprofile?studentId=${studentId}`);
-        setIsLoading(false);
     };
 
     const handleFilter = () => {
-        if (!search) {
-            setFilteredStudents(students); // Show full data if search is empty
-        } else {
-            const filtered = students.filter(
-                (student) =>
-                    student.studentID.toLowerCase().includes(search.toLowerCase()) ||
-                    student.name.toLowerCase().includes(search.toLowerCase())
-            );
-            setFilteredStudents(filtered);
-        }
+        const filteredData = students.filter(
+            (student) =>
+                student?.studentID?.toLowerCase().includes(search.toLowerCase()) ||
+                student?.name?.toLowerCase().includes(search.toLowerCase())
+        );
+        setFilteredStudents(filteredData);
     };
 
     useEffect(() => {
         setStudents(allStudents);
         setFilteredStudents(allStudents);
-    }, [allStudents]);
+    }, [students]);
 
     useEffect(() => {
         handleFilter();
@@ -52,8 +44,6 @@ export const AllStudentsTable = ({ search }: Props) => {
             noHeader
             data={filteredStudents ?? []}
             pagination
-            progressPending={isLoading}
-            //   progressComponent={<Loader text="Loading" />}
             highlightOnHover
             pointerOnHover
             onRowClicked={handleRowClick}

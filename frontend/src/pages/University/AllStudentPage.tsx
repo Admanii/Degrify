@@ -8,13 +8,14 @@ import { UserInfo } from '../../store/slice/authSlice';
 import { GetAllStudentsbyUniId } from '../../store/actions/studentActions';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Search } from '../../components/general/Search';
+import { Loader } from '../../components/general/Loader';
 
 const AllStudentPage = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const userInfo = useSelector(UserInfo)
     const [search, setSearch] = useState("");
-
+    const [isLoading, setIsLoading] = useState(false);
     const organisation_id = userInfo?.user?.organisationID ?? '';
 
     useEffect(() => {
@@ -22,7 +23,9 @@ const AllStudentPage = () => {
     }, [])
 
     const getStudents = async () => {
+        setIsLoading(true)
         await dispatch(GetAllStudentsbyUniId({ organisation_id: organisation_id }))
+        setIsLoading(false)
     }
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,8 +43,12 @@ const AllStudentPage = () => {
                         </div>
                         <Search handleOnChange={handleSearch} />
                     </div>
-                    <AllStudentsTable search={search} />
                 </div>
+                {isLoading ? (
+                    <Loader text='Loading' />
+                ) : (
+                    <AllStudentsTable search={search} />
+                )}
             </div>
         </Layout>
     )
