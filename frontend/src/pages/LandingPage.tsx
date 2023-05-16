@@ -52,7 +52,7 @@ const LandingPage = () => {
                         <div className="relative mt-4 font-sans">
                             <input
                                 type="text"
-                                className="block w-full h-14 py-2 pl-4 pr-32 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                className="block w-full h-14 py-2 pl-4 pr-32 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:border-gray-500 focus:ring-gray-500"
                                 placeholder="Enter Hash Value"
                                 value={hashValue}
                                 onChange={handleInputChange}

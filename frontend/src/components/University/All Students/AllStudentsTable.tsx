@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { AllStudents } from "../../../store/slice/studentSlice";
 import AllStudentsColumn from "./AllStudentsColumn";
 import { IStudentDetails } from "../../../store/types/types";
@@ -11,11 +11,12 @@ interface Props {
 }
 
 export const AllStudentsTable = ({ search }: Props) => {
-    const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const allStudents = useSelector(AllStudents);
+    const [students, setStudents] = useState<Array<IStudentDetails>>([]);
+    const [filteredStudents, setFilteredStudents] = useState<Array<IStudentDetails>>([]);
+
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const handleRowClick = async (student: IStudentDetails) => {
         const studentId = student?._id ?? '';
@@ -24,19 +25,32 @@ export const AllStudentsTable = ({ search }: Props) => {
         setIsLoading(false);
     };
 
-    const fetchVerifiedDegrees = async () => {
-        setIsLoading(true);
-        setIsLoading(false);
+    const handleFilter = () => {
+        if (!search) {
+            setFilteredStudents(students); // Show full data if search is empty
+        } else {
+            const filtered = students.filter(
+                (student) =>
+                    student.studentID.toLowerCase().includes(search.toLowerCase()) ||
+                    student.name.toLowerCase().includes(search.toLowerCase())
+            );
+            setFilteredStudents(filtered);
+        }
     };
 
     useEffect(() => {
-        fetchVerifiedDegrees();
-    }, [currentPage, search]);
+        setStudents(allStudents);
+        setFilteredStudents(allStudents);
+    }, [allStudents]);
+
+    useEffect(() => {
+        handleFilter();
+    }, [search]);
 
     return (
         <DataTable
             noHeader
-            data={allStudents ?? []}
+            data={filteredStudents ?? []}
             pagination
             progressPending={isLoading}
             //   progressComponent={<Loader text="Loading" />}
@@ -44,7 +58,6 @@ export const AllStudentsTable = ({ search }: Props) => {
             pointerOnHover
             onRowClicked={handleRowClick}
             columns={AllStudentsColumn()}
-            className="react-dataTable"
         />
     );
 };
