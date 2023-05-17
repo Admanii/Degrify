@@ -56,6 +56,14 @@ const studentSchema = mongoose.Schema({
     ref: "Organisation",
     required: true,
   },
+  TotalCreditHours: {
+    type: String,
+    required: true,
+  },
+  CGPA: {
+    type: String,
+    required: true,
+  },
 });
 
 export default mongoose.model("Student", studentSchema);

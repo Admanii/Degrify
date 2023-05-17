@@ -114,6 +114,8 @@ export const registerStudent = async (req, res) => {
     email,
     password,
     organisationID,
+    TotalCreditHours,
+    CGPA,
   } = req.body;
 
   const userRole = "STUDENT";
@@ -196,6 +198,8 @@ export const registerStudent = async (req, res) => {
       Program: Program,
       GraduatingYear: GraduatingYear,
       organisationID: organisationID,
+      TotalCreditHours: TotalCreditHours,
+      CGPA: CGPA,
     });
     const result = await User.create({
       name: name,

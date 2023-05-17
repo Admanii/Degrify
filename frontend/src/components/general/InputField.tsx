@@ -20,8 +20,9 @@ const Input: React.FC<Props> = ({ type, id, label, hintText, defaultText, requir
         id={id}
         placeholder={hintText}
         defaultValue={defaultText}
+        required={required}
         {...register(id, { required })}
-        className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-left shadow-sm rounded-md border-none"
+        className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-left shadow-sm rounded-md border border-gray-300 focus:outline-none focus:border-gray-500 focus:ring-gray-500"
       />
     </div>
   );

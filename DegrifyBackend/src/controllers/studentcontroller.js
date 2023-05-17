@@ -114,35 +114,97 @@ export const deleteStudent = async (req, res) => {
 
 export const updateStudent = async (req, res) => {
   try {
+    const {
+      name,
+      enrollmentNumber,
+      fatherName,
+      studentID,
+      DateOfBirth,
+      CNIC,
+      DateOfAdmission,
+      DateOfompletion,
+      Program,
+      GraduatingYear,
+      organisationID,
+      TotalCreditHours,
+      CGPA,
+    } = req.body;
+
+    const studentExist = await Student.findById(req.query.student_id);
+
+    if (!studentExist) {
+      return res.json(
+        jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Student Does not Exists")
+      );
+    }
+
+    const date1 = new Date(DateOfAdmission);
+    const Admissionyear = date1.getFullYear();
+    const date2 = new Date(DateOfBirth);
+    const birthYear = date2.getFullYear();
+    const date = new Date(DateOfompletion);
+    const Completionyear = date.getFullYear();
+
+    if (Completionyear - Admissionyear < 4) {
+      return res.json(
+        jsonGenerate(
+          statusCode.CLIENT_ERROR,
+          "4 years difference required between Admissionyear and Completionyear"
+        )
+      );
+    }
+    if (Admissionyear - birthYear < 16) {
+      return res.json(
+        jsonGenerate(
+          statusCode.CLIENT_ERROR,
+          "16 years difference required between Admissionyear and birthYear"
+        )
+      );
+    }
+    if (Completionyear.toString() !== GraduatingYear.toString()) {
+      return res.json(
+        jsonGenerate(
+          statusCode.CLIENT_ERROR,
+          "CompletionYear and GraduatingYear must be same"
+        )
+      );
+    }
+
     const newUser = {
-      name: req.body.name,
-      enrollmentNumber: req.body.enrollmentNumber,
-      fatherName: req.body.fatherName,
-      studentID: req.body.studentID,
-      DateOfBirth: req.body.DateOfBirth,
-      CNIC: req.body.CNIC,
-      DateOfAdmission: req.body.DateOfAdmission,
-      DateOfompletion: req.body.DateOfompletion,
-      Program: req.body.Program,
-      GraduatingYear: req.body.GraduatingYear,
+      name: name,
+      enrollmentNumber: enrollmentNumber,
+      fatherName: fatherName,
+      studentID: studentID,
+      DateOfBirth: DateOfBirth,
+      CNIC: CNIC,
+      DateOfAdmission: DateOfAdmission,
+      DateOfompletion: DateOfompletion,
+      Program: Program,
+      GraduatingYear: GraduatingYear,
+      organisationID: organisationID,
+      TotalCreditHours: TotalCreditHours,
+      CGPA: CGPA,
     };
 
-    const updated = await Student.findByIdAndUpdate(
+    console.log(newUser);
+
+    const updatedUser = await Student.findByIdAndUpdate(
       req.query.student_id,
-      {
-        newUser,
-      },
+      newUser,
       {
         new: true,
         runValidators: true,
         useFindAndModify: false,
       }
     );
+
+    console.log(updatedUser)
+
     return res.json(
       jsonGenerate(
         statusCode.SUCCESS,
-        "Profile of the Student Updated",
-        updated
+        "Student Profile Updated",
+        updatedUser
       )
     );
   } catch (err) {
@@ -171,6 +233,8 @@ export const getAllStudent = async (req, res) => {
       "Program",
       "GraduatingYear",
       "organisationID",
+      "TotalCreditHours",
+      "CGPA",
     ]);
     for (var i = 0; i < allStudents.length; i++) {
       var org = await Student.findById(allStudents[i]._id)
@@ -225,6 +289,8 @@ export const getStudent = async (req, res) => {
       "Program",
       "GraduatingYear",
       "organisationID",
+      "TotalCreditHours",
+      "CGPA",
     ]);
 
     let orgName = org?.organisationID?.name ?? "";

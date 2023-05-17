@@ -97,6 +97,8 @@ export const getDegreeByID = async (req, res) => {
       "Program",
       "GraduatingYear",
       "organisationID",
+      "TotalCreditHours",
+      "CGPA",
     ]);
     console.log(StudentDetails1._id);
     var org = await Student.findById(StudentDetails1._id)
@@ -191,6 +193,8 @@ export const getStudentVerifiedDegrees = async (req, res) => {
           "Program",
           "GraduatingYear",
           "organisationID",
+          "TotalCreditHours",
+          "CGPA",
         ])
         .exec();
 
@@ -264,6 +268,8 @@ export const getOrganisationVerifiedDegrees = async (req, res) => {
           "Program",
           "GraduatingYear",
           "organisationID",
+          "TotalCreditHours",
+          "CGPA",
         ])
         .exec();
 
@@ -338,6 +344,8 @@ export const getCompleteVerifiedDegrees = async (req, res) => {
           "Program",
           "GraduatingYear",
           "organisationID",
+          "TotalCreditHours",
+          "CGPA",
         ])
         .exec();
 
@@ -413,6 +421,8 @@ export const getUniversityAllDegree = async (req, res) => {
           "Program",
           "GraduatingYear",
           "organisationID",
+          "TotalCreditHours",
+          "CGPA",
         ])
         .exec();
       var list1 = await Student.findById(studentDetail._id).select([
@@ -513,6 +523,8 @@ export const getVerifiedUniversityDegree = async (req, res) => {
           "Program",
           "GraduatingYear",
           "organisationID",
+          "TotalCreditHours",
+          "CGPA",
         ])
         .exec();
       var list1 = await Student.findById(studentDetail._id).select([
@@ -527,6 +539,8 @@ export const getVerifiedUniversityDegree = async (req, res) => {
         "Program",
         "GraduatingYear",
         "organisationID",
+        "TotalCreditHours",
+        "CGPA",
       ]);
       var org = await Student.findById(studentDetail._id)
         .select("")
@@ -612,6 +626,8 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
           "Program",
           "GraduatingYear",
           "organisationID",
+          "TotalCreditHours",
+          "CGPA",
         ])
         .exec();
       var list1 = await Student.findById(studentDetail._id).select([
@@ -626,6 +642,8 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
         "Program",
         "GraduatingYear",
         "organisationID",
+        "TotalCreditHours",
+        "CGPA",
       ]);
       var org = await Student.findById(studentDetail._id)
         .select("")
@@ -711,6 +729,8 @@ export const getHECAllDegree = async (req, res) => {
           "Program",
           "GraduatingYear",
           "organisationID",
+          "TotalCreditHours",
+          "CGPA",
         ])
         .exec();
       var list1 = await Student.findById(studentDetail._id).select([
@@ -725,6 +745,8 @@ export const getHECAllDegree = async (req, res) => {
         "Program",
         "GraduatingYear",
         "organisationID",
+        "TotalCreditHours",
+        "CGPA",
       ]);
       var org = await Student.findById(studentDetail._id)
         .select("")
@@ -811,6 +833,8 @@ export const getHECVerifiedDegrees = async (req, res) => {
           "Program",
           "GraduatingYear",
           "organisationID",
+          "TotalCreditHours",
+          "CGPA",
         ])
         .exec();
       var list1 = await Student.findById(studentDetail._id).select([
@@ -825,6 +849,8 @@ export const getHECVerifiedDegrees = async (req, res) => {
         "Program",
         "GraduatingYear",
         "organisationID",
+        "TotalCreditHours",
+        "CGPA",
       ]);
       var org = await Student.findById(studentDetail._id)
         .select("")
@@ -911,6 +937,8 @@ export const getUnvserifiedHECDegree = async (req, res) => {
           "Program",
           "GraduatingYear",
           "organisationID",
+          "TotalCreditHours",
+          "CGPA",
         ])
         .exec();
       var list1 = await Student.findById(studentDetail._id).select([
@@ -925,6 +953,8 @@ export const getUnvserifiedHECDegree = async (req, res) => {
         "Program",
         "GraduatingYear",
         "organisationID",
+        "TotalCreditHours",
+        "CGPA",
       ]);
       var org = await Student.findById(studentDetail._id)
         .select("")
@@ -1011,6 +1041,8 @@ export const getDegreebyHash = async (req, res) => {
       "Program",
       "GraduatingYear",
       "organisationID",
+      "TotalCreditHours",
+      "CGPA",
     ]);
 
     var org = await Student.findById(StudentDetails1._id)

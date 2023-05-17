@@ -53,6 +53,7 @@ import {
   getStudentbyUni,
   getStudentbyYear,
   getStudentbyYearAndUni,
+  updateStudent,
 } from "../controllers/studentcontroller.js";
 import {
   getOrganisationByID,
@@ -61,6 +62,7 @@ import {
 import {
   organisationRegister,
   studentRegister,
+  studentUpdate,
 } from "../middleware/validator.js";
 import { validateResult } from "../middleware/validationResult.js";
 
@@ -147,3 +149,5 @@ apiProtected.get("/getorganisationbyid", getOrganisationByID); // done
 
 // will do this if required
 apiProtected.get("/getstudentverifieddegrees", getStudentVerifiedDegrees);
+
+apiProtected.post("/updatestudentbyid", studentUpdate, validateResult, updateStudent); 

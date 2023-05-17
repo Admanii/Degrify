@@ -110,6 +110,8 @@ export interface IRegisterStudent {
     email: string;
     password: string;
     userRole: string;
+    TotalCreditHours: string;
+    CGPA: string;
     //active?: boolean;
 }
 

@@ -69,10 +69,13 @@ const AddStudent = () => {
                                             <InputField type={'text'} {...register('CNIC')} id={"CNIC"} label={"CNIC"} hintText='42000-1234567-8' required={false} register={register} />
                                         </div>
                                         <div>
-                                            <InputField type={'text'} {...register('enrollmentNumber')} id={'enrollmentNumber'} label={'Enrolment Number'} hintText={'Enrolment Number'} required={false} register={register} />
+                                            <InputField type={'text'} {...register('enrollmentNumber')} id={'enrollmentNumber'} label={'Enrolment Number'} hintText={'2021-BSCS'} required={false} register={register} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('Program')} id={'Program'} label={'Program'} hintText={'BSCS'} required={false} register={register} />
+                                        </div>
+                                        <div>
+                                            <InputField type={'text'} {...register('CGPA')} id={'CGPA'} label={'CGPA'} hintText={'3.5'} required={false} register={register} />
                                         </div>
                                         <div
                                             data-te-datepicker-init
@@ -80,7 +83,7 @@ const AddStudent = () => {
                                             <InputField type={'date'} {...register('DateOfAdmission')} id={'DateOfAdmission'} label={'Date Of Admission'} hintText={'dd/mm/yyyy'} required={false} register={register} />
                                         </div>
                                         <div>
-                                            <InputField type={'text'} {...register('email')} id={'email'} label={'Email'} hintText={'abc@xyz.com'} required={false} register={register} />
+                                            <InputField type={'text'} {...register('email')} id={'email'} label={'Email'} hintText={'example@gmail.com'} required={true} register={register} />
                                         </div>
                                     </div>
                                     <div className='p-16 flex flex-col items-start justify-start'>
@@ -97,6 +100,9 @@ const AddStudent = () => {
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('GraduatingYear')} id={'GraduatingYear'} label={'Graduating Year'} hintText={'2023'} required={false} register={register} />
+                                        </div>
+                                        <div>
+                                            <InputField type={'text'} {...register('TotalCreditHours')} id={'TotalCreditHours'} label={'Total Credit Hours'} hintText={'120'} required={false} register={register} />
                                         </div>
                                         <div
                                             data-te-datepicker-init
