@@ -2,9 +2,13 @@ import bcrypt from "bcrypt";
 import Degree from "../models/Degree.js";
 import { statusCode } from "../utils/constant.js";
 import { jsonGenerate } from "../utils/helper.js";
+import Student from "../models/Student.js";
 
 export const AddDegree = async (req, res) => {
   try {
+
+    const studentExist = await Student.findById(req.query.student_id);
+
     const degreeExist = await Degree.findOne({
       $or: [
         {
@@ -12,6 +16,12 @@ export const AddDegree = async (req, res) => {
         },
       ],
     });
+
+    if (!studentExist) {
+      return res.json(
+        jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Student Does not Exists")
+      );
+    }
 
     if (degreeExist) {
       return res.json(

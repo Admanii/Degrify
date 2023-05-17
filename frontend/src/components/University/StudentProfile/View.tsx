@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import HeadingWithSpan from '../../general/HeadingWithSpan'
 import DetailsHeading from '../DegreeViewPage/DetailsHeading'
 import DegreeCertificate from '../DegreeViewPage/DegreeCertificate'
@@ -8,9 +8,16 @@ import { Heading } from '../../general/Heading'
 import Button from '../../general/Button'
 import UnderlineRow from './UnderlineRow'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Student } from '../../../store/slice/studentSlice'
 import { IStudentDetails } from '../../../store/types/types'
+import Modal from '../../general/Modal/Modal'
+import { Title } from '../../general/Modal/Title'
+import { SubTitle } from '../../general/Modal/SubTitle'
+import { AppDispatch } from '../../../store/store'
+import { AddDegree } from '../../../store/actions/degreeActions'
+import { UserInfo } from '../../../store/slice/authSlice'
+import { unwrapResult } from '@reduxjs/toolkit'
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp
@@ -45,8 +52,32 @@ interface Props {
 
 function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: Props) {
   const navigate = useNavigate()
+  const [modal, setModal] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const userInfo = useSelector(UserInfo)
+
+  const organisationId = userInfo?.user?.organisationID ?? '';
+  const studentId = student._id ?? '';
   // console.log(isDegreeExist + " isDegreeExist")
   // console.log(student);
+
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  const uploadDegree = async () => {
+    const response = await dispatch(AddDegree({ studentId: studentId, organisationId: organisationId, payload: {} }))
+    const result = unwrapResult(response);
+    if(result.statusCode === 200) {
+      navigate(`/view/degreecertificate?degreeId=${result?.data?.degreeId ?? ''}`);
+    }
+  };
+
+
 
   return (
     // <div>
@@ -227,9 +258,36 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
               <div className='h-5'></div>
               <div className="flex flex-row justify-between items-start w-2/3 pr-5">
                 <Button className={`${buttonHidden}`} inverted={true} buttonText={'Edit Profile'} />
+                <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
+                  <div className='flex justify-center'>
+                    <img src={IMAGES.info_icon}></img>
+                  </div>
+                  <Title text="Upload this degree?" />
+                  <SubTitle text='Have you verified all the Student Information? This action cannot be undone. Degrees uploaded to blockchain can not be altered!' />
+                  <div className='flex my-2'>
+                    <div className='flex px-2 w-1/2 justify-center'>
+                      <button
+                        type="submit"
+                        className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
+                        onClick={closeModal}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                    <div className='flex px-2 w-1/2 justify-center'>
+                      <button
+                        type="submit"
+                        className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700"
+                        onClick={uploadDegree}
+                      >
+                        Upload Degree
+                      </button>
+                    </div>
+                  </div>
+                </Modal>
                 {isDegreeExist ? (
                   <Button className={`${buttonHidden}`} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)} buttonText={'View Certificate'} />) :
-                  (<Button className={`${buttonHidden}`} onClick={() => navigate("/AddStudentDegree")} buttonText={'Add Degree'} />)
+                  (<Button className={`${buttonHidden}`} onClick={openModal} buttonText={'Add Degree'} />)
                 }
               </div>
             </div>
