@@ -4,6 +4,10 @@ import { statusCode } from "../utils/constant.js";
 import { jsonGenerate } from "../utils/helper.js";
 import { uploadJSONToIPFS } from "../pinata.js";
 import { hash2Cal, hashCal } from "../middleware/HashCalculate.js";
+import { sign } from "crypto";
+import { ethers } from "ethers";
+import Student from "../models/Student.js";
+//import UniversityDegree from "../hardhat/contracts/UniversityDegrees.sol/UniversityDegrees.json";
 
 export const HECAppovedDegree = async (req, res) => {
   try {
@@ -20,7 +24,6 @@ export const HECAppovedDegree = async (req, res) => {
         useFindAndModify: false,
       }
     ).select(["-ipfsLink", "-hashValue", "-dateCreated"]);
-    console.log(updatedDegree);
     if (!updatedDegree) {
       return res.json(
         jsonGenerate(statusCode.SUCCESS, "Degree Not Found", null)
@@ -30,6 +33,7 @@ export const HECAppovedDegree = async (req, res) => {
     console.log(response.pinataURL);
     const hash = hashCal(JSON.stringify(updatedDegree));
     console.log(hash);
+
     const updateDegree = await Degree.findByIdAndUpdate(
       req.query.degree_id,
       {
@@ -43,6 +47,268 @@ export const HECAppovedDegree = async (req, res) => {
         useFindAndModify: false,
       }
     );
+    var StudentDetails1 = await Student.findById(updateDegree.studentID).select(
+      [
+        "name",
+        "enrollmentNumber",
+        "fatherName",
+        "studentID",
+        "DateOfBirth",
+        "CNIC",
+        "DateOfAdmission",
+        "DateOfompletion",
+        "Program",
+        "GraduatingYear",
+        "organisationID",
+        "TotalCreditHours",
+        "CGPA",
+      ]
+    );
+    const contractAddress = "0x553952fd4267A6BAb54903E11F46804A400AB326";
+    const abi = [
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: false,
+            internalType: "string",
+            name: "tokenURI",
+            type: "string",
+          },
+          {
+            indexed: true,
+            internalType: "uint256",
+            name: "degreeId",
+            type: "uint256",
+          },
+          {
+            indexed: false,
+            internalType: "string",
+            name: "name",
+            type: "string",
+          },
+          {
+            indexed: true,
+            internalType: "address",
+            name: "studentAddress",
+            type: "address",
+          },
+          {
+            indexed: false,
+            internalType: "string",
+            name: "ERP",
+            type: "string",
+          },
+          {
+            indexed: false,
+            internalType: "bool",
+            name: "isVerified",
+            type: "bool",
+          },
+        ],
+        name: "DegreeAdded",
+        type: "event",
+      },
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: true,
+            internalType: "uint256",
+            name: "degreeId",
+            type: "uint256",
+          },
+        ],
+        name: "DegreeVerified",
+        type: "event",
+      },
+      {
+        inputs: [
+          {
+            internalType: "string",
+            name: "_name",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "_ERP",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "_tokenURI",
+            type: "string",
+          },
+        ],
+        name: "addDegree",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [
+          {
+            internalType: "uint256",
+            name: "",
+            type: "uint256",
+          },
+        ],
+        name: "degrees",
+        outputs: [
+          {
+            internalType: "string",
+            name: "tokenURI",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "degreeId",
+            type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "name",
+            type: "string",
+          },
+          {
+            internalType: "bool",
+            name: "isVerified",
+            type: "bool",
+          },
+          {
+            internalType: "string",
+            name: "ERP",
+            type: "string",
+          },
+        ],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [],
+        name: "getAllDegrees",
+        outputs: [
+          {
+            components: [
+              {
+                internalType: "string",
+                name: "tokenURI",
+                type: "string",
+              },
+              {
+                internalType: "uint256",
+                name: "degreeId",
+                type: "uint256",
+              },
+              {
+                internalType: "string",
+                name: "name",
+                type: "string",
+              },
+              {
+                internalType: "bool",
+                name: "isVerified",
+                type: "bool",
+              },
+              {
+                internalType: "string",
+                name: "ERP",
+                type: "string",
+              },
+            ],
+            internalType: "struct UniversityDegrees.Degree[]",
+            name: "",
+            type: "tuple[]",
+          },
+        ],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [
+          {
+            internalType: "string",
+            name: "_ERP",
+            type: "string",
+          },
+        ],
+        name: "getDegreeByERP",
+        outputs: [
+          {
+            components: [
+              {
+                internalType: "string",
+                name: "tokenURI",
+                type: "string",
+              },
+              {
+                internalType: "uint256",
+                name: "degreeId",
+                type: "uint256",
+              },
+              {
+                internalType: "string",
+                name: "name",
+                type: "string",
+              },
+              {
+                internalType: "bool",
+                name: "isVerified",
+                type: "bool",
+              },
+              {
+                internalType: "string",
+                name: "ERP",
+                type: "string",
+              },
+            ],
+            internalType: "struct UniversityDegrees.Degree",
+            name: "",
+            type: "tuple",
+          },
+        ],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [],
+        name: "totalDegrees",
+        outputs: [
+          {
+            internalType: "uint256",
+            name: "",
+            type: "uint256",
+          },
+        ],
+        stateMutability: "view",
+        type: "function",
+      },
+    ];
+
+    console.log("jjj");
+    if (typeof window !== "undefined") {
+      console.log("jjjj");
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      console.log(signer);
+      let contract = new ethers.Contract(contractAddress, abi, signer);
+      let transaction = await contract.addDegree(
+        StudentDetails1.name,
+        StudentDetails1.studentID,
+        response.pinataURL
+      );
+      await transaction.wait();
+      console.log("ggg");
+
+      let getting = await contract.getDegreeByERP(StudentDetails1.studentID);
+      console.log(getting);
+    }
+
+    // const signer = provider.getSigner();
+    console.log(StudentDetails1.name + " " + StudentDetails1.studentID);
+
+    // console.log(contract);
+
     return res.json(
       jsonGenerate(statusCode.SUCCESS, "Degree Updated by HEC", updateDegree)
     );

@@ -17,7 +17,7 @@
     "apexcharts": "^3.37.3",
     "axios": "^0.27.2",
     "classnames": "^2.3.2",
-    "ethers": "^6.3.0",
+    "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-data-table-component": "^7.5.3",
     "react-dom": "^18.2.0",

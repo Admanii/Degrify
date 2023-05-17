@@ -42,9 +42,247 @@ const LoginPage = () => {
             console.log("MetaMask Here!");
             window.ethereum
                 .request({ method: "eth_requestAccounts" })
-                .then((result: string[]) => {
-                    console.log("result:  " + result)
-                    console.log("result[0]:  " + result[0])
+                .then(async (result: string[]) => {
+                    const contractAddress = "0x553952fd4267A6BAb54903E11F46804A400AB326";
+                    const abi = [
+                      {
+                        anonymous: false,
+                        inputs: [
+                          {
+                            indexed: false,
+                            internalType: "string",
+                            name: "tokenURI",
+                            type: "string",
+                          },
+                          {
+                            indexed: true,
+                            internalType: "uint256",
+                            name: "degreeId",
+                            type: "uint256",
+                          },
+                          {
+                            indexed: false,
+                            internalType: "string",
+                            name: "name",
+                            type: "string",
+                          },
+                          {
+                            indexed: true,
+                            internalType: "address",
+                            name: "studentAddress",
+                            type: "address",
+                          },
+                          {
+                            indexed: false,
+                            internalType: "string",
+                            name: "ERP",
+                            type: "string",
+                          },
+                          {
+                            indexed: false,
+                            internalType: "bool",
+                            name: "isVerified",
+                            type: "bool",
+                          },
+                        ],
+                        name: "DegreeAdded",
+                        type: "event",
+                      },
+                      {
+                        anonymous: false,
+                        inputs: [
+                          {
+                            indexed: true,
+                            internalType: "uint256",
+                            name: "degreeId",
+                            type: "uint256",
+                          },
+                        ],
+                        name: "DegreeVerified",
+                        type: "event",
+                      },
+                      {
+                        inputs: [
+                          {
+                            internalType: "string",
+                            name: "_name",
+                            type: "string",
+                          },
+                          {
+                            internalType: "string",
+                            name: "_ERP",
+                            type: "string",
+                          },
+                          {
+                            internalType: "string",
+                            name: "_tokenURI",
+                            type: "string",
+                          },
+                        ],
+                        name: "addDegree",
+                        outputs: [],
+                        stateMutability: "nonpayable",
+                        type: "function",
+                      },
+                      {
+                        inputs: [
+                          {
+                            internalType: "uint256",
+                            name: "",
+                            type: "uint256",
+                          },
+                        ],
+                        name: "degrees",
+                        outputs: [
+                          {
+                            internalType: "string",
+                            name: "tokenURI",
+                            type: "string",
+                          },
+                          {
+                            internalType: "uint256",
+                            name: "degreeId",
+                            type: "uint256",
+                          },
+                          {
+                            internalType: "string",
+                            name: "name",
+                            type: "string",
+                          },
+                          {
+                            internalType: "bool",
+                            name: "isVerified",
+                            type: "bool",
+                          },
+                          {
+                            internalType: "string",
+                            name: "ERP",
+                            type: "string",
+                          },
+                        ],
+                        stateMutability: "view",
+                        type: "function",
+                      },
+                      {
+                        inputs: [],
+                        name: "getAllDegrees",
+                        outputs: [
+                          {
+                            components: [
+                              {
+                                internalType: "string",
+                                name: "tokenURI",
+                                type: "string",
+                              },
+                              {
+                                internalType: "uint256",
+                                name: "degreeId",
+                                type: "uint256",
+                              },
+                              {
+                                internalType: "string",
+                                name: "name",
+                                type: "string",
+                              },
+                              {
+                                internalType: "bool",
+                                name: "isVerified",
+                                type: "bool",
+                              },
+                              {
+                                internalType: "string",
+                                name: "ERP",
+                                type: "string",
+                              },
+                            ],
+                            internalType: "struct UniversityDegrees.Degree[]",
+                            name: "",
+                            type: "tuple[]",
+                          },
+                        ],
+                        stateMutability: "view",
+                        type: "function",
+                      },
+                      {
+                        inputs: [
+                          {
+                            internalType: "string",
+                            name: "_ERP",
+                            type: "string",
+                          },
+                        ],
+                        name: "getDegreeByERP",
+                        outputs: [
+                          {
+                            components: [
+                              {
+                                internalType: "string",
+                                name: "tokenURI",
+                                type: "string",
+                              },
+                              {
+                                internalType: "uint256",
+                                name: "degreeId",
+                                type: "uint256",
+                              },
+                              {
+                                internalType: "string",
+                                name: "name",
+                                type: "string",
+                              },
+                              {
+                                internalType: "bool",
+                                name: "isVerified",
+                                type: "bool",
+                              },
+                              {
+                                internalType: "string",
+                                name: "ERP",
+                                type: "string",
+                              },
+                            ],
+                            internalType: "struct UniversityDegrees.Degree",
+                            name: "",
+                            type: "tuple",
+                          },
+                        ],
+                        stateMutability: "view",
+                        type: "function",
+                      },
+                      {
+                        inputs: [],
+                        name: "totalDegrees",
+                        outputs: [
+                          {
+                            internalType: "uint256",
+                            name: "",
+                            type: "uint256",
+                          },
+                        ],
+                        stateMutability: "view",
+                        type: "function",
+                      },
+                    ];
+                    console.log("jjj");
+                     if (typeof window !== "undefined") {
+                        console.log("jjjj");
+                        const provider = new ethers.providers.Web3Provider(window.ethereum);
+                        const signer = provider.getSigner();
+                        console.log(signer);
+                        console.log("jjjj2");
+                        let contract = new ethers.Contract(contractAddress, abi, signer);
+                        // console.log("jjjj3");
+                        // let transaction = await contract.addDegree(
+                        //     "Azlan",
+                        //     "17211",
+                        //     "https://gateway.pinata.cloud/ipfs/QmfB7cUgSs8kNygLR1fkDztfUmXuW9ZNqxJDHUJ9D1HRUr"
+                        //   );
+                        //   console.log("jjjj4");
+                        //   await transaction.wait();
+                          console.log("ggg");
+                          let getting = await contract.getDegreeByERP("17211");
+                          console.log(getting);
+    }
                     accountChangedHandler(result[0]);
                     setConnButtonText("Wallet Connected");
                     getAccountBalance(result[0]);
@@ -64,7 +302,7 @@ const LoginPage = () => {
         window.ethereum
             .request({ method: "eth_getBalance", params: [account, "latest"] })
             .then((balance: string) => {
-                setUserBalance(ethers.formatEther(balance));
+                setUserBalance(ethers.utils.formatEther(balance));
             })
             .catch((error: { message: string }) => {
                 setErrorMessage(error.message);
