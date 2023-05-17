@@ -1,5 +1,5 @@
 import api from "../api";
-import { IRegisterStudent } from "../types/types";
+import { IRegisterStudent, IUpdateStudent, IUpdateStudentPayload } from "../types/types";
 
 var accessToken = '';
 var config = {}
@@ -44,4 +44,9 @@ export const getAllStudentsbyUniId = async (organisation_id: string) => {
 export const getStudentbyId = async (studentId: string) => {
     await getConfig();
     return api.get(`/getstudentbyid?student_id=${studentId}`, config);
+};
+
+export const updateStudentbyId = async (studentId: string, payload: IUpdateStudentPayload) => {
+    await getConfig();
+    return api.post(`/updatestudentbyid?student_id=${studentId}`, payload, config);
 };

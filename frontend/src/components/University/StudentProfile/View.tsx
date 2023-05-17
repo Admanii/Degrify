@@ -257,7 +257,7 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
               {/* <UnderlineRow text={"Date of Completion:"} spanText={`${dateOfCompletion}`} showBorder={false} /> */}
               <div className='h-5'></div>
               <div className="flex flex-row justify-between items-start w-2/3 pr-5">
-                <Button className={`${buttonHidden}`} inverted={true} buttonText={'Edit Profile'} />
+                <Button className={`${buttonHidden}`} inverted={true} buttonText={'Edit Profile'} onClick={() => navigate(`/edit/studentprofile?studentId=${studentId}`)}/>
                 <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
                   <div className='flex justify-center'>
                     <img src={IMAGES.info_icon}></img>
