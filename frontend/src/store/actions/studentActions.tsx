@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { IRegisterStudent, IResponse, IStudentDetails } from '../types/types';
-import { getAllStudentsbyUniId, getStudentbyId, registerStudent } from '../service/studentServices';
+import { IRegisterStudent, IResponse, IStudentDetails, IUpdateStudent } from '../types/types';
+import { getAllStudentsbyUniId, getStudentbyId, registerStudent, updateStudentbyId } from '../service/studentServices';
 
 export const GetAllStudentsbyUniId = createAsyncThunk<
     Array<IStudentDetails>,
@@ -67,6 +67,25 @@ export const RegisterStudent = createAsyncThunk<
     async (student: IRegisterStudent, { rejectWithValue }) => {
         try {
             const response = await registerStudent(student);
+            return response.data;
+        } catch (err) {
+            //@ts-ignore
+            let error: AxiosError<IRejectValue> = err;
+            if (!error.response) throw err;
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const UpdateStudentbyId = createAsyncThunk<
+    IResponse,
+    IUpdateStudent,
+    any
+>(
+    "uni/update/student",
+    async ({ studentId, payload }: IUpdateStudent, { rejectWithValue }) => {
+        try {
+            const response = await updateStudentbyId(studentId, payload );
             return response.data;
         } catch (err) {
             //@ts-ignore

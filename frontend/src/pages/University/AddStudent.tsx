@@ -1,18 +1,16 @@
 import { useState } from 'react'
-import Button from '../../general/Button';
-import Navbar from "../../general/Navbar";
+import Button from '../../components/general/Button';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '../../../store/store';
-import { RegisterStudent } from '../../../store/actions/studentActions';
-import { IRegisterStudent } from '../../../store/types/types';
-import { UserInfo } from '../../../store/slice/authSlice';
-import InputField from '../../general/InputField';
-import Modal from '../../general/Modal/Modal';
-import { IMAGES } from '../../../constants/images';
-import { Title } from '../../general/Modal/Title';
-import { SubTitle } from '../../general/Modal/SubTitle';
-import Layout from '../../general/Layout';
+import { AppDispatch } from '../../store/store';
+import { RegisterStudent } from '../../store/actions/studentActions';
+import { IRegisterStudent } from '../../store/types/types';
+import { UserInfo } from '../../store/slice/authSlice';
+import InputField from '../../components/general/InputField';
+import Modal from '../../components/general/Modal/Modal';
+import { IMAGES } from '../../constants/images';
+import { Title } from '../../components/general/Modal/Title';
+import Layout from '../../components/general/Layout';
 import { useNavigate } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';

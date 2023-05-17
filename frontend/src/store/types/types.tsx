@@ -16,6 +16,8 @@ export interface IStudentDetails {
     DateOfompletion: string;
     Program: string;
     GraduatingYear: string;
+    TotalCreditHours: string;
+    CGPA: string;
     organisationID: string;
     orgName: string;
     email: string;
@@ -95,7 +97,6 @@ export interface IDegreeCountByProgram {
 }
 
 export interface IRegisterStudent {
-    //_id?: string;
     name: string;
     enrollmentNumber: string;
     fatherName: string;
@@ -112,7 +113,6 @@ export interface IRegisterStudent {
     userRole: string;
     TotalCreditHours: string;
     CGPA: string;
-    //active?: boolean;
 }
 
 export interface IRegisterOrganisation {
@@ -162,3 +162,25 @@ export interface IDegreeCountByProgramAndUni {
     _id: string,
     count: number
 }
+
+export interface IUpdateStudent {
+    studentId: string,
+    payload: IUpdateStudentPayload
+}
+export interface IUpdateStudentPayload {
+    name: string;
+    enrollmentNumber: string;
+    fatherName: string;
+    studentID: string;
+    DateOfBirth: string;
+    CNIC: string;
+    Program: string;
+    GraduatingYear: string;
+    DateOfAdmission: string;
+    DateOfompletion: string;
+    TotalCreditHours: string;
+    CGPA: string;
+    //active?: boolean;   
+}
+
+

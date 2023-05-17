@@ -114,6 +114,7 @@ export const deleteStudent = async (req, res) => {
 
 export const updateStudent = async (req, res) => {
   try {
+
     const {
       name,
       enrollmentNumber,
@@ -125,7 +126,6 @@ export const updateStudent = async (req, res) => {
       DateOfompletion,
       Program,
       GraduatingYear,
-      organisationID,
       TotalCreditHours,
       CGPA,
     } = req.body;
@@ -181,7 +181,6 @@ export const updateStudent = async (req, res) => {
       DateOfompletion: DateOfompletion,
       Program: Program,
       GraduatingYear: GraduatingYear,
-      organisationID: organisationID,
       TotalCreditHours: TotalCreditHours,
       CGPA: CGPA,
     };
@@ -209,7 +208,7 @@ export const updateStudent = async (req, res) => {
     );
   } catch (err) {
     return res.json(
-      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error is displaying ", err)
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error is displaying", err)
     );
   }
 };

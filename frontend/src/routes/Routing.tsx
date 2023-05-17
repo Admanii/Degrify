@@ -9,7 +9,7 @@ import LandingPage from "../pages/LandingPage";
 import AllDegreesPage from "../pages/University/AllDegreesPage";
 import EditRequestsPage from "../pages/University/EditRequestsPage";
 import DegreeViewPage from "../pages/DegreeViewPage";
-import AddStudent from "../components/University/AddStudent/AddStudent";
+import AddStudent from "../pages/University/AddStudent";
 import MainPageHec from "../pages/HEC/MainPageHec";
 import VerifiedDegreesPageHec from "../pages/HEC/VerifiedDegreesPageHec";
 import UnverifiedDegreesPageHec from "../pages/HEC/UnverifiedDegreesPageHec";
@@ -24,7 +24,7 @@ import AllStudentPage from "../pages/University/AllStudentPage";
 import AllUniversitiesPage from "../pages/HEC/AllUniversitiesPage";
 import OrganisationProfileView from "../pages/OrganisationProfileView";
 import AddUniversity from "../pages/HEC/AddUniversity";
-import AddStudentDegree from "../pages/University/AddStudentDegree";
+import EditStudentPage from "../pages/University/EditStudentPage";
 
 interface RouteType {
   path: string;
@@ -184,11 +184,11 @@ export const routeList: RouteType[] = [
     isPrivate: false,
     component: <AddStudent />,
   },
-  {
-    path: "/AddStudentDegree",
-    isPrivate: false,
-    component: <AddStudentDegree />,
-  },
+  // {
+  //   path: "/AddStudentDegree",
+  //   isPrivate: false,
+  //   component: <AddStudentDegree />,
+  // },
   {
     path: "/AddUniversity",
     isPrivate: true,
@@ -232,6 +232,12 @@ export const routeList: RouteType[] = [
     isPrivate: true,
     isOrg: true,
     component: <OrganisationProfileView />,
+  },
+  {
+    path: "/edit/studentprofile",
+    isPrivate: true,
+    isUni: true,
+    component: <EditStudentPage />,
   },
 ];
 
