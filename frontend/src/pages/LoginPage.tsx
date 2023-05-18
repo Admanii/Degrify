@@ -11,6 +11,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { ethers } from "ethers";
 import { abi } from '../utility/util';
+import { logout } from '../store/slice/authSlice';
 
 declare global {
     interface Window {
@@ -20,18 +21,10 @@ declare global {
 
 const LoginPage = () => {
 
-    // interface Window {
-    //     ethereum?: {
-    //       request: (args: any) => Promise<any>;
-    //       on: (eventName: string, callback: (...args: any[]) => void) => void;
-    //       removeListener: (eventName: string, callback: (...args: any[]) => void) => void;
-    //       isMetaMask?: boolean;
-    //     };
-    //   }
-
     const { userInfo, success } = useSelector((state: any) => state.auth)
     const [errorMessage, setErrorMessage] = useState('');
     const [defaultAccount, setDefaultAccount] = useState('');
+    const [accountAddress, setAccountAddress] = useState('');
     const [userBalance, setUserBalance] = useState('');
     const [connButtonText, setConnButtonText] = useState("Connect Wallet");
     const dispatch = useDispatch<AppDispatch>();
@@ -44,16 +37,17 @@ const LoginPage = () => {
             await window.ethereum
                 .request({ method: "eth_requestAccounts" })
                 .then(async () => {
+                    console.log("then!");
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
                     const addr = await signer.getAddress();
-                    console.log("jjj");
+                    console.log("addr");
+                    console.log(addr)
                     accountChangedHandler(addr);
                     setConnButtonText("Wallet Connected");
                     getAccountBalance(addr);
                     localStorage.setItem("accountAddress", addr);
-
-                    const contractAddress = "0x553952fd4267A6BAb54903E11F46804A400AB326";
+                    //const contractAddress = "0x553952fd4267A6BAb54903E11F46804A400AB326";
                     if (typeof window !== "undefined") {
                         //console.log("jjjj");
                         // const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -76,7 +70,6 @@ const LoginPage = () => {
                     }
                 })
                 .catch((error: { message: string }) => {
-                    console.log("jheree")
                     setErrorMessage(error.message);
                 });
         } else {
@@ -96,7 +89,7 @@ const LoginPage = () => {
             });
     };
 
-    const accountChangedHandler = (newAccount: string) => {
+    const accountChangedHandler = async (newAccount: string) => {
         setDefaultAccount(newAccount);
         getAccountBalance(newAccount.toString());
     };
@@ -112,22 +105,20 @@ const LoginPage = () => {
         });
     }
 
-    const getAccountAddress = async () => {
-        const temp = await getAddressFromLocalStorage();
-        const accountAddress = defaultAccount ? defaultAccount : temp;
-        setDefaultAccount(accountAddress);
-    };
-
     const navigate = useNavigate()
 
     useEffect(() => {
-        //console.log(userInfo);
-        getAccountAddress();
+        (async () => {
+            const temp = await getAddressFromLocalStorage();
+            setAccountAddress(temp)
+        })();
         var userRole = userInfo?.user?.userRole ?? '';
-        console.log("defaultAccount: BEFORE " + defaultAccount)
-        // need to store defaultAccount in redux or local storage -- done in local storage
-        if (success && defaultAccount != '') {
-            console.log("defaultAccount: AFTER " + defaultAccount)
+        console.log("success " + success)
+        if (success && accountAddress != '') {
+            console.log("accountAddressfromlocal: " + accountAddress)
+            toast.success("Login Successfull", {
+                position: toast.POSITION.TOP_RIGHT
+            },);
             if (userRole === 'UNIVERSITY') {
                 navigate('/uni/dashboard')
             }
@@ -138,7 +129,12 @@ const LoginPage = () => {
                 navigate('/student/dashboard')
             }
         }
-    }, [navigate, success, defaultAccount])
+    }, [navigate, success, defaultAccount, accountAddress])
+
+    const logoutHandler = async () => {
+        console.log("Logout clicked");
+        await dispatch(logout())
+    };
 
     const submitForm = async (data: any) => {
 
@@ -149,10 +145,17 @@ const LoginPage = () => {
                 const result = unwrapResult(response)
                 console.log(result)
                 if (result?.data != null && (result?.statusCode === 200)) {
-                    toast.success(result?.message, {
-                        position: toast.POSITION.TOP_RIGHT
-                    },);
-                    connectWalletHandler();
+                    await connectWalletHandler();
+                    const address = await getAddressFromLocalStorage();
+                    console.log("address")
+                    console.log(address)
+                    if (address === '') {
+                        console.log("logoutHandler()")
+                        logoutHandler()
+                        toast.error("Please Connect Your MetaMask Wallet and Login Again!", {
+                            position: toast.POSITION.TOP_RIGHT
+                        },);
+                    }
                 } else {
                     toast.error(result?.message, {
                         position: toast.POSITION.TOP_RIGHT

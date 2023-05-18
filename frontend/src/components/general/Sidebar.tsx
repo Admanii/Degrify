@@ -54,10 +54,7 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec, studen
 
     const logoutHandler = async () => {
         console.log("Logout clicked");
-        // clear local storage
         await dispatch(logout())
-        localStorage.clear();
-        // navigate to login page
         navigate("/login");
     };
 

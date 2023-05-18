@@ -29,8 +29,7 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            localStorage.removeItem('token') // delete token from storage
-            localStorage.removeItem('userData')
+            localStorage.clear();
             state.loading = false
             state.userInfo = {} as IUserDetails
             state.token = ''
@@ -50,6 +49,10 @@ const authSlice = createSlice({
                 state.token = payload?.data?.token
                 if (state.userInfo && state.token) {
                     state.success = true
+                }
+                else {
+                    state.success = false
+                    localStorage.clear();
                 }
             })
     },
