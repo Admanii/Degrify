@@ -10,6 +10,7 @@ import { AppDispatch } from '../store/store';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { ethers } from "ethers";
+import { abi } from '../utility/util';
 
 declare global {
     interface Window {
@@ -37,240 +38,29 @@ const LoginPage = () => {
 
     const { register, handleSubmit, reset } = useForm()
 
-    const connectWalletHandler = () => {
+    const connectWalletHandler = async () => {
         if ((window.ethereum) && window.ethereum.isMetaMask) {
             console.log("MetaMask Here!");
-            window.ethereum
+            await window.ethereum
                 .request({ method: "eth_requestAccounts" })
-                .then(async (result: string[]) => {
-                    const contractAddress = "0x553952fd4267A6BAb54903E11F46804A400AB326";
-                    const abi = [
-                      {
-                        anonymous: false,
-                        inputs: [
-                          {
-                            indexed: false,
-                            internalType: "string",
-                            name: "tokenURI",
-                            type: "string",
-                          },
-                          {
-                            indexed: true,
-                            internalType: "uint256",
-                            name: "degreeId",
-                            type: "uint256",
-                          },
-                          {
-                            indexed: false,
-                            internalType: "string",
-                            name: "name",
-                            type: "string",
-                          },
-                          {
-                            indexed: true,
-                            internalType: "address",
-                            name: "studentAddress",
-                            type: "address",
-                          },
-                          {
-                            indexed: false,
-                            internalType: "string",
-                            name: "ERP",
-                            type: "string",
-                          },
-                          {
-                            indexed: false,
-                            internalType: "bool",
-                            name: "isVerified",
-                            type: "bool",
-                          },
-                        ],
-                        name: "DegreeAdded",
-                        type: "event",
-                      },
-                      {
-                        anonymous: false,
-                        inputs: [
-                          {
-                            indexed: true,
-                            internalType: "uint256",
-                            name: "degreeId",
-                            type: "uint256",
-                          },
-                        ],
-                        name: "DegreeVerified",
-                        type: "event",
-                      },
-                      {
-                        inputs: [
-                          {
-                            internalType: "string",
-                            name: "_name",
-                            type: "string",
-                          },
-                          {
-                            internalType: "string",
-                            name: "_ERP",
-                            type: "string",
-                          },
-                          {
-                            internalType: "string",
-                            name: "_tokenURI",
-                            type: "string",
-                          },
-                        ],
-                        name: "addDegree",
-                        outputs: [],
-                        stateMutability: "nonpayable",
-                        type: "function",
-                      },
-                      {
-                        inputs: [
-                          {
-                            internalType: "uint256",
-                            name: "",
-                            type: "uint256",
-                          },
-                        ],
-                        name: "degrees",
-                        outputs: [
-                          {
-                            internalType: "string",
-                            name: "tokenURI",
-                            type: "string",
-                          },
-                          {
-                            internalType: "uint256",
-                            name: "degreeId",
-                            type: "uint256",
-                          },
-                          {
-                            internalType: "string",
-                            name: "name",
-                            type: "string",
-                          },
-                          {
-                            internalType: "bool",
-                            name: "isVerified",
-                            type: "bool",
-                          },
-                          {
-                            internalType: "string",
-                            name: "ERP",
-                            type: "string",
-                          },
-                        ],
-                        stateMutability: "view",
-                        type: "function",
-                      },
-                      {
-                        inputs: [],
-                        name: "getAllDegrees",
-                        outputs: [
-                          {
-                            components: [
-                              {
-                                internalType: "string",
-                                name: "tokenURI",
-                                type: "string",
-                              },
-                              {
-                                internalType: "uint256",
-                                name: "degreeId",
-                                type: "uint256",
-                              },
-                              {
-                                internalType: "string",
-                                name: "name",
-                                type: "string",
-                              },
-                              {
-                                internalType: "bool",
-                                name: "isVerified",
-                                type: "bool",
-                              },
-                              {
-                                internalType: "string",
-                                name: "ERP",
-                                type: "string",
-                              },
-                            ],
-                            internalType: "struct UniversityDegrees.Degree[]",
-                            name: "",
-                            type: "tuple[]",
-                          },
-                        ],
-                        stateMutability: "view",
-                        type: "function",
-                      },
-                      {
-                        inputs: [
-                          {
-                            internalType: "string",
-                            name: "_ERP",
-                            type: "string",
-                          },
-                        ],
-                        name: "getDegreeByERP",
-                        outputs: [
-                          {
-                            components: [
-                              {
-                                internalType: "string",
-                                name: "tokenURI",
-                                type: "string",
-                              },
-                              {
-                                internalType: "uint256",
-                                name: "degreeId",
-                                type: "uint256",
-                              },
-                              {
-                                internalType: "string",
-                                name: "name",
-                                type: "string",
-                              },
-                              {
-                                internalType: "bool",
-                                name: "isVerified",
-                                type: "bool",
-                              },
-                              {
-                                internalType: "string",
-                                name: "ERP",
-                                type: "string",
-                              },
-                            ],
-                            internalType: "struct UniversityDegrees.Degree",
-                            name: "",
-                            type: "tuple",
-                          },
-                        ],
-                        stateMutability: "view",
-                        type: "function",
-                      },
-                      {
-                        inputs: [],
-                        name: "totalDegrees",
-                        outputs: [
-                          {
-                            internalType: "uint256",
-                            name: "",
-                            type: "uint256",
-                          },
-                        ],
-                        stateMutability: "view",
-                        type: "function",
-                      },
-                    ];
+                .then(async () => {
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
+                    const addr = await signer.getAddress();
                     console.log("jjj");
-                     if (typeof window !== "undefined") {
-                        console.log("jjjj");
-                        const provider = new ethers.providers.Web3Provider(window.ethereum);
-                        const signer = provider.getSigner();
-                        console.log(signer);
-                        console.log("jjjj2");
-                        let contract = new ethers.Contract(contractAddress, abi, signer);
+                    accountChangedHandler(addr);
+                    setConnButtonText("Wallet Connected");
+                    getAccountBalance(addr);
+                    localStorage.setItem("accountAddress", addr);
+
+                    const contractAddress = "0x553952fd4267A6BAb54903E11F46804A400AB326";
+                    if (typeof window !== "undefined") {
+                        //console.log("jjjj");
+                        // const provider = new ethers.providers.Web3Provider(window.ethereum);
+                        // const signer = provider.getSigner();
+                        //console.log(signer);
+                        //console.log("jjjj2");
+                        // let contract = new ethers.Contract(contractAddress, abi, signer);
                         // console.log("jjjj3");
                         // let transaction = await contract.addDegree(
                         //     "Azlan",
@@ -279,14 +69,11 @@ const LoginPage = () => {
                         //   );
                         //   console.log("jjjj4");
                         //   await transaction.wait();
-                          console.log("ggg");
-                          let getting = await contract.getDegreeByERP("17211");
-                          console.log(getting);
-    }
-                    accountChangedHandler(result[0]);
-                    setConnButtonText("Wallet Connected");
-                    getAccountBalance(result[0]);
-                    localStorage.setItem("accountAddress", result[0]);
+
+                        // console.log("getting");
+                        // let getting = await contract.getDegreeByERP("17211");
+                        // console.log(getting);
+                    }
                 })
                 .catch((error: { message: string }) => {
                     console.log("jheree")

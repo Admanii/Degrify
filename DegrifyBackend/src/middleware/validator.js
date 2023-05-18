@@ -5,7 +5,7 @@ export const studentRegister = [
   check("password", "Password should be 6 or more characters").isLength({
     min: 6,
   }),
-  check("studentID", "studentID is required")
+  check("studentID", "studentID should be 5 characters")
     .notEmpty()
     .trim()
     .escape()

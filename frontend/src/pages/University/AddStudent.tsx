@@ -78,7 +78,7 @@ const AddStudent = () => {
                                         <div
                                             data-te-datepicker-init
                                             data-te-input-wrapper-init>
-                                            <InputField type={'date'} {...register('DateOfAdmission')} id={'DateOfAdmission'} label={'Date Of Admission'} hintText={'dd/mm/yyyy'} required={false} register={register} />
+                                            <InputField type={'date'} {...register('DateOfAdmission')} id={'DateOfAdmission'} label={'Date Of Admission'} hintText={'2023-05-17'} required={false} register={register} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('email')} id={'email'} label={'Email'} hintText={'example@gmail.com'} required={true} register={register} />
