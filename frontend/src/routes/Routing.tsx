@@ -53,7 +53,9 @@ const PrivateRoute = ({
   isStudent?: boolean;
   userRole: string;
 }) => {
-  if (isAuthenticated) {
+  const accountAddress = localStorage.getItem('accountAddress') ?? '';
+  console.log(accountAddress)
+  if (isAuthenticated && accountAddress !== '') {
     if (isOrg && userRole !== ('HEC' || 'UNIVERSITY')) {
       return <Navigate to='/login' />;
     }
@@ -73,7 +75,6 @@ const PrivateRoute = ({
   else {
     return <Navigate to='/login' />;
   }
-  //return isAuthenticated ? element : <Navigate to='/login' />;
 };
 
 const GetRoutes = () => {

@@ -99,8 +99,8 @@ const LoginPage = () => {
     function getAddressFromLocalStorage(): Promise<string> {
         return new Promise((resolve) => {
             setTimeout(() => {
-                const accessToken = localStorage.getItem('accountAddress');
-                resolve(accessToken ?? '');
+                const address = localStorage.getItem('accountAddress');
+                resolve(address ?? '');
             }, 0);
         });
     }
@@ -113,9 +113,10 @@ const LoginPage = () => {
             setAccountAddress(temp)
         })();
         var userRole = userInfo?.user?.userRole ?? '';
-        console.log("success " + success)
+        //console.log("success " + success)
         if (success && accountAddress != '') {
-            console.log("accountAddressfromlocal: " + accountAddress)
+            // console.log("accountAddressfromlocal: " + accountAddress)
+            console.log("Login Successfull");
             toast.success("Login Successfull", {
                 position: toast.POSITION.TOP_RIGHT
             },);
