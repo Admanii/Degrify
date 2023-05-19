@@ -1309,3 +1309,99 @@ export const getDegreebyHash = async (req, res) => {
     );
   }
 };
+
+export const getDegreeCountByYear = async (req, res) => {
+  try {
+    const pipeline = [
+      {
+        $lookup: {
+          from: "students",
+          let: { studentID: "$studentID" },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $eq: ["$_id", "$$studentID"] },
+              },
+            },
+          ],
+          as: "studentData",
+        },
+      },
+      {
+        $match: {
+          studentVerified: true,
+          organisationVerified: true,
+          // HECVerified: true,
+          // completeVerified: true,
+        },
+      },
+      {
+        $group: {
+          _id: { $arrayElemAt: ["$studentData.GraduatingYear", 0] },
+          count: { $sum: 1 },
+        },
+      },
+    ];
+    Degree.aggregate(pipeline, function (err, results) {
+      if (err) {
+        return res.status(500).json({ error: err });
+      }
+
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "Degrees by University", results)
+      );
+    });
+  } catch (err) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed to disply", err)
+    );
+  }
+};
+
+export const getDegreeCountByOrganisation = async (req, res) => {
+  try {
+    const pipeline = [
+      {
+        $lookup: {
+          from: "organisations",
+          let: { organisationID: "$organisationID" },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $eq: ["$_id", "$$organisationID"] },
+              },
+            },
+          ],
+          as: "OrganisationData",
+        },
+      },
+      {
+        $match: {
+          studentVerified: true,
+          organisationVerified: true,
+          // HECVerified: true,
+          // completeVerified: true,
+        },
+      },
+      {
+        $group: {
+          _id: { $arrayElemAt: ["$OrganisationData.name", 0] },
+          count: { $sum: 1 },
+        },
+      },
+    ];
+    Degree.aggregate(pipeline, function (err, results) {
+      if (err) {
+        return res.status(500).json({ error: err });
+      }
+
+      return res.json(
+        jsonGenerate(statusCode.SUCCESS, "Degrees by University", results)
+      );
+    });
+  } catch (err) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed to disply", err)
+    );
+  }
+};

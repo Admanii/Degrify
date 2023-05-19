@@ -29,6 +29,8 @@ import {
   getCompleteVerifiedDegrees,
   getDegreeByID,
   getDegreeByStudentID,
+  getDegreeCountByOrganisation,
+  getDegreeCountByYear,
   getDegreebyHash,
   getHECAllDegree,
   getHECVerifiedDegrees,
@@ -131,6 +133,8 @@ apiProtected.get(
   "/getunverifieddegreesuniversity",
   getUnverifiedUniversityDegree
 ); // done
+apiProtected.get("/getdegreebyyear", getDegreeCountByYear);
+apiProtected.get("/getdegreebyorganisation", getDegreeCountByOrganisation);
 
 // get all students
 apiProtected.get("/getallStudents", getAllStudent); // done
@@ -150,4 +154,9 @@ apiProtected.get("/getorganisationbyid", getOrganisationByID); // done
 // will do this if required
 apiProtected.get("/getstudentverifieddegrees", getStudentVerifiedDegrees);
 
-apiProtected.post("/updatestudentbyid", studentUpdate, validateResult, updateStudent); 
+apiProtected.post(
+  "/updatestudentbyid",
+  studentUpdate,
+  validateResult,
+  updateStudent
+);
