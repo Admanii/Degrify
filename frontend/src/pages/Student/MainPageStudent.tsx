@@ -5,6 +5,7 @@ import { UserInfo } from '../../store/slice/authSlice'
 import { AppDispatch } from '../../store/store'
 import { useEffect } from 'react'
 import { UpdateDegreeStudent } from '../../store/actions/degreeActions'
+import StudentProfileView from '../StudentProfileView'
 
 
 const MainPageStudent = () => {
@@ -20,9 +21,7 @@ const MainPageStudent = () => {
   }
 
   return (
-    <Layout>
-      <HeadingWithSpan Text={userInfo?.user?.name} SpanText={"Here's what is happening today"} marginTop={'6'} />
-    </Layout>
+    <StudentProfileView/>
   )
 }
 
