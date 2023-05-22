@@ -1,32 +1,9 @@
-import React from 'react'
 import HeadingWithSpan from '../../general/HeadingWithSpan'
 import DetailsHeading from '../DegreeViewPage/DetailsHeading'
-import DegreeCertificate from '../DegreeViewPage/DegreeCertificate'
 import { IMAGES } from '../../../constants/images'
-import VerifiedTickIcon from '../DegreeViewPage/VerifiedTickIcon'
-import { Heading } from '../../general/Heading'
 import Button from '../../general/Button'
 import UnderlineRow from '../../general/UnderlineRow'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { Student } from '../../../store/slice/studentSlice'
 import { IOrganisationDetails, IStudentDetails } from '../../../store/types/types'
-const name = "IBA"
-const phoneNumber = "09007801"
-const email = 'ahmed@iba.pk'
-const address = 'KU ke andar'
-
-
-function getCaseClass(programDeg: string) {
-    switch (programDeg) {
-        case 'BSCS':
-            return programDeg = "Bachelor of Science in Computer Science (BSCS)";
-        case 'BBA':
-            return 'Bachelor of Business Administration (BBA)';
-        default:
-            return '';
-    }
-}
 
 interface Props {
     headingText: string,
@@ -34,9 +11,6 @@ interface Props {
 }
 
 function OrganisationView({ headingText, organisation }: Props) {
-    const navigate = useNavigate()
-    //const student = useSelector(Student);
-    //student called here, set in UI now
     console.log(organisation);
 
     return (
@@ -69,9 +43,9 @@ function OrganisationView({ headingText, organisation }: Props) {
                             <UnderlineRow text={'University Name '} spanText={organisation?.name} showBorder={true} />
                             <UnderlineRow text={'Phone Number '} spanText={organisation?.phoneNumber} showBorder={true} />
                             <UnderlineRow text={"Email ID:"} spanText={`${organisation?.email}`} showBorder={true} />
-                            <UnderlineRow text={'Address'} spanText={organisation?.address} showBorder={true} />
+                            <UnderlineRow text={'Address'} spanText={organisation?.address} showBorder={false} />
                             <div className='h-5'></div>
-                            <div className="flex flex-row justify-between items-start w-2/3 pr-5">
+                            {/* <div className="flex flex-row justify-between items-start w-2/3 pr-5">
                                 <Button inverted={true} buttonText={'Edit Profile'} />
                                 <li className="flex items-center py-3">
                                     <span>Status</span>
@@ -81,7 +55,7 @@ function OrganisationView({ headingText, organisation }: Props) {
                                         </span>
                                     </span>
                                 </li>  
-                            </div>      
+                            </div>       */}
                         </div>
 
                     </div>

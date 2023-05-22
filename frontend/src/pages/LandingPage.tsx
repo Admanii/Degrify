@@ -1,19 +1,24 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/general/Button';
 import Navbar from '../components/general/Navbar'
 import { IMAGES } from '../constants/images';
 import { GetDegreebyHashValue } from '../store/actions/degreeActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../store/store';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { IsLoggedIn, UserInfo } from '../store/slice/authSlice';
 
 const LandingPage = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const [hashValue, setHashValue] = useState('');
     const navigate = useNavigate()
+    const accountAddress = localStorage.getItem('accountAddress') ?? '';
+    const isAuthenticated = useSelector(IsLoggedIn);
+    const userInfo = useSelector(UserInfo)
+    const userRole = userInfo?.user?.userRole ?? '';
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -34,6 +39,20 @@ const LandingPage = () => {
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setHashValue(event.target.value);
     };
+
+    useEffect(() => {
+        if (isAuthenticated && accountAddress !== '') {
+            if (userRole === 'UNIVERSITY') {
+                navigate('/uni/dashboard')
+            }
+            else if (userRole === 'HEC') {
+                navigate('/hec/dashboard')
+            }
+            else if (userRole === 'STUDENT') {
+                navigate('/student/view')
+            }
+        }
+    }, [accountAddress, isAuthenticated, userRole])
 
     return (
         <div className="grid min-h-screen grid-rows-header bg-zinc-100">
@@ -66,27 +85,27 @@ const LandingPage = () => {
                         </div>
                     </form>
                     <div className='flex justify-start w-full mt-8 text-left gap-x-20 font-sans'>
-                            <div className="container w-20">
-                                <div className="grid grid-cols-2 gap-x-2">
-                                    <div className="text-3xl font-semibold">
-                                        29
-                                    </div>
-                                    <div className="text-sm text-gray-900 font-medium">
-                                        Universities On Board
-                                    </div>
+                        <div className="container w-20">
+                            <div className="grid grid-cols-2 gap-x-2">
+                                <div className="text-3xl font-semibold">
+                                    29
+                                </div>
+                                <div className="text-sm text-gray-900 font-medium">
+                                    Universities On Board
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="container w-28">
-                                <div className="grid grid-cols-2 gap-x-8">
-                                    <div className="text-3xl font-semibold">
-                                        1M+
-                                    </div>
-                                    <div className="text-sm text-gray-900 font-medium">
-                                        Verified Degrees
-                                    </div>
+                        <div className="container w-28">
+                            <div className="grid grid-cols-2 gap-x-8">
+                                <div className="text-3xl font-semibold">
+                                    1M+
+                                </div>
+                                <div className="text-sm text-gray-900 font-medium">
+                                    Verified Degrees
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
 

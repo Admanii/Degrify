@@ -256,7 +256,7 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
               <UnderlineRow text={"Graduating Year: "} spanText={student?.GraduatingYear} showBorder={true} />
               <UnderlineRow text={"Date of Completion:"} spanText={`${getFormattedDate(student?.DateOfompletion ?? '')}`}  showBorder={true} />
               <UnderlineRow text={"CGPA:"} spanText={student?.CGPA} showBorder={true} />
-              <UnderlineRow text={"Total Credit Hours:"} spanText={student?.TotalCreditHours} showBorder={true} />
+              <UnderlineRow text={"Total Credit Hours:"} spanText={student?.TotalCreditHours} showBorder={false} />
               {/* <UnderlineRow text={"Date of Completion:"} spanText={`${dateOfCompletion}`} showBorder={false} /> */}
               <div className='h-5'></div>
               <div className="flex flex-row justify-between items-start w-2/3 pr-5">

@@ -25,6 +25,7 @@ import AllUniversitiesPage from "../pages/HEC/AllUniversitiesPage";
 import OrganisationProfileView from "../pages/HEC/OrganisationProfileView";
 import AddUniversity from "../pages/HEC/AddUniversity";
 import EditStudentPage from "../pages/University/EditStudentPage";
+import DegreeDetails from "../pages/Student/DegreeDetails";
 
 interface RouteType {
   path: string;
@@ -232,7 +233,7 @@ export const routeList: RouteType[] = [
     path: "/student/degree",
     isPrivate: true,
     isStudent: true,
-    component: <ProfileView />,
+    component: <DegreeDetails />,
   },
   {
     path: "/view/organisationprofile",

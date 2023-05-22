@@ -78,7 +78,7 @@ function View({ headingText, student }: Props) {
               <UnderlineRow text={"Graduating Year: "} spanText={student?.GraduatingYear} showBorder={true} />
               <UnderlineRow text={"Date of Completion:"} spanText={`${getFormattedDate(student?.DateOfompletion ?? '')}`}  showBorder={true} />
               <UnderlineRow text={"CGPA:"} spanText={student?.CGPA} showBorder={true} />
-              <UnderlineRow text={"Total Credit Hours:"} spanText={student?.TotalCreditHours} showBorder={true} />
+              <UnderlineRow text={"Total Credit Hours:"} spanText={student?.TotalCreditHours} showBorder={false} />
             </div>
           </div>
         </div>

@@ -47,27 +47,6 @@ const LoginPage = () => {
                     setConnButtonText("Wallet Connected");
                     getAccountBalance(addr);
                     localStorage.setItem("accountAddress", addr);
-                    //const contractAddress = "0x553952fd4267A6BAb54903E11F46804A400AB326";
-                    if (typeof window !== "undefined") {
-                        //console.log("jjjj");
-                        // const provider = new ethers.providers.Web3Provider(window.ethereum);
-                        // const signer = provider.getSigner();
-                        //console.log(signer);
-                        //console.log("jjjj2");
-                        // let contract = new ethers.Contract(contractAddress, abi, signer);
-                        // console.log("jjjj3");
-                        // let transaction = await contract.addDegree(
-                        //     "Azlan",
-                        //     "17211",
-                        //     "https://gateway.pinata.cloud/ipfs/QmfB7cUgSs8kNygLR1fkDztfUmXuW9ZNqxJDHUJ9D1HRUr"
-                        //   );
-                        //   console.log("jjjj4");
-                        //   await transaction.wait();
-
-                        // console.log("getting");
-                        // let getting = await contract.getDegreeByERP("17211");
-                        // console.log(getting);
-                    }
                 })
                 .catch((error: { message: string }) => {
                     setErrorMessage(error.message);
@@ -114,7 +93,7 @@ const LoginPage = () => {
         })();
         var userRole = userInfo?.user?.userRole ?? '';
         //console.log("success " + success)
-        if (success && accountAddress != '') {
+        if (success && accountAddress !== '') {
             // console.log("accountAddressfromlocal: " + accountAddress)
             console.log("Login Successfull");
             toast.success("Login Successfull", {
