@@ -16,6 +16,11 @@ export const getCaseClass = (programDeg: string) => {
     }
 }
 
+export const getFormattedDate = (date: string) => {
+    const formattedDate = new Date(date).toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+    return formattedDate;
+}
+
 export const getOrgFullName = (orgName: string) => {
     switch (orgName) {
         case 'IBA':

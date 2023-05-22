@@ -154,6 +154,8 @@ export interface IUpdatedDegree {
         completeVerified: boolean,
         active: boolean,
         dateCreated: string,
+        ipfsLink: string,
+        hashValue: string,
     }
 }
 

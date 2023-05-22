@@ -1,24 +1,26 @@
 import DetailsHeading from '../components/University/DegreeViewPage/DetailsHeading'
 import Layout from '../components/general/Layout'
-import View from '../components/University/StudentProfile/View'
 import HeadingWithSpan from '../components/general/HeadingWithSpan'
 import { useEffect, useState } from 'react'
-import { GetDegreebyId, UpdateDegreeHec, UpdateDegreeUniversity } from '../store/actions/degreeActions'
+import { GetDegreebyId, RevertDegreeUpdatesHec, UpdateDegreeHec, UpdateDegreeUniversity } from '../store/actions/degreeActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../store/store'
-import { Degree } from '../store/slice/degreeSlice'
 import Button from '../components/general/Button'
 import Modal from '../components/general/Modal/Modal'
 import { IMAGES } from '../constants/images'
 import { SubTitle } from '../components/general/Modal/SubTitle'
 import { Title } from '../components/general/Modal/Title'
 import { useNavigate } from 'react-router-dom'
-import { IDegreeDetails, IUpdatedDegree } from '../store/types/types'
+import { IDegreeDetails } from '../store/types/types'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { UserInfo } from '../store/slice/authSlice'
+import { ethers } from "ethers";
+import { abi, getFormattedDate } from '../utility/util'
+import { toast } from 'react-toastify'
+import classNames from 'classnames'
+
 const name = "Muhammad Ahmed"
 const erp = "19717"
-const NameErp = name + " " + erp
 const programDeg = "BSCS"
 const graduatingYear = "2023"
 const fatherName = "Riaz"
@@ -27,16 +29,6 @@ const dateOfAdmission = '02/02/23'
 const dateOfCompletion = '02/02/2023'
 const cnic = '42000-000000-2'
 const email = 'ahmed@iba.pk'
-function getCaseClass(programDeg: string) {
-  switch (programDeg) {
-    case 'BSCS':
-      return programDeg = "Bachelor of Science in Computer Science (BSCS)";
-    case 'BBA':
-      return 'Bachelor of Business Administration (BBA)';
-    default:
-      return '';
-  }
-}
 
 function DegreeStudent() {
 
@@ -53,6 +45,7 @@ function DegreeStudent() {
   const [isUniApproved, setIsUniApproved] = useState(false);
   const [isHecApproved, setIsHecApproved] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getDegreebyId();
@@ -91,6 +84,8 @@ function DegreeStudent() {
   };
 
   const approveDegree = async () => {
+    let errorMessage = '';
+    setIsLoading(true);
     var result;
     if (userRole == "UNIVERSITY") {
       const response = await dispatch(UpdateDegreeUniversity({ degreeId: degreeId }))
@@ -99,11 +94,51 @@ function DegreeStudent() {
     if (userRole == "HEC") {
       const response = await dispatch(UpdateDegreeHec({ degreeId: degreeId }))
       result = unwrapResult(response);
+      const contractAddress = "0x553952fd4267A6BAb54903E11F46804A400AB326";
+      if (typeof window !== "undefined") {
+        try {
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          const signer = provider.getSigner();
+          let contract = new ethers.Contract(contractAddress, abi, signer);
+          let transaction = await contract.addDegree(
+            degree?.studentDetails?.name,
+            degree?.studentDetails?.studentID,
+            result.data.ipfsLink
+          );
+          let receipt = await transaction.wait();
+          if (receipt.status === 1) {
+            toast.success("Degree Updated, Transaction Successfull!", {
+              position: toast.POSITION.TOP_RIGHT
+            },);
+            console.log("Transaction accepted!");
+          }
+          let getDegree = await contract.getDegreeByERP(degree?.studentDetails?.studentID);
+          console.log(getDegree);
+        } catch (error: any) {
+          errorMessage = error;
+          const response = await dispatch(RevertDegreeUpdatesHec({ degreeId: degreeId }))
+          result = unwrapResult(response);
+          if (error.code === "ACTION_REJECTED") {
+            console.log("User denied transaction signature.");
+            toast.error("Transaction Denied!", {
+              position: toast.POSITION.TOP_RIGHT
+            },);
+          } else {
+            toast.error("Transaction Error, Try Again!", {
+              position: toast.POSITION.TOP_RIGHT
+            },);
+            console.log("Transaction failed:", error);
+          }
+        }
+      }
     }
     setIsStudentApproved(result?.data?.studentVerified ?? false)
     setIsUniApproved(result?.data?.organisationVerified ?? false)
     setIsHecApproved(result?.data?.HECVerified ?? false)
-    navigate(`/view/degreecertificate?degreeId=${degreeId}`);
+    if (errorMessage === '') {
+      navigate(`/view/degreecertificate?degreeId=${degreeId}`);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -117,17 +152,17 @@ function DegreeStudent() {
             <div className="bg-white p-3 border-t-4 border-green-400 text-left">
               <div className="grid grid-cols-2 gap-4 my-6">
                 <DetailsHeading text={'Name:'} spanText={degree?.studentDetails?.name} />
-                <DetailsHeading text={'Serial Number:'} spanText={degree?.studentDetails?.studentID} />
-                <DetailsHeading text={'ERP ID:'} spanText={degree?.studentDetails?.studentID} />
-                <DetailsHeading text={'Program: '} spanText={`${getCaseClass(degree?.studentDetails?.orgName ?? '')}`} />
-                <DetailsHeading text={'Graduating Year: '} spanText={degree?.studentDetails?.GraduatingYear} />
                 <DetailsHeading text={'Father\'s Name:'} spanText={degree?.studentDetails?.fatherName} />
-                <DetailsHeading text={'Date of Birth:'} spanText={`${dateOfBirth}`} />
-                <DetailsHeading text={'CNIC:'} spanText={`${cnic}`} />
-                <DetailsHeading text={'Date of Admission:'} spanText={`${dateOfAdmission}`} />
-                <DetailsHeading text={'Date of Completion:'} spanText={`${dateOfCompletion}`} />
-                <DetailsHeading text={'Email ID:'} spanText={`${email}`} />
-                <DetailsHeading text={'Password:'} spanText="*********" />
+                <DetailsHeading text={'ERP ID:'} spanText={degree?.studentDetails?.studentID} />
+                <DetailsHeading text={'Program: '} spanText={degree?.studentDetails?.Program} />
+                <DetailsHeading text={'CNIC:'} spanText={degree?.studentDetails?.CNIC} />
+                <DetailsHeading text={'Graduating Year: '} spanText={degree?.studentDetails?.GraduatingYear} />
+                <DetailsHeading text={'Date of Birth:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfBirth ?? '')}`} />
+                <DetailsHeading text={'Date of Admission:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} />
+                <DetailsHeading text={'Date of Completion:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfompletion ?? '')}`} />
+                <DetailsHeading text={'Email ID:'} spanText={degree?.studentDetails?.email} />
+                <DetailsHeading text={'CGPA:'} spanText={degree?.studentDetails?.CGPA} />
+                <DetailsHeading text={'Total Credit Hours:'} spanText={degree?.studentDetails?.TotalCreditHours} />
               </div>
               <div className="flex justify-around">
                 <Button height={44} inverted={true} buttonText={'View Certificate'} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)}></Button>
@@ -151,7 +186,11 @@ function DegreeStudent() {
                     <div className='flex px-2 w-1/2 justify-center'>
                       <button
                         type="submit"
-                        className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700"
+                        disabled={isLoading}
+                        className={classNames(
+                          "mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700",
+                          isLoading ? "opacity-40 cursor-not-allowed" : ""
+                        )}
                         onClick={approveDegree}
                       >
                         Approve

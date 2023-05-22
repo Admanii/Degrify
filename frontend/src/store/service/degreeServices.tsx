@@ -81,6 +81,11 @@ export const updateDegreeHec = async (degreeId: string) => {
     return api.post(`/hecapproveddegree?degree_id=${degreeId}`, {}, config);
 };
 
+export const revertDegreeUpdatesHec = async (degreeId: string) => {
+    await getConfig();
+    return api.post(`/unhecapproveddegree?degree_id=${degreeId}`, {}, config);
+};
+
 export const updateDegreeStudent = async (degreeId: string) => {
     await getConfig();
     return api.post(`/studentapproveddegree?degree_id=${degreeId}`, {}, config);

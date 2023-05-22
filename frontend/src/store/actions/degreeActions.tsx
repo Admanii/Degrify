@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getDegreeCountByUniversityName, getDegreeCountByProgramAndUniId, getDegreeCountByYearAndUniId, getDegreeCountByYearHEC, getDegreebyHashValue, getDegreebyId, getDegreebyStudentId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
+import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getDegreeCountByUniversityName, getDegreeCountByProgramAndUniId, getDegreeCountByYearAndUniId, getDegreeCountByYearHEC, getDegreebyHashValue, getDegreebyId, getDegreebyStudentId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity, revertDegreeUpdatesHec } from '../service/degreeServices';
 import { IAddDegree, IDegreeCountByUniversityName, IDegreeCountByProgramAndUni, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails, IResponse, IUpdatedDegree } from '../types/types';
 
 export const GetAllDegreesHec = createAsyncThunk<
@@ -227,6 +227,28 @@ export const UpdateDegreeHec = createAsyncThunk<
     async ({ degreeId }, { rejectWithValue }) => {
         try {
             const response = await updateDegreeHec(degreeId);
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data;
+        } catch (err) {
+            //@ts-ignore
+            let error: AxiosError<IRejectValue> = err;
+            if (!error.response) throw err;
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const RevertDegreeUpdatesHec = createAsyncThunk<
+    IUpdatedDegree,
+    { degreeId: string; },
+    any
+>(
+    "hec/revert/updates/degree",
+    async ({ degreeId }, { rejectWithValue }) => {
+        try {
+            const response = await revertDegreeUpdatesHec(degreeId);
             if (response.data.statusCode === 401) {
                 return rejectWithValue(response.data.message)
             }
