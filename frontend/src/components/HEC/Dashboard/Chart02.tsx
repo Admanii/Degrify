@@ -11,7 +11,7 @@ interface Props {
 
 // class Chart02 extends Component<Props> {
 //   // degreesByProgram = useSelector(DegreesByProgram);
-  
+
 //   private chartRef: any;
 
 //   componentDidMount() {
@@ -107,84 +107,92 @@ interface Props {
 // }
 const Chart02: React.FC<Props> = ({ id }) => {
   const chartRef = useRef<any>(null);
-  const degreesByProgram = useSelector(DegreesByUniversityName);
-  // console.log("degreesByProgram: "+degreesByProgram[0]._id)
+  const degreesByUniversityName = useSelector(DegreesByUniversityName);
 
-  function searchYearCount(program: { toString: () => string; }) {
-    for (let i = 0; i < degreesByProgram.length; i++) {
-      if (degreesByProgram[i]._id === program.toString()) {
-        return degreesByProgram[i].count;
-      }
+  function getUniversitiesCount() {
+    let count = []
+    for (let i = 0; i < degreesByUniversityName.length; i++) {
+      count.push(degreesByUniversityName[i].count);
     }
-    return 0;
+    console.log(count)
+    return count;
   }
 
-  useEffect(() => {
-    const chartTwoOptions = {
-      series: [
-        {
-          name: "Students",
-          data: [44, 55, 41, 67, 22, 43],
-        },
-      ],
-      colors: ["#3056D3", "#80CAEE"],
-      chart: {
-        type: "bar",
-        height: 335,
-        stacked: true,
-        toolbar: {
-          show: false,
-        },
-        zoom: {
-          enabled: false,
-        },
-      },
+  function getUniversitiesName() {
+    let id = []
+    for (let i = 0; i < degreesByUniversityName.length; i++) {
+      id.push(degreesByUniversityName[i]._id)
+    }
+    console.log(id)
+    return id;
+  }
 
-      responsive: [
-        {
-          breakpoint: 1536,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 0,
-                columnWidth: "25%",
-              },
+  const chartTwoOptions = {
+    series: [
+      {
+        name: "Degrees",
+        data: getUniversitiesCount(),
+      },
+    ],
+    colors: ["#3056D3", "#80CAEE"],
+    chart: {
+      type: "bar",
+      height: 335,
+      stacked: true,
+      toolbar: {
+        show: false,
+      },
+      zoom: {
+        enabled: false,
+      },
+    },
+
+    responsive: [
+      {
+        breakpoint: 1536,
+        options: {
+          plotOptions: {
+            bar: {
+              borderRadius: 0,
+              columnWidth: "25%",
             },
           },
         },
-      ],
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          borderRadius: 0,
-          columnWidth: "25%",
-          borderRadiusApplication: "end",
-          borderRadiusWhenStacked: "last",
-        },
       },
-      dataLabels: {
-        enabled: false,
+    ],
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        borderRadius: 0,
+        columnWidth: "25%",
+        borderRadiusApplication: "end",
+        borderRadiusWhenStacked: "last",
       },
+    },
+    dataLabels: {
+      enabled: false,
+    },
 
-      xaxis: {
-        categories: ["IBA", "LUMS", "NED","GIKI","HU", "NUST"],
-      },
-      legend: {
-        position: "top",
-        horizontalAlign: "left",
-        fontFamily: "Satoshi",
-        fontWeight: 500,
-        fontSize: "14px",
+    xaxis: {
+      categories: getUniversitiesName(),
+    },
+    legend: {
+      position: "top",
+      horizontalAlign: "left",
+      fontFamily: "Satoshi",
+      fontWeight: 500,
+      fontSize: "14px",
 
-        markers: {
-          radius: 99,
-        },
+      markers: {
+        radius: 99,
       },
-      fill: {
-        opacity: 1,
-      },
-    };
+    },
+    fill: {
+      opacity: 1,
+    },
+  };
 
+  useEffect(() => {
     if (chartRef.current) {
       const chartTwo = new ApexCharts(chartRef.current, chartTwoOptions);
       chartTwo.render();
@@ -192,7 +200,7 @@ const Chart02: React.FC<Props> = ({ id }) => {
         chartTwo.destroy();
       };
     }
-  }, [chartRef, id]);
+  }, [chartRef, chartTwoOptions]);
 
   return <div id={id} ref={chartRef} />;
 };
