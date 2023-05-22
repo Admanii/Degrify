@@ -200,14 +200,14 @@ const LoginPage = () => {
                                 />
                             </div>
                             <Button className='mt-8' buttonText="Sign In" width={384} />
-                            <div className='flex justify-between mt-2 w-96 text-gray-900'>
+                            {/* <div className='flex justify-between mt-2 w-96 text-gray-900'>
                                 <Link to="/">
                                     Remember me
                                 </Link>
                                 <Link to="/">
                                     Forgot password?
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     </form>
 
