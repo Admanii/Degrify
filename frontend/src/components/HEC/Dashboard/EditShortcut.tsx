@@ -221,6 +221,7 @@
 
 //TRY 3
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface ItemProps {
     imgSrc: string;
@@ -229,9 +230,9 @@ interface ItemProps {
     id: string;
 }
 function getRandomColor() {
-    const colors = ['bg-pink-500','bg-pink-800','bg-amber-800', 'bg-lime-600','bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500','bg-red-800', 'bg-blue-800', 'bg-green-800', 'bg-yellow-800'];
+    const colors = ['bg-pink-500', 'bg-pink-800', 'bg-amber-800', 'bg-lime-600', 'bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-800', 'bg-blue-800', 'bg-green-800', 'bg-yellow-800'];
     return colors[Math.floor(Math.random() * colors.length)];
-  }
+}
 
 function EditShortcutItem({ imgSrc, name, degree, id }: ItemProps) {
     const randomColor = `bg-${Math.floor(Math.random() * 16777215).toString(16)}`;
@@ -319,9 +320,9 @@ function EditShortcut() {
                     <h3 className="text-lg font-bold leading-none text-gray-900 dark:text-white">
                         Latest Edit Requests
                     </h3>
-                    <a href="/edit/requests" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                    <Link to="" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
                         View all
-                    </a>
+                    </Link>
                 </div>
                 <div className="flow-root">
                     <EditShortcutList items={latestEditRequests} />

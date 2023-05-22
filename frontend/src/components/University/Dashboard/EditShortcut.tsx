@@ -320,7 +320,7 @@ function EditShortcut() {
                     <h3 className="text-lg font-bold leading-none text-gray-900 dark:text-white">
                         Latest Edit Requests
                     </h3>
-                    <Link to="/uni/edit/requests" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                    <Link to="" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
                         View all
                     </Link>
                 </div>

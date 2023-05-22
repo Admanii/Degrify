@@ -19,14 +19,19 @@ const MainPageHec = () => {
 
   useEffect(() => {
     getDegrees();
-    //registerOrganisation(organisation);
-    //updateDegreeHec("6442740ba9fd0ee7fdbd856a");
+    getAllUniversities();
   }, [])
 
   const getDegrees = async () => {
+    await dispatch(GetAllDegreesHec({}))
+    await dispatch(GetVerifiedDegreesHec({}))
     await dispatch(GetUnverifiedDegreesHec({}))
     await dispatch(GetCountDegreeByYearHEC({}))
     await dispatch(GetDegreeCountByUniversityName({}))
+  }
+
+  const getAllUniversities = async () => {
+    await dispatch(GetAllUniversities({}))
   }
 
   const updateDegreeHec = async (degreeId: string) => {

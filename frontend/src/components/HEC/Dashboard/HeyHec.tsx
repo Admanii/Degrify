@@ -6,6 +6,7 @@ import EditShortcut from "./EditShortcut";
 import HeadingWithSpan from "../../general/HeadingWithSpan";
 import { useSelector } from "react-redux";
 import { UnverifiedDegreesComp } from "./UnverifiedDegreesComp";
+import { Link } from "react-router-dom";
 
 const HeyHec = () => {
 
@@ -37,11 +38,11 @@ const HeyHec = () => {
         <div className="w-2/3 h-96 bg-white m-4 shadow-md border overflow-hidden hover:overflow-y-auto">
           <div className="flex justify-between items-center sm:py-8 sm:px-4">
             <h3 className="text-lg font-bold leading-none text-gray-900 dark:text-white">
-              Verify Degrees
+              Approve Degrees
             </h3>
-            <a href="/unverified/degrees" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+            <Link to="/hec/unverified/degrees" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
               View all
-            </a>
+            </Link>
           </div>
           {/* <h1 className="font-bold text-lg mt-6 ml-4">Edhi All Students Chart daal idher</h1> */}
 

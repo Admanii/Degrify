@@ -1,4 +1,8 @@
+import { useSelector } from "react-redux";
 import AnalyticsBox from "./AnalyticsBox";
+import { AllDegrees, UnverifiedDegrees, VerifiedDegrees } from "../../../store/slice/degreeSlice";
+import { AllStudents } from "../../../store/slice/studentSlice";
+import { AllUniversities } from "../../../store/slice/organisationSlice";
 
 interface Props {
   title: string;
@@ -58,13 +62,19 @@ interface Props {
 
 
 
-function AnalyticsSection() {
+const AnalyticsSection = () => {
+
+  const allDegrees = useSelector(AllDegrees);
+  const verifiedDegrees = useSelector(VerifiedDegrees);
+  const unverifiedDegrees = useSelector(UnverifiedDegrees);
+  const allUniversities = useSelector(AllUniversities);
+
   return (
     <div className="my-4 flex justify-between">
-      <AnalyticsBox title="TOTAL ISSUED DEGREES" value ={25400003} isFirst={true} />
-      <AnalyticsBox title="APPROVED DEGREES" value={5832000} />
-      <AnalyticsBox title="UNAPPROVED DEGREES" value={300000} />
-      <AnalyticsBox title="TOTAL STUDENTS" value={240000} isLast={true} />
+      <AnalyticsBox title="TOTAL ISSUED DEGREES" value={allDegrees?.length ?? ''} isFirst={true} />
+      <AnalyticsBox title="APPROVED DEGREES" value={verifiedDegrees?.length ?? ''} />
+      <AnalyticsBox title="UNAPPROVED DEGREES" value={unverifiedDegrees?.length ?? ''} />
+      <AnalyticsBox title="TOTAL UNIVERSITIES" value={allUniversities?.length ?? ''} isLast={true} />
       {/* <AnalyticsBox title="TOTAL STUDENTS" value={240000} isLarge={true} />
       <AnalyticsBox title="TOTAL STUDENTS" value={240000} isLarge={true} /> */}
     </div>
