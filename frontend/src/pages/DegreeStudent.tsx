@@ -265,4 +265,3 @@ function DegreeStudent() {
 }
 
 export default DegreeStudent
-

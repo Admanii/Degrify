@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import DegreeCertificate from '../components/University/DegreeViewPage/DegreeCertificate'
-import Layout from '../components/general/Layout'
-import View from '../components/University/StudentProfile/View'
-import { AppDispatch } from '../store/store'
+import DegreeCertificate from '../../components/University/DegreeViewPage/DegreeCertificate'
+import Layout from '../../components/general/Layout'
+import View from '../../components/University/StudentProfile/View'
+import { AppDispatch } from '../../store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from "react";
-import { GetStudentbyId } from '../store/actions/studentActions'
-import { Student } from '../store/slice/studentSlice'
-import { GetDegreebyStudentId } from '../store/actions/degreeActions'
+import { GetStudentbyId } from '../../store/actions/studentActions'
+import { Student } from '../../store/slice/studentSlice'
+import { GetDegreebyStudentId } from '../../store/actions/degreeActions'
 import { unwrapResult } from '@reduxjs/toolkit'
-import { IStudentDetails } from '../store/types/types'
+import { IStudentDetails } from '../../store/types/types'
 const name = "Muhammad Ahmed"
 const erp = "19717"
 const NameErp = name + " " + erp

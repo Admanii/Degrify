@@ -1,10 +1,10 @@
-import Layout from '../components/general/Layout'
-import { AppDispatch } from '../store/store';
+import Layout from '../../components/general/Layout'
+import { AppDispatch } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { Organisation } from '../store/slice/organisationSlice';
+import { Organisation } from '../../store/slice/organisationSlice';
 import { useEffect } from 'react';
-import { GetOrganisationbyId } from '../store/actions/organisationActions';
-import OrganisationView from '../components/University/OrganisationProfile/OrganisationView';
+import { GetOrganisationbyId } from '../../store/actions/organisationActions';
+import OrganisationView from '../../components/University/OrganisationProfile/OrganisationView';
 
 const OrganisationProfileView = () => {
     const dispatch = useDispatch<AppDispatch>();

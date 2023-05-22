@@ -6,8 +6,8 @@ import { IMAGES } from '../../../constants/images'
 import VerifiedTickIcon from '../DegreeViewPage/VerifiedTickIcon'
 import { Heading } from '../../general/Heading'
 import Button from '../../general/Button'
-import UnderlineRow from './UnderlineRow'
-import { Navigate, useNavigate } from 'react-router-dom'
+import UnderlineRow from '../../general/UnderlineRow'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Student } from '../../../store/slice/studentSlice'
 import { IStudentDetails } from '../../../store/types/types'
@@ -252,11 +252,11 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
               <UnderlineRow text={"Date of Birth:"} spanText={`${getFormattedDate(student?.DateOfBirth ?? '')}`} showBorder={true} />
               <UnderlineRow text={"University"} spanText={student?.orgName} showBorder={true} />
               <UnderlineRow text={"Serial Number:"} spanText={student?.enrollmentNumber} showBorder={true} />
-              <UnderlineRow text={"Date of Admission:"} spanText={`${getFormattedDate(student?.DateOfAdmission ?? '')}`}  showBorder={false} />
+              <UnderlineRow text={"Date of Admission:"} spanText={`${getFormattedDate(student?.DateOfAdmission ?? '')}`}  showBorder={true} />
               <UnderlineRow text={"Graduating Year: "} spanText={student?.GraduatingYear} showBorder={true} />
-              <UnderlineRow text={"Date of Completion:"} spanText={`${getFormattedDate(student?.DateOfompletion ?? '')}`}  showBorder={false} />
-              <UnderlineRow text={"CGPA:"} spanText={student?.CGPA} showBorder={false} />
-              <UnderlineRow text={"Total Credit Hours:"} spanText={student?.TotalCreditHours} showBorder={false} />
+              <UnderlineRow text={"Date of Completion:"} spanText={`${getFormattedDate(student?.DateOfompletion ?? '')}`}  showBorder={true} />
+              <UnderlineRow text={"CGPA:"} spanText={student?.CGPA} showBorder={true} />
+              <UnderlineRow text={"Total Credit Hours:"} spanText={student?.TotalCreditHours} showBorder={true} />
               {/* <UnderlineRow text={"Date of Completion:"} spanText={`${dateOfCompletion}`} showBorder={false} /> */}
               <div className='h-5'></div>
               <div className="flex flex-row justify-between items-start w-2/3 pr-5">

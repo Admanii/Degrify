@@ -1,5 +1,5 @@
 // components/layout/Sidebar.tsx
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { navItemsUni, navItemsHec, navItemsStudent } from "./navItems";
 import { useOnClickOutside } from "usehooks-ts";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -32,25 +32,10 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec, studen
 
     const { userInfo } = useSelector((state: any) => state.auth)
 
-    var items: NavItem[] = [];
-    var path = '';
+    const [items, setItems] = useState(Array<NavItem>)
+    const [path, setPath] = useState('')
     var userRole = userInfo?.user?.userRole ?? '';
-
-    if (userRole === 'HEC') {
-        items = navItems.hec;
-        path = "/hec/dashboard/";
-    }
-    else if (userRole === 'UNIVERSITY') {
-        items = navItems.uni
-        path = "/uni/dashboard/";
-    }
-    else if (userRole === 'STUDENT') {
-        items = navItems.student
-        path = "/student/dashboard";
-    }
-
     const dispatch = useDispatch<AppDispatch>();
-
 
     const logoutHandler = async () => {
         console.log("Logout clicked");
@@ -66,6 +51,22 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec, studen
     useOnClickOutside(ref, (e) => {
         setOpen(false);
     });
+
+    useEffect(() => {
+        if (userRole === 'HEC') {
+            setItems(navItems.hec)
+            setPath("/hec/dashboard")
+        }
+        else if (userRole === 'UNIVERSITY') {
+            setItems(navItems.uni)
+            setPath("/uni/dashboard")
+        }
+        else if (userRole === 'STUDENT') {
+            setItems(navItems.student)
+            setPath("/student/view")
+        }
+    }, [path, items])
+
     return (
         <div
             className={classNames(
@@ -95,33 +96,33 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec, studen
                 )}
 
                 {userRole === 'HEC' && (
-                    <button onClick={() => { navigate('/AddUniversity') }}className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg hover:bg-gray-900">
+                    <button onClick={() => { navigate('/AddUniversity') }} className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg hover:bg-gray-900">
                         <div><img src={IMAGES.plus_icon} alt="plus" /></div>
                         <div className="font-">Add New University</div>
                     </button>
                 )}
 
-                {userRole === 'STUDENT' && (
+                {/* {userRole === 'STUDENT' && (
                     <button className="p-2 mx-3 mt-8 flex w-11/12 justify-center items-center gap-x-3 bg-black rounded-lg">
                         <div><img src={IMAGES.plus_icon} alt="plus" /></div>
-                        <div className="font-">Add New Request</div>
                     </button>
+                )} */}
+
+                {(userRole === 'HEC' || userRole === 'UNIVERSITY') && (
+                    <Link to={path}>
+                        <div className={classNames(
+                            "text-gray-600 font-bold text-base", //colors
+                            "flex gap-4 items-center", //layout
+                            "transition-colors duration-300", //animation
+                            "rounded-md p-2 mx-6 mt-4", //self style
+                            path === currentUrl ? "font-bold" : "font-medium"
+                        )}>
+                            <img src={
+                                path === currentUrl ? IMAGES.home_active_icon : IMAGES.home_icon
+                            }></img> Dashboard
+                        </div>
+                    </Link>
                 )}
-
-
-                <Link to={path}>
-                    <div className={classNames(
-                        "text-gray-600 text-base", //colors
-                        "flex gap-4 items-center", //layout
-                        "transition-colors duration-300", //animation
-                        "rounded-md p-2 mx-6 mt-4", //self style
-                        "/uni/dashboard/" === currentUrl ? "font-bold text-black" : "font-medium"
-                    )}>
-                        <img src={
-                            path === currentUrl ? IMAGES.home_active_icon : IMAGES.home_icon
-                        }></img> Dashboard
-                    </div>
-                </Link>
 
                 <div className={classNames(
                     "text-gray-400 font-medium text-base", //colors
@@ -141,7 +142,7 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec, studen
                                         "flex gap-4 items-center", //layout
                                         "transition-colors duration-300", //animation
                                         "rounded-md p-2 mx-6", //self style
-                                        item.href === currentUrl ? "font-bold text-black" : "font-medium"
+                                        item.href === currentUrl ? "font-bold" : "font-medium"
                                     )}
                                 >
                                     <img src={

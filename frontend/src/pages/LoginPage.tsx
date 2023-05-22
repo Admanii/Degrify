@@ -127,7 +127,7 @@ const LoginPage = () => {
                 navigate('/hec/dashboard')
             }
             else if (userRole === 'STUDENT') {
-                navigate('/student/dashboard')
+                navigate('/student/view')
             }
         }
     }, [navigate, success, defaultAccount, accountAddress])

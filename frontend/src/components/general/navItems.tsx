@@ -32,12 +32,12 @@ export const navItemsUni: NavItem[] = [
     activeIcon: IMAGES.verified_icon_active,
     inactiveIcon: IMAGES.verified_icon,
   },
-  {
-    label: "Edit Requests",
-    href: "/uni/edit/requests",
-    activeIcon: IMAGES.user_icon_active,
-    inactiveIcon: IMAGES.user_icon,
-  },
+  // {
+  //   label: "Edit Requests",
+  //   href: "/uni/edit/requests",
+  //   activeIcon: IMAGES.user_icon_active,
+  //   inactiveIcon: IMAGES.user_icon,
+  // },
 ];
 
 
@@ -70,8 +70,14 @@ export const navItemsHec: NavItem[] = [
 
 export const navItemsStudent: NavItem[] = [
   {
-    label: "View Details",
-    href: "/view/details",
+    label: "Student Profile",
+    href: "/student/view",
+    activeIcon: IMAGES.user_icon_active,
+    inactiveIcon: IMAGES.user_icon,
+  },
+  {
+    label: "Student Degree",
+    href: "/student/degree",
     activeIcon: IMAGES.user_icon_active,
     inactiveIcon: IMAGES.user_icon,
   },

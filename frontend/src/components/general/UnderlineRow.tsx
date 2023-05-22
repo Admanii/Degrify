@@ -1,6 +1,6 @@
 // import DetailsHeading from './DetailsHeading';
 
-import DetailsHeading from "../DegreeViewPage/DetailsHeading";
+import DetailsHeading from "../University/DegreeViewPage/DetailsHeading";
 
 interface Props{
     text: string,

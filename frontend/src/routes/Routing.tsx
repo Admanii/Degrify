@@ -14,15 +14,15 @@ import MainPageHec from "../pages/HEC/MainPageHec";
 import VerifiedDegreesPageHec from "../pages/HEC/VerifiedDegreesPageHec";
 import UnverifiedDegreesPageHec from "../pages/HEC/UnverifiedDegreesPageHec";
 import AllDegreesPageHec from "../pages/HEC/AllDegreesPageHec";
-import MainPageStudent from "../pages/Student/MainPageStudent";
+import ProfileView from "../pages/Student/ProfileView";
 import { useSelector } from "react-redux";
 import { IsLoggedIn } from "../store/slice/authSlice";
-import StudentProfileView from "../pages/StudentProfileView";
+import StudentProfileView from "../pages/University/StudentProfileView";
 import DegreeStudent from "../pages/DegreeStudent";
 import ApproveDegree from "../pages/University/ApproveDegree";
 import AllStudentPage from "../pages/University/AllStudentPage";
 import AllUniversitiesPage from "../pages/HEC/AllUniversitiesPage";
-import OrganisationProfileView from "../pages/OrganisationProfileView";
+import OrganisationProfileView from "../pages/HEC/OrganisationProfileView";
 import AddUniversity from "../pages/HEC/AddUniversity";
 import EditStudentPage from "../pages/University/EditStudentPage";
 
@@ -223,10 +223,16 @@ export const routeList: RouteType[] = [
     component: <UnverifiedDegreesPageHec />,
   },
   {
-    path: "/student/dashboard/",
+    path: "/student/view",
     isPrivate: true,
     isStudent: true,
-    component: <MainPageStudent />,
+    component: <ProfileView />,
+  },
+  {
+    path: "/student/degree",
+    isPrivate: true,
+    isStudent: true,
+    component: <ProfileView />,
   },
   {
     path: "/view/organisationprofile",
