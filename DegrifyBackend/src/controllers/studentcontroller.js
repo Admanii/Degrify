@@ -414,7 +414,7 @@ export const getStudentbyProgramAndUni = async (req, res) => {
       }
 
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "Students by Year", results)
+        jsonGenerate(statusCode.SUCCESS, "Students by Program", results)
       );
     });
   } catch (err) {

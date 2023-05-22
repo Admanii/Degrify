@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../store/store';
 import { useEffect } from "react";
 import { UserInfo } from '../../store/slice/authSlice';
-import { GetCountDegreeByProgram, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetUnverifiedDegreesbyUniId } from '../../store/actions/degreeActions';
+import { GetDegreeCountByUniversityName, GetDegreeCountByYearAndUniId, GetCountDegreeByYearHEC, GetUnverifiedDegreesbyUniId, GetDegreeCountByProgramAndUniId } from '../../store/actions/degreeActions';
 
 
 const MainPageUni = () => {
@@ -20,9 +20,8 @@ const MainPageUni = () => {
 
   const getDegrees = async () => {
     await dispatch(GetUnverifiedDegreesbyUniId({ organisation_id: organisation_id }))
-    await dispatch(GetCountDegreeByYears({}))
-    await dispatch(GetCountDegreeByProgram({}))
-    await dispatch(GetCountDegreeByYearAndUni({ organisationId: organisation_id }))
+    await dispatch(GetDegreeCountByYearAndUniId({ organisationId: organisation_id }))
+    await dispatch(GetDegreeCountByProgramAndUniId({ organisationId: organisation_id }))
   }
 
   return (

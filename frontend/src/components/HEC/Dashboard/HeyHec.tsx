@@ -22,12 +22,12 @@ const HeyHec = () => {
       <AnalyticsSection />
       <div className="h-100 flex" >
         <div className="w-2/3 h-100 bg-white m-4 border shadow-md">
-          <h1 className="font-bold text-lg mt-6 ml-4">ENROLLED STUDENTS</h1>
+          <h1 className="font-bold text-lg mt-6 ml-4">DEGREES PER YEAR</h1>
           <Chart01 />
 
         </div>
         <div className="w-1/3 h-100 bg-white m-4 border shadow-md">
-          <h1 className="font-bold text-lg mt-6 ml-4">STUDENTS PER UNIVERSITY</h1>
+          <h1 className="font-bold text-lg mt-6 ml-4">DEGREES PER UNIVERSITY</h1>
 
           <Chart02 id={"Best"} />
 

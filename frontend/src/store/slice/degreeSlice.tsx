@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
-import { GetAllDegreesHec, GetAllDegreesbyUniId, GetCountDegreeByProgram, GetCountDegreeByProgramAndUni, GetCountDegreeByYearAndUni, GetCountDegreeByYears, GetDegreebyHashValue, GetDegreebyId, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId } from '../actions/degreeActions';
-import { IDegreeCountByProgram, IDegreeCountByProgramAndUni, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails,} from '../types/types';
+import { GetAllDegreesHec, GetAllDegreesbyUniId, GetDegreeCountByUniversityName, GetDegreeCountByProgramAndUniId, GetDegreeCountByYearAndUniId, GetCountDegreeByYearHEC, GetDegreebyHashValue, GetDegreebyId, GetUnverifiedDegreesHec, GetUnverifiedDegreesbyUniId, GetVerifiedDegreesHec, GetVerifiedDegreesbyUniId } from '../actions/degreeActions';
+import { IDegreeCountByProgramAndUni, IDegreeCountByUniversityName, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails,} from '../types/types';
 
 const initialState: IState = {
     loading: false,
@@ -9,7 +9,7 @@ const initialState: IState = {
     verifiedDegrees: [],
     unverifiedDegrees: [],
     degreesByYear: [],
-    degreesByProgram: [],
+    degreesByUniversityName: [],
     degreesByYearAndUni: [],
     degreesByProgramAndUni: [],
     degree: {} as IDegreeDetails,
@@ -24,7 +24,7 @@ interface IState {
     verifiedDegrees: Array<IDegreeDetails>;
     unverifiedDegrees: Array<IDegreeDetails>;
     degreesByYear: Array<IDegreeCountByYear>;
-    degreesByProgram: Array<IDegreeCountByProgram>
+    degreesByUniversityName: Array<IDegreeCountByUniversityName>
     degreesByYearAndUni: Array<IDegreeCountByYearAndUni>
     degreesByProgramAndUni: Array<IDegreeCountByProgramAndUni>
     degree: IDegreeDetails
@@ -122,30 +122,30 @@ const degreeSlice = createSlice({
                 state.error = payload.payload ?? ''
                 state.success = false
             })
-            .addCase(GetCountDegreeByYears.pending, (state) => {
+            .addCase(GetCountDegreeByYearHEC.pending, (state) => {
                 state.loading = true
                 state.error = {}
             })
-            .addCase(GetCountDegreeByYears.fulfilled, (state, { payload }) => {
+            .addCase(GetCountDegreeByYearHEC.fulfilled, (state, { payload }) => {
                 state.loading = false
                 state.degreesByYear = payload
                 state.success = true
             })
-            .addCase(GetCountDegreeByYears.rejected, (state, payload) => {
+            .addCase(GetCountDegreeByYearHEC.rejected, (state, payload) => {
                 state.loading = false
                 state.error = payload.payload ?? ''
                 state.success = false
             })
-            .addCase(GetCountDegreeByProgram.pending, (state) => {
+            .addCase(GetDegreeCountByUniversityName.pending, (state) => {
                 state.loading = true
                 state.error = {}
             })
-            .addCase(GetCountDegreeByProgram.fulfilled, (state, { payload }) => {
+            .addCase(GetDegreeCountByUniversityName.fulfilled, (state, { payload }) => {
                 state.loading = false
-                state.degreesByProgram = payload
+                state.degreesByUniversityName = payload
                 state.success = true
             })
-            .addCase(GetCountDegreeByProgram.rejected, (state, payload) => {
+            .addCase(GetDegreeCountByUniversityName.rejected, (state, payload) => {
                 state.loading = false
                 state.error = payload.payload ?? ''
                 state.success = false
@@ -164,30 +164,30 @@ const degreeSlice = createSlice({
                 state.error = payload.payload ?? ''
                 state.success = false
             })
-            .addCase(GetCountDegreeByYearAndUni.pending, (state) => {
+            .addCase(GetDegreeCountByYearAndUniId.pending, (state) => {
                 state.loading = true
                 state.error = {}
             })
-            .addCase(GetCountDegreeByYearAndUni.fulfilled, (state, { payload }) => {
+            .addCase(GetDegreeCountByYearAndUniId.fulfilled, (state, { payload }) => {
                 state.loading = false
                 state.degreesByYearAndUni = payload
                 state.success = true
             })
-            .addCase(GetCountDegreeByYearAndUni.rejected, (state, payload) => {
+            .addCase(GetDegreeCountByYearAndUniId.rejected, (state, payload) => {
                 state.loading = false
                 state.error = payload.payload ?? ''
                 state.success = false
             })
-            .addCase(GetCountDegreeByProgramAndUni.pending, (state) => {
+            .addCase(GetDegreeCountByProgramAndUniId.pending, (state) => {
                 state.loading = true
                 state.error = {}
             })
-            .addCase(GetCountDegreeByProgramAndUni.fulfilled, (state, { payload }) => {
+            .addCase(GetDegreeCountByProgramAndUniId.fulfilled, (state, { payload }) => {
                 state.loading = false
                 state.degreesByProgramAndUni = payload
                 state.success = true
             })
-            .addCase(GetCountDegreeByProgramAndUni.rejected, (state, payload) => {
+            .addCase(GetDegreeCountByProgramAndUniId.rejected, (state, payload) => {
                 state.loading = false
                 state.error = payload.payload ?? ''
                 state.success = false
@@ -205,7 +205,7 @@ export const AllDegrees = (state: RootState) => state.degree.allDegrees;
 export const VerifiedDegrees = (state: RootState) => state.degree.verifiedDegrees;
 export const UnverifiedDegrees = (state: RootState) => state.degree.unverifiedDegrees;
 export const DegreesByYear = (state: RootState) => state.degree.degreesByYear;
-export const DegreesByProgram = (state: RootState) => state.degree.degreesByProgram;
+export const DegreesByUniversityName = (state: RootState) => state.degree.degreesByUniversityName;
 export const Degree = (state: RootState) => state.degree.degree;
 export const DegreesByYearAndUni = (state: RootState) => state.degree.degreesByYearAndUni;
 export const DegreesByProgramAndUni = (state: RootState) => state.degree.degreesByProgramAndUni;

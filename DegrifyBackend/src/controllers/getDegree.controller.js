@@ -1331,8 +1331,6 @@ export const getDegreeCountByYear = async (req, res) => {
         $match: {
           studentVerified: true,
           organisationVerified: true,
-          // HECVerified: true,
-          // completeVerified: true,
         },
       },
       {
@@ -1348,7 +1346,7 @@ export const getDegreeCountByYear = async (req, res) => {
       }
 
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "Degrees by University", results)
+        jsonGenerate(statusCode.SUCCESS, "Degrees by Year", results)
       );
     });
   } catch (err) {
@@ -1379,8 +1377,6 @@ export const getDegreeCountByOrganisation = async (req, res) => {
         $match: {
           studentVerified: true,
           organisationVerified: true,
-          // HECVerified: true,
-          // completeVerified: true,
         },
       },
       {

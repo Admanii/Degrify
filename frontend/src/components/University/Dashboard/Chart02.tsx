@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useRef } from 'react';
 import ApexCharts from "apexcharts";
 import { useSelector } from 'react-redux';
-import { DegreesByProgram, DegreesByProgramAndUni } from '../../../store/slice/degreeSlice';
+import { DegreesByProgramAndUni } from '../../../store/slice/degreeSlice';
 
 // console.log("DegreesByProgram" + DegreesByProgram)
 
@@ -107,88 +107,87 @@ interface Props {
 // }
 const Chart02: React.FC<Props> = ({ id }) => {
   const chartRef = useRef<any>(null);
-  const degreesByProgram = useSelector(DegreesByProgram);
   const degreesByProgramAndUni = useSelector(DegreesByProgramAndUni);
   
-  // console.log("degreesByProgram: "+degreesByProgram[0]._id)
-  // console.log("degreesByProgramAndUni: "+degreesByProgramAndUni)
+  console.log("degreesByProgramAndUni: "+degreesByProgramAndUni)
   
-
   function searchProgramCount(program: { toString: () => string; }) {
-    for (let i = 0; i < degreesByProgram.length; i++) {
-      if (degreesByProgram[i]._id === program.toString()) {
-        return degreesByProgram[i].count;
+    for (let i = 0; i < degreesByProgramAndUni.length; i++) {
+      if (degreesByProgramAndUni[i]._id === program.toString()) {
+        console.log("degreesByProgramAndUni")
+        console.log(degreesByProgramAndUni[i].count)
+        return degreesByProgramAndUni[i].count;
       }
     }
     return 0;
   }
 
-  useEffect(() => {
-    const chartTwoOptions = {
-      series: [
-        {
-          name: "Students",
-          data: [searchProgramCount("BBA"), searchProgramCount("BSCS"), searchProgramCount("ACF"), searchProgramCount("BSSS"), searchProgramCount("BECO"), searchProgramCount("BSEM")],
-        },
-      ],
-      colors: ["#3056D3", "#80CAEE"],
-      chart: {
-        type: "bar",
-        height: 335,
-        stacked: true,
-        toolbar: {
-          show: false,
-        },
-        zoom: {
-          enabled: false,
-        },
+  const chartTwoOptions = {
+    series: [
+      {
+        name: "Students",
+        data: [searchProgramCount("BBA"), searchProgramCount("BSCS"), searchProgramCount("ACF"), searchProgramCount("BSSS"), searchProgramCount("BECO"), searchProgramCount("BSEM")],
       },
+    ],
+    colors: ["#3056D3", "#80CAEE"],
+    chart: {
+      type: "bar",
+      height: 335,
+      stacked: true,
+      toolbar: {
+        show: false,
+      },
+      zoom: {
+        enabled: false,
+      },
+    },
 
-      responsive: [
-        {
-          breakpoint: 1536,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 0,
-                columnWidth: "25%",
-              },
+    responsive: [
+      {
+        breakpoint: 1536,
+        options: {
+          plotOptions: {
+            bar: {
+              borderRadius: 0,
+              columnWidth: "25%",
             },
           },
         },
-      ],
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          borderRadius: 0,
-          columnWidth: "25%",
-          borderRadiusApplication: "end",
-          borderRadiusWhenStacked: "last",
-        },
       },
-      dataLabels: {
-        enabled: false,
+    ],
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        borderRadius: 0,
+        columnWidth: "25%",
+        borderRadiusApplication: "end",
+        borderRadiusWhenStacked: "last",
       },
+    },
+    dataLabels: {
+      enabled: false,
+    },
 
-      xaxis: {
-        categories: ["BBA", "BSCS", "ACF", "BSSS", "BECO", "BSEM"],
-      },
-      legend: {
-        position: "top",
-        horizontalAlign: "left",
-        fontFamily: "Satoshi",
-        fontWeight: 500,
-        fontSize: "14px",
+    xaxis: {
+      categories: ["BBA", "BSCS", "ACF", "BSSS", "BECO", "BSEM"],
+    },
+    legend: {
+      position: "top",
+      horizontalAlign: "left",
+      fontFamily: "Satoshi",
+      fontWeight: 500,
+      fontSize: "14px",
 
-        markers: {
-          radius: 99,
-        },
+      markers: {
+        radius: 99,
       },
-      fill: {
-        opacity: 1,
-      },
-    };
+    },
+    fill: {
+      opacity: 1,
+    },
+  };
 
+  useEffect(() => {
     if (chartRef.current) {
       const chartTwo = new ApexCharts(chartRef.current, chartTwoOptions);
       chartTwo.render();
@@ -196,7 +195,7 @@ const Chart02: React.FC<Props> = ({ id }) => {
         chartTwo.destroy();
       };
     }
-  }, [chartRef, id]);
+  }, [chartRef, chartTwoOptions]);
 
   return <div id={id} ref={chartRef} />;
 };

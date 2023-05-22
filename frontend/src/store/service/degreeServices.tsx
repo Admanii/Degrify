@@ -66,16 +66,6 @@ export const getUnverifiedDegreesbyUniId = async (organisation_id: string) => {
     return api.get(`/getunverifieddegreesuniversity?organisation_id=${organisation_id}`, config);
 };
 
-export const getCountDegreeByYears = async () => {
-    await getConfig();
-    return api.get("/studentsbyyear", config);
-}
-
-export const getCountDegreeByProgram = async () => {
-    await getConfig();
-    return api.get("/studentsbyprogram", config);
-}
-
 export const getDegreebyId = async (degree_id: string) => {
     await getConfig();
     return api.get(`/getdegreebyid?degree_id=${degree_id}`, config);
@@ -101,21 +91,31 @@ export const addDegree = async (studentId: string, organisationId: string, paylo
     return api.post(`/adddegree?student_id=${studentId}&organisation_id=${organisationId}`, payload, config);
 };
 
-export const getCountDegreeByYearAndUni = async (organisationId: string,) => {
-    await getConfig();
-    return api.get(`/studentsbyyearanduni?organisation_id=${organisationId}`, config);
-}
-
 export const getDegreebyStudentId = async (student_id: string,) => {
     await getConfig();
     return api.get(`/getdegreebystudentid?student_id=${student_id}`, config);
 }
 
-export const getCountDegreeByProgramAndUni = async (organisationId: string,) => {
+export const getDegreebyHashValue = async (hashValue: string,) => {
+    return api.get(`/getdegreebyhash?hashValue=${hashValue}`);
+}
+
+export const getDegreeCountByProgramAndUniId = async (organisationId: string,) => {
     await getConfig();
     return api.get(`/studentsbyprogramanduni?organisation_id=${organisationId}`, config);
 }
 
-export const getDegreebyHashValue = async (hashValue: string,) => {
-    return api.get(`/getdegreebyhash?hashValue=${hashValue}`);
+export const getDegreeCountByYearAndUniId = async (organisationId: string,) => {
+    await getConfig();
+    return api.get(`/studentsbyyearanduni?organisation_id=${organisationId}`, config);
+}
+
+export const getDegreeCountByYearHEC = async () => {
+    await getConfig();
+    return api.get("/getdegreebyyear", config);
+}
+
+export const getDegreeCountByUniversityName = async () => {
+    await getConfig();
+    return api.get("/getdegreebyuniversity", config);
 }

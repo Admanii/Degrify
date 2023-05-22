@@ -1,23 +1,15 @@
 import React, { useRef, useEffect } from "react";
 import ApexCharts, { ApexOptions } from "apexcharts";
-import { DegreesByProgram, DegreesByProgramAndUni, DegreesByYear, DegreesByYearAndUni } from "../../../store/slice/degreeSlice";
+import { DegreesByYearAndUni } from "../../../store/slice/degreeSlice";
 import { useSelector } from "react-redux";
 
 const Chart01: React.FC = (): JSX.Element => {
   const chartRef = useRef<HTMLDivElement>(null);
-  const degreesByYear = useSelector(DegreesByYear);
-  const degreesByProgram = useSelector(DegreesByProgram);
   const degreesByYearAndUni = useSelector(DegreesByYearAndUni);
-  // const degreesByProgramAndUni = useSelector(DegreesByProgramAndUni)
 
-  // console.log(degreesByYear)
-  console.log("degreesByProgram: "+ degreesByProgram)
   // console.log("degreesByYearAndUni: "+ degreesByYearAndUni[0]._id)
-  // console.log("degreesByProgramAndUni01: "+ degreesByProgramAndUni[0]._id)
-  //console.log("degreesByProgram: "+ degreesByProgram[0].count)
 
-
-  const years = ["2017",'2018',"2019","2020","2021","2022","2023","2024","2025","2026","2027"]
+  const years = ['2018',"2019","2020","2021","2022","2023","2024","2025","2026","2027", "2028"]
   
   function searchYearCount(year: { toString: () => string; }) {
     for (let i = 0; i < degreesByYearAndUni.length; i++) {

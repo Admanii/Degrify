@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getCountDegreeByProgram, getCountDegreeByProgramAndUni, getCountDegreeByYearAndUni, getCountDegreeByYears, getDegreebyHashValue, getDegreebyId, getDegreebyStudentId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
-import { IAddDegree, IDegreeCountByProgram, IDegreeCountByProgramAndUni, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails, IResponse, IUpdatedDegree } from '../types/types';
+import { addDegree, getAllDegreesHec, getAllDegreesbyUniId, getDegreeCountByUniversityName, getDegreeCountByProgramAndUniId, getDegreeCountByYearAndUniId, getDegreeCountByYearHEC, getDegreebyHashValue, getDegreebyId, getDegreebyStudentId, getUnverifiedDegreesHec, getUnverifiedDegreesbyUniId, getVerifiedDegreesHec, getVerifiedDegreesbyUniId, updateDegreeHec, updateDegreeStudent, updateDegreeUniversity } from '../service/degreeServices';
+import { IAddDegree, IDegreeCountByUniversityName, IDegreeCountByProgramAndUni, IDegreeCountByYear, IDegreeCountByYearAndUni, IDegreeDetails, IResponse, IUpdatedDegree } from '../types/types';
 
 export const GetAllDegreesHec = createAsyncThunk<
     Array<IDegreeDetails>,
@@ -168,61 +168,6 @@ export const GetUnverifiedDegreesbyUniId = createAsyncThunk<
     }
 )
 
-export const GetCountDegreeByYears = createAsyncThunk<
-    Array<IDegreeCountByYear>,
-    {},
-    any
->(
-    'uni/year/count',
-    async ({ }, { rejectWithValue }) => {
-        var response: any = {};
-        try {
-            response = await getCountDegreeByYears();
-            //console.log(response.data)
-            if (response.data.statusCode === 401) {
-                return rejectWithValue(response.data.message)
-            }
-            return response.data.data
-        } catch (error) {
-            //@ts-ignore
-            if (error.response && error.response.data.message) {
-                //@ts-ignore
-                return rejectWithValue(error.response.data.message)
-            } else {
-                return rejectWithValue(response.message)
-            }
-        }
-    }
-)
-
-
-export const GetCountDegreeByProgram = createAsyncThunk<
-    Array<IDegreeCountByProgram>,
-    {},
-    any
->(
-    'uni/program/count',
-    async ({ }, { rejectWithValue }) => {
-        var response: any = {};
-        try {
-            response = await getCountDegreeByProgram();
-            //console.log(response.data)
-            if (response.data.statusCode === 401) {
-                return rejectWithValue(response.data.message)
-            }
-            return response.data.data
-        } catch (error) {
-            //@ts-ignore
-            if (error.response && error.response.data.message) {
-                //@ts-ignore
-                return rejectWithValue(error.response.data.message)
-            } else {
-                return rejectWithValue(response.message)
-            }
-        }
-    }
-)
-
 export const GetDegreebyId = createAsyncThunk<
     IDegreeDetails,
     {
@@ -339,33 +284,6 @@ export const AddDegree = createAsyncThunk<
     }
 );
 
-export const GetCountDegreeByYearAndUni = createAsyncThunk<
-    Array<IDegreeCountByYearAndUni>,
-    { organisationId: string; },
-    any
->(
-    'uni/each/year/count',
-    async ({ organisationId }, { rejectWithValue }) => {
-        var response: any = {};
-        try {
-            response = await getCountDegreeByYearAndUni(organisationId);
-            //console.log(response.data)
-            if (response.data.statusCode === 401) {
-                return rejectWithValue(response.data.message)
-            }
-            return response.data.data
-        } catch (error) {
-            //@ts-ignore
-            if (error.response && error.response.data.message) {
-                //@ts-ignore
-                return rejectWithValue(error.response.data.message)
-            } else {
-                return rejectWithValue(response.message)
-            }
-        }
-    }
-)
-
 export const GetDegreebyStudentId = createAsyncThunk<
     IResponse,
     {
@@ -394,16 +312,41 @@ export const GetDegreebyStudentId = createAsyncThunk<
     }
 )
 
-export const GetCountDegreeByProgramAndUni = createAsyncThunk<
-    Array<IDegreeCountByProgramAndUni>,
-    { organisationId: string; },
+export const GetDegreebyHashValue = createAsyncThunk<
+    IResponse,
+    {
+        hashValue: string;
+    },
     any
 >(
-    'uni/each/program/count',
-    async ({ organisationId }, { rejectWithValue }) => {
+    'degreebyhashvalue',
+    async ({ hashValue }, { rejectWithValue }) => {
         var response: any = {};
         try {
-            response = await getCountDegreeByProgramAndUni(organisationId);
+            response = await getDegreebyHashValue(hashValue);
+            return response.data
+        } catch (error) {
+            //@ts-ignore
+            if (error.response && error.response.data.message) {
+                //@ts-ignore
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(response.message)
+            }
+        }
+    }
+)
+
+export const GetCountDegreeByYearHEC = createAsyncThunk<
+    Array<IDegreeCountByYear>,
+    {},
+    any
+>(
+    'hec/degree/year/count',
+    async ({ }, { rejectWithValue }) => {
+        var response: any = {};
+        try {
+            response = await getDegreeCountByYearHEC();
             //console.log(response.data)
             if (response.data.statusCode === 401) {
                 return rejectWithValue(response.data.message)
@@ -421,19 +364,75 @@ export const GetCountDegreeByProgramAndUni = createAsyncThunk<
     }
 )
 
-export const GetDegreebyHashValue = createAsyncThunk<
-    IResponse,
-    {
-        hashValue: string;
-    },
+export const GetDegreeCountByUniversityName = createAsyncThunk<
+    Array<IDegreeCountByUniversityName>,
+    {},
     any
 >(
-    'degreebyhashvalue',
-    async ({ hashValue }, { rejectWithValue }) => {
+    'hec/degree/uni/count',
+    async ({ }, { rejectWithValue }) => {
         var response: any = {};
         try {
-            response = await getDegreebyHashValue(hashValue);
-            return response.data
+            response = await getDegreeCountByUniversityName();
+            //console.log(response.data)
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data.data
+        } catch (error) {
+            //@ts-ignore
+            if (error.response && error.response.data.message) {
+                //@ts-ignore
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(response.message)
+            }
+        }
+    }
+)
+
+export const GetDegreeCountByYearAndUniId = createAsyncThunk<
+    Array<IDegreeCountByYearAndUni>,
+    { organisationId: string; },
+    any
+>(
+    'uni/each/year/count',
+    async ({ organisationId }, { rejectWithValue }) => {
+        var response: any = {};
+        try {
+            response = await getDegreeCountByYearAndUniId(organisationId);
+            //console.log(response.data)
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data.data
+        } catch (error) {
+            //@ts-ignore
+            if (error.response && error.response.data.message) {
+                //@ts-ignore
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(response.message)
+            }
+        }
+    }
+)
+
+export const GetDegreeCountByProgramAndUniId = createAsyncThunk<
+    Array<IDegreeCountByProgramAndUni>,
+    { organisationId: string; },
+    any
+>(
+    'uni/each/program/count',
+    async ({ organisationId }, { rejectWithValue }) => {
+        var response: any = {};
+        try {
+            response = await getDegreeCountByProgramAndUniId(organisationId);
+            //console.log(response.data)
+            if (response.data.statusCode === 401) {
+                return rejectWithValue(response.data.message)
+            }
+            return response.data.data
         } catch (error) {
             //@ts-ignore
             if (error.response && error.response.data.message) {

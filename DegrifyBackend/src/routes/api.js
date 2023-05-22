@@ -136,13 +136,13 @@ apiProtected.get(
   getUnverifiedUniversityDegree
 ); // done
 apiProtected.get("/getdegreebyyear", getDegreeCountByYear);
-apiProtected.get("/getdegreebyorganisation", getDegreeCountByOrganisation);
+apiProtected.get("/getdegreebyuniversity", getDegreeCountByOrganisation);
 
 // get all students
 apiProtected.get("/getallStudents", getAllStudent); // done
-apiProtected.get("/studentsbyyear", getStudentbyYear);
-apiProtected.get("/studentsbyuni", getStudentbyUni);
-apiProtected.get("/studentsbyprogram", getStudentbyProgram);
+//apiProtected.get("/studentsbyyear", getStudentbyYear);
+//apiProtected.get("/studentsbyuni", getStudentbyUni);
+//apiProtected.get("/studentsbyprogram", getStudentbyProgram);
 apiProtected.get("/studentsbyprogramanduni", getStudentbyProgramAndUni);
 apiProtected.get("/studentsbyyearanduni", getStudentbyYearAndUni);
 

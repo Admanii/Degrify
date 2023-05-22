@@ -27,7 +27,7 @@ const HeyUni = () => {
 
         </div>
         <div className="w-1/3 h-100 bg-white m-4 border shadow-md">
-          <h1 className="font-bold text-lg mt-6 ml-4">DEGREE PROGRAMS</h1>
+          <h1 className="font-bold text-lg mt-6 ml-4">STUDENT PROGRAMS</h1>
 
           <Chart02 id={"Best"} />
 

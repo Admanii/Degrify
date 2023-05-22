@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useRef } from 'react';
 import ApexCharts from "apexcharts";
 import { useSelector } from 'react-redux';
-import { DegreesByProgram } from '../../../store/slice/degreeSlice';
+import { DegreesByUniversityName } from '../../../store/slice/degreeSlice';
 
 // console.log("DegreesByProgram" + DegreesByProgram)
 
@@ -107,7 +107,7 @@ interface Props {
 // }
 const Chart02: React.FC<Props> = ({ id }) => {
   const chartRef = useRef<any>(null);
-  const degreesByProgram = useSelector(DegreesByProgram);
+  const degreesByProgram = useSelector(DegreesByUniversityName);
   // console.log("degreesByProgram: "+degreesByProgram[0]._id)
 
   function searchYearCount(program: { toString: () => string; }) {

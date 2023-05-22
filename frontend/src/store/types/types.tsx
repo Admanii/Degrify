@@ -85,13 +85,12 @@ export interface IDegreeDetailsTemp {
     active: boolean;
 }
 
-
 export interface IDegreeCountByYear {
     _id: string,
     count: number
 }
 
-export interface IDegreeCountByProgram {
+export interface IDegreeCountByUniversityName {
     _id: string,
     count: number
 }
