@@ -430,3 +430,31 @@ export const CompleteAppovedDegree = async (req, res) => {
     );
   }
 };
+
+export const UnHECAppovedDegree = async (req, res) => {
+  try {
+    const updatedDegree = await Degree.findByIdAndUpdate(
+      req.query.degree_id,
+      {
+        HECVerified: false,
+        completeVerified: false,
+        ipfsLink: "",
+        hashValue: "",
+        dateCreated: "",
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
+
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "Degree Updated by HEC", updatedDegree)
+    );
+  } catch (err) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error is displaying ", err)
+    );
+  }
+};

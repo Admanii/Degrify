@@ -5,6 +5,7 @@ import {
   HECAppovedDegree,
   OrganisationAppovedDegree,
   StudentAppovedDegree,
+  UnHECAppovedDegree,
 } from "../controllers/DegreeApproved.controller.js";
 
 import {
@@ -104,6 +105,7 @@ apiProtected.get("/getcoursebyproganduni", getCoursebyProgAndUni);
 // post approved degrees
 apiProtected.post("/adddegree", AddDegree); // done
 apiProtected.post("/hecapproveddegree", HECAppovedDegree); // done
+apiProtected.post("/unhecapproveddegree", UnHECAppovedDegree);
 apiProtected.post("/studentapproveddegree", StudentAppovedDegree); // done
 apiProtected.post("/organisationapproveddegree", OrganisationAppovedDegree); // done
 
