@@ -3,7 +3,7 @@ import HeadingWithSpan from '../general/HeadingWithSpan';
 import DetailsHeading from '../University/DegreeViewPage/DetailsHeading';
 import { IMAGES } from '../../constants/images';
 import UnderlineRow from '../general/UnderlineRow';
-import { getFormattedDate } from '../../utility/util';
+import { getFormattedDate, getOrgFullName } from '../../utility/util';
 import Button from '../general/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -95,16 +95,16 @@ function View({ headingText, student }: Props) {
               {/* NAME ROW */}
               <UnderlineRow text={'Full Name '} spanText={student?.name} showBorder={true} />
               <UnderlineRow text={'Father\'s Name '} spanText={student?.fatherName} showBorder={true} />
-              <UnderlineRow text={"Email ID:"} spanText={student?.email} showBorder={true} />
+              <UnderlineRow text={"Email ID"} spanText={student?.email} showBorder={true} />
               <UnderlineRow text={'CNIC'} spanText={student?.CNIC} showBorder={true} />
-              <UnderlineRow text={"Date of Birth:"} spanText={`${getFormattedDate(student?.DateOfBirth ?? '')}`} showBorder={true} />
-              <UnderlineRow text={"University"} spanText={student?.orgName} showBorder={true} />
-              <UnderlineRow text={"Serial Number:"} spanText={student?.enrollmentNumber} showBorder={true} />
-              <UnderlineRow text={"Date of Admission:"} spanText={`${getFormattedDate(student?.DateOfAdmission ?? '')}`} showBorder={true} />
+              <UnderlineRow text={"Date of Birth"} spanText={`${getFormattedDate(student?.DateOfBirth ?? '')}`} showBorder={true} />
+              <UnderlineRow text={"University"} spanText={ `${getOrgFullName(student?.orgName ?? '')}`} showBorder={true} />
+              <UnderlineRow text={"Serial Number"} spanText={student?.enrollmentNumber} showBorder={true} />
+              <UnderlineRow text={"Date of Admission"} spanText={`${getFormattedDate(student?.DateOfAdmission ?? '')}`} showBorder={true} />
               {/* <UnderlineRow text={"Graduating Year: "} spanText={student?.GraduatingYear} showBorder={true} /> */}
               {/* <UnderlineRow text={"Date of Completion:"} spanText={`${getFormattedDate(student?.DateOfompletion ?? '')}`}  showBorder={true} /> */}
-              <UnderlineRow text={"CGPA:"} spanText={student?.CGPA} showBorder={true} />
-              <UnderlineRow text={"Total Credit Hours:"} spanText={student?.TotalCreditHours} showBorder={false} />
+              <UnderlineRow text={"CGPA"} spanText={student?.CGPA} showBorder={true} />
+              <UnderlineRow text={"Total Credit Hours"} spanText={student?.TotalCreditHours} showBorder={false} />
               <div className='h-5'></div>
               <div className="w-11/12 flex flex-row justify-center items-end">
 
