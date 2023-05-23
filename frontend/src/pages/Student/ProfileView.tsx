@@ -22,14 +22,16 @@ const ProfileView = () => {
     getStudent();
   }, [])
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, []);
 
   const getStudent = async () => {
+    setLoading(true);
     await dispatch(GetStudentbyId({ studentId: studentId }))
+    setLoading(false);
   }
 
   return (

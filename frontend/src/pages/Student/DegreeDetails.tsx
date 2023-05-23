@@ -33,12 +33,16 @@ function DegreeDetails() {
   const [isStudentApproved, setIsStudentApproved] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const studentId = userInfo?.user?.studentID ?? '';
   var userRole = userInfo?.user?.userRole ?? '';
   console.log(userRole)
 
   const isDegreeExists = async () => {
+  setLoading(true)
     const response = await dispatch(GetDegreebyStudentId({ studentId: studentId }))
+    setLoading(false)
+  
     const result = unwrapResult(response);
     if (result?.message === 'Exists' && (result?.statusCode === 200)) {
       setIsDegreeExists(true);
@@ -53,11 +57,15 @@ function DegreeDetails() {
   }, [isStudentApproved, isDegreeExist, disabled, degreeId])
 
   const getDegreebyId = async () => {
+    setLoading(true);
     const response = await dispatch(GetDegreebyId({ degreeId: degreeId }))
+    // setLoading(false);
     const result = unwrapResult(response);
     setDegree(result);
     setIsStudentApproved(result?.degree?.studentVerified)
     console.log(degree)
+    setLoading(false);
+    
   }
 
   const openModal = () => {
@@ -76,12 +84,12 @@ function DegreeDetails() {
     navigate(`/view/degreecertificate?degreeId=${degreeId}`);
     setIsLoading(false);
   };
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
+ 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, []);
 
   return (
     <Layout>
