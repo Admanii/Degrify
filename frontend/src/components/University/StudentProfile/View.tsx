@@ -300,7 +300,7 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
                   </div>
                 </Modal>
                 {isDegreeExist ? (
-                  <Button width={200} className={`${buttonHidden}`} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)} buttonText={'View Certificate'} />) :
+                  <Button width={200} className={`${buttonHidden}`} onClick={() => navigate(`/view/degreedetails?degreeId=${degreeId}`)} buttonText={'View Degree'} />) :
                   (<Button width={200} className={`${buttonHidden}`} onClick={openModal} buttonText={'Add Degree'} />)
                 }
               </div>
