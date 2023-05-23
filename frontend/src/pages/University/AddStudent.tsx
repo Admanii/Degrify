@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '../../components/general/Button';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +14,7 @@ import Layout from '../../components/general/Layout';
 import { useNavigate } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { useEffectOnce } from 'usehooks-ts';
 
 const AddStudent = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -21,6 +22,7 @@ const AddStudent = () => {
     const { register, handleSubmit, reset } = useForm<IRegisterStudent>()
     const userInfo = useSelector(UserInfo)
     const organisationID = userInfo?.user?.organisationID ?? '';
+    const organisationName = userInfo?.user?.name ?? '';
 
     const submitForm = async (data: IRegisterStudent) => {
         // console.log(data);
@@ -49,6 +51,30 @@ const AddStudent = () => {
         setModal(false);
     };
 
+
+
+    const [name, setName] = useState('');
+    const [erp, setErp] = useState('');
+    const [email, setEmail] = useState('');
+
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const enteredName = e.target.value;
+        setName(enteredName);
+
+        
+    }
+    const handleErpChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        const enteredERP = e.target.value;
+        setErp(enteredERP);
+
+        
+    }
+
+    useEffect(()=>{
+        const generatedEmail = name.toLowerCase()+ "_" + erp + "@" + organisationName.toLowerCase() + ".degrify.com";
+        setEmail(generatedEmail)
+    }, [name,erp])
+
     return (
         <Layout>
             <div>
@@ -61,7 +87,7 @@ const AddStudent = () => {
                                 <div className="grid min-h-full grid-cols-2">
                                     <div className='p-16 flex flex-col items-end justify-start'>
                                         <div>
-                                            <InputField type={'text'} {...register('name')} id={'name'} label={'Name'} hintText={'Full Name'} required={false} register={register} />
+                                            <InputField type={'text'} {...register('name')} id={'name'} label={'Name'} hintText={'Full Name'} required={false} register={register} onChange={handleNameChange} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('CNIC')} id={"CNIC"} label={"CNIC"} hintText='42000-1234567-8' required={false} register={register} />
@@ -81,7 +107,7 @@ const AddStudent = () => {
                                             <InputField type={'date'} {...register('DateOfAdmission')} id={'DateOfAdmission'} label={'Date Of Admission'} hintText={'2023-05-17'} required={false} register={register} />
                                         </div>
                                         <div>
-                                            <InputField type={'text'} {...register('email')} id={'email'} label={'Email'} hintText={'example@gmail.com'} required={true} register={register} />
+                                            <InputField type={'text'} {...register('email')} id={'email'} label={'Email'} hintText={'example@gmail.com'} required={true} register={register} defaultValue={email} />
                                         </div>
                                     </div>
                                     <div className='p-16 flex flex-col items-start justify-start'>
@@ -94,7 +120,7 @@ const AddStudent = () => {
                                             <InputField type={'date'} {...register('DateOfBirth')} id={'DateOfBirth'} label={'Date of Birth'} hintText={'dd/mm/yyyy'} required={false} register={register} />
                                         </div>
                                         <div>
-                                            <InputField type={'text'} {...register('studentID')} id={'studentID'} label={'Student ID'} hintText={'123'} required={false} register={register} />
+                                            <InputField type={'text'} {...register('studentID')} id={'studentID'} label={'Student ID'} hintText={'12345'} required={false} register={register} onChange={handleErpChange} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('GraduatingYear')} id={'GraduatingYear'} label={'Graduating Year'} hintText={'2023'} required={false} register={register} />

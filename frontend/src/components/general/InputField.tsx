@@ -7,11 +7,12 @@ type Props = {
   label: string;
   hintText: string;
   defaultValue?: string,
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
   required: boolean;
   register: any;
 };
 
-const Input: React.FC<Props> = ({ type, id, label, hintText, defaultValue, required, register }) => {
+const Input: React.FC<Props> = ({ type, id, label, hintText, defaultValue, required, register, onChange }) => {
   return (
     <div>
       <label htmlFor={id} className="flex justify-left mt-2 text-gray-700 font-bold">{label}</label>
@@ -22,6 +23,7 @@ const Input: React.FC<Props> = ({ type, id, label, hintText, defaultValue, requi
         defaultValue={defaultValue}
         required={required}
         {...register(id, { required })}
+        onChange={onChange}
         className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-left shadow-sm rounded-md border border-gray-300 focus:outline-none focus:border-gray-500 focus:ring-gray-500"
       />
     </div>
