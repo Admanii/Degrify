@@ -19,6 +19,7 @@ import { Title } from '../../components/general/Modal/Title'
 import { SubTitle } from '../../components/general/Modal/SubTitle'
 import { getCaseClass, getFormattedDate } from '../../utility/util'
 import UnderlineRow from '../../components/general/UnderlineRow'
+import LoadingScreen from '../../components/general/LoadingScreen'
 
 function DegreeDetails() {
 
@@ -32,12 +33,16 @@ function DegreeDetails() {
   const [isStudentApproved, setIsStudentApproved] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const studentId = userInfo?.user?.studentID ?? '';
   var userRole = userInfo?.user?.userRole ?? '';
   console.log(userRole)
 
   const isDegreeExists = async () => {
+  setLoading(true)
     const response = await dispatch(GetDegreebyStudentId({ studentId: studentId }))
+    setLoading(false)
+  
     const result = unwrapResult(response);
     if (result?.message === 'Exists' && (result?.statusCode === 200)) {
       setIsDegreeExists(true);
@@ -52,11 +57,15 @@ function DegreeDetails() {
   }, [isStudentApproved, isDegreeExist, disabled, degreeId])
 
   const getDegreebyId = async () => {
+    setLoading(true);
     const response = await dispatch(GetDegreebyId({ degreeId: degreeId }))
+    // setLoading(false);
     const result = unwrapResult(response);
     setDegree(result);
     setIsStudentApproved(result?.degree?.studentVerified)
     console.log(degree)
+    setLoading(false);
+    
   }
 
   const openModal = () => {
@@ -75,126 +84,138 @@ function DegreeDetails() {
     navigate(`/view/degreecertificate?degreeId=${degreeId}`);
     setIsLoading(false);
   };
+ 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, []);
 
   return (
     <Layout>
-      {!isDegreeExist ?
-        (<HeadingWithSpan marginTop='4' Text={'DEGREE DOESNOT EXIST'} />)
-        : (
-          <div className='p-5'>
-            <HeadingWithSpan marginTop='3' Text={'DEGREE DETAILS'} />
-            <div className="flex">
+      {loading ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          {!isDegreeExist ?
+            (<HeadingWithSpan marginTop='4' Text={'DEGREE DOESNOT EXIST'} />)
+            : (
+              <div className='p-5'>
+                <HeadingWithSpan marginTop='3' Text={'DEGREE DETAILS'} />
+                <div className="flex">
 
-              <div className="w-full p-5 pr-5">
-                <div className="bg-white p-3 border-t-4 border-green-400 text-left">
-                  <div className="grid grid-cols-2 gap-4 my-4 px-10">
-                    <UnderlineRow text={'Name'} spanText={`${degree?.studentDetails?.name}`} showBorder={false} />
-                    <UnderlineRow text={'Father\'s Name'} spanText={`${degree?.studentDetails?.fatherName}`} showBorder={false} />
-                    <UnderlineRow text={'Email ID'} spanText={`${degree?.studentDetails?.email}`} showBorder={false} />
-                    <UnderlineRow text={'ERP ID'} spanText={`${degree?.studentDetails?.studentID}`} showBorder={false} />
-                    <UnderlineRow text={'CNIC'} spanText={`${degree?.studentDetails?.CNIC}`} showBorder={false} />
-                    <UnderlineRow text={'Date of Birth'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfBirth ?? '')}`} showBorder={false} />
-                    <UnderlineRow text={'Program'} spanText={`${degree?.studentDetails?.Program}`} showBorder={false} />
-                    <UnderlineRow text={'University'} spanText={`${degree?.studentDetails?.orgName}`} showBorder={false} />
-                    <UnderlineRow text={'Date of Admission'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} showBorder={false} />
-                    <UnderlineRow text={'Date of Completion'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfompletion ?? '')}`} showBorder={false} />
-                    <UnderlineRow text={'Date of Issue'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} showBorder={false} />
-                    <UnderlineRow text={'Graduating Year'} spanText={`${degree?.studentDetails?.GraduatingYear}`} showBorder={false} />
-                    <UnderlineRow text={'CGPA'} spanText={`${degree?.studentDetails?.CGPA}`} showBorder={false} />
-                    <UnderlineRow text={'Total Credit Hours'} spanText={`${degree?.studentDetails?.TotalCreditHours}`} showBorder={false} />
+                  <div className="w-full p-5 pr-5">
+                    <div className="bg-white p-3 border-t-4 border-green-400 text-left">
+                      <div className="grid grid-cols-2 gap-4 my-4 px-10">
+                        <UnderlineRow text={'Name'} spanText={`${degree?.studentDetails?.name}`} showBorder={false} />
+                        <UnderlineRow text={'Father\'s Name'} spanText={`${degree?.studentDetails?.fatherName}`} showBorder={false} />
+                        <UnderlineRow text={'Email ID'} spanText={`${degree?.studentDetails?.email}`} showBorder={false} />
+                        <UnderlineRow text={'ERP ID'} spanText={`${degree?.studentDetails?.studentID}`} showBorder={false} />
+                        <UnderlineRow text={'CNIC'} spanText={`${degree?.studentDetails?.CNIC}`} showBorder={false} />
+                        <UnderlineRow text={'Date of Birth'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfBirth ?? '')}`} showBorder={false} />
+                        <UnderlineRow text={'Program'} spanText={`${degree?.studentDetails?.Program}`} showBorder={false} />
+                        <UnderlineRow text={'University'} spanText={`${degree?.studentDetails?.orgName}`} showBorder={false} />
+                        <UnderlineRow text={'Date of Admission'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} showBorder={false} />
+                        <UnderlineRow text={'Date of Completion'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfompletion ?? '')}`} showBorder={false} />
+                        <UnderlineRow text={'Date of Issue'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} showBorder={false} />
+                        <UnderlineRow text={'Graduating Year'} spanText={`${degree?.studentDetails?.GraduatingYear}`} showBorder={false} />
+                        <UnderlineRow text={'CGPA'} spanText={`${degree?.studentDetails?.CGPA}`} showBorder={false} />
+                        <UnderlineRow text={'Total Credit Hours'} spanText={`${degree?.studentDetails?.TotalCreditHours}`} showBorder={false} />
 
-                    {/* <DetailsHeading text={'CNIC:'} spanText={degree?.studentDetails?.CNIC} />
-                    <DetailsHeading text={'Graduating Year: '} spanText={degree?.studentDetails?.GraduatingYear} />
-                    <DetailsHeading text={'Date of Birth:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfBirth ?? '')}`} />
-                    <DetailsHeading text={'Date of Admission:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} />
-                    <DetailsHeading text={'Date of Completion:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfompletion ?? '')}`} />
-                    <DetailsHeading text={'Email ID:'} spanText={degree?.studentDetails?.email} />
-                    <DetailsHeading text={'CGPA:'} spanText={degree?.studentDetails?.CGPA} />
-                    <DetailsHeading text={'Total Credit Hours:'} spanText={degree?.studentDetails?.TotalCreditHours} /> */}
-                  </div>
-                  <div className="justify-start grid grid-cols-2 gap-4 pt-2 pb-2 px-10">
-                    <Button height={44} width={355} inverted={true} buttonText={'View Certificate'} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)}></Button>
-
-                    <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
-                      <div className='flex justify-center'>
-                        <img src={IMAGES.info_icon}></img>
+                        {/* <DetailsHeading text={'CNIC:'} spanText={degree?.studentDetails?.CNIC} />
+                      <DetailsHeading text={'Graduating Year: '} spanText={degree?.studentDetails?.GraduatingYear} />
+                      <DetailsHeading text={'Date of Birth:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfBirth ?? '')}`} />
+                      <DetailsHeading text={'Date of Admission:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} />
+                      <DetailsHeading text={'Date of Completion:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfompletion ?? '')}`} />
+                      <DetailsHeading text={'Email ID:'} spanText={degree?.studentDetails?.email} />
+                      <DetailsHeading text={'CGPA:'} spanText={degree?.studentDetails?.CGPA} />
+                      <DetailsHeading text={'Total Credit Hours:'} spanText={degree?.studentDetails?.TotalCreditHours} /> */}
                       </div>
-                      <Title text="Approve this degree?" />
-                      <SubTitle text='Are you sure you want to approve? This action cannot be undone. Degrees uploaded to blockchain can not be altered!' />
-                      <div className='flex my-2'>
-                        <div className='flex px-2 w-1/2 justify-center'>
-                          <button
-                            type="submit"
-                            className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
-                            onClick={closeModal}
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                        <div className='flex px-2 w-1/2 justify-center'>
-                          <button
-                            type="submit"
-                            disabled={isLoading}
-                            className={classNames(
-                              "mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700",
-                              isLoading ? "opacity-40 cursor-not-allowed" : ""
+                      <div className="justify-start grid grid-cols-2 gap-4 pt-2 pb-2 px-10">
+                        <Button height={44} width={355} inverted={true} buttonText={'View Certificate'} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)}></Button>
+
+                        <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
+                          <div className='flex justify-center'>
+                            <img src={IMAGES.info_icon}></img>
+                          </div>
+                          <Title text="Approve this degree?" />
+                          <SubTitle text='Are you sure you want to approve? This action cannot be undone. Degrees uploaded to blockchain can not be altered!' />
+                          <div className='flex my-2'>
+                            <div className='flex px-2 w-1/2 justify-center'>
+                              <button
+                                type="submit"
+                                className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
+                                onClick={closeModal}
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                            <div className='flex px-2 w-1/2 justify-center'>
+                              <button
+                                type="submit"
+                                disabled={isLoading}
+                                className={classNames(
+                                  "mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700",
+                                  isLoading ? "opacity-40 cursor-not-allowed" : ""
+                                )}
+                                onClick={approveDegree}
+                              >
+                                Approve
+                              </button>
+                            </div>
+                          </div>
+                        </Modal>
+                        <div className='flex flex-col'>
+                          <Button height={44} width={355} buttonText={'Approve Degree'} disabled={disabled} onClick={openModal} className={disabled ? "bg-gray-600" : ""}></Button>
+                          <div>
+                            {isStudentApproved && (
+                              <span className="text-sm text-green-400 font-medium">
+                                *This degree has already been approved by the student
+                              </span>
                             )}
-                            onClick={approveDegree}
-                          >
-                            Approve
-                          </button>
+                          </div>
                         </div>
-                      </div>
-                    </Modal>
-                    <div className='flex flex-col'>
-                      <Button height={44} width={355} buttonText={'Approve Degree'} disabled={disabled} onClick={openModal} className={disabled ? "bg-gray-600" : ""}></Button>
-                      <div>
-                        {isStudentApproved && (
-                          <span className="text-sm text-green-400 font-medium">
-                            *This degree has already been approved by the student
-                          </span>
-                        )}
                       </div>
                     </div>
                   </div>
+
+
+                  {/* <div className="w-1/2 p-4">
+                  <div className="bg-white p-3 border-t-4 border-green-400 text-left">
+                    <div className="flex justify-center items-center w-full h-64 mb-6">
+                      <div className="w-40 h-40 rounded-full bg-gray-500"></div>
+                    </div>
+                    <table className="table-auto w-full">
+                      <thead>
+                        <tr>
+                          <th className="px-4 py-2 font-bold text-left">Degree</th>
+                          <th className="px-4 py-2 font-bold text-left">Institution</th>
+                          <th className="px-4 py-2 font-bold text-left">CGPA</th>
+                          <th className="px-4 py-2 font-bold text-left">Year</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border px-4 py-2">BS Computer Science</td>
+                          <td className="border px-4 py-2">ABC University</td>
+                          <td className="border px-4 py-2">3.8</td>
+                          <td className="border px-4 py-2">2020</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2">MS Computer Science</td>
+                          <td className="border px-4 py-2">XYZ University</td>
+                          <td className="border px-4 py-2">4.0</td>
+                          <td className="border px-4 py-2">2022</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div> */}
                 </div>
               </div>
-
-
-              {/* <div className="w-1/2 p-4">
-                <div className="bg-white p-3 border-t-4 border-green-400 text-left">
-                  <div className="flex justify-center items-center w-full h-64 mb-6">
-                    <div className="w-40 h-40 rounded-full bg-gray-500"></div>
-                  </div>
-                  <table className="table-auto w-full">
-                    <thead>
-                      <tr>
-                        <th className="px-4 py-2 font-bold text-left">Degree</th>
-                        <th className="px-4 py-2 font-bold text-left">Institution</th>
-                        <th className="px-4 py-2 font-bold text-left">CGPA</th>
-                        <th className="px-4 py-2 font-bold text-left">Year</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border px-4 py-2">BS Computer Science</td>
-                        <td className="border px-4 py-2">ABC University</td>
-                        <td className="border px-4 py-2">3.8</td>
-                        <td className="border px-4 py-2">2020</td>
-                      </tr>
-                      <tr>
-                        <td className="border px-4 py-2">MS Computer Science</td>
-                        <td className="border px-4 py-2">XYZ University</td>
-                        <td className="border px-4 py-2">4.0</td>
-                        <td className="border px-4 py-2">2022</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div> */}
-            </div>
-          </div>
-        )}
+            )}
+        </>
+      )}
     </Layout>
   )
 }

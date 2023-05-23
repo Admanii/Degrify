@@ -36,7 +36,7 @@ function DegreeCertificate({ degree }: Props) {
               </div>
               <h1 className="text-5xl font-bold mb-4 font-certificate">Certificate of Completion</h1>
               <p className="text-xl mb-4">This certifies that</p>
-              <h2 className="text-3xl font-bold mb-4">{degree?.studentDetails?.name.charAt(0).toUpperCase()}{degree?.studentDetails?.name.slice(1)} {degree?.studentDetails?.fatherName.charAt(0).toUpperCase()}{degree?.studentDetails?.fatherName.slice(1)}</h2>
+              <h2 className="text-3xl font-bold mb-4">{degree?.studentDetails?.name.charAt(0).toUpperCase()}{degree?.studentDetails?.name.slice(1)}</h2>
               <p className="text-xl mb-4">has successfully completed the</p>
               <h2 className="text-xl font-bold mb-4">{getCaseClass(degree?.studentDetails?.Program)}</h2>
               <p className="text-xl mb-4">from {getOrgFullName(degree?.studentDetails?.orgName)}</p>
@@ -44,8 +44,14 @@ function DegreeCertificate({ degree }: Props) {
             </div>
           </div>
         </div>
-        <VerifiedTickIcon size={'8'} visible={true} />
-        <p className='text-red-500'>* This degree is pending approval from the Higher Education Commission</p>
+
+        {degree?.degree?.HECVerified ? (
+          <VerifiedTickIcon size={'8'} verified={degree?.degree?.HECVerified} />
+        ) : (
+          <VerifiedTickIcon size={'8'} verified={degree?.degree?.HECVerified} />
+        )
+        }
+        {/* <p className='text-red-500'>* This degree is pending approval from the Higher Education Commission</p> */}
       </div>
     </div>
 

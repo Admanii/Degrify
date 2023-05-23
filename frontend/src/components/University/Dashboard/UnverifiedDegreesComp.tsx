@@ -46,7 +46,7 @@ export const UnverifiedDegreesComp = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white text-left">
                   {unverifiedDegrees?.length > 0 && unverifiedDegrees?.map((degree, index) => (
-                    <tr  key={index} className="cursor-pointer  hover:bg-gray-100" onClick={() => { navigate(`/view/degreedetails?degreeId=${degree?.degree?._id}`) }} >
+                    <tr  key={index} className="cursor-pointer hover:bg-gray-100" onClick={() => { navigate(`/view/degreedetails?degreeId=${degree?.degree?._id}`) }} >
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
                         <div className="text-gray-700">{degree?.degree?._id?.substring(1, 10)}</div>
                       </td>
