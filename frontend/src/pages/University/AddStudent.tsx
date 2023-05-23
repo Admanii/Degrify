@@ -58,28 +58,47 @@ const AddStudent = () => {
     const [erp, setErp] = useState('');
     const [email, setEmail] = useState('');
 
+    const [program, setProgram] = useState('');
+    const [gradYear, setgradYear] = useState('');
+    const [enrollmentNumber, setEnrollmentNumber] = useState('');
+
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const enteredName = e.target.value;
         setName(enteredName);
-
-        
     }
     const handleErpChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         const enteredERP = e.target.value;
         setErp(enteredERP);
-
-        
     }
+    const handleProgramChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        const enteredProgram = e.target.value;
+        setProgram(enteredProgram);
+    }
+    const handleGradYearChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        const enteredGradYear = e.target.value;
+        setgradYear(enteredGradYear);
+    }
+
+
     
     const generateEmail=()=>{
         const generatedEmail = name.toLowerCase()+ "_" + erp + "@" + organisationName.toLowerCase() + ".degrify.com";
         return generatedEmail;
+    }
+    const generateEnrolmentNumber=()=>{
+        const generatedEnrolmentNumber = gradYear +"-"+ program;
+        return generatedEnrolmentNumber;
     }
 
     useEffect(()=>{
         const generatedEmail = generateEmail()
         setEmail(generatedEmail)
     }, [name,erp])
+    
+    useEffect(()=>{
+        const generatedEnrolmentNumber = generateEnrolmentNumber();
+        setEnrollmentNumber(generatedEnrolmentNumber)
+    }, [gradYear, program])
 
     return (
         <Layout>
@@ -99,10 +118,10 @@ const AddStudent = () => {
                                             <InputField type={'text'} {...register('CNIC')} id={"CNIC"} label={"CNIC"} hintText='42000-1234567-8' required={false} register={register} />
                                         </div>
                                         <div>
-                                            <InputField type={'text'} {...register('enrollmentNumber')} id={'enrollmentNumber'} label={'Enrolment Number'} hintText={'2021-BSCS'} required={false} register={register} />
+                                            <InputField type={'text'} {...register('Program')} id={'Program'} label={'Program'} hintText={'BSCS'} required={false} register={register} onChange={handleProgramChange} />
                                         </div>
                                         <div>
-                                            <InputField type={'text'} {...register('Program')} id={'Program'} label={'Program'} hintText={'BSCS'} required={false} register={register} />
+                                            <InputField type={'text'} {...register('enrollmentNumber')} id={'enrollmentNumber'} label={'Enrolment Number'} hintText={'2021-BSCS'} required={false} register={register} defaultValue={enrollmentNumber} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('CGPA')} id={'CGPA'} label={'CGPA'} hintText={'3.5'} required={false} register={register} />
@@ -126,10 +145,10 @@ const AddStudent = () => {
                                             <InputField type={'date'} {...register('DateOfBirth')} id={'DateOfBirth'} label={'Date of Birth'} hintText={'dd/mm/yyyy'} required={false} register={register} />
                                         </div>
                                         <div>
-                                            <InputField type={'text'} {...register('studentID')} id={'studentID'} label={'Student ID'} hintText={'12345'} required={false} register={register} onChange={handleErpChange} />
+                                            <InputField type={'text'} {...register('GraduatingYear')} id={'GraduatingYear'} label={'Graduating Year'} hintText={'2023'} required={false} register={register} onChange={handleGradYearChange}/>
                                         </div>
                                         <div>
-                                            <InputField type={'text'} {...register('GraduatingYear')} id={'GraduatingYear'} label={'Graduating Year'} hintText={'2023'} required={false} register={register} />
+                                            <InputField type={'text'} {...register('studentID')} id={'studentID'} label={'Student ID'} hintText={'12345'} required={false} register={register} onChange={handleErpChange} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('TotalCreditHours')} id={'TotalCreditHours'} label={'Total Credit Hours'} hintText={'120'} required={false} register={register} />
