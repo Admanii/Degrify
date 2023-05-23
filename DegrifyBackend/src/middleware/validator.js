@@ -18,7 +18,10 @@ export const studentRegister = [
     min: 13,
     max: 13,
   }),
-  check("TotalCreditHours", "Total Credit Hours is required").notEmpty().trim().escape(),
+  check("TotalCreditHours", "Total Credit Hours is required")
+    .notEmpty()
+    .trim()
+    .escape(),
 ];
 
 export const organisationRegister = [
@@ -31,7 +34,6 @@ export const organisationRegister = [
   }),
   check("phoneNumber", "Phone Number is required").notEmpty().trim().escape(),
 ];
-
 
 export const studentUpdate = [
   check("name", "Name is required").notEmpty().trim().escape(),
@@ -48,5 +50,8 @@ export const studentUpdate = [
     min: 13,
     max: 13,
   }),
-  check("TotalCreditHours", "Total Credit Hours is required").notEmpty().trim().escape(),
+  check("TotalCreditHours", "Total Credit Hours is required")
+    .notEmpty()
+    .trim()
+    .escape(),
 ];

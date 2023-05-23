@@ -114,7 +114,6 @@ export const deleteStudent = async (req, res) => {
 
 export const updateStudent = async (req, res) => {
   try {
-
     const {
       name,
       enrollmentNumber,
@@ -145,6 +144,7 @@ export const updateStudent = async (req, res) => {
     const date = new Date(DateOfompletion);
     const Completionyear = date.getFullYear();
 
+    console.log(Completionyear);
     if (Completionyear - Admissionyear < 4) {
       return res.json(
         jsonGenerate(
@@ -153,6 +153,7 @@ export const updateStudent = async (req, res) => {
         )
       );
     }
+
     if (Admissionyear - birthYear < 16) {
       return res.json(
         jsonGenerate(
@@ -161,6 +162,7 @@ export const updateStudent = async (req, res) => {
         )
       );
     }
+
     if (Completionyear.toString() !== GraduatingYear.toString()) {
       return res.json(
         jsonGenerate(
@@ -169,7 +171,7 @@ export const updateStudent = async (req, res) => {
         )
       );
     }
-
+    console.log("kk");
     const newUser = {
       name: name,
       enrollmentNumber: enrollmentNumber,
@@ -197,16 +199,13 @@ export const updateStudent = async (req, res) => {
       }
     );
 
-    console.log(updatedUser)
+    console.log(updatedUser);
 
     return res.json(
-      jsonGenerate(
-        statusCode.SUCCESS,
-        "Student Profile Updated",
-        updatedUser
-      )
+      jsonGenerate(statusCode.SUCCESS, "Student Profile Updated", updatedUser)
     );
   } catch (err) {
+    console.log(err);
     return res.json(
       jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Error is displaying", err)
     );

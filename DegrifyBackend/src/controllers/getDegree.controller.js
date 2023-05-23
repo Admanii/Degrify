@@ -403,11 +403,13 @@ export const getUniversityAllDegree = async (req, res) => {
       ],
     }).select(["-_id", "studentID"]);
     const result = [];
-
+    console.log("kkk");
     const array = Object.values(list);
 
+    console.log(array.length);
     for (let i = 0; i < array.length; i++) {
       const studentId = array[i].studentID;
+      console.log(studentId);
       const studentDetail = await Student.findById(studentId)
         .select("")
         .populate([
@@ -426,6 +428,7 @@ export const getUniversityAllDegree = async (req, res) => {
           "CGPA",
         ])
         .exec();
+      console.log(studentDetail._id);
       var list1 = await Student.findById(studentDetail._id).select([
         "name",
         "enrollmentNumber",
@@ -610,9 +613,11 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
     const result = [];
 
     const array = Object.values(list);
+    console.log(array.length);
 
     for (let i = 0; i < array.length; i++) {
       const studentId = array[i].studentID;
+      console.log(studentId);
       const studentDetail = await Student.findById(studentId)
         .select("")
         .populate([
@@ -631,6 +636,8 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
           "CGPA",
         ])
         .exec();
+      console.log("kkllls");
+      console.log(studentDetail._id);
       var list1 = await Student.findById(studentDetail._id).select([
         "name",
         "enrollmentNumber",
@@ -646,10 +653,12 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
         "TotalCreditHours",
         "CGPA",
       ]);
+      //console.log("kk");
       var org = await Student.findById(studentDetail._id)
         .select("")
         .populate(["organisationID"])
         .exec();
+
       var user = await User.findOne({
         studentID: studentDetail._id,
       })
@@ -681,6 +690,7 @@ export const getUnverifiedUniversityDegree = async (req, res) => {
       };
       // console.log(particular);
       result.push(particular);
+      //console.log(result);
     }
 
     return res.json(
