@@ -74,7 +74,7 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
     const response = await dispatch(AddDegree({ studentId: studentId, organisationId: organisationId, payload: {} }))
     const result = unwrapResult(response);
     if(result.statusCode === 200) {
-      navigate(`/view/degreecertificate?degreeId=${result?.data?.degreeId ?? ''}`);
+      navigate(`/view/degreedetails?degreeId=${result?.data?.degreeId ?? ''}`);
     }
   };
 

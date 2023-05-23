@@ -120,7 +120,7 @@ const Chart02: React.FC<Props> = ({ id }) => {
 
   function getUniversitiesName() {
     let id = []
-    for (let i = 0; i < degreesByUniversityName.length; i++) {
+    for (let i = 0; i < degreesByUniversityName?.length; i++) {
       id.push(degreesByUniversityName[i]._id)
     }
     console.log(id)

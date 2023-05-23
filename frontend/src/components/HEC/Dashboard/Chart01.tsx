@@ -10,7 +10,7 @@ const Chart01: React.FC = (): JSX.Element => {
  
 
   function searchYearCount(year: { toString: () => string; }) {
-    for (let i = 0; i < degreesByYear.length; i++) {
+    for (let i = 0; i < degreesByYear?.length; i++) {
       if (degreesByYear[i]._id === year.toString()) {
         return degreesByYear[i].count;
       }

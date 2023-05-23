@@ -59,7 +59,7 @@ function View({ headingText, student }: Props) {
                   <span className="ml-auto">{student?.DateOfompletion?.slice(0, 10)}</span>
                 </li>
               </ul> */}
-              <ul className="bg-white px-3 divide-y rounded">
+              <ul className="bg-white px-3 rounded">
                 {/* <li className="flex items-center py-3">
                   <span>Status</span>
                   <span className="ml-auto">

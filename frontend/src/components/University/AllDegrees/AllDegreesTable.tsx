@@ -106,8 +106,8 @@ export const AllDegreesTable = ({ search }: Props) => {
     const handleFilter = () => {
         const filteredData = degrees.filter(
             (degree) =>
-                degree?.studentDetails?.studentID.toLowerCase().includes(search.toLowerCase()) ||
-                degree?.studentDetails?.name.toLowerCase().includes(search.toLowerCase())
+                degree?.studentDetails?.studentID?.toLowerCase().includes(search.toLowerCase()) ||
+                degree?.studentDetails?.name?.toLowerCase().includes(search.toLowerCase())
         );
         setFilteredDegrees(filteredData);
     };
@@ -119,6 +119,7 @@ export const AllDegreesTable = ({ search }: Props) => {
 
     useEffect(() => {
         handleFilter();
+        console.log(filteredDegrees)
     }, [search]);
 
     return (

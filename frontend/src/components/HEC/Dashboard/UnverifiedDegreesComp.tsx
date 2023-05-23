@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
-import { AllDegrees } from "../../../store/slice/degreeSlice";
+import { UnverifiedDegrees } from "../../../store/slice/degreeSlice";
+import { useNavigate } from "react-router-dom";
 
 export const UnverifiedDegreesComp = () => {
-  const allDegrees = useSelector(AllDegrees);
+  const unverifiedDegrees = useSelector(UnverifiedDegrees);
+  const navigate = useNavigate()
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -43,8 +45,8 @@ export const UnverifiedDegreesComp = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white text-left">
-                  {allDegrees?.length > 0 && allDegrees?.map((degree, index) => (
-                    <tr key={index}>
+                  {unverifiedDegrees?.length > 0 && unverifiedDegrees?.map((degree, index) => (
+                    <tr key={index} className="cursor-pointer hover:bg-gray-100" onClick={() => { navigate(`/view/degreedetails?degreeId=${degree?.degree?._id}`) }}>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
                         <div className="text-gray-700">{degree?.degree?._id?.substring(1, 10)}</div>
                       </td>
