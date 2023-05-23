@@ -15,7 +15,7 @@ type Props = {
 const Input: React.FC<Props> = ({ type, id, label, hintText, defaultValue, required, register, onChange }) => {
   return (
     <div>
-      <label htmlFor={id} className="flex justify-left mt-2 text-gray-700 font-bold">{label}</label>
+      <label htmlFor={id} className="flex justify-left mt-2 text-gray-700 font-bold text-sm">{label}</label>
       <input
         type={type}
         id={id}

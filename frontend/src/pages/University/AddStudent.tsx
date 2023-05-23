@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { useEffectOnce } from 'usehooks-ts';
+import HeadingWithSpan from '../../components/general/HeadingWithSpan';
 
 const AddStudent = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -85,12 +86,12 @@ const AddStudent = () => {
             <div>
                 <div className='bg-zinc-100'>
                     <div className="grid min-h-screen grid-rows-header bg-zinc-100">
-
-                        <div className='font-semibold text-black text-3xl mb-4 mt-10'>Add Student Details</div>
+                        {/* <HeadingWithSpan Text={'Add Student Details'} marginTop={'6'} marginLeft={'48'}/> */}
+                        <div className='font-bold text-2xl mt-10 ml-4'>Add Student Details</div>
                         <form onSubmit={handleSubmit(submitForm)}>
                             <div>
-                                <div className="grid min-h-full grid-cols-2">
-                                    <div className='p-16 flex flex-col items-end justify-start'>
+                                <div className="grid grid-cols-2">
+                                    <div className='px-16 py-6 flex flex-col items-end justify-start'>
                                         <div>
                                             <InputField type={'text'} {...register('name')} id={'name'} label={'First Name'} hintText={'Full Name'} required={false} register={register} onChange={handleNameChange} />
                                         </div>
@@ -115,7 +116,7 @@ const AddStudent = () => {
                                             <InputField type={'text'} {...register('email')} id={'email'} label={'Email'} hintText={'example@gmail.com'} required={true} register={register} defaultValue={email} />
                                         </div>
                                     </div>
-                                    <div className='p-16 flex flex-col items-start justify-start'>
+                                    <div className='px-16 py-6 flex flex-col items-start justify-start'>
                                         <div>
                                             <InputField type={'text'} {...register('fatherName')} id={'fatherName'} label={'Father Name'} hintText={'Father Name'} required={false} register={register} />
                                         </div>
