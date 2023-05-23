@@ -213,7 +213,7 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
               <div className="w-40 h-40 rounded-full bg-gray-500">
                 <img src={IMAGES.man_avatar}></img>
               </div>
-              <DetailsHeading text={student?.name} size='2xl' />
+              <DetailsHeading text={student?.name.charAt(0).toUpperCase() + student?.name?.slice(1)} size='2xl' />
               <DetailsHeading spanText={`${getCaseClass(student?.Program)}`} />
             </div>
           </div>
@@ -254,8 +254,8 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
             <div className="h-130 bg-white shadow-md flex flex-col items-start px-8 py-4">
 
               {/* NAME ROW */}
-              <UnderlineRow text={'Full Name '} spanText={student?.name} showBorder={true} />
-              <UnderlineRow text={'Father\'s Name '} spanText={student?.fatherName} showBorder={true} />
+              <UnderlineRow text={'Full Name '} spanText={student?.name.charAt(0).toUpperCase() + student?.name.slice(1)} showBorder={true} />
+              <UnderlineRow text={'Father\'s Name '} spanText={student?.fatherName.charAt(0).toUpperCase() + student?.fatherName.slice(1)} showBorder={true} />
               <UnderlineRow text={"Email ID:"} spanText={student?.email} showBorder={true} />
               <UnderlineRow text={'CNIC'} spanText={student?.CNIC} showBorder={true} />
               <UnderlineRow text={"Date of Birth:"} spanText={`${getFormattedDate(student?.DateOfBirth ?? '')}`} showBorder={true} />

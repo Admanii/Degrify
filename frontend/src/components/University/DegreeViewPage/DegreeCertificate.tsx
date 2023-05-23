@@ -44,7 +44,8 @@ function DegreeCertificate({ degree }: Props) {
             </div>
           </div>
         </div>
-        {/* <VerifiedTickIcon size={'8'} visible={true} /> */}
+        <VerifiedTickIcon size={'8'} visible={true} />
+        <p className='text-red-500'>* This degree is pending approval from the Higher Education Commission</p>
       </div>
     </div>
 

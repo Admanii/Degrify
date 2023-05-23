@@ -152,8 +152,8 @@ function DegreeStudent() {
           <div className="w-full p-5 pr-5">
             <div className="bg-white p-3 border-t-4 border-green-400 text-left">
               <div className="grid grid-cols-2 gap-4 my-4 px-10">
-                <UnderlineRow text={'Name'} spanText={`${degree?.studentDetails?.name}`} showBorder={false} />
-                <UnderlineRow text={'Father\'s Name'} spanText={`${degree?.studentDetails?.fatherName}`} showBorder={false} />
+                <UnderlineRow text={'Name'} spanText={`${degree?.studentDetails?.name.charAt(0).toUpperCase()}${degree?.studentDetails?.name.slice(1)}`} showBorder={false} />
+                <UnderlineRow text={'Father\'s Name'} spanText={`${degree?.studentDetails?.fatherName.charAt(0).toUpperCase()}${degree?.studentDetails?.fatherName.slice(1)}`} showBorder={false} />
                 <UnderlineRow text={'Email ID'} spanText={`${degree?.studentDetails?.email}`} showBorder={false} />
                 <UnderlineRow text={'ERP ID'} spanText={`${degree?.studentDetails?.studentID}`} showBorder={false} />
                 <UnderlineRow text={'CNIC'} spanText={`${degree?.studentDetails?.CNIC}`} showBorder={false} />
