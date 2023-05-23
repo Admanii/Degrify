@@ -69,9 +69,14 @@ const AddStudent = () => {
 
         
     }
+    
+    const generateEmail=()=>{
+        const generatedEmail = name.toLowerCase()+ "_" + erp + "@" + organisationName.toLowerCase() + ".degrify.com";
+        return generatedEmail;
+    }
 
     useEffect(()=>{
-        const generatedEmail = name.toLowerCase()+ "_" + erp + "@" + organisationName.toLowerCase() + ".degrify.com";
+        const generatedEmail = generateEmail()
         setEmail(generatedEmail)
     }, [name,erp])
 
@@ -87,7 +92,7 @@ const AddStudent = () => {
                                 <div className="grid min-h-full grid-cols-2">
                                     <div className='p-16 flex flex-col items-end justify-start'>
                                         <div>
-                                            <InputField type={'text'} {...register('name')} id={'name'} label={'Name'} hintText={'Full Name'} required={false} register={register} onChange={handleNameChange} />
+                                            <InputField type={'text'} {...register('name')} id={'name'} label={'First Name'} hintText={'Full Name'} required={false} register={register} onChange={handleNameChange} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('CNIC')} id={"CNIC"} label={"CNIC"} hintText='42000-1234567-8' required={false} register={register} />
