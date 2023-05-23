@@ -111,7 +111,7 @@ const Chart02: React.FC<Props> = ({ id }) => {
 
   function getUniversitiesCount() {
     let count = []
-    for (let i = 0; i < degreesByUniversityName.length; i++) {
+    for (let i = 0; i < degreesByUniversityName?.length; i++) {
       count.push(degreesByUniversityName[i].count);
     }
     console.log(count)
