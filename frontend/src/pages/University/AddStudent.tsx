@@ -16,6 +16,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { useEffectOnce } from 'usehooks-ts';
 import HeadingWithSpan from '../../components/general/HeadingWithSpan';
+import DropDownField from '../../components/general/DropDownField';
 
 const AddStudent = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -62,6 +63,9 @@ const AddStudent = () => {
     const [gradYear, setgradYear] = useState('');
     const [enrollmentNumber, setEnrollmentNumber] = useState('');
 
+    // const [dateCompletion, setDateCompletion] = useState('');
+    
+
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const enteredName = e.target.value;
         setName(enteredName);
@@ -79,16 +83,27 @@ const AddStudent = () => {
         setgradYear(enteredGradYear);
     }
 
+    const handleDateCompletionChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        const enteredDateCompletion = e.target.value.split("-")[0];
+        setgradYear(enteredDateCompletion);
+        console.log(gradYear)
+    }
 
-    
+
+    function removeSpaces(str: string) {
+        return str.replace(/\s/g, "");
+      }
     const generateEmail=()=>{
         const generatedEmail = name.toLowerCase()+ "_" + erp + "@" + organisationName.toLowerCase() + ".degrify.com";
-        return generatedEmail;
+        // removeSpaces(generatedEmail);
+        // console.log(removeSpaces(generatedEmail))
+        return removeSpaces(generatedEmail);
     }
     const generateEnrolmentNumber=()=>{
         const generatedEnrolmentNumber = gradYear +"-"+ program;
         return generatedEnrolmentNumber;
     }
+    
 
     useEffect(()=>{
         const generatedEmail = generateEmail()
@@ -99,6 +114,11 @@ const AddStudent = () => {
         const generatedEnrolmentNumber = generateEnrolmentNumber();
         setEnrollmentNumber(generatedEnrolmentNumber)
     }, [gradYear, program])
+
+    // useEffect(()=>{
+    //     setgradYear(gradYear)
+    // }, [dateCompletion])
+
 
     return (
         <Layout>
@@ -112,24 +132,24 @@ const AddStudent = () => {
                                 <div className="grid grid-cols-2">
                                     <div className='px-16 py-6 flex flex-col items-end justify-start'>
                                         <div>
-                                            <InputField type={'text'} {...register('name')} id={'name'} label={'First Name'} hintText={'Full Name'} required={false} register={register} onChange={handleNameChange} />
+                                            <InputField type={'text'} {...register('name')} id={'name'} label={'First Name'} hintText={'First Name'} required={false} register={register} onChange={handleNameChange} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('CNIC')} id={"CNIC"} label={"CNIC"} hintText='42000-1234567-8' required={false} register={register} />
                                         </div>
+                                        <div
+                                            data-te-datepicker-init
+                                            data-te-input-wrapper-init>
+                                            <InputField type={'date'} {...register('DateOfAdmission')} id={'DateOfAdmission'} label={'Date Of Admission'} hintText={'2023-05-17'} required={false} register={register} />
+                                        </div>
                                         <div>
-                                            <InputField type={'text'} {...register('Program')} id={'Program'} label={'Program'} hintText={'BSCS'} required={false} register={register} onChange={handleProgramChange} />
+                                            <DropDownField type={'text'} {...register('Program')} id={'Program'} label={'Program'} hintText={'BSCS'} required={false} register={register} onChange={handleProgramChange} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('enrollmentNumber')} id={'enrollmentNumber'} label={'Enrolment Number'} hintText={'2021-BSCS'} required={false} register={register} defaultValue={enrollmentNumber} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('CGPA')} id={'CGPA'} label={'CGPA'} hintText={'3.5'} required={false} register={register} />
-                                        </div>
-                                        <div
-                                            data-te-datepicker-init
-                                            data-te-input-wrapper-init>
-                                            <InputField type={'date'} {...register('DateOfAdmission')} id={'DateOfAdmission'} label={'Date Of Admission'} hintText={'2023-05-17'} required={false} register={register} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('email')} id={'email'} label={'Email'} hintText={'example@gmail.com'} required={true} register={register} defaultValue={email} />
@@ -144,19 +164,19 @@ const AddStudent = () => {
                                             data-te-input-wrapper-init>
                                             <InputField type={'date'} {...register('DateOfBirth')} id={'DateOfBirth'} label={'Date of Birth'} hintText={'dd/mm/yyyy'} required={false} register={register} />
                                         </div>
+                                        <div
+                                            data-te-datepicker-init
+                                            data-te-input-wrapper-init>
+                                            <InputField type={'date'} {...register('DateOfompletion')} id={'DateOfompletion'} label={'Date of Completion'} hintText={'dd/mm/yyyy'} required={false} register={register} onChange={handleDateCompletionChange} />
+                                        </div>
                                         <div>
-                                            <InputField type={'text'} {...register('GraduatingYear')} id={'GraduatingYear'} label={'Graduating Year'} hintText={'2023'} required={false} register={register} onChange={handleGradYearChange}/>
+                                            <InputField type={'text'} {...register('GraduatingYear')} id={'GraduatingYear'} label={'Graduating Year'} hintText={'2023'} required={false} register={register} onChange={handleGradYearChange} defaultValue={gradYear}/>
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('studentID')} id={'studentID'} label={'Student ID'} hintText={'12345'} required={false} register={register} onChange={handleErpChange} />
                                         </div>
                                         <div>
                                             <InputField type={'text'} {...register('TotalCreditHours')} id={'TotalCreditHours'} label={'Total Credit Hours'} hintText={'120'} required={false} register={register} />
-                                        </div>
-                                        <div
-                                            data-te-datepicker-init
-                                            data-te-input-wrapper-init>
-                                            <InputField type={'date'} {...register('DateOfompletion')} id={'DateOfompletion'} label={'Date of Completion'} hintText={'dd/mm/yyyy'} required={false} register={register} />
                                         </div>
                                         <div>
                                             <InputField type={'password'} {...register('password')} id={'password'} label={'Password'} hintText={'*******'} required={false} register={register} />
