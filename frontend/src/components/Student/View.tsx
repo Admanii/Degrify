@@ -33,7 +33,7 @@ function View({ headingText, student }: Props) {
         {/* FIRST COLUMN */}
         <div className="w-2/6">
           {/* FIRST BOX TOP LEFT */}
-          <div className="p-4">
+          <div className="p-4 ">
             <div className="h-80 bg-white shadow-md p-4 flex flex-col items-center justify-center">
               <div className="w-40 h-40 rounded-full bg-gray-500">
                 <img src={IMAGES.man_avatar}></img>
@@ -44,7 +44,7 @@ function View({ headingText, student }: Props) {
           </div>
           {/* SECOND BOX BOTTOM LEFT */}
           <div className="pb-4 pr-4 pl-4 ">
-            <div className="h-48 bg-white shadow-md p-4 flex flex-col justify-center">
+            <div className="h-48 bg-white shadow-md p-4 flex flex-col justify-center ">
               {/* <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                 <li className="flex items-center py-3">
                   <span>Status</span>
