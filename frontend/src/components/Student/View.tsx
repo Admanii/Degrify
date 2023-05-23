@@ -59,7 +59,7 @@ function View({ headingText, student }: Props) {
                   <span className="ml-auto">{student?.DateOfompletion?.slice(0, 10)}</span>
                 </li>
               </ul> */}
-              <ul className="bg-white text-gray-600 py-2 px-3 divide-y rounded shadow-sm">
+              <ul className="bg-white px-3 divide-y rounded">
                 {/* <li className="flex items-center py-3">
                   <span>Status</span>
                   <span className="ml-auto">
@@ -68,11 +68,14 @@ function View({ headingText, student }: Props) {
                     </span>
                   </span>
                 </li> */}
-                <li className="flex items-center py-3">
+                <li className="flex items-center py-7">
                   <span className='font-bold'>Date of Issue</span>
                   <span className="ml-auto">{student?.DateOfAdmission?.slice(0, 10)}</span>
                 </li>
-                <li className="flex items-center py-3">
+                <li className="flex items-center pb-5">
+                <Button width={285} onClick={() => navigate(`/student/degree`)} buttonText={'View Degree'} />
+                </li>
+                {/* <li className="flex items-center py-3">
                   <span className='font-bold'>Graduating Year</span>
                   <span className="ml-auto">{student?.GraduatingYear?.slice(0, 10)}</span>
                 </li>
@@ -80,7 +83,7 @@ function View({ headingText, student }: Props) {
                 <li className="flex items-center py-3">
                   <span className='font-bold'>Date of Completion</span>
                   <span className="ml-auto">{student?.DateOfompletion?.slice(0, 10)}</span>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
@@ -101,14 +104,14 @@ function View({ headingText, student }: Props) {
               <UnderlineRow text={"University"} spanText={ `${getOrgFullName(student?.orgName ?? '')}`} showBorder={true} />
               <UnderlineRow text={"Serial Number"} spanText={student?.enrollmentNumber} showBorder={true} />
               <UnderlineRow text={"Date of Admission"} spanText={`${getFormattedDate(student?.DateOfAdmission ?? '')}`} showBorder={true} />
-              {/* <UnderlineRow text={"Graduating Year: "} spanText={student?.GraduatingYear} showBorder={true} /> */}
-              {/* <UnderlineRow text={"Date of Completion:"} spanText={`${getFormattedDate(student?.DateOfompletion ?? '')}`}  showBorder={true} /> */}
+              <UnderlineRow text={"Graduating Year: "} spanText={student?.GraduatingYear} showBorder={true} />
+              <UnderlineRow text={"Date of Completion:"} spanText={`${getFormattedDate(student?.DateOfompletion ?? '')}`}  showBorder={true} />
               <UnderlineRow text={"CGPA"} spanText={student?.CGPA} showBorder={true} />
               <UnderlineRow text={"Total Credit Hours"} spanText={student?.TotalCreditHours} showBorder={false} />
               <div className='h-5'></div>
               <div className="w-11/12 flex flex-row justify-center items-end">
 
-                <Button width={300} onClick={() => navigate(`/student/degree`)} buttonText={'View Degree'} />
+                {/* <Button width={300} onClick={() => navigate(`/student/degree`)} buttonText={'View Degree'} /> */}
               </div>
             </div>
           </div>

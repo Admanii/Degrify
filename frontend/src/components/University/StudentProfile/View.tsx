@@ -268,8 +268,10 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
               <UnderlineRow text={"Total Credit Hours:"} spanText={student?.TotalCreditHours} showBorder={false} />
               {/* <UnderlineRow text={"Date of Completion:"} spanText={`${dateOfCompletion}`} showBorder={false} /> */}
               <div className='h-5'></div>
-              <div className="flex flex-row justify-between items-start w-2/3 pr-5">
-                <Button className={`${buttonHidden}`} inverted={true} buttonText={'Edit Profile'} onClick={() => navigate(`/edit/studentprofile?studentId=${studentId}`)}/>
+              {/* <div className="flex flex-row justify-between items-start w-2/3 pr-5 bg-red-700"> */}
+              <div className="grid grid-cols-2 gap-0 w-11/12">
+              
+                <Button width={200} className={`${buttonHidden}`} inverted={true} buttonText={'Edit Profile'} onClick={() => navigate(`/edit/studentprofile?studentId=${studentId}`)}/>
                 <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
                   <div className='flex justify-center'>
                     <img src={IMAGES.info_icon}></img>
@@ -298,8 +300,8 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
                   </div>
                 </Modal>
                 {isDegreeExist ? (
-                  <Button className={`${buttonHidden}`} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)} buttonText={'View Certificate'} />) :
-                  (<Button className={`${buttonHidden}`} onClick={openModal} buttonText={'Add Degree'} />)
+                  <Button width={200} className={`${buttonHidden}`} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)} buttonText={'View Certificate'} />) :
+                  (<Button width={200} className={`${buttonHidden}`} onClick={openModal} buttonText={'Add Degree'} />)
                 }
               </div>
             </div>
