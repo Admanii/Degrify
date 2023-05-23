@@ -35,7 +35,7 @@ const HeyHec = () => {
         </div>
       </div>
       <div className="h-100 flex">
-        <div className="w-2/3 h-96 bg-white m-4 shadow-md border overflow-hidden hover:overflow-y-auto">
+        <div className="w-full h-96 bg-white m-4 shadow-md border overflow-hidden hover:overflow-y-auto">
           <div className="flex justify-between items-center sm:py-8 sm:px-4">
             <h3 className="text-lg font-bold leading-none text-gray-900 dark:text-white">
               Approve Degrees
@@ -52,10 +52,12 @@ const HeyHec = () => {
 
         </div>
 
+        {/* 
         <div className="w-1/3 h-96 bg-white m-4 shadow-md border overflow-hidden hover:overflow-y-auto">
-          {/* <h1 className="font-bold text-lg mt-6 ml-4">Edit Degree Requests</h1> */}
-          <EditShortcut />
-        </div>
+          <h1 className="font-bold text-lg mt-6 ml-4">Edit Degree Requests</h1> */}
+        {/* <EditShortcut /> */}
+        {/* </div> */}
+        {/* */} 
 
       </div>
       {/* <Dashboard/> */}

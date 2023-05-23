@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 const Chart01: React.FC = (): JSX.Element => {
   const chartRef = useRef<HTMLDivElement>(null);
   const degreesByYear = useSelector(DegreesByYear);
+  const years = ['2018',"2019","2020","2021","2022","2023","2024","2025","2026","2027", "2028"]
+ 
 
   function searchYearCount(year: { toString: () => string; }) {
     for (let i = 0; i < degreesByYear.length; i++) {
@@ -15,7 +17,8 @@ const Chart01: React.FC = (): JSX.Element => {
     }
     return 0;
   }
-  
+  const counts = years.map(year => searchYearCount(year));
+  const year = years.map(yearStr => parseInt(yearStr));
   // console.log("Check 2023: "+searchYearCount(2024))
   // const byYear(){
     // degreesByYear
@@ -25,7 +28,8 @@ const Chart01: React.FC = (): JSX.Element => {
     series: [
       {
         name: "Degrees",
-        data: [searchYearCount(2012), searchYearCount(2013), searchYearCount(2014), searchYearCount(2015), searchYearCount(2016), searchYearCount(2017), searchYearCount(2018), searchYearCount(2019), searchYearCount(2020), searchYearCount(2021), searchYearCount(2022), searchYearCount(2023)],
+        data: counts
+        // data: [searchYearCount(2012), searchYearCount(2013), searchYearCount(2014), searchYearCount(2015), searchYearCount(2016), searchYearCount(2017), searchYearCount(2018), searchYearCount(2019), searchYearCount(2020), searchYearCount(2021), searchYearCount(2022), searchYearCount(2023)],
       },
       // {
       //   name: "Product Two",
@@ -113,8 +117,9 @@ const Chart01: React.FC = (): JSX.Element => {
     },
     xaxis: {
       type: "category",
-      categories: [
-        "2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023",],
+      categories:
+      years, 
+      // ["2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023",],
       axisBorder: {
         show: false,
       },
