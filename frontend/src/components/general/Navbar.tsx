@@ -25,7 +25,7 @@ const Navbar = (props: Props) => {
                 navigate('/hec/dashboard')
             }
             else if (userRole === 'STUDENT') {
-                navigate('/student/dashboard')
+                navigate('/student/view')
             }
         }
         else {

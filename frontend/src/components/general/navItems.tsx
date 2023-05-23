@@ -75,10 +75,10 @@ export const navItemsStudent: NavItem[] = [
     activeIcon: IMAGES.user_icon_active,
     inactiveIcon: IMAGES.user_icon,
   },
-  {
-    label: "Student Degree",
-    href: "/student/degree",
-    activeIcon: IMAGES.user_icon_active,
-    inactiveIcon: IMAGES.user_icon,
-  },
+  // {
+  //   label: "Student Degree",
+  //   href: "/student/degree",
+  //   activeIcon: IMAGES.user_icon_active,
+  //   inactiveIcon: IMAGES.user_icon,
+  // },
 ];

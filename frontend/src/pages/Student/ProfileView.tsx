@@ -6,27 +6,43 @@ import { useEffect, useState } from 'react'
 import View from '../../components/Student/View'
 import { GetStudentbyId } from '../../store/actions/studentActions'
 import { Student } from '../../store/slice/studentSlice'
-import LoadingScreen from '../../components/general/LoadingScreen'
+import { GetDegreebyStudentId } from '../../store/actions/degreeActions'
+import { unwrapResult } from '@reduxjs/toolkit'
 
 
 const ProfileView = () => {
   const userInfo = useSelector(UserInfo)
   const dispatch = useDispatch<AppDispatch>();
   const studentId = userInfo?.user?.studentID ?? '';
-  const student = useSelector(Student);
-
   const [loading, setLoading] = useState(true);
-
+  const [isDegreeExist, setIsDegreeExists] = useState(false);
+  const [degreeId, setdegreeId] = useState('');
+  const student = useSelector(Student);
 
   useEffect(() => {
     getStudent();
-  }, [])
+    isDegreeExists();
+  }, [isDegreeExist, degreeId])
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   // useEffect(() => {
   //   setTimeout(() => {
   //     setLoading(false);
   //   }, 1000);
   // }, []);
+
+  const isDegreeExists = async () => {
+    const response = await dispatch(GetDegreebyStudentId({ studentId: studentId }))
+    const result = unwrapResult(response);
+    if (result?.message === 'Exists' && (result?.statusCode === 200)) {
+      setIsDegreeExists(true);
+      setdegreeId(result?.data._id)
+    }
+  }
 
   const getStudent = async () => {
     setLoading(true);
@@ -35,14 +51,8 @@ const ProfileView = () => {
   }
 
   return (
-
     <Layout>
-      {loading ? (
-        <LoadingScreen/>
-      ):(
-        <View student={student} headingText={'STUDENT PROFILE'} />
-      )}
-      
+      <View student={student} headingText={'STUDENT PROFILE'} isDegreeExist={isDegreeExist} degreeId={degreeId} />
     </Layout>
   )
 }

@@ -17,7 +17,10 @@ export const getCaseClass = (programDeg: string) => {
 }
 
 export const getFormattedDate = (date: string) => {
-    const formattedDate = new Date(date).toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+    var formattedDate = ''
+    if (date !== '') {
+        formattedDate = new Date(date).toLocaleString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
     return formattedDate;
 }
 
