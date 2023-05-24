@@ -8,6 +8,7 @@ import { GetStudentbyId } from '../../store/actions/studentActions'
 import { Student } from '../../store/slice/studentSlice'
 import { GetDegreebyStudentId } from '../../store/actions/degreeActions'
 import { unwrapResult } from '@reduxjs/toolkit'
+import LoadingScreen from '../../components/general/LoadingScreen'
 
 
 const ProfileView = () => {
@@ -52,7 +53,11 @@ const ProfileView = () => {
 
   return (
     <Layout>
-      <View student={student} headingText={'STUDENT PROFILE'} isDegreeExist={isDegreeExist} degreeId={degreeId} />
+      {loading? (
+        <LoadingScreen/>
+      ):(
+        <View student={student} headingText={'STUDENT PROFILE'} isDegreeExist={isDegreeExist} degreeId={degreeId} />
+      )}
     </Layout>
   )
 }

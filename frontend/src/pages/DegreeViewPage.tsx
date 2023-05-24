@@ -12,11 +12,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Degree } from '../store/slice/degreeSlice';
 import { AppDispatch } from '../store/store';
 import { GetDegreebyId } from '../store/actions/degreeActions';
-const name = "Muhammad Ahmed"
-const erp = "19717"
-const NameErp = name + " " + erp
-const programDeg = "BSCS"
-const graduatingYear = "2023"
+import LoadingScreen from '../components/general/LoadingScreen';
+// const name = "Muhammad Ahmed"
+// const erp = "19717"
+// const NameErp = name + " " + erp
+// const programDeg = "BSCS"
+// const graduatingYear = "2023"
 
 
 
@@ -40,6 +41,7 @@ function DegreeViewPage() {
   const dispatch = useDispatch<AppDispatch>();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -51,7 +53,9 @@ function DegreeViewPage() {
 
   const getDegreebyId = async () => {
     if (degreeId != '') {
+      setLoading(true)
       await dispatch(GetDegreebyId({ degreeId: degreeId }))
+      setLoading(false)
     }
   }
 
@@ -83,9 +87,18 @@ function DegreeViewPage() {
 
 
   return (
+
     <div className='flex justify-center items-center w-screen h-screen'>
-      <DegreeCertificate degree={degree} />
+      {
+        loading ? (
+          <LoadingScreen />
+        ) : (
+          <DegreeCertificate degree={degree} />
+
+        )
+      }
     </div>
+
 
     // {/* <HeadingWithSpan Text="STUDENT DEGREE" SpanText={NameErp} /> */}
 

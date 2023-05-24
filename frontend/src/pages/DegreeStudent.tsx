@@ -48,7 +48,7 @@ function DegreeStudent() {
   const [isHecApproved, setIsHecApproved] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getDegreebyId();
     console.log(isStudentApproved)
@@ -143,9 +143,15 @@ function DegreeStudent() {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
   return (
     <Layout>
-      {isLoading ? (
+      {loading ? (
         <LoadingScreen />
       ) : (
         <div className='p-5'>

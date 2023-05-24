@@ -10,11 +10,12 @@ import { Student } from '../../store/slice/studentSlice'
 import { GetDegreebyStudentId } from '../../store/actions/degreeActions'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { IStudentDetails } from '../../store/types/types'
-const name = "Muhammad Ahmed"
-const erp = "19717"
-const NameErp = name + " " + erp
-const programDeg = "BSCS"
-const graduatingYear = "2023"
+import LoadingScreen from '../../components/general/LoadingScreen'
+// const name = "Muhammad Ahmed"
+// const erp = "19717"
+// const NameErp = name + " " + erp
+// const programDeg = "BSCS"
+// const graduatingYear = "2023"
 
 function getCaseClass(programDeg: string) {
     switch (programDeg) {
@@ -35,7 +36,8 @@ const StudentProfileView = () => {
     const [isDegreeExist, setIsDegreeExists] = useState(false);
     const [degreeId, setdegreeId] = useState('');
     const student = useSelector(Student);
-
+    const [loading, setLoading] = useState(true);
+ 
     useEffect(() => {
         getStudent();
         isDegreeExists()
@@ -46,18 +48,24 @@ const StudentProfileView = () => {
     }
 
     const isDegreeExists = async () => {
+        setLoading(true)
         const response = await dispatch(GetDegreebyStudentId({ studentId: studentId }))
+        setLoading(false)
         const result = unwrapResult(response);
         if (result?.message === 'Exists' && (result?.statusCode === 200)) {
-            setIsDegreeExists(true);
+            setIsDegreeExists(true); 
             setdegreeId(result?.data._id)
         }
     }
 
     return (
         <Layout>
+            {loading ? (
+        <LoadingScreen />
+      ) : (
             <View student={student} isDegreeExist={isDegreeExist} degreeId={degreeId} headingText={'STUDENT PROFILE'} />
-        </Layout>
+      )}
+            </Layout>
     )
 }
 

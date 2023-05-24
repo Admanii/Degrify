@@ -33,13 +33,13 @@ function DegreeDetails() {
   const [isStudentApproved, setIsStudentApproved] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const studentId = userInfo?.user?.studentID ?? '';
   var userRole = userInfo?.user?.userRole ?? '';
   console.log(userRole)
 
   const isDegreeExists = async () => {
-    //setLoading(true)
+    // setLoading(true)
     const response = await dispatch(GetDegreebyStudentId({ studentId: studentId }))
     const result = unwrapResult(response);
     if (result?.message === 'Exists' && (result?.statusCode === 200)) {
@@ -47,7 +47,7 @@ function DegreeDetails() {
       setdegreeId(result?.data._id)
       getDegreebyId();
     }
-    setLoading(false)
+    // setLoading(false)
   }
 
   useEffect(() => {
@@ -56,13 +56,13 @@ function DegreeDetails() {
   }, [isStudentApproved, isDegreeExist, disabled, degreeId])
 
   const getDegreebyId = async () => {
-    //setLoading(true);
+    // setLoading(true);
     const response = await dispatch(GetDegreebyId({ degreeId: degreeId }))
     const result = unwrapResult(response);
     setDegree(result);
     setIsStudentApproved(result?.degree?.studentVerified)
     console.log(degree)
-    //setLoading(false);
+    // setLoading(false);
   }
 
   const openModal = () => {
@@ -74,19 +74,19 @@ function DegreeDetails() {
   };
 
   const approveDegree = async () => {
-   // setIsLoading(true);
+    setIsLoading(true);
     const response = await dispatch(UpdateDegreeStudent({ degreeId: degreeId }))
     const result = unwrapResult(response);
     setIsStudentApproved(result?.data?.studentVerified ?? false)
     navigate(`/view/degreecertificate?degreeId=${degreeId}`);
-    //setIsLoading(false);
+    setIsLoading(false);
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 1000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   return (
     <Layout>
@@ -116,14 +116,6 @@ function DegreeDetails() {
                   <UnderlineRow text={'Total Credit Hours'} spanText={`${degree?.studentDetails?.TotalCreditHours ?? ''}`} showBorder={false} />
                   <UnderlineRow text={'Degree Hash'} spanText={`${degree?.degree?.hashValue ?? ''}`} showBorder={false} />
 
-                  {/* <DetailsHeading text={'CNIC:'} spanText={degree?.studentDetails?.CNIC} />
-                      <DetailsHeading text={'Graduating Year: '} spanText={degree?.studentDetails?.GraduatingYear} />
-                      <DetailsHeading text={'Date of Birth:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfBirth ?? '')}`} />
-                      <DetailsHeading text={'Date of Admission:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} />
-                      <DetailsHeading text={'Date of Completion:'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfompletion ?? '')}`} />
-                      <DetailsHeading text={'Email ID:'} spanText={degree?.studentDetails?.email} />
-                      <DetailsHeading text={'CGPA:'} spanText={degree?.studentDetails?.CGPA} />
-                      <DetailsHeading text={'Total Credit Hours:'} spanText={degree?.studentDetails?.TotalCreditHours} /> */}
                 </div>
                 <div className="justify-start grid grid-cols-2 gap-4 pt-2 pb-2 px-10">
                   <Button height={44} width={355} inverted={true} buttonText={'View Certificate'} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)}></Button>
@@ -174,40 +166,14 @@ function DegreeDetails() {
             </div>
 
 
-            {/* <div className="w-1/2 p-4">
-                  <div className="bg-white p-3 border-t-4 border-green-400 text-left">
-                    <div className="flex justify-center items-center w-full h-64 mb-6">
-                      <div className="w-40 h-40 rounded-full bg-gray-500"></div>
-                    </div>
-                    <table className="table-auto w-full">
-                      <thead>
-                        <tr>
-                          <th className="px-4 py-2 font-bold text-left">Degree</th>
-                          <th className="px-4 py-2 font-bold text-left">Institution</th>
-                          <th className="px-4 py-2 font-bold text-left">CGPA</th>
-                          <th className="px-4 py-2 font-bold text-left">Year</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className="border px-4 py-2">BS Computer Science</td>
-                          <td className="border px-4 py-2">ABC University</td>
-                          <td className="border px-4 py-2">3.8</td>
-                          <td className="border px-4 py-2">2020</td>
-                        </tr>
-                        <tr>
-                          <td className="border px-4 py-2">MS Computer Science</td>
-                          <td className="border px-4 py-2">XYZ University</td>
-                          <td className="border px-4 py-2">4.0</td>
-                          <td className="border px-4 py-2">2022</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div> */}
+
           </div>
         </div>
       )}
+
+
+
+
     </Layout>
   )
 }
