@@ -24,6 +24,14 @@ export const getFormattedDate = (date: string) => {
     return formattedDate;
 }
 
+export const getFormattedDate2 = (date: string) => {
+    var formattedDate = ''
+    if (date !== '') {
+        formattedDate = new Date(date).toLocaleDateString('en-GB', { year: 'numeric', month: 'numeric', day: 'numeric' }).replaceAll('\/', '-');
+    }
+    return formattedDate;
+}
+
 export const getOrgFullName = (orgName: string) => {
     switch (orgName) {
         case 'IBA':

@@ -28,10 +28,10 @@ export const UnverifiedDegreesComp = () => {
                       CNIC
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      Date of Birth
+                      Program
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      Program
+                      Date of Birth
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                       Date of Admission
@@ -63,12 +63,12 @@ export const UnverifiedDegreesComp = () => {
                         <div className="text-gray-700">{degree?.studentDetails?.CNIC}</div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
+                        <div className="text-gray-700">{degree?.studentDetails?.Program}</div>
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
                         <div className="text-gray-700">{degree?.studentDetails?.DateOfBirth ? new Date(degree?.studentDetails?.DateOfBirth).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
                           : "N/A"}
                         </div>
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        <div className="text-gray-700">{degree?.studentDetails?.Program}</div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
                         <div className="text-gray-700">{degree?.studentDetails?.DateOfAdmission ? new Date(degree?.studentDetails?.DateOfAdmission).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
