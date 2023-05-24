@@ -4,6 +4,7 @@ import { statusCode } from "../utils/constant.js";
 import { jsonGenerate } from "../utils/helper.js";
 import User from "../models/User.js";
 import mongoose from "mongoose";
+import { all } from "axios";
 
 export const AddStudent = async (req, res) => {
   const {
@@ -454,6 +455,76 @@ export const getStudentbyYearAndUni = async (req, res) => {
     console.log(err);
     return res.json(
       jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed to disply", err)
+    );
+  }
+};
+
+export const getStudentERP = async (req, res) => {
+  try {
+    var appendedList = {};
+    var array = new Array();
+    const allStudents = await Student.find({
+      organisationID: req.query.organisation_id,
+      active: true,
+    }).select([
+      "name",
+      "enrollmentNumber",
+      "fatherName",
+      "studentID",
+      "DateOfBirth",
+      "CNIC",
+      "DateOfAdmission",
+      "DateOfompletion",
+      "Program",
+      "GraduatingYear",
+      "organisationID",
+      "TotalCreditHours",
+      "CGPA",
+      "dateCreated",
+    ]);
+
+    var differenceMs = Date.now() - allStudents[0].dateCreated.getTime();
+    //console.log(allStudents);
+    // console.log(allStudents.length);
+    var ERP = allStudents[0].studentID;
+    //console.log(differenceMs);
+
+    for (var i = 1; i < allStudents.length; i++) {
+      //console.log(allStudents[i]._id);
+      var org = await Student.findById(allStudents[i]._id)
+        .select("")
+        .populate(["studentID", "dateCreated"])
+        .exec();
+      //console.log(org.studentID + " " + org.dateCreated);
+      const mm = Date.now() - org.dateCreated.getTime();
+
+      if (mm < differenceMs) {
+        differenceMs = mm;
+        //console.log(differenceMs);
+        ERP = org.studentID;
+        //console.log(differenceMs);
+      }
+    }
+
+    var newERP = parseInt(ERP);
+    while (true) {
+      var check = await Student.findOne({ studentID: newERP });
+      if (check) {
+        newERP = newERP + 1;
+      } else {
+        break;
+      }
+    }
+
+    const data = { ERP: newERP + 1 };
+
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "New ERP", data)
+    );
+  } catch (err) {
+    console.log(err);
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "Failed to disply")
     );
   }
 };

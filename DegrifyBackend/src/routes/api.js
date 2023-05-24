@@ -52,6 +52,7 @@ import {
   deleteStudent,
   getAllStudent,
   getStudent,
+  getStudentERP,
   getStudentbyProgram,
   getStudentbyProgramAndUni,
   getStudentbyUni,
@@ -164,3 +165,5 @@ apiProtected.post(
   validateResult,
   updateStudent
 );
+
+apiProtected.get("/newERP", getStudentERP);
