@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IMAGES } from '../../../constants/images';
 interface Props {
-  size: string,
+  size?: string,
   verified: boolean,
 
 }
@@ -10,12 +10,12 @@ interface Props {
 // var verified = false;
 
 
-function VerifiedTickIcon({ size, verified }: Props) {
-  var paraText = verified ? "This Degree Has been verified by HEC" : "This degrees is pending approval from the Higher Education Commission";
+function VerifiedTickIcon({ verified }: Props) {
+  var paraText = verified ? "This degrees is approved by all entities" : "This degree is pending approval from University and Higher Education Commission";
 
   return (
     <div>
-        <div className='flex flex-row justify-start py-4'>
+        <div className='flex flex-row justify-start items-center py-4'>
           <img width={30} height={30} src={
             // ADD RELEVANT LOGOS
             verified === true ? IMAGES.verified_tick_icon : IMAGES.unverified_icon

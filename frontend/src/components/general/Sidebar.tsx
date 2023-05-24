@@ -40,7 +40,7 @@ const Sidebar = ({ open, navItems = { uni: navItemsUni, hec: navItemsHec, studen
     const logoutHandler = async () => {
         console.log("Logout clicked");
         await dispatch(logout())
-        navigate("/login");
+        navigate("/");
     };
 
     const navigate = useNavigate()

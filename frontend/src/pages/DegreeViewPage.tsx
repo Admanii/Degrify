@@ -41,7 +41,7 @@ function DegreeViewPage() {
   const dispatch = useDispatch<AppDispatch>();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -51,11 +51,15 @@ function DegreeViewPage() {
     getDegreebyId();
   }, [])
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
   const getDegreebyId = async () => {
     if (degreeId != '') {
-      setLoading(true)
       await dispatch(GetDegreebyId({ degreeId: degreeId }))
-      setLoading(false)
     }
   }
 

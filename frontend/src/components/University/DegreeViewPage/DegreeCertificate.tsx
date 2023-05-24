@@ -28,10 +28,10 @@ function DegreeCertificate({ degree }: Props) {
               <div className="flex justify-between px-2 py-3 absolute top-0 left-0 w-full">
                 {/* ADD RELEVANT UNI LOGO */}
                 <img className='w-36' src={IMAGES.iba_logo} alt="IBA logo"></img>
-                {degree?.degree?.HECVerified ? (
-                  <img className="h-6 sm:h-10" src={IMAGES.verified_tick_icon} alt="verified icon" title="This degrees is approved by all entities" />
+                {degree?.degree?.completeVerified ? (
+                  <img className="h-6 sm:h-10" src={IMAGES.verified_tick_icon} alt="verified icon" title="This degrees is approved by all Entities" />
                 ) : (
-                  <img className="h-6 sm:h-10" src={IMAGES.unverified_icon} alt="Unverified icon" title="This degrees is pending approval from the Higher Education Commission" />
+                  <img className="h-6 sm:h-10" src={IMAGES.unverified_icon} alt="Unverified icon" title="This degree is pending approval from University and Higher Education Commission" />
                 )}
               </div>
               <h1 className="text-5xl font-bold mb-4 font-certificate">Certificate of Completion</h1>
@@ -46,10 +46,10 @@ function DegreeCertificate({ degree }: Props) {
           </div>
         </div>
 
-        {degree?.degree?.HECVerified ? (
-          <VerifiedTickIcon size={'8'} verified={degree?.degree?.HECVerified} />
+        {degree?.degree?.completeVerified ? (
+          <VerifiedTickIcon verified={degree?.degree?.completeVerified} />
         ) : (
-          <VerifiedTickIcon size={'8'} verified={degree?.degree?.HECVerified} />
+          <VerifiedTickIcon verified={degree?.degree?.organisationVerified} />
         )
         }
         {/* <p className='text-red-500'>* This degree is pending approval from the Higher Education Commission</p> */}
