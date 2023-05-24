@@ -48,9 +48,9 @@ const StudentProfileView = () => {
     }
 
     const isDegreeExists = async () => {
-        setLoading(true)
+        // setLoading(true)
         const response = await dispatch(GetDegreebyStudentId({ studentId: studentId }))
-        setLoading(false)
+        // setLoading(false)
         const result = unwrapResult(response);
         if (result?.message === 'Exists' && (result?.statusCode === 200)) {
             setIsDegreeExists(true); 
@@ -58,6 +58,11 @@ const StudentProfileView = () => {
         }
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+      }, []);
     return (
         <Layout>
             {loading ? (
