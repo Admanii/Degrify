@@ -37,7 +37,7 @@ export const organisationRegister = [
 
 export const studentUpdate = [
   check("name", "Name is required").notEmpty().trim().escape(),
-  check("studentID", "studentID is required")
+  check("studentID", "studentID should be 5 characters")
     .notEmpty()
     .trim()
     .escape()
