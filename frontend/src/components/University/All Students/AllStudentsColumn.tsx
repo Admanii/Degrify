@@ -70,11 +70,18 @@ const AllStudentsColumn = () => {
                 : "N/A",
         },
         {
-            name: "Graduating Year",
+            name: "Total Credit Hours",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            selector: (row: IStudentDetails) => row?.GraduatingYear ?? "N/A",
+            selector: (row: IStudentDetails) => row?.TotalCreditHours ?? "N/A",
+        },
+        {
+            name: "CGPA",
+            wrap: true,
+            minWidth: "50px",
+            sortable: true,
+            selector: (row: IStudentDetails) => row?.CGPA ?? "N/A",
         },
         // {
         //     name: "Status",
