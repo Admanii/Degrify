@@ -212,7 +212,7 @@ function DegreeStudent() {
                     </div>
                   </Modal>
                   <div className='flex flex-col'>
-                    <Button height={44} width={355} buttonText={'Approve Degree'} disabled={disabled} onClick={openModal} className={disabled ? "bg-gray-600 opacity-40 cursor-not-allowed" : ""}></Button>
+                    <Button height={44} width={355} buttonText={'Approve Degree'} disabled={disabled} onClick={openModal}></Button>
                     <div>
                       {!isStudentApproved && (
                         <span className="text-sm text-red-500 font-medium">
