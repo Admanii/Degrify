@@ -441,6 +441,8 @@ export const getUniversityAllDegree = async (req, res) => {
         "Program",
         "GraduatingYear",
         "organisationID",
+        "TotalCreditHours",
+        "CGPA",
       ]);
       var org = await Student.findById(studentDetail._id)
         .select("")

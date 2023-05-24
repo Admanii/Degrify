@@ -41,7 +41,7 @@ function DegreeViewPage() {
   const dispatch = useDispatch<AppDispatch>();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const openModal = () => {
     setModalIsOpen(true);
