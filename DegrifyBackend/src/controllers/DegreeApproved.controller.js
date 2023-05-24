@@ -339,11 +339,24 @@ export const OrganisationAppovedDegree = async (req, res) => {
       );
     }
 
+    const hash = hashCal(JSON.stringify(updatedDegree));
+    const updateDegree = await Degree.findByIdAndUpdate(
+      req.query.degree_id,
+      {
+        hashValue: hash,
+        //dateCreated: Date.now,
+      },
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
     return res.json(
       jsonGenerate(
         statusCode.SUCCESS,
         "Degree Updated by University",
-        updatedDegree
+        updateDegree
       )
     );
   } catch (error) {
