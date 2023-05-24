@@ -26,6 +26,7 @@ const DropDownField: React.FC<Props> = ({ type, id, label, hintText, defaultValu
         onChange={onChange}
         className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-left shadow-sm rounded-md border border-gray-300 focus:outline-none focus:border-gray-500 focus:ring-gray-500"
       >
+        <option value="" className='text-gray-500'>Select Degree Program</option>
         <option value="BSCS">BSCS</option>
         <option value="BBA">BBA</option>
         <option value="ACF">ACF</option>

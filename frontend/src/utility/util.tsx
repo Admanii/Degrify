@@ -36,6 +36,8 @@ export const getOrgFullName = (orgName: string) => {
     switch (orgName) {
         case 'IBA':
             return orgName = "Institute of Business Administration (IBA)";
+        case 'Lums':
+            return orgName = "Lahore University of Managment and Sciences (LUMS)";
         default:
             return '';
     }
