@@ -4,13 +4,6 @@ const UnverifiedDegreesColumn = () => {
 
     const unverifiedDegreesColumn = [
         {
-            name: "Degree ID",
-            wrap: true,
-            minWidth: "50px",
-            sortable: true,
-            selector: (row: IDegreeDetails) => row?.degree?._id ?? "N/A",
-        },
-        {
             name: "ERP ID",
             wrap: true,
             minWidth: "50px",
@@ -36,21 +29,45 @@ const UnverifiedDegreesColumn = () => {
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            selector: (row: IDegreeDetails) => row?.studentDetails?.enrollmentNumber ?? "N/A",
+            selector: (row: IDegreeDetails) => row?.studentDetails?.Program ?? "N/A",
         },
         {
-            name: "Date of Issue",
+            name: "Date of Birth",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            selector: (row: IDegreeDetails) => row?.degree?.dateCreated ?? "N/A",
+            selector: (row: IDegreeDetails) => row?.studentDetails?.DateOfBirth ? new Date(row?.studentDetails?.DateOfBirth).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
+                : "N/A",
         },
         {
-            name: "Graduating Year",
+            name: "Date of Admission",
             wrap: true,
             minWidth: "50px",
             sortable: true,
-            selector: (row: IDegreeDetails) => row?.studentDetails?.DateOfompletion ?? "N/A",
+            selector: (row: IDegreeDetails) => row?.studentDetails?.DateOfAdmission ? new Date(row?.studentDetails?.DateOfAdmission).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
+                : "N/A",
+        },
+        {
+            name: "Date of Completion",
+            wrap: true,
+            minWidth: "50px",
+            sortable: true,
+            selector: (row: IDegreeDetails) => row?.studentDetails?.DateOfompletion ? new Date(row?.studentDetails?.DateOfompletion).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
+                : "N/A",
+        },
+        {
+            name: "Total Credit Hours",
+            wrap: true,
+            minWidth: "50px",
+            sortable: true,
+            selector: (row: IDegreeDetails) => row?.studentDetails?.TotalCreditHours ?? "N/A",
+        },
+        {
+            name: "CGPA",
+            wrap: true,
+            minWidth: "50px",
+            sortable: true,
+            selector: (row: IDegreeDetails) => row?.studentDetails?.CGPA ?? "N/A",
         },
         {
             name: "Status",
