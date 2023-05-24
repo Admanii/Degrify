@@ -914,6 +914,111 @@ export const getHECVerifiedDegrees = async (req, res) => {
   }
 };
 
+export const getHECVerifiedDegreesByUni = async (req, res) => {
+  try {
+    const list = await Degree.find({
+      organisationID: req.query.organisation_id,
+      studentVerified: true,
+      organisationVerified: true,
+      HECVerified: true,
+      active: true,
+    }).select(["-_id", "studentID"]);
+
+    if (!list) {
+      return res.json(
+        jsonGenerate(statusCode.CLIENT_ERROR, "No Degree Found", list)
+      );
+    }
+    const result = [];
+
+    const array = Object.values(list);
+
+    for (let i = 0; i < array.length; i++) {
+      const studentId = array[i].studentID;
+      const studentDetail = await Student.findById(studentId)
+        .select("")
+        .populate([
+          "name",
+          "enrollmentNumber",
+          "fatherName",
+          "studentID",
+          "DateOfBirth",
+          "CNIC",
+          "DateOfAdmission",
+          "DateOfompletion",
+          "Program",
+          "GraduatingYear",
+          "organisationID",
+          "TotalCreditHours",
+          "CGPA",
+        ])
+        .exec();
+      var list1 = await Student.findById(studentDetail._id).select([
+        "name",
+        "enrollmentNumber",
+        "fatherName",
+        "studentID",
+        "DateOfBirth",
+        "CNIC",
+        "DateOfAdmission",
+        "DateOfompletion",
+        "Program",
+        "GraduatingYear",
+        "organisationID",
+        "TotalCreditHours",
+        "CGPA",
+      ]);
+      var org = await Student.findById(studentDetail._id)
+        .select("")
+        .populate(["organisationID"])
+        .exec();
+      var user = await User.findOne({
+        studentID: studentDetail._id,
+      })
+        .select("email")
+        .exec();
+
+      let orgName = org?.organisationID?.name ?? "";
+      let email = user?.email ?? "";
+      const studentDetails = {
+        ...list1._doc,
+        orgName,
+        email,
+      };
+      const degree = await Degree.findOne({ studentID: studentId }).select([
+        "_id",
+        "studentID",
+        "studentVerified",
+        "organisationVerified",
+        "HECVerified",
+        "completeVerified",
+        "dateCreated",
+        "ipfsLink",
+        "hashValue",
+      ]);
+
+      const particular = {
+        studentDetails,
+        degree,
+      };
+      // console.log(particular);
+      result.push(particular);
+    }
+
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "HEC Verified Degrees", result)
+    );
+  } catch (error) {
+    return res.json(
+      jsonGenerate(
+        statusCode.UNPROCESSABLE_ENTITY,
+        "Error is displaying Degree",
+        error
+      )
+    );
+  }
+};
+
 export const getUnvserifiedHECDegree = async (req, res) => {
   try {
     const list = await Degree.find({

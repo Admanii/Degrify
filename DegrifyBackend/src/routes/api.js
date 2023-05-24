@@ -35,6 +35,7 @@ import {
   getDegreebyHash,
   getHECAllDegree,
   getHECVerifiedDegrees,
+  getHECVerifiedDegreesByUni,
   getOrganisationVerifiedDegrees,
   getStudentVerifiedDegrees,
   getUniversityAllDegree,
@@ -123,6 +124,7 @@ apiProtected.get("/getuniversities", getUniversities); // done
 apiProtected.get("/getalldegreeshec", getHECAllDegree); // done
 // verified Degree by HEC
 apiProtected.get("/getverifieddegreeshec", getHECVerifiedDegrees); // done
+apiProtected.get("/getverifieddegreeshecbyuni", getHECVerifiedDegreesByUni);
 // Unverified Degree by HEC
 apiProtected.get("/getunverifieddegreeshec", getUnvserifiedHECDegree); // done
 
