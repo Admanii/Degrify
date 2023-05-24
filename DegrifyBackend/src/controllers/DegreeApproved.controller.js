@@ -332,7 +332,8 @@ export const OrganisationAppovedDegree = async (req, res) => {
         runValidators: true,
         useFindAndModify: false,
       }
-    );
+    ).select(["-ipfsLink", "-hashValue", "-dateCreated"]);
+    
     if (!updatedDegree) {
       return res.json(
         jsonGenerate(statusCode.SUCCESS, "Degree Not Found", null)
