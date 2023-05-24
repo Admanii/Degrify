@@ -518,9 +518,7 @@ export const getStudentERP = async (req, res) => {
 
     const data = { ERP: newERP + 1 };
 
-    return res.json(
-      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "New ERP", data)
-    );
+    return res.json(jsonGenerate(statusCode.SUCCESS, "New ERP", data));
   } catch (err) {
     console.log(err);
     return res.json(
