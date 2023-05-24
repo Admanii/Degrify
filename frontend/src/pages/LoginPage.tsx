@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { ethers } from "ethers";
 import { abi } from '../utility/util';
 import { logout } from '../store/slice/authSlice';
+import LoadingScreen from '../components/general/LoadingScreen';
 
 declare global {
     interface Window {
@@ -28,6 +29,8 @@ const LoginPage = () => {
     const [userBalance, setUserBalance] = useState('');
     const [connButtonText, setConnButtonText] = useState("Connect Wallet");
     const dispatch = useDispatch<AppDispatch>();
+    const [loading, setLoading] = useState(true);
+
 
     const { register, handleSubmit, reset } = useForm()
 
@@ -150,11 +153,73 @@ const LoginPage = () => {
         }
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+    }, []);
+
     return (
         <div className="grid min-h-screen grid-rows-header bg-zinc-100">
-            <div>
-                <Navbar isButton={false} onMenuButtonClick={() => { }} />
-            </div>
+            {loading ? (
+                <LoadingScreen />
+            ) : (
+                <>
+                    <div>
+                        <Navbar isButton={false} onMenuButtonClick={() => { }} />
+                    </div>
+                    <div className="grid min-h-full grid-cols-2">
+                        <div className='p-16 flex flex-col items-center justify-center'>
+                            <div className='font-semibold text-black text-3xl mb-4'>Sign in to your Account</div>
+                            <form onSubmit={handleSubmit(submitForm)}>
+                                <div>
+                                    <div className="mt-3">
+                                        <input
+                                            type="text"
+                                            id="email"
+                                            autoComplete="email"
+                                            placeholder="Email Address"
+                                            {...register('email')}
+                                            // value=""
+                                            //   onChange={}
+                                            required
+                                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
+                                        />
+                                    </div>
+                                    <div className="mt-3">
+                                        <input
+                                            type="password"
+                                            id="password"
+                                            autoComplete="password"
+                                            placeholder="Password"
+                                            // value=""
+                                            //   onChange={}
+                                            {...register('password')}
+                                            required
+                                            className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
+                                        />
+                                    </div>
+                                    <Button className='mt-8' buttonText="Sign In" width={384} />
+                                    {/* <div className='flex justify-between mt-2 w-96 text-gray-900'>
+                 <Link to="/">
+                     Remember me
+                 </Link>
+                 <Link to="/">
+                     Forgot password?
+                 </Link>
+             </div> */}
+                                </div>
+                            </form>
+
+                        </div>
+
+                        <div className='p-2 flex items-center justify-center'>
+                            <img src={IMAGES.landing_image}></img>
+                        </div>
+                    </div >
+                </>
+            )}
+
 
             {/* <div className="WalletCard">
                 <h4>{"Connection to MetaMask using window.ethereum methods"}</h4>
@@ -168,55 +233,7 @@ const LoginPage = () => {
                 {errorMessage}
             </div> */}
 
-            <div className="grid min-h-full grid-cols-2">
-                <div className='p-16 flex flex-col items-center justify-center'>
-                    <div className='font-semibold text-black text-3xl mb-4'>Sign in to your Account</div>
-                    <form onSubmit={handleSubmit(submitForm)}>
-                        <div>
-                            <div className="mt-3">
-                                <input
-                                    type="text"
-                                    id="email"
-                                    autoComplete="email"
-                                    placeholder="Email Address"
-                                    {...register('email')}
-                                    // value=""
-                                    //   onChange={}
-                                    required
-                                    className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
-                                />
-                            </div>
-                            <div className="mt-3">
-                                <input
-                                    type="password"
-                                    id="password"
-                                    autoComplete="password"
-                                    placeholder="Password"
-                                    // value=""
-                                    //   onChange={}
-                                    {...register('password')}
-                                    required
-                                    className="appearance-none block mt-2 px-3 py-3 w-96 bg-white text-base text-center shadow-sm placeholder-gray-400 rounded-md border-none focus:outline-none ring-0 focus:ring-2 focus:ring-[#E6EDF0]"
-                                />
-                            </div>
-                            <Button className='mt-8' buttonText="Sign In" width={384} />
-                            {/* <div className='flex justify-between mt-2 w-96 text-gray-900'>
-                                <Link to="/">
-                                    Remember me
-                                </Link>
-                                <Link to="/">
-                                    Forgot password?
-                                </Link>
-                            </div> */}
-                        </div>
-                    </form>
 
-                </div>
-
-                <div className='p-2 flex items-center justify-center'>
-                    <img src={IMAGES.landing_image}></img>
-                </div>
-            </div >
         </div>
     )
 }
