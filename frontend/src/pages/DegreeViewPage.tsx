@@ -13,6 +13,7 @@ import { Degree } from '../store/slice/degreeSlice';
 import { AppDispatch } from '../store/store';
 import { GetDegreebyId } from '../store/actions/degreeActions';
 import LoadingScreen from '../components/general/LoadingScreen';
+import LoadingScreenDegree from '../components/general/LoadingScreenDegree';
 // const name = "Muhammad Ahmed"
 // const erp = "19717"
 // const NameErp = name + " " + erp
@@ -54,7 +55,7 @@ function DegreeViewPage() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 4000);
   }, []);
 
   const getDegreebyId = async () => {
@@ -95,7 +96,7 @@ function DegreeViewPage() {
     <div className='flex justify-center items-center w-screen h-screen'>
       {
         loading ? (
-          <LoadingScreen />
+          <LoadingScreenDegree />
         ) : (
           <DegreeCertificate degree={degree} />
 
