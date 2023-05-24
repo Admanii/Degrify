@@ -8,6 +8,7 @@ import { GetAllDegreesHec } from '../../store/actions/degreeActions';
 import { Loader } from '../../components/general/Loader';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Search } from '../../components/general/Search';
+import LoadingScreen from '../../components/general/LoadingScreen';
 
 const AllDegreesPageHec = () => {
 
@@ -42,7 +43,7 @@ const AllDegreesPageHec = () => {
                     </div>
                 </div>
                 {isLoading ? (
-                    <Loader text='Loading' />
+                    <LoadingScreen/>
                 ) : (
                     <AllDegreesTable search={search} />
                 )}

@@ -9,6 +9,7 @@ import { GetAllStudentsbyUniId } from '../../store/actions/studentActions';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Search } from '../../components/general/Search';
 import { Loader } from '../../components/general/Loader';
+import LoadingScreen from '../../components/general/LoadingScreen';
 
 const AllStudentPage = () => {
 
@@ -45,7 +46,7 @@ const AllStudentPage = () => {
                     </div>
                 </div>
                 {isLoading ? (
-                    <Loader text='Loading' />
+                    <LoadingScreen/>
                 ) : (
                     <AllStudentsTable search={search} />
                 )}

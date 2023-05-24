@@ -9,6 +9,7 @@ import { GetVerifiedDegreesbyUniId } from '../../store/actions/degreeActions';
 import { Search } from '../../components/general/Search';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Loader } from '../../components/general/Loader';
+import LoadingScreen from '../../components/general/LoadingScreen';
 
 const VerifiedDegreesPage = () => {
 
@@ -45,7 +46,7 @@ const VerifiedDegreesPage = () => {
                     </div>
                 </div>
                 {isLoading ? (
-                    <Loader text='Loading' />
+                    <LoadingScreen/>
                 ) : (
                     <VerifiedDegreesTable search={search} />
                 )}

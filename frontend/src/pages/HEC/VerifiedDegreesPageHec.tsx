@@ -9,6 +9,7 @@ import { Search } from '../../components/general/Search';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Loader } from '../../components/general/Loader';
 import { UserInfo } from '../../store/slice/authSlice';
+import LoadingScreen from '../../components/general/LoadingScreen';
 
 const VerifiedDegreesPageHec = () => {
 
@@ -48,7 +49,7 @@ const VerifiedDegreesPageHec = () => {
                     </div>
                 </div>
                 {isLoading ? (
-                    <Loader text='Loading' />
+                    <LoadingScreen/>
                 ) : (
                     <VerifiedDegreesTable search={search} />
                 )}

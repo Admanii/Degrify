@@ -9,6 +9,7 @@ import { GetAllDegreesbyUniId } from '../../store/actions/degreeActions';
 import { Loader } from '../../components/general/Loader';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Search } from '../../components/general/Search';
+import LoadingScreen from '../../components/general/LoadingScreen';
 
 const AllDegreesPage = () => {
 
@@ -45,7 +46,7 @@ const AllDegreesPage = () => {
                     </div>
                 </div>
                 {isLoading ? (
-                    <Loader text='Loading' />
+                    <LoadingScreen/>
                 ) : (
                     <AllDegreesTable search={search} />
                 )}

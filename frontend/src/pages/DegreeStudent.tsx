@@ -19,6 +19,7 @@ import { abi, getFormattedDate } from '../utility/util'
 import { toast } from 'react-toastify'
 import classNames from 'classnames'
 import UnderlineRow from '../components/general/UnderlineRow'
+import LoadingScreen from '../components/general/LoadingScreen'
 
 const name = "Muhammad Ahmed"
 const erp = "19717"
@@ -144,95 +145,100 @@ function DegreeStudent() {
 
   return (
     <Layout>
-      <div className='p-5'>
-        {/* <View student={degree?.studentDetails} headingText={'STUDENT DETAILS'} /> */}
-        <HeadingWithSpan marginTop='3' Text={'DEGREE DETAILS'} />
-        <div className="flex">
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <div className='p-5'>
+          {/* <View student={degree?.studentDetails} headingText={'STUDENT DETAILS'} /> */}
+          <HeadingWithSpan marginTop='3' Text={'DEGREE DETAILS'} />
+          <div className="flex">
 
-          <div className="w-full p-5 pr-5">
-            <div className="bg-white p-3 border-t-4 border-green-400 text-left">
-              <div className="grid grid-cols-2 gap-4 my-4 px-10">
-                <UnderlineRow text={'Name'} spanText={`${degree?.studentDetails?.name.charAt(0).toUpperCase()}${degree?.studentDetails?.name.slice(1)}`} showBorder={false} />
-                <UnderlineRow text={'Father\'s Name'} spanText={`${degree?.studentDetails?.fatherName.charAt(0).toUpperCase()}${degree?.studentDetails?.fatherName.slice(1)}`} showBorder={false} />
-                <UnderlineRow text={'Email ID'} spanText={`${degree?.studentDetails?.email}`} showBorder={false} />
-                <UnderlineRow text={'ERP ID'} spanText={`${degree?.studentDetails?.studentID}`} showBorder={false} />
-                <UnderlineRow text={'CNIC'} spanText={`${degree?.studentDetails?.CNIC}`} showBorder={false} />
-                <UnderlineRow text={'Date of Birth'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfBirth ?? '')}`} showBorder={false} />
-                <UnderlineRow text={'Program'} spanText={`${degree?.studentDetails?.Program}`} showBorder={false} />
-                <UnderlineRow text={'University'} spanText={`${degree?.studentDetails?.orgName}`} showBorder={false} />
-                <UnderlineRow text={'Date of Admission'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} showBorder={false} />
-                <UnderlineRow text={'Date of Completion'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfompletion ?? '')}`} showBorder={false} />
-                <UnderlineRow text={'Date of Issue'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} showBorder={false} />
-                <UnderlineRow text={'Graduating Year'} spanText={`${degree?.studentDetails?.GraduatingYear}`} showBorder={false} />
-                <UnderlineRow text={'CGPA'} spanText={`${degree?.studentDetails?.CGPA}`} showBorder={false} />
-                <UnderlineRow text={'Total Credit Hours'} spanText={`${degree?.studentDetails?.TotalCreditHours}`} showBorder={false} />
+            <div className="w-full p-5 pr-5">
+              <div className="bg-white p-3 border-t-4 border-green-400 text-left">
+                <div className="grid grid-cols-2 gap-4 my-4 px-10">
+                  <UnderlineRow text={'Name'} spanText={`${degree?.studentDetails?.name.charAt(0).toUpperCase()}${degree?.studentDetails?.name.slice(1)}`} showBorder={false} />
+                  <UnderlineRow text={'Father\'s Name'} spanText={`${degree?.studentDetails?.fatherName.charAt(0).toUpperCase()}${degree?.studentDetails?.fatherName.slice(1)}`} showBorder={false} />
+                  <UnderlineRow text={'Email ID'} spanText={`${degree?.studentDetails?.email}`} showBorder={false} />
+                  <UnderlineRow text={'ERP ID'} spanText={`${degree?.studentDetails?.studentID}`} showBorder={false} />
+                  <UnderlineRow text={'CNIC'} spanText={`${degree?.studentDetails?.CNIC}`} showBorder={false} />
+                  <UnderlineRow text={'Date of Birth'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfBirth ?? '')}`} showBorder={false} />
+                  <UnderlineRow text={'Program'} spanText={`${degree?.studentDetails?.Program}`} showBorder={false} />
+                  <UnderlineRow text={'University'} spanText={`${degree?.studentDetails?.orgName}`} showBorder={false} />
+                  <UnderlineRow text={'Date of Admission'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} showBorder={false} />
+                  <UnderlineRow text={'Date of Completion'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfompletion ?? '')}`} showBorder={false} />
+                  <UnderlineRow text={'Date of Issue'} spanText={`${getFormattedDate(degree?.studentDetails?.DateOfAdmission ?? '')}`} showBorder={false} />
+                  <UnderlineRow text={'Graduating Year'} spanText={`${degree?.studentDetails?.GraduatingYear}`} showBorder={false} />
+                  <UnderlineRow text={'CGPA'} spanText={`${degree?.studentDetails?.CGPA}`} showBorder={false} />
+                  <UnderlineRow text={'Total Credit Hours'} spanText={`${degree?.studentDetails?.TotalCreditHours}`} showBorder={false} />
                 </div>
-              <div className="justify-start grid grid-cols-2 gap-4 pt-2 pb-2 px-10">
-                <Button height={44} width={355} inverted={true} buttonText={'View Certificate'} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)}></Button>
+                <div className="justify-start grid grid-cols-2 gap-4 pt-2 pb-2 px-10">
+                  <Button height={44} width={355} inverted={true} buttonText={'View Certificate'} onClick={() => navigate(`/view/degreecertificate?degreeId=${degreeId}`)}></Button>
 
-                <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
-                  <div className='flex justify-center'>
-                    <img src={IMAGES.info_icon}></img>
-                  </div>
-                  <Title text="Approve this degree?" />
-                  <SubTitle text='Are you sure you want to approve? This action cannot be undone. Degrees uploaded to blockchain can not be altered!' />
-                  <div className='flex my-2'>
-                    <div className='flex px-2 w-1/2 justify-center'>
-                      <button
-                        type="submit"
-                        className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
-                        onClick={closeModal}
-                      >
-                        Cancel
-                      </button>
+                  <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
+                    <div className='flex justify-center'>
+                      <img src={IMAGES.info_icon}></img>
                     </div>
-                    <div className='flex px-2 w-1/2 justify-center'>
-                      <button
-                        type="submit"
-                        disabled={isLoading}
-                        className={classNames(
-                          "mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700",
-                          isLoading ? "opacity-40 cursor-not-allowed" : ""
-                        )}
-                        onClick={approveDegree}
-                      >
-                        Approve
-                      </button>
+                    <Title text="Approve this degree?" />
+                    <SubTitle text='Are you sure you want to approve? This action cannot be undone. Degrees uploaded to blockchain can not be altered!' />
+                    <div className='flex my-2'>
+                      <div className='flex px-2 w-1/2 justify-center'>
+                        <button
+                          type="submit"
+                          className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
+                          onClick={closeModal}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                      <div className='flex px-2 w-1/2 justify-center'>
+                        <button
+                          type="submit"
+                          disabled={isLoading}
+                          className={classNames(
+                            "mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700",
+                            isLoading ? "opacity-40 cursor-not-allowed" : ""
+                          )}
+                          onClick={approveDegree}
+                        >
+                          Approve
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </Modal>
-                <div className='flex flex-col'>
-                  <Button height={44} width={355} buttonText={'Approve Degree'} disabled={disabled} onClick={openModal} className={disabled ? "bg-gray-600 opacity-40 cursor-not-allowed" : ""}></Button>
-                  <div>
-                    {!isStudentApproved && (
-                      <span className="text-sm text-red-500 font-medium">
-                      * This degree is pending approval from the student
-                      </span>
-                    )}
-                    {(isUniApproved && isHecApproved && userRole == "UNIVERSITY") ? (
-                      <span className="text-sm text-green-500 font-medium">
-                        * This degree has been approved by {degree?.studentDetails?.orgName} and the HEC
-                      </span>
-                    ) : (isUniApproved && isStudentApproved && userRole == "UNIVERSITY") && (
-                      <span className="text-sm text-green-500 font-medium">
-                        *This degree has already been approved by {degree?.studentDetails?.orgName}
-                      </span>
-                    )}
-                    {(isHecApproved && userRole == "HEC") && (
-                      <span className="text-sm text-green-500 font-medium">
-                        *This degree has already been approved by HEC
-                      </span>
-                    )}
+                  </Modal>
+                  <div className='flex flex-col'>
+                    <Button height={44} width={355} buttonText={'Approve Degree'} disabled={disabled} onClick={openModal} className={disabled ? "bg-gray-600 opacity-40 cursor-not-allowed" : ""}></Button>
+                    <div>
+                      {!isStudentApproved && (
+                        <span className="text-sm text-red-500 font-medium">
+                          * This degree is pending approval from the student
+                        </span>
+                      )}
+                      {(isUniApproved && isHecApproved && userRole == "UNIVERSITY") ? (
+                        <span className="text-sm text-green-500 font-medium">
+                          * This degree has been approved by {degree?.studentDetails?.orgName} and the HEC
+                        </span>
+                      ) : (isUniApproved && isStudentApproved && userRole == "UNIVERSITY") && (
+                        <span className="text-sm text-green-500 font-medium">
+                          *This degree has already been approved by {degree?.studentDetails?.orgName}
+                        </span>
+                      )}
+                      {(isHecApproved && userRole == "HEC") && (
+                        <span className="text-sm text-green-500 font-medium">
+                          *This degree has already been approved by HEC
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
+
+
           </div>
-
-
-         
         </div>
-      </div>
+      )}
+
     </Layout>
   )
 }

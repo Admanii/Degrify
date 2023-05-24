@@ -8,6 +8,7 @@ import { GetAllUniversities } from '../../store/actions/organisationActions';
 import { Loader } from '../../components/general/Loader';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Search } from '../../components/general/Search';
+import LoadingScreen from '../../components/general/LoadingScreen';
 
 const AllUniversitiesPage = () => {
 
@@ -42,7 +43,7 @@ const AllUniversitiesPage = () => {
                     </div>
                 </div>
                 {isLoading ? (
-                    <Loader text='Loading' />
+                    <LoadingScreen/>
                 ) : (
                     <AllUniversitiesTable search={search} />
                 )}
