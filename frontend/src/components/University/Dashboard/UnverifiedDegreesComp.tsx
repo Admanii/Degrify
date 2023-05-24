@@ -19,9 +19,6 @@ export const UnverifiedDegreesComp = () => {
                 <thead className="bg-gray-50">
                   <tr>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      Degree ID
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                       ERP ID
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -31,13 +28,22 @@ export const UnverifiedDegreesComp = () => {
                       CNIC
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Date of Birth
+                    </th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                       Program
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      Date of Issue
+                      Date of Admission
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      Graduating Year
+                      Date of Completion
+                    </th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Total Credit Hours
+                    </th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      CGPA
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                       Status
@@ -46,10 +52,7 @@ export const UnverifiedDegreesComp = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white text-left">
                   {unverifiedDegrees?.length > 0 && unverifiedDegrees?.map((degree, index) => (
-                    <tr  key={index} className="cursor-pointer hover:bg-gray-100" onClick={() => { navigate(`/view/degreedetails?degreeId=${degree?.degree?._id}`) }} >
-                      <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        <div className="text-gray-700">{degree?.degree?._id?.substring(1, 10)}</div>
-                      </td>
+                    <tr key={index} className="cursor-pointer hover:bg-gray-100" onClick={() => { navigate(`/view/degreedetails?degreeId=${degree?.degree?._id}`) }} >
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
                         <div className="text-gray-700">{degree?.studentDetails?.studentID}</div>
                       </td>
@@ -60,7 +63,17 @@ export const UnverifiedDegreesComp = () => {
                         <div className="text-gray-700">{degree?.studentDetails?.CNIC}</div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        <div className="text-gray-700">{degree?.studentDetails?.enrollmentNumber}</div>
+                        <div className="text-gray-700">{degree?.studentDetails?.DateOfBirth ? new Date(degree?.studentDetails?.DateOfBirth).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
+                          : "N/A"}
+                        </div>
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
+                        <div className="text-gray-700">{degree?.studentDetails?.Program}</div>
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
+                        <div className="text-gray-700">{degree?.studentDetails?.DateOfAdmission ? new Date(degree?.studentDetails?.DateOfAdmission).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
+                          : "N/A"}
+                        </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
                         <div className="text-gray-700">{degree?.studentDetails?.DateOfompletion ? new Date(degree?.studentDetails?.DateOfompletion).toLocaleDateString('en-GB', { day: 'numeric', month: "numeric", year: 'numeric' }).replaceAll('\/', '-')
@@ -68,18 +81,19 @@ export const UnverifiedDegreesComp = () => {
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        <div className="text-gray-700">{degree?.studentDetails?.DateOfompletion ? new Date(degree?.studentDetails?.DateOfompletion).toLocaleDateString('en-GB', { year: 'numeric' }).replaceAll('\/', '-')
-                          : "N/A"}
-                        </div>
+                        <div className="text-gray-700">{degree?.studentDetails?.TotalCreditHours}</div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
-                        {degree?.degree?.completeVerified ?
+                        <div className="text-gray-700">{degree?.studentDetails?.CGPA}</div>
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
+                        {degree?.degree?.organisationVerified ?
                           <span
-                            className={`h-5 w-22 flex bg-green-600 items-center justify-center rounded-full px-3 py-0.5">`}
+                            className={`h-6 w-21 flex bg-green-600 items-center justify-center rounded-full px-3 py-0.5">`}
                           >Verified</span>
                           :
                           <span
-                            className={`h-5 w-22 flex bg-red-600 items-center justify-center rounded-full px-3 py-0.5">`}
+                            className={`h-6 w-21 flex bg-red-600 items-center justify-center rounded-full px-3 py-0.5">`}
                           >Unverified</span>
                         }
                       </td>
