@@ -118,14 +118,28 @@ const LandingPage = () => {
 
                 <div className='font-semibold text-black text-3xl mb-4'>About Us</div>
 
-                Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
-                Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
-                Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
-                Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
-                Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
-                Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
-                Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
-                Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
+                With an increasing number of graduates in Pakistan, it is becoming increasingly 
+                important to regulate the degree verification system. Despite the increasing 
+                digitalization of government departments, the current system still relies on a 
+                lengthy document-based process, which creates unnecessary overhead as degrees move 
+                from one institution to another. To address this issue, this paper proposes a solution 
+                using web 3.0 technologies to combat the problem of fake and duplicate degrees. This 
+                paper proposes a blockchain-based degree verification system using web 3.0 technologies 
+                to combat the problem of fake and duplicate degrees in Pakistan. The current system 
+                relies on a lengthy document-based process, creating unnecessary overheads as degrees 
+                move from one institution to another. Utilizing the decentralized nature of blockchain 
+                technology, the proposed system stores degree information securely and verifies it 
+                through every institution along the path, such as universities and the higher education 
+                commission. The front-end web app provides an easy-to-use interface for students and 
+                graduates to register their degrees and view their information, while the back-end 
+                extracts data from the blockchain and performs verification checks using smart contracts. 
+                The automation of the verification process streamlines the process and makes it more 
+                efficient. In conclusion, this blockchain-based degree verification system is a 
+                cutting-edge solution that utilizes web 3.0, blockchain, and smart contract technologies 
+                to provide a secure, tamper-proof, and efficient means of verifying degrees. This 
+                innovative solution would be a significant step towards combating the problem of fake 
+                and duplicate degrees in Pakistan, making the degree verification process more reliable 
+                and efficient.
 
             </div>
 

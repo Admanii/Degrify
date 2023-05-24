@@ -16,7 +16,7 @@ function OrganisationView({ headingText, organisation }: Props) {
     return (
        
         <div>
-            <HeadingWithSpan Text={headingText} marginTop={'3'} />
+            <HeadingWithSpan Text={headingText} marginTop={'6'} />
 
             <div className="flex flex-wrap justify-center h-135 w-11/12 bg-gray-100">
                 {/* FIRST COLUMN */}
