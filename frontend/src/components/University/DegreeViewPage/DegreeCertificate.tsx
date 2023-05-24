@@ -25,13 +25,13 @@ function DegreeCertificate({ degree }: Props) {
         <div className="h-5/6 w-4/6 max-w-4xl bg-white border-2 border-black border-solid relative shadow-xl">
           <div className="absolute inset-2 bg-red-900">
             <div className="absolute inset-10 bg-white flex flex-col items-center justify-center">
-              <div className="flex justify-between px-2 py-2 absolute top-0 left-0 w-full">
+              <div className="flex justify-between px-2 py-3 absolute top-0 left-0 w-full">
                 {/* ADD RELEVANT UNI LOGO */}
-                <img className='w-10 sm:w-20' src={IMAGES.iba_logo} alt="IBA logo"></img>
+                <img className='w-36' src={IMAGES.iba_logo} alt="IBA logo"></img>
                 {degree?.degree?.HECVerified ? (
-                  <img className="h-10 sm:h-16" src={IMAGES.verified_tick_icon} alt="verified icon" title="This degrees is approved by all entities" />
+                  <img className="h-6 sm:h-10" src={IMAGES.verified_tick_icon} alt="verified icon" title="This degrees is approved by all entities" />
                 ) : (
-                  <img className="h-10 sm:h-16" src={IMAGES.unverified_icon} alt="Unverified icon" title="This degrees is pending approval from the Higher Education Commission" />
+                  <img className="h-6 sm:h-10" src={IMAGES.unverified_icon} alt="Unverified icon" title="This degrees is pending approval from the Higher Education Commission" />
                 )}
               </div>
               <h1 className="text-5xl font-bold mb-4 font-certificate">Certificate of Completion</h1>
