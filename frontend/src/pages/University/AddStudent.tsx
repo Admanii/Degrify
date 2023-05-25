@@ -77,11 +77,11 @@ const AddStudent = () => {
         setErp(enteredERP);
     }
 
-    const handleProgramChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    const handleProgramChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const enteredProgram = e.target.value;
         setProgram(enteredProgram);
     }
-    const handleGradYearChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    const handleGradYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const enteredGradYear = e.target.value;
         setgradYear(enteredGradYear);
     }
@@ -91,10 +91,13 @@ const AddStudent = () => {
     }
 
     const generateEmail = () => {
-        const generatedEmail = name.toLowerCase() + "_" + erp + "@" + organisationName.toLowerCase() + ".degrify.com";
+        var generatedEmail = ''
+        if (name || erp) {
+            generatedEmail = name.toLowerCase() + "_" + erp + "@" + organisationName.toLowerCase() + ".degrify.com";
+        }
         return removeSpaces(generatedEmail);
     }
-    
+
     const generateEnrolmentNumber = () => {
         var generatedEnrolmentNumber = ''
         if (gradYear || program) {
@@ -148,7 +151,7 @@ const AddStudent = () => {
                                             <InputField type={'text'} {...register('CGPA')} id={'CGPA'} label={'CGPA'} hintText={'3.5'} required={false} register={register} />
                                         </div>
                                         <div>
-                                            <InputField type={'text'} {...register('email')} id={'email'} label={'Email'} hintText={'example@gmail.com'} required={false} register={register} defaultValue={email} />
+                                            <InputField type={'text'} {...register('email')} id={'email'} label={'Email'} hintText={'example@gmail.com'} required={false} register={register} />
                                         </div>
                                     </div>
                                     <div className='px-16 py-6 flex flex-col items-start justify-start'>
@@ -196,7 +199,7 @@ const AddStudent = () => {
                             <div className='flex px-2 w-1/2 justify-center'>
                                 <button
                                     type="submit"
-                                    className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
+                                    className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl hover:bg-slate-50 border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
                                     onClick={() => { navigate("/uni/dashboard") }}
                                 >
                                     Home
@@ -205,7 +208,7 @@ const AddStudent = () => {
                             <div className='flex px-2 w-1/2 justify-center'>
                                 <button
                                     type="submit"
-                                    className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700"
+                                    className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-black"
                                     onClick={clearForm}
                                 >
                                     Add New

@@ -163,7 +163,7 @@ const AddUniversity = () => {
                             <div className='flex px-2 w-1/2 justify-center'>
                                 <button
                                     type="submit"
-                                    className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
+                                    className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl hover:bg-slate-50 border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
                                     onClick={() => { navigate("/uni/dashboard") }}
                                 >
                                     Home
@@ -172,7 +172,7 @@ const AddUniversity = () => {
                             <div className='flex px-2 w-1/2 justify-center'>
                                 <button
                                     type="submit"
-                                    className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700"
+                                    className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-black"
                                     onClick={clearForm}
                                 >
                                     Add New
