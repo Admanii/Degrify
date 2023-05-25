@@ -41,6 +41,7 @@ import {
   getUniversityAllDegree,
   getUnverifiedUniversityDegree,
   getUnvserifiedHECDegree,
+  getVerifiedDegreeCount,
   getVerifiedUniversityDegree,
 } from "../controllers/getDegree.controller.js";
 import {
@@ -63,6 +64,7 @@ import {
 import {
   getOrganisationByID,
   getUniversities,
+  getUniversitiesCount,
 } from "../controllers/organisation.controller.js";
 import {
   organisationRegister,
@@ -88,6 +90,8 @@ apiRoute.post(
   registerOrganisation
 ); // done
 apiRoute.post("/login", Login); // done
+apiRoute.get("/getuniversitiescount", getUniversitiesCount);
+apiRoute.get("/getdegreecount", getVerifiedDegreeCount);
 
 //apiProtected.post("/addstudent", AddStudent);
 //apiProtected.post("/deletestudent", deleteStudent);

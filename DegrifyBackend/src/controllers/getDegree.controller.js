@@ -1518,3 +1518,32 @@ export const getDegreeCountByOrganisation = async (req, res) => {
     );
   }
 };
+
+export const getVerifiedDegreeCount = async (req, res) => {
+  try {
+    const list = await Degree.find({
+      studentVerified: true,
+      organisationVerified: true,
+      HECVerified: true,
+      active: true,
+    }).select("");
+
+    if (!list) {
+      return res.json(
+        jsonGenerate(statusCode.CLIENT_ERROR, "No Degree Found", list)
+      );
+    }
+    var count = { count: list.length };
+    return res.json(
+      jsonGenerate(statusCode.CLIENT_ERROR, "Degrees Found", count)
+    );
+  } catch (error) {
+    return res.json(
+      jsonGenerate(
+        statusCode.UNPROCESSABLE_ENTITY,
+        "Error is displaying Degree",
+        error
+      )
+    );
+  }
+};

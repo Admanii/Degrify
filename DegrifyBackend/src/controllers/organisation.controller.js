@@ -5,8 +5,16 @@ import { jsonGenerate } from "../utils/helper.js";
 
 export const getOrganisationByID = async (req, res) => {
   try {
-    const organistionDetails = await Organistation.findById(req.query.organisation_id)
-      .select(["name", "phoneNumber", "address", "userRole", "active", "dateCreated"]);
+    const organistionDetails = await Organistation.findById(
+      req.query.organisation_id
+    ).select([
+      "name",
+      "phoneNumber",
+      "address",
+      "userRole",
+      "active",
+      "dateCreated",
+    ]);
 
     var user = await User.findOne({
       organisationID: organistionDetails._id,
@@ -47,7 +55,11 @@ export const getUniversities = async (req, res) => {
 
     if (organistionDetails.length === 0) {
       return res.json(
-        jsonGenerate(statusCode.SUCCESS, "No Universities Found", organistionDetails)
+        jsonGenerate(
+          statusCode.SUCCESS,
+          "No Universities Found",
+          organistionDetails
+        )
       );
     }
 
@@ -62,8 +74,14 @@ export const getUniversities = async (req, res) => {
         .select("email")
         .exec();
 
-      const orgDetail = await Organistation.findById(orgId)
-        .select(["name", "phoneNumber", "address", "userRole", "active", "dateCreated"]);
+      const orgDetail = await Organistation.findById(orgId).select([
+        "name",
+        "phoneNumber",
+        "address",
+        "userRole",
+        "active",
+        "dateCreated",
+      ]);
       let email = user?.email ?? "";
       const particular = {
         ...orgDetail._doc,
@@ -72,11 +90,35 @@ export const getUniversities = async (req, res) => {
       result.push(particular);
     }
     return res.json(
-      jsonGenerate(
-        statusCode.SUCCESS,
-        "Profile of the Universities",
-        result
-      )
+      jsonGenerate(statusCode.SUCCESS, "Profile of the Universities", result)
+    );
+  } catch (err) {
+    return res.json(
+      jsonGenerate(statusCode.UNPROCESSABLE_ENTITY, "failed", err)
+    );
+  }
+};
+
+export const getUniversitiesCount = async (req, res) => {
+  try {
+    const organistionDetails = await Organistation.find({
+      userRole: "UNIVERSITY",
+    })
+      .select("")
+      .exec();
+
+    if (organistionDetails.length === 0) {
+      return res.json(
+        jsonGenerate(
+          statusCode.SUCCESS,
+          "No Universities Found",
+          organistionDetails
+        )
+      );
+    }
+    var count = { count: organistionDetails.length };
+    return res.json(
+      jsonGenerate(statusCode.SUCCESS, "Universities count", count)
     );
   } catch (err) {
     return res.json(
