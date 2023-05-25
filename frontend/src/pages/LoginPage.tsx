@@ -50,13 +50,21 @@ const LoginPage = () => {
                     setConnButtonText("Wallet Connected");
                     getAccountBalance(addr);
                     localStorage.setItem("accountAddress", addr);
+                    setErrorMessage('');
                 })
                 .catch((error: { message: string }) => {
+                    console.log("Already processing eth_requestAccounts. Please wait")
                     setErrorMessage(error.message);
+                    toast.error("Please Connect Your MetaMask Account and Login Again!", {
+                        position: toast.POSITION.TOP_RIGHT
+                    },);
                 });
         } else {
             console.log("Need to install MetaMask");
-            setErrorMessage("Please install MetaMask browser extension to interact");
+            setErrorMessage("metamask installation error");
+            toast.error("Please install MetaMask Wallet!", {
+                position: toast.POSITION.TOP_RIGHT
+            },);
         }
     };
 
@@ -75,8 +83,6 @@ const LoginPage = () => {
         setDefaultAccount(newAccount);
         getAccountBalance(newAccount.toString());
     };
-
-    window.ethereum.on("accountsChanged", accountChangedHandler);
 
     function getAddressFromLocalStorage(): Promise<string> {
         return new Promise((resolve) => {
@@ -112,7 +118,7 @@ const LoginPage = () => {
                 navigate('/student/view')
             }
         }
-    }, [navigate, success, defaultAccount, accountAddress])
+    }, [navigate, success, defaultAccount, accountAddress, errorMessage])
 
     const logoutHandler = async () => {
         console.log("Logout clicked");
@@ -135,9 +141,6 @@ const LoginPage = () => {
                     if (address === '') {
                         console.log("logoutHandler()")
                         logoutHandler()
-                        toast.error("Please Connect Your MetaMask Wallet and Login Again!", {
-                            position: toast.POSITION.TOP_RIGHT
-                        },);
                     }
                 } else {
                     toast.error(result?.message, {
