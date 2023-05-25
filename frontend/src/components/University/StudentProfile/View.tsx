@@ -271,16 +271,16 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
               {/* NAME ROW */}
               <UnderlineRow text={'Full Name '} spanText={student?.name.charAt(0).toUpperCase() + student?.name.slice(1)} showBorder={true} />
               <UnderlineRow text={'Father\'s Name '} spanText={student?.fatherName.charAt(0).toUpperCase() + student?.fatherName.slice(1)} showBorder={true} />
-              <UnderlineRow text={"Email ID:"} spanText={student?.email} showBorder={true} />
+              <UnderlineRow text={"Email"} spanText={student?.email} showBorder={true} />
               <UnderlineRow text={'CNIC'} spanText={student?.CNIC} showBorder={true} />
-              <UnderlineRow text={"Date of Birth:"} spanText={`${getFormattedDate(student?.DateOfBirth ?? '')}`} showBorder={true} />
+              <UnderlineRow text={"Date of Birth"} spanText={`${getFormattedDate(student?.DateOfBirth ?? '')}`} showBorder={true} />
               <UnderlineRow text={"University"} spanText={student?.orgName} showBorder={true} />
-              <UnderlineRow text={"Serial Number:"} spanText={student?.enrollmentNumber} showBorder={true} />
-              <UnderlineRow text={"Date of Admission:"} spanText={`${getFormattedDate(student?.DateOfAdmission ?? '')}`} showBorder={true} />
+              <UnderlineRow text={"Serial Number"} spanText={student?.enrollmentNumber} showBorder={true} />
+              <UnderlineRow text={"Date of Admission"} spanText={`${getFormattedDate(student?.DateOfAdmission ?? '')}`} showBorder={true} />
               {/* <UnderlineRow text={"Graduating Year: "} spanText={student?.GraduatingYear} showBorder={true} /> */}
               {/* <UnderlineRow text={"Date of Completion:"} spanText={`${getFormattedDate(student?.DateOfompletion ?? '')}`}  showBorder={true} /> */}
-              <UnderlineRow text={"CGPA:"} spanText={student?.CGPA} showBorder={true} />
-              <UnderlineRow text={"Total Credit Hours:"} spanText={student?.TotalCreditHours} showBorder={false} />
+              <UnderlineRow text={"CGPA"} spanText={student?.CGPA} showBorder={true} />
+              <UnderlineRow text={"Total Credit Hours"} spanText={student?.TotalCreditHours} showBorder={false} />
               {/* <UnderlineRow text={"Date of Completion:"} spanText={`${dateOfCompletion}`} showBorder={false} /> */}
               <div className='h-5'></div>
               {/* <div className="flex flex-row justify-between items-start w-2/3 pr-5 bg-red-700"> */}

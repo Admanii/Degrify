@@ -89,11 +89,11 @@ export const UnverifiedDegreesComp = () => {
                       <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">
                         {degree?.degree?.HECVerified ?
                           <span
-                            className={`h-6 w-21 flex bg-green-600 items-center justify-center rounded-full px-3 py-0.5">`}
+                            className={`h-6 w-24 flex bg-green-600 text-slate-100 text-sm items-center justify-center rounded-full px-3 py-0.5">`}
                           >Verified</span>
                           :
                           <span
-                            className={`h-6 w-21 flex bg-red-600 items-center justify-center rounded-full px-3 py-0.5">`}
+                            className={`h-6 w-24 flex bg-red-600 text-slate-100 text-sm items-center justify-center rounded-full px-3 py-0.5">`}
                           >Unverified</span>
                         }
                       </td>

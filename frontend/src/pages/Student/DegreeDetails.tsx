@@ -39,7 +39,6 @@ function DegreeDetails() {
   console.log(userRole)
 
   const isDegreeExists = async () => {
-    // setLoading(true)
     const response = await dispatch(GetDegreebyStudentId({ studentId: studentId }))
     const result = unwrapResult(response);
     if (result?.message === 'Exists' && (result?.statusCode === 200)) {
@@ -47,7 +46,6 @@ function DegreeDetails() {
       setdegreeId(result?.data._id)
       getDegreebyId();
     }
-    // setLoading(false)
   }
 
   useEffect(() => {
@@ -56,13 +54,11 @@ function DegreeDetails() {
   }, [isStudentApproved, isDegreeExist, disabled, degreeId])
 
   const getDegreebyId = async () => {
-    // setLoading(true);
     const response = await dispatch(GetDegreebyId({ degreeId: degreeId }))
     const result = unwrapResult(response);
     setDegree(result);
     setIsStudentApproved(result?.degree?.studentVerified)
     console.log(degree)
-    // setLoading(false);
   }
 
   const openModal = () => {
