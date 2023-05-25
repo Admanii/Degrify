@@ -250,8 +250,7 @@ export const routeList: RouteType[] = [
   },
   {
     path: "/metamask",
-    isPrivate: true,
-    isUni: true,
+    isPrivate: false,
     component: <Metamask />,
   },
 ];

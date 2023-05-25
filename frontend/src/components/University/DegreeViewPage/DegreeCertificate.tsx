@@ -28,9 +28,15 @@ function DegreeCertificate({ degree }: Props) {
               <div className="flex justify-between px-2 py-3 absolute top-0 left-0 w-full">
                 {/* ADD RELEVANT UNI LOGO */}
                 <img className='w-36' src={IMAGES.iba_logo} alt="IBA logo"></img>
-                {degree?.degree?.completeVerified ? (
+                {degree?.degree?.completeVerified && (
                   <img className="h-6 sm:h-10" src={IMAGES.verified_tick_icon} alt="verified icon" title="This degrees is approved by all Entities" />
-                ) : (
+                )}
+
+                {(!degree?.degree?.HECVerified && degree?.degree?.organisationVerified) && (
+                  <img className="h-6 sm:h-10" src={IMAGES.unverified_icon} alt="Unverified icon" title="This degree is pending approval from Higher Education Commission" />
+                )}
+
+                {(!degree?.degree?.HECVerified && !degree?.degree?.organisationVerified) && (
                   <img className="h-6 sm:h-10" src={IMAGES.unverified_icon} alt="Unverified icon" title="This degree is pending approval from University and Higher Education Commission" />
                 )}
               </div>
@@ -46,12 +52,19 @@ function DegreeCertificate({ degree }: Props) {
           </div>
         </div>
 
-        {degree?.degree?.completeVerified ? (
-          <VerifiedTickIcon verified={degree?.degree?.completeVerified} />
-        ) : (
-          <VerifiedTickIcon verified={degree?.degree?.organisationVerified} />
-        )
-        }
+        {degree?.degree?.completeVerified && (
+          <VerifiedTickIcon verified={true} paraText='This degrees is approved by all entities' />
+        )}
+
+        {(!degree?.degree?.HECVerified && degree?.degree?.organisationVerified) && (
+          <VerifiedTickIcon verified={false} paraText='This degree is pending approval from Higher Education Commission' />
+        )}
+
+        {(!degree?.degree?.HECVerified && !degree?.degree?.organisationVerified) && (
+          <VerifiedTickIcon verified={false} paraText='This degree is pending approval from University and Higher Education Commission' />
+        )}
+
+
         {/* <p className='text-red-500'>* This degree is pending approval from the Higher Education Commission</p> */}
       </div>
     </div>

@@ -4,15 +4,10 @@ import { IMAGES } from '../../../constants/images';
 interface Props {
   size?: string,
   verified: boolean,
-
+  paraText: string,
 }
 
-// var verified = false;
-
-
-function VerifiedTickIcon({ verified }: Props) {
-  var paraText = verified ? "This degrees is approved by all entities" : "This degree is pending approval from University and Higher Education Commission";
-
+function VerifiedTickIcon({ verified, paraText }: Props) {
   return (
     <div>
         <div className='flex flex-row justify-start items-center py-4'>
