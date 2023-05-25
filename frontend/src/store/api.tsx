@@ -1,8 +1,10 @@
 import axios from "axios";
 
+// "http://localhost:8000/api"
+
 export const axiosInstance = axios.create({
   baseURL:
-    "http://localhost:8000/api"
+    "http://43.245.131.203:8000/api"
 });
 
 export default axiosInstance;
