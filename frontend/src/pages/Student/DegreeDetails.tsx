@@ -130,7 +130,7 @@ function DegreeDetails() {
                       <div className='flex px-2 w-1/2 justify-center'>
                         <button
                           type="submit"
-                          className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
+                          className="mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-[#344054] text-xl border border-gray-300 hover:bg-slate-100 rounded-lg shadow-md font-medium focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-gray-400"
                           onClick={closeModal}
                         >
                           Cancel
@@ -141,7 +141,7 @@ function DegreeDetails() {
                           type="submit"
                           disabled={isLoading}
                           className={classNames(
-                            "mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700",
+                            "mt-5 flex w-4/5 justify-center items-center py-3 px-3 text-xl border border-transparent rounded-lg shadow-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-red-700",
                             isLoading ? "opacity-40 cursor-not-allowed" : ""
                           )}
                           onClick={approveDegree}

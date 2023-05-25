@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import HeadingWithSpan from '../../general/HeadingWithSpan'
 import DetailsHeading from '../DegreeViewPage/DetailsHeading'
 import DegreeCertificate from '../DegreeViewPage/DegreeCertificate'
@@ -15,7 +15,7 @@ import Modal from '../../general/Modal/Modal'
 import { Title } from '../../general/Modal/Title'
 import { SubTitle } from '../../general/Modal/SubTitle'
 import { AppDispatch } from '../../../store/store'
-import { AddDegree } from '../../../store/actions/degreeActions'
+import { AddDegree, GetDegreebyId } from '../../../store/actions/degreeActions'
 import { UserInfo } from '../../../store/slice/authSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { getFormattedDate } from '../../../utility/util'
@@ -54,6 +54,8 @@ interface Props {
 function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: Props) {
   const navigate = useNavigate()
   const [modal, setModal] = useState(false);
+  const [isUniApproved, setIsUniApproved] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const userInfo = useSelector(UserInfo)
 
@@ -73,12 +75,25 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
   const uploadDegree = async () => {
     const response = await dispatch(AddDegree({ studentId: studentId, organisationId: organisationId, payload: {} }))
     const result = unwrapResult(response);
-    if(result.statusCode === 200) {
+    if (result.statusCode === 200) {
       navigate(`/view/degreedetails?degreeId=${result?.data?.degreeId ?? ''}`);
     }
   };
 
+  const getDegreebyId = async (degreeId: string) => {
+    if (degreeId !== '') {
+      const response = await dispatch(GetDegreebyId({ degreeId: degreeId }))
+      const result = unwrapResult(response);
+      console.log(result)
+      setIsUniApproved(result?.degree?.organisationVerified)
+    }
+  }
 
+  useEffect(() => {
+    getDegreebyId(degreeId);
+    console.log(isUniApproved)
+    setDisabled(isUniApproved)
+  }, [isUniApproved, disabled])
 
   return (
     // <div>
@@ -237,7 +252,7 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
                   <span className='font-bold'>Graduating Year</span>
                   <span className="ml-auto">{student?.GraduatingYear?.slice(0, 10)}</span>
                 </li>
-                
+
                 <li className="flex items-center py-3">
                   <span className='font-bold'>Date of Completion</span>
                   <span className="ml-auto">{student?.DateOfompletion?.slice(0, 10)}</span>
@@ -261,7 +276,7 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
               <UnderlineRow text={"Date of Birth:"} spanText={`${getFormattedDate(student?.DateOfBirth ?? '')}`} showBorder={true} />
               <UnderlineRow text={"University"} spanText={student?.orgName} showBorder={true} />
               <UnderlineRow text={"Serial Number:"} spanText={student?.enrollmentNumber} showBorder={true} />
-              <UnderlineRow text={"Date of Admission:"} spanText={`${getFormattedDate(student?.DateOfAdmission ?? '')}`}  showBorder={true} />
+              <UnderlineRow text={"Date of Admission:"} spanText={`${getFormattedDate(student?.DateOfAdmission ?? '')}`} showBorder={true} />
               {/* <UnderlineRow text={"Graduating Year: "} spanText={student?.GraduatingYear} showBorder={true} /> */}
               {/* <UnderlineRow text={"Date of Completion:"} spanText={`${getFormattedDate(student?.DateOfompletion ?? '')}`}  showBorder={true} /> */}
               <UnderlineRow text={"CGPA:"} spanText={student?.CGPA} showBorder={true} />
@@ -270,8 +285,8 @@ function View({ headingText, student, buttonHidden, isDegreeExist, degreeId }: P
               <div className='h-5'></div>
               {/* <div className="flex flex-row justify-between items-start w-2/3 pr-5 bg-red-700"> */}
               <div className="grid grid-cols-2 gap-0 w-11/12">
-              
-                <Button width={200} className={`${buttonHidden}`} inverted={true} buttonText={'Edit Profile'} onClick={() => navigate(`/edit/studentprofile?studentId=${studentId}`)}/>
+
+                <Button width={200} className={`${buttonHidden}`} inverted={true} disabled={disabled} buttonText={'Edit Profile'} onClick={() => navigate(`/edit/studentprofile?studentId=${studentId}`)} />
                 <Modal closeButton={true} modalState={modal} onClick={() => closeModal()}>
                   <div className='flex justify-center'>
                     <img src={IMAGES.info_icon}></img>
