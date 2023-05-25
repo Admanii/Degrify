@@ -39,7 +39,7 @@ export const getOrgFullName = (orgName: string) => {
         case 'Lums':
             return orgName = "Lahore University of Managment and Sciences (LUMS)";
         default:
-            return '';
+            return orgName;
     }
 }
 
