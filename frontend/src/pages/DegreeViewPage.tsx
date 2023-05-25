@@ -55,7 +55,7 @@ function DegreeViewPage() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 1000);
   }, []);
 
   const getDegreebyId = async () => {
