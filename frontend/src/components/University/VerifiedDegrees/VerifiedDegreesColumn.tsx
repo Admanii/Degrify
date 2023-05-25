@@ -78,7 +78,7 @@ const VerifiedDegreesColumn = () => {
                 if (row?.degree?.organisationVerified) {
                     return (
                         <div
-                            className={`h-6 w-22 flex bg-green-600 items-center justify-center rounded-full px-3 py-0.5 text-sm font-medium text-gray-900">`}
+                            className={`h-6 w-24 flex bg-green-600 text-slate-100 items-center justify-center rounded-full px-3 py-0.5 text-xs font-medium">`}
                         >
                             Verified
                         </div>
@@ -87,7 +87,7 @@ const VerifiedDegreesColumn = () => {
                 else {
                     return (
                         <div
-                            className={`h-6 w-22 flex bg-red-600 items-center justify-center rounded-full px-3 py-0.5 text-sm font-medium text-gray-900">`}
+                            className={`h-6 w-24 flex bg-red-600 text-slate-100 items-center justify-center rounded-full px-3 py-0.5 text-xs font-medium">`}
                         >
                             Unverified
                         </div>

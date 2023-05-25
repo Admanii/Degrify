@@ -42,7 +42,7 @@ function OrganisationView({ headingText, organisation }: Props) {
                             {/* NAME ROW */}
                             <UnderlineRow text={'University Name '} spanText={organisation?.name} showBorder={true} />
                             <UnderlineRow text={'Phone Number '} spanText={organisation?.phoneNumber} showBorder={true} />
-                            <UnderlineRow text={"Email ID:"} spanText={`${organisation?.email}`} showBorder={true} />
+                            <UnderlineRow text={"Email"} spanText={`${organisation?.email}`} showBorder={true} />
                             <UnderlineRow text={'Address'} spanText={organisation?.address} showBorder={false} />
                             <div className='h-5'></div>
                             {/* <div className="flex flex-row justify-between items-start w-2/3 pr-5">
