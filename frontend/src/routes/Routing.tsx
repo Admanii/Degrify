@@ -26,6 +26,7 @@ import OrganisationProfileView from "../pages/HEC/OrganisationProfileView";
 import AddUniversity from "../pages/HEC/AddUniversity";
 import EditStudentPage from "../pages/University/EditStudentPage";
 import DegreeDetails from "../pages/Student/DegreeDetails";
+import Metamask from "../pages/Metamask";
 
 interface RouteType {
   path: string;
@@ -246,6 +247,12 @@ export const routeList: RouteType[] = [
     isPrivate: true,
     isUni: true,
     component: <EditStudentPage />,
+  },
+  {
+    path: "/metamask",
+    isPrivate: true,
+    isUni: true,
+    component: <Metamask />,
   },
 ];
 
