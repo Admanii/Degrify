@@ -11,12 +11,16 @@ import { apiProtected, apiRoute } from "./src/routes/api.js";
 import AuthMiddleware from "./src/middleware/Authentication.js";
 import { ipfs } from "./src/middleware/HashCalculate.js";
 import { uploadJSONToIPFS } from "./src/pinata.js";
-//import "dotenv".config();
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const mongoURL = process.env.mongoURL;
 
 // connecting to mongodb
 mongoose.set("strictQuery", false);
 mongoose.connect(
-  "mongodb+srv://osama:osama123@degrify.2zpqfy2.mongodb.net/degrify?retryWrites=true&w=majority",
+  mongoURL,
   { useNewUrlParser: true },
   (e) => console.log(e)
 );
@@ -44,7 +48,7 @@ app.use(cors());
 app.use("/api/", apiRoute);
 app.use("/api/", AuthMiddleware, apiProtected);
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 
 // starting the server
 app.listen(port, () => {

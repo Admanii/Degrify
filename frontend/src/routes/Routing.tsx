@@ -248,11 +248,11 @@ export const routeList: RouteType[] = [
     isUni: true,
     component: <EditStudentPage />,
   },
-  {
-    path: "/metamask",
-    isPrivate: false,
-    component: <Metamask />,
-  },
+  // {
+  //   path: "/metamask",
+  //   isPrivate: false,
+  //   component: <Metamask />,
+  // },
 ];
 
 export default GetRoutes;
