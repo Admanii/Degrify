@@ -18,9 +18,9 @@ export function hash2Cal(string) {
 }
 
 export function ipfs(string) {
-  const projectId =
-    "k51qzi5uqu5djarme8pl1se9qodjv95efz49gjlu392850hu8lkga5fxs6u81x";
-  const projectSecret = "12D3KooWJEQFT1AD23zomWppj7apdQHD78SkkbzoAQxsNUJTir7W";
+  const projectId = process.env.projectId
+  const projectSecret = process.env.projectSecret
+  console.log(projectId)
   const auth =
     "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
   const ipfs = new IPFS({
