@@ -15,11 +15,12 @@ import { IDegreeDetails } from '../store/types/types'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { UserInfo } from '../store/slice/authSlice'
 import { ethers } from "ethers";
-import { abi, getFormattedDate } from '../utility/util'
+import { getFormattedDate } from '../utility/util'
 import { toast } from 'react-toastify'
 import classNames from 'classnames'
 import UnderlineRow from '../components/general/UnderlineRow'
 import LoadingScreen from '../components/general/LoadingScreen'
+import { abi, contractAddress } from '../constants/keys'
 
 const name = "Muhammad Ahmed"
 const erp = "19717"
@@ -96,7 +97,6 @@ function DegreeStudent() {
     if (userRole == "HEC") {
       const response = await dispatch(UpdateDegreeHec({ degreeId: degreeId }))
       result = unwrapResult(response);
-      const contractAddress = "0x553952fd4267A6BAb54903E11F46804A400AB326";
       if (typeof window !== "undefined") {
         try {
           const provider = new ethers.providers.Web3Provider(window.ethereum);
