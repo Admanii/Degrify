@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/general/Button';
 import Navbar from '../components/general/Navbar'
 import { IMAGES } from '../constants/images';
@@ -10,7 +10,6 @@ import { AppDispatch } from '../store/store';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { ethers } from "ethers";
-import { abi } from '../utility/util';
 import { logout } from '../store/slice/authSlice';
 import LoadingScreen from '../components/general/LoadingScreen';
 
